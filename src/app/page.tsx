@@ -20,7 +20,7 @@ export default function HomePage() {
             </div>
           </Link>
           <Link
-            className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
+            className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 font-bold text-white hover:bg-white/20"
             href="https://create.t3.gg/en/introduction"
             target="_blank"
           >
@@ -32,6 +32,7 @@ export default function HomePage() {
           </Link>
         </div>
       </div>
+      <div className="color-red-100 float-end flex bg-red-200"></div>
     </main>
   );
 }
