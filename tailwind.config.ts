@@ -1,5 +1,5 @@
-import { type Config } from "tailwindcss";
-import { fontFamily } from "tailwindcss/defaultTheme";
+import { type Config } from "tailwindcss"
+import { fontFamily } from "tailwindcss/defaultTheme"
 
 export default {
   content: ["./src/**/*.tsx"],
@@ -8,13 +8,14 @@ export default {
       primary: "#E74C3C",
       secondary: "#F4ECDF",
       white: "#FFFEFB",
-      black: "#1C1E31",
+      foreground: "#1C1E31",
     },
     extend: {
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
+        logo: ["var(--font-mochiy)", ...fontFamily.sans],
       },
     },
   },
   plugins: [],
-} satisfies Config;
+} satisfies Config
