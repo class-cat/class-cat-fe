@@ -25,10 +25,11 @@ import {
   Trash,
   Twitter,
   User,
+  Menu,
   X,
-} from "lucide-react";
+} from "lucide-react"
 
-export type Icon = LucideIcon;
+export type Icon = LucideIcon
 
 export const Icons = {
   close: X,
@@ -56,6 +57,7 @@ export const Icons = {
   moon: Moon,
   laptop: Laptop,
   pencil: Pencil,
+  menu: Menu,
   logo: (props: LucideProps) => (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" {...props}>
       <path
@@ -64,4 +66,4 @@ export const Icons = {
       />
     </svg>
   ),
-};
+}

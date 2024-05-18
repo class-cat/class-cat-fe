@@ -2,8 +2,9 @@ import "~/styles/globals.css"
 
 import { Inter } from "next/font/google"
 import { ClerkProvider } from "@clerk/nextjs"
-import { TopNav } from "./_components/topnav"
+
 import { Mochiy_Pop_P_One } from "next/font/google"
+import { TopNav } from "./_components/topnav"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -33,7 +34,7 @@ export default function RootLayout({
         <body className={`font-sans ${inter.variable} dark ${mochiy.variable}`}>
           <div className="grid h-screen grid-rows-[auto,1fr]">
             <TopNav />
-            <main className="overflow-y-scroll ">{children}</main>
+            <main className="h-[100% - 80px]">{children}</main>
           </div>
         </body>
       </html>
