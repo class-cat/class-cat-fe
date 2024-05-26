@@ -1,14 +1,16 @@
 import "~/styles/globals.css"
 
-import { Inter } from "next/font/google"
 import { ClerkProvider } from "@clerk/nextjs"
 
 import { Mochiy_Pop_P_One } from "next/font/google"
+import { Poppins } from "next/font/google"
 import { TopNav } from "./_components/topnav"
+import { Container } from "~/components/ui/container"
 
-const inter = Inter({
+const inter = Poppins({
   subsets: ["latin"],
   variable: "--font-sans",
+  weight: ["400"],
 })
 
 const mochiy = Mochiy_Pop_P_One({
@@ -32,9 +34,9 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={`font-sans ${inter.variable} dark ${mochiy.variable}`}>
-          <div className="grid h-screen grid-rows-[auto,1fr]">
+          <div className="paddingX grid h-screen grid-rows-[auto,1fr] bg-white">
             <TopNav />
-            <main className="h-[100% - 80px]">{children}</main>
+            <main className="bg-white">{children}</main>
           </div>
         </body>
       </html>

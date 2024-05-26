@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  h1 {
+    @apply font-sans text-6xl font-black leading-[68px] tracking-tight text-foreground drop-shadow-lg;
+  }
+}
+
+@layer components {
+  .padding {
+    @apply px-4 py-8 lg:px-24 lg:py-12;
+  }
+  .paddingX {
+    @apply px-4  lg:px-24;
+  }
+}

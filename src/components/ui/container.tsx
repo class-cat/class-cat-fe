@@ -8,7 +8,11 @@ type ContainerProps = React.HTMLAttributes<HTMLDivElement> & {
 const Container = React.forwardRef<HTMLDivElement, ContainerProps>(
   ({ className, children, ...props }, ref) => {
     return (
-      <div ref={ref} className={cn(className, "max-w-[1440px]")} {...props}>
+      <div
+        ref={ref}
+        className={cn(className, "mx-auto w-full max-w-[1440px]")}
+        {...props}
+      >
         {children}
       </div>
     )
