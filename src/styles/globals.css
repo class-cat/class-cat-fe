@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    @apply text-foreground;
+  }
   h1 {
     @apply font-sans text-6xl font-black leading-[68px] tracking-tight text-foreground drop-shadow-lg;
   }

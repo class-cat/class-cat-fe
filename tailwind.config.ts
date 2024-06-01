@@ -9,6 +9,7 @@ export default {
       secondary: "#F4ECDF",
       white: "#FFFEFB",
       foreground: "#1C1E31",
+      foregroundMuted: "#535353",
     },
     extend: {
       fontFamily: {
