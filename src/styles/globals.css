@@ -9,6 +9,9 @@
   h1 {
     @apply font-sans text-6xl font-black leading-[68px] tracking-tight text-foreground drop-shadow-lg;
   }
+  h2 {
+    @apply font-sans text-5xl font-black leading-[68px] tracking-tight text-foreground drop-shadow-lg;
+  }
 }
 
 @layer components {
