@@ -1,8 +1,10 @@
 'use client'
-
+import ReactDOM from 'react-dom';
 import React, { useRef, useEffect, useState } from 'react';
 import * as maptilersdk from '@maptiler/sdk';
 import "@maptiler/sdk/dist/maptiler-sdk.css";
+import './style.css'
+import Marker from './marker';
 
 export default function Map() {
   const mapContainer = useRef<HTMLDivElement>(null);
@@ -12,7 +14,7 @@ export default function Map() {
   maptilersdk.config.apiKey = 'T6HMkvhbirvp9zNTqczZ';
 
   const markers = [
-    { lng: 18.6435, lat: 54.3520, title: "Gdańsk, Nowe Ogrody" }
+    { lng: 18.6435, lat: 54.3520, title: 'Siatkówka dla klas 1-3', street: "Gdańsk, Nowe Ogrody", src:'/stock.png'}
   ];
 
   useEffect(() => {
@@ -22,25 +24,22 @@ export default function Map() {
       container: mapContainer.current,
       style: maptilersdk.MapStyle.STREETS,
       center: [gdansk.lng, gdansk.lat],
-      zoom: zoom
+      zoom: zoom,
+      maptilerLogo: false,
+
     });
 
     markers.forEach(marker => {
-      const el = document.createElement('div');
-      el.className = 'custom-marker';
-      el.style.backgroundImage = 'url(https://placekitten.com/40/40)';
-      el.style.width = '40px';
-      el.style.height = '40px';
-      el.style.backgroundSize = '100%';
-      el.style.borderRadius = '50%';
-      el.style.border = '2px solid white';
-      el.style.boxShadow = '0 0 5px rgba(0, 0, 0, 0.5)';
-      
-      new maptilersdk.Marker(el)
-        .setLngLat([marker.lng, marker.lat])
-        .setPopup(new maptilersdk.Popup({ offset: 25 }).setText(marker.title))
-        .addTo(map.current as maptilersdk.Map)
-    });
+        const el = document.createElement('div');
+        const popupContent = (
+            <Marker marker={marker}/>
+        )
+        ReactDOM.render(popupContent, el);
+        new maptilersdk.Marker(el)
+          .setLngLat([marker.lng, marker.lat])
+          .setPopup(new maptilersdk.Popup({ offset: 25, closeButton: false, className:'popup'}).setDOMContent(el))
+          .addTo(map.current as maptilersdk.Map);
+      });
   }, [gdansk.lng, gdansk.lat, zoom, markers]);
 
   return (
