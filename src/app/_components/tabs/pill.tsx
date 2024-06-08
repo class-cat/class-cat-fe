@@ -18,7 +18,7 @@ export function TabPill({ item }: TabPillProps) {
     setBookmark(!bookmark)
   }
   return (
-    <div className="relative flex items-center gap-4 rounded-2xl border-2 border-secondary p-3">
+    <div className="relative flex items-center gap-4 rounded-2xl border-2 border-secondary p-3 mt-2">
       <img
         src={avatar}
         alt={title}
