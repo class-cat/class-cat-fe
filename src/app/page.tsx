@@ -1,4 +1,3 @@
-
 import Image from "next/image"
 import { Icons } from "~/components/icons"
 import { Button } from "~/components/ui/button"
@@ -8,6 +7,14 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs"
 import React from "react"
 import { TabPill } from "./_components/tabs/pill"
 import Map from "./_components/map/map"
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "~/components/ui/carousel"
+import { Card, CardContent } from "~/components/ui/card"
 
 const tabsTriggers = [
   {
@@ -46,11 +53,37 @@ const tabsContent = [
   { value: "viewed", items: createItems(8) },
 ]
 
+const createCardItems = (count: number) =>
+  Array.from({ length: count }, () => ({
+    title: "piłka nożna",
+    desc: "34",
+    avatar: "ball.svg",
+  }))
+
+type MostSearchItemProps = {
+  title: string
+  desc: string
+  avatar: string
+}
+const MostSearchItem = ({ title, desc, avatar }: MostSearchItemProps) => {
+  return (
+    <Card className="aspect-square rounded-3xl bg-secondary p-4">
+      <CardContent className="flex flex-col items-center justify-center gap-4">
+        <img src={avatar} alt="stock" className="width-[60px] height-[65px]" />
+        <div className="flex flex-col items-center text-center capitalize">
+          <h5>{title}</h5>
+          <p className="text-foregroundMuted">{desc}</p>
+        </div>
+      </CardContent>
+    </Card>
+  )
+}
+const mostSearchedItems = createCardItems(16)
 export default function HomePage() {
   return (
     <Container className="h-full flex-1 justify-center pt-6">
       <section className="paddingX flex justify-between gap-12 rounded-3xl bg-secondary py-4">
-        <div className="flex w-3/4 flex-col justify-between gap-9 py-12">
+        <div className="flex w-full flex-col justify-between gap-9 py-12 md:w-3/4">
           <h2>
             Wszystkie Twoje Pasje w <br />
             jednym miejscu.
@@ -60,7 +93,7 @@ export default function HomePage() {
               <Icons.search className="hidden h-8 w-8 md:block" />
               <Input
                 className="h-16 flex-grow rounded-l-3xl rounded-r-none px-2 py-2 focus-visible:outline-none md:text-xl"
-                placeholder="Zdjęcia, słowo kluczowe..."
+                placeholder="Słowo kluczowe..."
                 type="text"
               />
             </div>
@@ -79,14 +112,14 @@ export default function HomePage() {
           </div>
         </div>
         <div className="h-84">
-        <Image
-          src="./cat.svg"
-          alt="cat"
-          objectFit="contain"
-          height={200}
-          width={200}
-          className="w-full h-full hidden md:block"
-        />
+          <Image
+            src="./cat.svg"
+            alt="cat"
+            objectFit="contain"
+            height={200}
+            width={200}
+            className="hidden h-full w-full md:block"
+          />
         </div>
       </section>
       <div className="h-10" />
@@ -104,7 +137,7 @@ export default function HomePage() {
                         ? "border-x-2"
                         : index !== tabsTriggers.length - 1
                           ? "border-r-2"
-                          : "border-0"
+                          : "hidden border-0 sm:block"
                     }`}
                   >
                     {tab.title}
@@ -112,24 +145,63 @@ export default function HomePage() {
                 ))}
               </TabsList>
               <div className="h-6" />
-              {tabsContent.map((tab, index) => (
+              {tabsContent.map((tab) => (
                 <TabsContent
                   key={tab.value}
                   value={tab.value}
-                  className="grid gap-4 grid-cols-2"
+                  className="grid grid-cols-1 gap-4 xl:grid-cols-2"
                 >
                   {tab.items.map((item, index) => (
-                    <TabPill key={index} item={item}/>
+                    <TabPill key={index} item={item} />
                   ))}
                 </TabsContent>
               ))}
             </Tabs>
           </div>
-          <div className="mt-4 xl:mt-0">
+          <div>
             <Map />
           </div>
         </div>
       </section>
+      <div className="h-16" />
+      <section>
+        <div className="text-center">
+          <h3>Najczęściej wyszukiwane zajęcia</h3>
+        </div>
+        <div className="h-8" />
+        <div className="flex justify-center">
+          <Carousel
+            className="w-full max-w-xs sm:max-w-sm md:max-w-2xl lg:max-w-3xl xl:max-w-5xl"
+            opts={{
+              align: "start",
+              loop: false,
+            }}
+          >
+            <CarouselContent className="-ml-2">
+              {mostSearchedItems.map((item, index) => (
+                <CarouselItem
+                  key={index}
+                  className="sm:basis-1/3 md:basis-1/4 lg:basis-1/6"
+                >
+                  <div className="p-1">
+                    <MostSearchItem {...item} />
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="ml-2" />
+            <CarouselNext className="mr-2" />
+          </Carousel>
+        </div>
+      </section>
+      <div className="h-16" />
+      <div className="flex h-[153px] w-full items-center justify-center gap-8 border-t-2 border-secondary">
+        <h4>Zapoznaj się z ofertą dla firm</h4>
+        <Button variant={"outline"} size={"lg"}>
+          Sprawdź szczegóły
+        </Button>
+      </div>
+      <div className="h-16" />
     </Container>
   )
 }

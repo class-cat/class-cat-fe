@@ -34,10 +34,13 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={`font-sans ${inter.variable} dark ${mochiy.variable}`}>
-          <div className="paddingX grid h-screen grid-rows-[auto,1fr] bg-white">
+          <div className="paddingX grid grid-rows-[auto,1fr] bg-white">
             <TopNav />
             <main className="bg-white">{children}</main>
           </div>
+          <footer className="padding h-[153px] bg-foreground text-white">
+            ClassCat
+          </footer>
         </body>
       </html>
     </ClerkProvider>

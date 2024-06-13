@@ -12,13 +12,19 @@
   h2 {
     @apply font-sans text-5xl font-black leading-[68px] tracking-tight text-foreground drop-shadow-lg;
   }
+  h3 {
+    @apply font-sans text-4xl font-black leading-[68px] tracking-tight text-foreground drop-shadow-lg;
+  }
+  h4 {
+    @apply font-sans text-3xl leading-[68px] tracking-tight text-foreground drop-shadow-lg;
+  }
 }
 
 @layer components {
   .padding {
-    @apply px-4 py-8 lg:px-24 lg:py-12;
+    @apply px-4 py-8 md:px-12 lg:px-24 lg:py-12;
   }
   .paddingX {
-    @apply px-4  lg:px-24;
+    @apply px-4 md:px-12 xl:px-24;
   }
 }
