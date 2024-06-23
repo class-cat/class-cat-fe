@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@clerk/elements": "^0.8.0",
+    "@clerk/localizations": "^2.4.5",
     "@clerk/nextjs": "^5.0.8",
     "@clerk/shared": "^2.3.1",
     "@maptiler/sdk": "^2.0.3",

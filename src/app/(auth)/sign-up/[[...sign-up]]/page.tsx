@@ -99,9 +99,9 @@ export default function SignUpPage() {
               </SignUp.Step>
 
               <SignUp.Step name="continue">
-                <Card className="w-full sm:w-96">
+              <Card className="sm:w-96 bg-[#FFFFFF] border-[#F5F6F7]">
                   <CardHeader>
-                    <CardTitle>Kontynnuj rejestrację</CardTitle>
+                    <CardTitle className='mx-auto text-lg text-primary'>Kontynnuj rejestrację</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <Clerk.Field name="username" className="space-y-2">
@@ -132,15 +132,15 @@ export default function SignUpPage() {
 
               <SignUp.Step name="verifications">
                 <SignUp.Strategy name="email_code">
-                  <Card className="w-full sm:w-96">
+                <Card className="sm:w-96 bg-[#FFFFFF] border-[#F5F6F7]">
                     <CardHeader>
-                      <CardTitle>Verify your email</CardTitle>
-                      <CardDescription>Use the verification link sent to your email address</CardDescription>
+                      <CardTitle className='mx-auto text-lg text-primary'>Zweryfikuj swój adres E-mail</CardTitle>
+                      <CardDescription className='mx-auto text-sm font-thin text-[#58738B]'>Użyj kod weryfikacyjny wysłany na adres E-mail </CardDescription>
                     </CardHeader>
                     <CardContent className="grid gap-y-4">
                       <div className="grid items-center justify-center gap-y-2">
                         <Clerk.Field name="code" className="space-y-2">
-                          <Clerk.Label className="sr-only">Email address</Clerk.Label>
+                          <Clerk.Label className="sr-only">E-mail</Clerk.Label>
                           <div className="flex justify-center text-center">
                             <Clerk.Input
                               type="otp"
@@ -151,7 +151,7 @@ export default function SignUpPage() {
                                   <div
                                     data-status={status}
                                     className={cn(
-                                      'relative flex size-10 items-center justify-center border-y border-r border-input text-sm transition-all first:rounded-l-md first:border-l last:rounded-r-md',
+                                      'relative flex size-10 items-center justify-center border-y border-r border-input text-sm transition-all first:rounded-l-md first:border-l last:rounded-r-md border-[#D5DADD]',
                                       {
                                         'z-10 ring-2 ring-ring ring-offset-background':
                                           status === 'cursor' || status === 'selected',
@@ -177,13 +177,13 @@ export default function SignUpPage() {
                           className="text-muted-foreground"
                           fallback={({ resendableAfter }) => (
                             <Button variant="link" size="sm" disabled>
-                              Didn&apos;t recieve a code? Resend (
+                              Nie otrzymałeś kodu? Wyślij ponownie (
                               <span className="tabular-nums">{resendableAfter}</span>)
                             </Button>
                           )}
                         >
                           <Button type="button" variant="link" size="sm">
-                            Didn&apos;t recieve a code? Resend
+                            Nie otrzymałeś kodu? Wyślij ponownie
                           </Button>
                         </SignUp.Action>
                       </div>
@@ -191,7 +191,7 @@ export default function SignUpPage() {
                     <CardFooter>
                       <div className="grid w-full gap-y-4">
                         <SignUp.Action submit asChild>
-                          <Button disabled={isGlobalLoading}>
+                          <Button className='w-full' disabled={isGlobalLoading}>
                             <Clerk.Loading>
                               {(isLoading) => {
                                 return isLoading ? <Icons.spinner className="size-4 animate-spin" /> : 'Kontynnuj';
