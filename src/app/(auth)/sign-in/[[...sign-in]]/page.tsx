@@ -90,30 +90,30 @@ export default function SignInPage() {
               </SignIn.Step>
 
               <SignIn.Step name="choose-strategy">
-                <Card className="w-full sm:w-96">
+                <Card className="sm:w-96 bg-[#FFFFFF] border-[#F5F6F7]">
                   <CardHeader>
-                    <CardTitle>Use another method</CardTitle>
-                    <CardDescription>Facing issues? You can use any of these methods to sign in.</CardDescription>
+                    <CardTitle className='mx-auto text-lg text-primary'>Użyj innej metody logowania</CardTitle>
+                    <CardDescription className='mx-auto text-sm font-thin text-[#58738B]'>Wystąpił błąd? Możesz użyć innej metody w celu weryfikacji.</CardDescription>
                   </CardHeader>
                   <CardContent className="grid gap-y-4">
                     <SignIn.SupportedStrategy name="email_code" asChild>
                       <Button type="button" variant="link" disabled={isGlobalLoading}>
-                        Email code
+                        Kod E-mail
                       </Button>
                     </SignIn.SupportedStrategy>
                     <SignIn.SupportedStrategy name="password" asChild>
                       <Button type="button" variant="link" disabled={isGlobalLoading}>
-                        Password
+                        Hasło
                       </Button>
                     </SignIn.SupportedStrategy>
                   </CardContent>
                   <CardFooter>
                     <div className="grid w-full gap-y-4">
                       <SignIn.Action navigate="previous" asChild>
-                        <Button disabled={isGlobalLoading}>
+                        <Button className='w-full' disabled={isGlobalLoading}>
                           <Clerk.Loading>
                             {(isLoading) => {
-                              return isLoading ? <Icons.spinner className="size-4 animate-spin" /> : 'Go back';
+                              return isLoading ? <Icons.spinner className="size-4 animate-spin" /> : 'Wróć';
                             }}
                           </Clerk.Loading>
                         </Button>
@@ -125,21 +125,21 @@ export default function SignInPage() {
 
               <SignIn.Step name="verifications">
                 <SignIn.Strategy name="password">
-                  <Card className="w-full sm:w-96">
+                <Card className="sm:w-96 bg-[#FFFFFF] border-[#F5F6F7]">
                     <CardHeader>
-                      <CardTitle>Check your email</CardTitle>
-                      <CardDescription>Enter the verification code sent to your email</CardDescription>
+                      <CardTitle className='mx-auto text-lg text-primary'>Sprawdź E-mail</CardTitle>
+                      <CardDescription className='mx-auto text-sm font-thin text-[#58738B]'>Wprowadź kod weryfikacyjny wysłany na twój adres e-mail.</CardDescription>
                       <p className="text-sm text-muted-foreground">
-                        Welcome back <SignIn.SafeIdentifier />
+                        Witaj ponownie <SignIn.SafeIdentifier />
                       </p>
                     </CardHeader>
                     <CardContent className="grid gap-y-4">
                       <Clerk.Field name="password" className="space-y-2">
                         <Clerk.Label asChild>
-                          <Label>Password</Label>
+                          <Label className='text-[#58738B] text-sm'>Hasło</Label>
                         </Clerk.Label>
                         <Clerk.Input type="password" asChild>
-                          <Input />
+                          <Input className='text-[#58738B] text-sm'/>
                         </Clerk.Input>
                         <Clerk.FieldError className="block text-sm text-destructive" />
                       </Clerk.Field>
@@ -157,7 +157,7 @@ export default function SignInPage() {
                         </SignIn.Action>
                         <SignIn.Action navigate="choose-strategy" asChild>
                           <Button type="button" size="sm" variant="link">
-                            Use another method
+                              Wybierz inną metodę
                           </Button>
                         </SignIn.Action>
                       </div>
@@ -166,18 +166,18 @@ export default function SignInPage() {
                 </SignIn.Strategy>
 
                 <SignIn.Strategy name="email_code">
-                  <Card className="w-full sm:w-96">
-                    <CardHeader>
-                      <CardTitle>Check your email</CardTitle>
-                      <CardDescription>Enter the verification code sent to your email</CardDescription>
+                  <Card className="sm:w-96 bg-[#FFFFFF] border-[#F5F6F7]">
+                    <CardHeader className='mx-auto text-sm font-thin text-[#58738B]'>
+                      <CardTitle className='mx-auto text-lg text-primary'>Sprawdź swój E-mail</CardTitle>
+                      <CardDescription>Wprowadź kod weryfikacyjny wysłany na twój adres e-mail.</CardDescription>
                       <p className="text-sm text-muted-foreground">
-                        Welcome back <SignIn.SafeIdentifier />
+                        Witaj ponownie <SignIn.SafeIdentifier />
                       </p>
                     </CardHeader>
                     <CardContent className="grid gap-y-4">
                       <Clerk.Field name="code">
                         <Clerk.Label className="sr-only">
-                          Email verification code
+                          Kod weryfikacyjny
                         </Clerk.Label>
                         <div className="grid gap-y-2 items-center justify-center">
                           <div className="flex justify-center text-center">
@@ -189,7 +189,7 @@ export default function SignInPage() {
                                 return (
                                   <div
                                     data-status={status}
-                                    className="relative flex h-9 w-9 items-center justify-center border-y border-r border-input text-sm shadow-sm transition-all first:rounded-l-md first:border-l last:rounded-r-md data-[status=selected]:ring-1 data-[status=selected]:ring-ring data-[status=cursor]:ring-1 data-[status=cursor]:ring-ring"
+                                    className="relative flex h-9 w-9 items-center justify-center border-y border-r border-input text-sm shadow-sm transition-all first:rounded-l-md first:border-l last:rounded-r-md data-[status=selected]:ring-1 data-[status=selected]:ring-ring data-[status=cursor]:ring-1 data-[status=cursor]:ring-ring border-[#D5DADD]"
                                   >
                                     {value}
                                   </div>
@@ -204,7 +204,7 @@ export default function SignInPage() {
                             className="text-muted-foreground"
                             fallback={({ resendableAfter }) => (
                               <Button variant="link" size="sm" disabled>
-                                Didn&apos;t recieve a code? Resend (
+                                Nie otrzymałeś kodu? Wyślij ponownie (
                                 <span className="tabular-nums">
                                   {resendableAfter}
                                 </span>
@@ -213,7 +213,7 @@ export default function SignInPage() {
                             )}
                           >
                             <Button variant="link" size="sm">
-                              Didn&apos;t recieve a code? Resend
+                            Nie otrzymałeś kodu? Wyślij ponownie
                             </Button>
                           </SignIn.Action>
                         </div>
@@ -222,17 +222,17 @@ export default function SignInPage() {
                     <CardFooter>
                       <div className="grid w-full gap-y-4">
                         <SignIn.Action submit asChild>
-                          <Button disabled={isGlobalLoading}>
+                          <Button className='w-full' disabled={isGlobalLoading}>
                             <Clerk.Loading>
                               {(isLoading) => {
-                                return isLoading ? <Icons.spinner className="size-4 animate-spin" /> : 'Continue';
+                                return isLoading ? <Icons.spinner className="size-4 animate-spin" /> : 'Kontynnuj';
                               }}
                             </Clerk.Loading>
                           </Button>
                         </SignIn.Action>
                         <SignIn.Action navigate="choose-strategy" asChild>
                           <Button size="sm" variant="link">
-                            Use another method
+                           Użyj innej metody
                           </Button>
                         </SignIn.Action>
                       </div>
