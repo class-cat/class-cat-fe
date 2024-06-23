@@ -68,7 +68,7 @@ type MostSearchItemProps = {
 const MostSearchItem = ({ title, desc, avatar }: MostSearchItemProps) => {
   return (
     <Card className="aspect-square rounded-3xl bg-secondary p-4">
-      <CardContent className="flex flex-col items-center justify-center gap-4">
+      <CardContent className="flex h-full flex-col items-center justify-center gap-4 sm:h-auto">
         <img src={avatar} alt="stock" className="width-[60px] height-[65px]" />
         <div className="flex flex-col items-center text-center capitalize">
           <h5>{title}</h5>
@@ -82,14 +82,14 @@ const mostSearchedItems = createCardItems(16)
 export default function HomePage() {
   return (
     <Container className="h-full flex-1 justify-center pt-6">
-      <section className="paddingX flex justify-between gap-12 rounded-3xl bg-secondary py-4">
+      <section className="paddingX flex justify-between gap-0 rounded-3xl bg-secondary py-4 sm:gap-4">
         <div className="flex w-full flex-col justify-between gap-9 py-12 md:w-3/4">
           <h2>
             Wszystkie Twoje Pasje w <br />
             jednym miejscu.
           </h2>
           <div className="flex items-center gap-2 rounded-3xl bg-white shadow-lg">
-            <div className="flex w-2/5 items-center px-4">
+            <div className="flex w-full items-center px-4 sm:w-2/5">
               <Icons.search className="hidden h-8 w-8 md:block" />
               <Input
                 className="h-16 flex-grow rounded-l-3xl rounded-r-none px-2 py-2 focus-visible:outline-none md:text-xl"
@@ -97,9 +97,9 @@ export default function HomePage() {
                 type="text"
               />
             </div>
-            <div className="h-[60%] w-1 bg-[#F4ECDF]" />
-            <div className="flex w-2/5 items-center px-4">
-              <Icons.map className="hidden h-8 w-8 md:block" />
+            <div className="hidden h-[60%] w-1 bg-[#F4ECDF] sm:block" />
+            <div className="hidden w-2/5 items-center px-4 sm:flex">
+              <Icons.map className="h-8 w-8" />
               <Input
                 className="h-16 flex-grow rounded-none px-2 py-2 focus-visible:outline-none md:text-xl"
                 placeholder="Lokalizacja"
@@ -195,9 +195,10 @@ export default function HomePage() {
         </div>
       </section>
       <div className="h-16" />
-      <div className="flex h-[153px] w-full items-center justify-center gap-8 border-t-2 border-secondary">
+      <div className="flex w-full flex-col items-center justify-center gap-8 border-t-2 border-secondary text-center sm:flex-row">
+        <div className="h-16" />
         <h4>Zapoznaj się z ofertą dla firm</h4>
-        <Button variant={"outline"} size={"lg"}>
+        <Button variant={"outline"} size={"lg"} className="w-full sm:w-40">
           Sprawdź szczegóły
         </Button>
       </div>
