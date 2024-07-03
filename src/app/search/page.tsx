@@ -11,76 +11,50 @@ import { SearchInput } from "./_components/searchInput"
 import { SearchCombobox } from "./_components/searchComboBox"
 import { useGetLessons } from "~/actions/get-lessons"
 import { useQueryClient } from "@tanstack/react-query"
-
-const locations = [
-  {
-    value: "bydgoszcz",
-    label: "Bydgoszcz",
-  },
-  {
-    value: "gdansk",
-    label: "Gdańsk",
-  },
-  {
-    value: "poznan",
-    label: "Poznań",
-  },
-  {
-    value: "warszawa",
-    label: "Warszawa",
-  },
-  {
-    value: "krakow",
-    label: "Kraków",
-  },
-  {
-    value: "wroclaw",
-    label: "Wrocław",
-  },
-  {
-    value: "gdynia",
-    label: "Gdynia",
-  },
-]
+import { SortSelect } from "./_components/sortSelect"
+import { useGetLocations } from "~/actions/get-locations"
+import { useUpdateQueryParams } from "~/hooks/useUpdateQueryParams"
 
 export default function SearchBar() {
   const queryClient = useQueryClient()
-  const router = useRouter()
   const searchParams = useSearchParams()
-  const search = searchParams.get("category")
-  const location = searchParams.get("location")
-  const [openSearchCombobox, setOpenSearchCombobox] = useState(false)
-  const [searchValue, setSearchValue] = useState(search || "")
-  const [locationValue, setLocationValue] = useState(location || "")
 
+  const name = searchParams.get("name")
+  const location = searchParams.get("location")
+  const sort = searchParams.get("sort")
+
+  const [nameValue, setNameValue] = useState(name || "")
+  const [locationValue, setLocationValue] = useState(location || "")
+  const [sortValue, setSortValue] = useState(sort || "name")
+
+  const { data: locationData} = useGetLocations()
   const { data } = useGetLessons({
-      searchValue,
-      locationValue
+      nameValue,
+      locationValue,
+      sortValue
     })
+
+  const updateQueryParams = useUpdateQueryParams()
 
   useEffect(() => {
     queryClient.invalidateQueries({queryKey: ['lessons-data']})
-    router.push(`?category=${searchValue}&location=${locationValue}`)
-  }, [searchValue, locationValue])
+    updateQueryParams({ name: nameValue, location: locationValue, sort: sortValue })
+  }, [nameValue, locationValue, sortValue])
 
   return (
     <Container className="h-[calc(100vh-80px)] flex flex-col justify-center pt-6">
       <section className="flex flex-1 overflow-hidden">
         <div className="grid grid-cols-1 gap-4 xl:grid-cols-2 w-full">
           <div>
-            <p className="text-2xl font-bold">{`Wyniki wyszukiwania dla: ${searchValue} (${data?.length || 0})`}</p>    
-            <div className="flex gap-2 my-2 ml-0.5">
+            <p className="text-2xl font-bold">{`Wyniki wyszukiwania dla: ${nameValue} (${data?.length || 0})`}</p>    
+            <div className="flex gap-2 my-2">
               <SearchInput 
-                value={searchValue} 
-                setValue={setSearchValue} 
+                value={nameValue} 
+                setValue={setNameValue} 
               />
             <div className="flex w-full items-center">
               <SearchCombobox
-                open={openSearchCombobox}
-                setOpen={setOpenSearchCombobox}
-                emptyText="Nie znaleziono lokalizacji."
-                placeholder="Wybierz lokalizację..."
-                data={locations}
+                data={locationData}
                 value={locationValue}
                 setValue={setLocationValue}
               />
@@ -95,8 +69,14 @@ export default function SearchBar() {
                 <div></div>
               </Button>
             </div>
-          </div>        
-          <div className="overflow-y-auto max-h-[calc(100vh-300px)] pr-3 mt-8 sidebar">
+          </div>   
+          <div>
+            <SortSelect
+              value={sortValue}
+              setValue={setSortValue}
+            />
+          </div>     
+          <div className="overflow-y-auto max-h-[calc(100vh-300px)] pr-3 sidebar">
             {data?.map((item, index) => (
               <div key={index} className="py-2">
                 <Pill item={item} />
