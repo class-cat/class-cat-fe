@@ -9,11 +9,11 @@ import { useEffect, useState } from "react"
 import { Button } from "~/components/ui/button"
 import { SearchInput } from "./_components/searchInput"
 import { SearchCombobox } from "./_components/searchComboBox"
-import { useGetLessons } from "~/actions/get-lessons"
 import { useQueryClient } from "@tanstack/react-query"
 import { SortSelect } from "./_components/sortSelect"
 import { useGetLocations } from "~/actions/get-locations"
 import { useUpdateQueryParams } from "~/hooks/useUpdateQueryParams"
+import { useGetActivities } from "~/actions/get-activities"
 
 export default function SearchBar() {
   const queryClient = useQueryClient()
@@ -28,7 +28,7 @@ export default function SearchBar() {
   const [sortValue, setSortValue] = useState(sort || "name")
 
   const { data: locationData} = useGetLocations()
-  const { data } = useGetLessons({
+  const { data } = useGetActivities({
       nameValue,
       locationValue,
       sortValue
@@ -37,7 +37,7 @@ export default function SearchBar() {
   const updateQueryParams = useUpdateQueryParams()
 
   useEffect(() => {
-    queryClient.invalidateQueries({queryKey: ['lessons-data']})
+    queryClient.invalidateQueries({queryKey: ['activities-data']})
     updateQueryParams({ name: nameValue, location: locationValue, sort: sortValue })
   }, [nameValue, locationValue, sortValue])
 
