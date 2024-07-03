@@ -1,43 +1,62 @@
+'use client'
+
 import { Icons } from "~/components/icons";
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "~/components/ui/command"
+import { Command, CommandGroup, CommandItem, CommandList } from "~/components/ui/command"
 import { Popover, PopoverContent, PopoverTrigger } from "~/components/ui/popover"
 import { cn } from "~/lib/utils";
 import { Button } from "~/components/ui/button";
 import { useState } from "react";
-import { Location } from "~/types/search.type";
 
 type Props = {
-    data?: Location[],
     value: string
     setValue: (value: string) => void
 }
 
-export function SearchCombobox({ data, value, setValue }: Props) {
-    const [open, setOpen] = useState(false) 
+const data = [
+    {
+      value: "distance",
+      label: "Odległość",
+    },
+    {
+      value: "rating",
+      label: "Ocena",
+    },
+    {
+      value: "price",
+      label: "Cena",
+    },
+    {
+      value: "name",
+      label: "Nazwa",
+    },
+    {
+      value: "date",
+      label: "Data",
+    },
+  ]
+  
 
+export function SortSelect({ value, setValue }: Props) {
+    const [open, setOpen] = useState(false)
+    
     return (
         <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
-                <Button
-                    variant="default"
-                    role="combobox"
-                    aria-expanded={open}
-                    className="flex w-full justify-between rounded-lg border-2 border-primary shadow-none"
-                >
-                    <Icons.globe className="hidden h-5 w-5 md:block" />
-                    {value
-                        ? data?.find((item) => item.value === value)?.label
-                        : "Lokalizacja"}
-                    <Icons.chevronUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                </Button>
+            <Button
+                variant="ghost"
+                className="flex rounded-lg border-2 border-white shadow-none hover:bg-secondary"
+              >
+               {value
+                    ? `Sortuj: ${data.find((item) => item.value === value)?.label}`
+                    : "Sortuj: Domyślnie"
+                }
+              </Button>
             </PopoverTrigger>
-            <PopoverContent className="flex w-full p-0 h-[250px]">
+            <PopoverContent className="flex w-full p-0">
                 <Command>
-                    <CommandInput placeholder='Wybierz lokalizację...' />
                     <CommandList>
-                        <CommandEmpty>Nie znaleziono lokalizacji.</CommandEmpty>
                         <CommandGroup>
-                            {data?.map((item) => (
+                            {data.map((item) => (
                                 <CommandItem
                                     key={item.value}
                                     value={item.value}
