@@ -10,6 +10,7 @@ export default {
       white: "#FFFEFB",
       foreground: "#1C1E31",
       foregroundMuted: "#535353",
+      popover: "#FFFEFB",
     },
     extend: {
       fontFamily: {

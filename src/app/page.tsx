@@ -5,7 +5,6 @@ import { Container } from "~/components/ui/container"
 import { Input } from "~/components/ui/input"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs"
 import React from "react"
-import { TabPill } from "./_components/tabs/pill"
 import Map from "./_components/map/map"
 import {
   Carousel,
@@ -15,6 +14,7 @@ import {
   CarouselPrevious,
 } from "~/components/ui/carousel"
 import { Card, CardContent } from "~/components/ui/card"
+import { Pill } from "~/components/pill"
 
 const tabsTriggers = [
   {
@@ -43,7 +43,7 @@ const createItems = (count: number) =>
   Array.from({ length: count }, () => ({
     title: "Siatkówka dla klas 1-3",
     address: "Gdańsk, Dragana 2",
-    avatar: "./stock.png",
+    avatar: "/stock.jpeg",
   }))
 
 const tabsContent = [
@@ -69,7 +69,16 @@ const MostSearchItem = ({ title, desc, avatar }: MostSearchItemProps) => {
   return (
     <Card className="aspect-square rounded-3xl bg-secondary p-4">
       <CardContent className="flex h-full flex-col items-center justify-center gap-4 sm:h-auto">
-        <img src={avatar} alt="stock" className="width-[60px] height-[65px]" />
+       
+        <div className="relative w-[80px] h-[80px]">
+        <Image
+          src={avatar}
+          alt={title}
+          layout="fill"
+          objectFit="cover"
+          className="rounded-lg"
+        />
+      </div>
         <div className="flex flex-col items-center text-center capitalize">
           <h5>{title}</h5>
           <p className="text-foregroundMuted">{desc}</p>
@@ -152,7 +161,7 @@ export default function HomePage() {
                   className="grid grid-cols-1 gap-4 xl:grid-cols-2"
                 >
                   {tab.items.map((item, index) => (
-                    <TabPill key={index} item={item} />
+                    <Pill key={index} item={item} />
                   ))}
                 </TabsContent>
               ))}

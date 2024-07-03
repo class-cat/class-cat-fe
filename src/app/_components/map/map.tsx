@@ -19,7 +19,7 @@ export default function Map() {
       lat: 54.352,
       title: "Siatkówka dla klas 1-3",
       street: "Gdańsk, Nowe Ogrody",
-      src: "/stock.png",
+      src: "/stock.jpeg",
     },
   ]
 
