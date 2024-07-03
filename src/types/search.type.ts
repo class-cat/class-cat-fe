@@ -1,4 +1,4 @@
-export type Lesson = {
+export type Activity = {
     name: string;
     title: string;
     address: string;
