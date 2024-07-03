@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { Lesson } from "~/types/search.type";
+import { Activity } from "~/types/search.type";
 
 const createItems = (count: number) =>
     Array.from({ length: count }, () => ({
@@ -15,15 +15,15 @@ type Props = {
     sortValue: string | null
 }
 
-const getLessons = async ({...props}: Props): Promise<Lesson[]> => {
+const getActivities = async ({...props}: Props): Promise<Activity[]> => {
     const {nameValue, locationValue, sortValue} = props
     console.log(nameValue, locationValue, sortValue)
     return createItems(20)
 };
 
-export const useGetLessons = ({...props}: Props) => {
+export const useGetActivities = ({...props}: Props) => {
   return useQuery({
-    queryKey: ["lessons-data"],
-    queryFn: () => getLessons({...props}),
+    queryKey: ["activities-data"],
+    queryFn: () => getActivities({...props}),
   });
 };
