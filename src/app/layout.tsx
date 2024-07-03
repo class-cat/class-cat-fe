@@ -7,6 +7,7 @@ import { Poppins } from "next/font/google"
 import { TopNav } from "./_components/topnav"
 
 import { plPL } from "@clerk/localizations";
+import { ReactQueryProvider } from "~/providers/reactquery-provider"
 
 const inter = Poppins({
   subsets: ["latin"],
@@ -32,6 +33,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
+    <ReactQueryProvider>
     <ClerkProvider localization={plPL}>
       <html lang="en">
         <body className={`font-sans ${inter.variable} dark ${mochiy.variable}`}>
@@ -45,5 +47,6 @@ export default function RootLayout({
         </body>
       </html>
     </ClerkProvider>
+    </ReactQueryProvider>
   )
 }
