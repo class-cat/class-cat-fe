@@ -1,20 +1,24 @@
+'use client'
+
 import { useState, useEffect } from "react";
 import { Icons } from "~/components/icons";
 import { Input } from "~/components/ui/input";
 import { useDebounce } from "~/hooks/useDebounce";
+import { useUpdateQueryParams } from "~/hooks/useUpdateQueryParams";
 
 type Props = {
     value: string;
-    setValue: (value: string) => void;
 };
 
-export function SearchInput({ value, setValue }: Props) {
+export function SearchInput({ value }: Props) {
+    const updateQueryParams = useUpdateQueryParams()
+
     const [inputValue, setInputValue] = useState(value);
     const debouncedValue = useDebounce(inputValue, 500);
 
     useEffect(() => {
-        setValue(debouncedValue);
-    }, [debouncedValue, setValue]);
+        updateQueryParams({ name: debouncedValue });
+    }, [debouncedValue]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(e.target.value);
