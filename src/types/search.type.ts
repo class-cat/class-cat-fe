@@ -11,7 +11,7 @@ export type Location = {
   } 
 
 export type QueryParams = {
-  nameValue: string;
-  locationValue: string;
-  sortValue: string;
+  nameValue: string | null;
+  locationValue: string | null;
+  sortValue: string | null;
 }

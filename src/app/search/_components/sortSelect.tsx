@@ -6,11 +6,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "~/components/ui/popover
 import { cn } from "~/lib/utils";
 import { Button } from "~/components/ui/button";
 import { useState } from "react";
-
-type Props = {
-    value: string
-    setValue: (value: string) => void
-}
+import { useUpdateQueryParams } from "~/hooks/useUpdateQueryParams";
 
 const data = [
     {
@@ -34,10 +30,20 @@ const data = [
       label: "Data",
     },
   ]
-  
 
-export function SortSelect({ value, setValue }: Props) {
+type Props = {
+    value: string | undefined
+}
+
+export function SortSelect({ value }: Props) {
+    const updateQueryParams = useUpdateQueryParams()
+
     const [open, setOpen] = useState(false)
+
+    const handleOnSelect = (currentValue: string) => {
+        updateQueryParams({ sort: currentValue })
+        setOpen(false)
+    }
     
     return (
         <Popover open={open} onOpenChange={setOpen}>
@@ -61,8 +67,7 @@ export function SortSelect({ value, setValue }: Props) {
                                     key={item.value}
                                     value={item.value}
                                     onSelect={(currentValue) => {
-                                        setValue(currentValue === value ? "" : currentValue)
-                                        setOpen(false)
+                                        handleOnSelect(currentValue)
                                     }}
                                 >
                                     <Icons.check
