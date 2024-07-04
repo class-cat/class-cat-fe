@@ -1,3 +1,5 @@
+'use client'
+
 import { Icons } from "~/components/icons";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "~/components/ui/command"
 import { Popover, PopoverContent, PopoverTrigger } from "~/components/ui/popover"
@@ -5,16 +7,23 @@ import { cn } from "~/lib/utils";
 import { Button } from "~/components/ui/button";
 import { useState } from "react";
 import { Location } from "~/types/search.type";
+import { useUpdateQueryParams } from "~/hooks/useUpdateQueryParams";
 
 type Props = {
     data?: Location[],
-    value: string
-    setValue: (value: string) => void
+    value: string | undefined
 }
 
-export function SearchCombobox({ data, value, setValue }: Props) {
-    const [open, setOpen] = useState(false) 
+export function SearchCombobox({ data, value }: Props) {
+    const updateQueryParams = useUpdateQueryParams()
 
+    const [open, setOpen] = useState(false) 
+    const handleOnSelect = (currentValue: string) => {
+        updateQueryParams({ location: currentValue })
+        setOpen(false)
+    }
+
+    
     return (
         <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
@@ -42,8 +51,7 @@ export function SearchCombobox({ data, value, setValue }: Props) {
                                     key={item.value}
                                     value={item.value}
                                     onSelect={(currentValue) => {
-                                        setValue(currentValue === value ? "" : currentValue)
-                                        setOpen(false)
+                                        handleOnSelect(currentValue)
                                     }}
                                 >
                                     <Icons.check
