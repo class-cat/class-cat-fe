@@ -32,7 +32,7 @@ const data = [
   ]
 
 type Props = {
-    value: string | undefined
+    value: string | null
 }
 
 export function SortSelect({ value }: Props) {

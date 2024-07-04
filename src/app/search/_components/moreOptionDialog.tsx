@@ -25,8 +25,8 @@ const classRangeData = [
 ]
 
 type Props = {
-    distanceValue: string | undefined
-    ageValue: string | undefined
+    distanceValue: string | null
+    ageValue: string | null
 }
 
 export const MoreOptionDialog = ({distanceValue, ageValue} : Props) => {
@@ -40,13 +40,26 @@ export const MoreOptionDialog = ({distanceValue, ageValue} : Props) => {
         updateQueryParams({ distance: distance, age: age });
         setOpen(false)
     };
+
+    const handleResetOptions = () => {
+        setDistance(null)
+        setAge(null)
+    };
+
+    const handleOpenChange = (isOpen: boolean) => {
+        setOpen(isOpen)
+        if (isOpen) {
+            setDistance(distanceValue)
+            setAge(ageValue)
+        }
+    };
     
     return( 
-        <Dialog open={open} onOpenChange={setOpen}>
-              <DialogTrigger className="flex w-full justify-between" asChild> 
+        <Dialog open={open} onOpenChange={handleOpenChange}>
+              <DialogTrigger className="flex w-full justify-center md:justify-between" asChild> 
                 <Button
                     variant="ghost"
-                    className="rounded-lg border-2 border-secondary shadow-none hover:bg-secondary"
+                    className="rounded-lg border-2 border-secondary py-5 shadow-none hover:bg-secondary"
                     onClick={() => setOpen(true)}
                 >
                     <Icons.filter className="hidden h-5 w-5 md:block" />
@@ -63,7 +76,7 @@ export const MoreOptionDialog = ({distanceValue, ageValue} : Props) => {
                         Odległość
                         </div>
                         <div>
-                            <Select value={distance} onValueChange={setDistance}>
+                            <Select value={distance || undefined} onValueChange={setDistance}>
                                 <SelectTrigger className="w-[210px]">
                                     <SelectValue placeholder="Odległość" />
                                 </SelectTrigger>
@@ -83,7 +96,7 @@ export const MoreOptionDialog = ({distanceValue, ageValue} : Props) => {
                         Klasa
                         </div>
                         <div>
-                            <Select value={age} onValueChange={setAge}>
+                            <Select value={age || undefined} onValueChange={setAge}>
                                 <SelectTrigger className="w-[210px]">
                                     <SelectValue placeholder="Klasa" />
                                 </SelectTrigger>
@@ -99,8 +112,10 @@ export const MoreOptionDialog = ({distanceValue, ageValue} : Props) => {
                     </div>
                 </DialogDescription>
             </DialogHeader>
-            <DialogFooter>
+            <DialogFooter className="mt-2">
+                <Button variant="outline" onClick={() => handleResetOptions()}>Wyczyść</Button>
                 <Button onClick={() => handleSaveOptions()}>Zapisz</Button>
+
             </DialogFooter>
             </DialogContent>
         </Dialog>        

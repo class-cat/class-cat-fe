@@ -11,7 +11,7 @@ import { useUpdateQueryParams } from "~/hooks/useUpdateQueryParams";
 
 type Props = {
     data?: Location[],
-    value: string | undefined
+    value: string | null
 }
 
 export function SearchCombobox({ data, value }: Props) {

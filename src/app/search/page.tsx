@@ -2,8 +2,7 @@
 
 import { useSearchParams } from "next/navigation"
 import { Container } from "~/components/ui/container"
-import Map from "../_components/map/map"
-import { Pill } from "~/components/pill"
+import Map from "../../components/map/map"
 import { useEffect } from "react"
 import { SearchInput } from "./_components/searchInput"
 import { SearchCombobox } from "./_components/searchComboBox"
@@ -12,25 +11,29 @@ import { SortSelect } from "./_components/sortSelect"
 import { useGetLocations } from "~/actions/get-locations"
 import { useGetActivities } from "~/actions/get-activities"
 import { MoreOptionDialog } from "./_components/moreOptionDialog"
+import PlaceholderPill from "~/components/pill/placeholerPill"
+import { Pill } from "~/components/pill/pill"
+import PlaceholderMap from "../../components/map/placeholderMap"
+
 
 export default function SearchPage() {
   const queryClient = useQueryClient()
   const searchParams = useSearchParams()
 
-  const name = searchParams.get("name") as string
-  const location = searchParams.get("location") as string | undefined
-  const sort = searchParams.get("sort") as string | undefined
-  const distance = searchParams.get("distance") as string | undefined
-  const age = searchParams.get("age") as string | undefined
+  const name = searchParams.get("name")
+  const location = searchParams.get("location")
+  const sort = searchParams.get("sort")
+  const distance = searchParams.get("distance")
+  const age = searchParams.get("age")
 
   const { data: locationData} = useGetLocations()
 
-  const { data } = useGetActivities({
+  const { data, isLoading } = useGetActivities({
       nameValue: name || "",
-      locationValue: location || undefined,
-      sortValue: sort || undefined,
-      distanceValue: distance || undefined,
-      ageValue: age || undefined,
+      locationValue: location,
+      sortValue: sort,
+      distanceValue: distance,
+      ageValue: age,
     })
 
   useEffect(() => {
@@ -43,7 +46,10 @@ export default function SearchPage() {
       <section className="flex flex-1 overflow-hidden">
         <div className="grid grid-cols-1 gap-4 xl:grid-cols-2 w-full">
           <div>
-            <p className="text-2xl font-bold">{`Wyniki wyszukiwania dla: ${name || ""} (${data?.length || 0})`}</p>    
+            <div className="flex items-center space-x-2">
+              <p className="text-2xl font-bold truncate">{`Wyniki wyszukiwania dla: ${name || ""}`}</p>
+              <p className="text-2xl font-bold">{`(${data?.length || 0})`}</p>
+            </div> 
             <div className="flex gap-2 my-2">
               <SearchInput 
                 value={name} 
@@ -55,25 +61,41 @@ export default function SearchPage() {
               />
             </div>
             <div className="flex w-full">
-            <MoreOptionDialog
-              distanceValue={distance}
-              ageValue={age}
-            />  
+              <MoreOptionDialog
+                distanceValue={distance}
+                ageValue={age}
+              />  
             </div>
           </div>   
             <SortSelect
               value={sort}
             />
-          <div className="overflow-y-auto max-h-[calc(100vh-300px)] pr-3 sidebar">
-            {data?.map((item, index) => (
-              <div key={index} className="py-2">
-                <Pill item={item} />
-              </div>
-            ))}
-          </div>
+            <div className="xl:hidden">
+              <Map/>
+            </div>
+           <div className="overflow-y-auto max-h-[calc(100vh-300px)] pr-3 sidebar mt-2">
+              {isLoading ? (
+                Array.from({ length: 10 }).map((_, index) => (
+                  <div key={index} className="py-2">
+                    <PlaceholderPill />
+                  </div>
+                ))
+              ) : (
+                data?.map((item, index) => (
+                  <div key={index} className="py-2">
+                    <Pill item={item} />
+                  </div>
+                ))
+              )}
+            </div>
         </div>
         <div className="h-full">
-          <Map />
+        {isLoading ? 
+          ( 
+            <PlaceholderMap />
+          ) : 
+            <Map />
+        }
         </div>
       </div>
     </section>

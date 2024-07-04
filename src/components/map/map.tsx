@@ -52,7 +52,7 @@ export default function Map() {
   }, [gdansk.lng, gdansk.lat, zoom, markers])
 
   return (
-    <div className="h-[200px] w-full xl:h-full">
+    <div className="h-[120px] w-full xl:h-full mb-6">
       <div ref={mapContainer} className="h-full w-full rounded-2xl" />
     </div>
   )
