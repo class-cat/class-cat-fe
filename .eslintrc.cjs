@@ -32,6 +32,7 @@ const config = {
     "@typescript-eslint/no-empty-interface": "off",
     "@typescript-eslint/non-nullable-type-assertion-style": "off",
     "@typescript-eslint/no-floating-promises": "off",
+    "react-hooks/exhaustive-deps": "off",
     "@typescript-eslint/no-misused-promises": [
       "error",
       {

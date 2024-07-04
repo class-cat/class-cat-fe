@@ -5,7 +5,7 @@ import { Container } from "~/components/ui/container"
 import { Input } from "~/components/ui/input"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs"
 import React from "react"
-import Map from "./_components/map/map"
+import Map from "../components/map/map"
 import {
   Carousel,
   CarouselContent,
@@ -14,7 +14,7 @@ import {
   CarouselPrevious,
 } from "~/components/ui/carousel"
 import { Card, CardContent } from "~/components/ui/card"
-import { Pill } from "~/components/pill"
+import { Pill } from "~/components/pill/pill"
 
 const tabsTriggers = [
   {
@@ -88,6 +88,7 @@ const MostSearchItem = ({ title, desc, avatar }: MostSearchItemProps) => {
   )
 }
 const mostSearchedItems = createCardItems(16)
+
 export default function HomePage() {
   return (
     <Container className="h-full flex-1 justify-center pt-6">
@@ -97,13 +98,18 @@ export default function HomePage() {
             Wszystkie Twoje Pasje w <br />
             jednym miejscu.
           </h2>
-          <div className="flex items-center gap-2 rounded-3xl bg-white shadow-lg">
+          <form
+            method="GET"
+            action="/search"
+            className="flex items-center gap-2 rounded-3xl bg-white shadow-lg"
+          >
             <div className="flex w-full items-center px-4 sm:w-2/5">
               <Icons.search className="hidden h-8 w-8 md:block" />
               <Input
                 className="h-16 flex-grow rounded-l-3xl rounded-r-none px-2 py-2 focus-visible:outline-none md:text-xl"
                 placeholder="Słowo kluczowe..."
                 type="text"
+                name="name"
               />
             </div>
             <div className="hidden h-[60%] w-1 bg-[#F4ECDF] sm:block" />
@@ -113,12 +119,16 @@ export default function HomePage() {
                 className="h-16 flex-grow rounded-none px-2 py-2 focus-visible:outline-none md:text-xl"
                 placeholder="Lokalizacja"
                 type="text"
+                name="location"
               />
             </div>
-            <Button className="h-16 flex-grow rounded-l-none rounded-r-3xl shadow-md md:text-xl">
+            <Button
+              type="submit"
+              className="h-16 flex-grow rounded-l-none rounded-r-3xl shadow-md md:text-xl"
+            >
               Wyszukaj
             </Button>
-          </div>
+          </form>
         </div>
         <div className="h-84">
           <Image
@@ -143,10 +153,10 @@ export default function HomePage() {
                     value={tab.value}
                     className={`${
                       index === 1
-                        ? "border-x-2"
+                        ? 'border-x-2'
                         : index !== tabsTriggers.length - 1
-                          ? "border-r-2"
-                          : "hidden border-0 sm:block"
+                        ? 'border-r-2'
+                        : 'hidden border-0 sm:block'
                     }`}
                   >
                     {tab.title}
@@ -181,10 +191,7 @@ export default function HomePage() {
         <div className="flex justify-center">
           <Carousel
             className="w-full max-w-xs sm:max-w-sm md:max-w-2xl lg:max-w-3xl xl:max-w-5xl"
-            opts={{
-              align: "start",
-              loop: false,
-            }}
+            opts={{ align: 'start', loop: false }}
           >
             <CarouselContent className="-ml-2">
               {mostSearchedItems.map((item, index) => (
@@ -213,5 +220,5 @@ export default function HomePage() {
       </div>
       <div className="h-16" />
     </Container>
-  )
+  );
 }
