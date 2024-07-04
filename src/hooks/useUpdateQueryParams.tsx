@@ -4,7 +4,7 @@ import { useCallback } from "react";
 export const useUpdateQueryParams = () => {
   const router = useRouter();
 
-  const updateQueryParams = useCallback((params: Record<string, string>) => {
+  const updateQueryParams = useCallback((params: Record<string, string | undefined>) => {
       const url = new URL(window.location.href);
       const currentParams = Object.fromEntries(url.searchParams.entries());
       const newParams = { ...currentParams, ...params };
