@@ -6,7 +6,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "~/components/ui/popover
 import { cn } from "~/lib/utils";
 import { Button } from "~/components/ui/button";
 import { useState } from "react";
-import { Location } from "~/types/search.type";
+import type {Location} from "~/types/search.type";
 import { useUpdateQueryParams } from "~/hooks/useUpdateQueryParams";
 
 type Props = {
