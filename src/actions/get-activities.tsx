@@ -10,11 +10,11 @@ const createItems = (count: number) =>
   }))
 
 type Props = {
-    nameValue: string | undefined
-    locationValue: string | undefined
-    sortValue: string | undefined
-    distanceValue: string | undefined
-    ageValue: string | undefined
+    nameValue: string | null
+    locationValue: string | null
+    sortValue: string | null
+    distanceValue: string | null
+    ageValue: string | null
 }
 
 const getActivities = async ({...props}: Props): Promise<Activity[]> => {

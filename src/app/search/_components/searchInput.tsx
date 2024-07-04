@@ -7,7 +7,7 @@ import { useDebounce } from "~/hooks/useDebounce";
 import { useUpdateQueryParams } from "~/hooks/useUpdateQueryParams";
 
 type Props = {
-    value: string;
+    value: string | null;
 };
 
 export function SearchInput({ value }: Props) {
@@ -32,7 +32,7 @@ export function SearchInput({ value }: Props) {
                     className="focus-visible:outline-none"
                     placeholder="Słowo kluczowe..."
                     type="text"
-                    value={inputValue}
+                    value={inputValue || ''}
                     onChange={handleChange}
                 />
             </div>
