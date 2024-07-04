@@ -1,23 +1,24 @@
-import { useRouter } from "next/navigation"
-import { useCallback } from "react"
+import { useRouter } from "next/navigation";
+import { useCallback } from "react";
 
 export const useUpdateQueryParams = () => {
-  const router = useRouter()
+  const router = useRouter();
 
-  const updateQueryParams = useCallback(
-    (params: Record<string, string>) => {
-      const url = new URL(window.location.href)
-      Object.keys(params).forEach((key) => {
-        if (params[key]) {
-          url.searchParams.set(key, params[key] as string)
-        } else {
-          url.searchParams.delete(key)
-        }
-      })
-      router.push(url.toString())
-    },
-    [router]
-  )
+  const updateQueryParams = useCallback((params: Record<string, string>) => {
+      const url = new URL(window.location.href);
+      const currentParams = Object.fromEntries(url.searchParams.entries());
+      const newParams = { ...currentParams, ...params };
 
-  return updateQueryParams
-}
+      Object.keys(newParams).forEach(key => {
+          if (newParams[key]) {
+              url.searchParams.set(key, newParams[key]!);
+          } else {
+              url.searchParams.delete(key);
+          }
+      });
+
+      router.push(url.toString());
+  }, [router]);
+
+  return updateQueryParams;
+};
