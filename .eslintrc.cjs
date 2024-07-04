@@ -27,6 +27,9 @@ const config = {
       },
     ],
     "@typescript-eslint/require-await": "off",
+    "@typescript-eslint/prefer-nullish-coalescing": "off",
+    "@typescript-eslint/no-unnecessary-type-assertion": "off",
+    "@typescript-eslint/no-empty-interface": "off",
     "@typescript-eslint/no-misused-promises": [
       "error",
       {
