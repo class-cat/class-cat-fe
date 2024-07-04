@@ -24,7 +24,7 @@ export default function Map() {
   ]
 
   useEffect(() => {
-    if (map.current || !mapContainer.current) return
+    if (map.current ?? !mapContainer.current) return
 
     map.current = new maptilersdk.Map({
       container: mapContainer.current,
@@ -47,7 +47,7 @@ export default function Map() {
             className: "popup",
           }).setDOMContent(el)
         )
-        .addTo(map.current as maptilersdk.Map)
+        .addTo(map.current!)
     })
   }, [gdansk.lng, gdansk.lat, zoom, markers])
 

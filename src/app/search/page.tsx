@@ -1,6 +1,6 @@
 "use client"
 
-import { useRouter, useSearchParams } from "next/navigation"
+import { useSearchParams } from "next/navigation"
 import { Container } from "~/components/ui/container"
 import Map from "../_components/map/map"
 import { Pill } from "~/components/pill"
@@ -23,73 +23,72 @@ export default function SearchBar() {
   const location = searchParams.get("location")
   const sort = searchParams.get("sort")
 
-  const [nameValue, setNameValue] = useState(name || "")
-  const [locationValue, setLocationValue] = useState(location || "")
-  const [sortValue, setSortValue] = useState(sort || "name")
+  const [nameValue, setNameValue] = useState(name ?? "")
+  const [locationValue, setLocationValue] = useState(location ?? "")
+  const [sortValue, setSortValue] = useState(sort ?? "name")
 
-  const { data: locationData} = useGetLocations()
+  const { data: locationData } = useGetLocations()
   const { data } = useGetActivities({
-      nameValue,
-      locationValue,
-      sortValue
-    })
+    nameValue,
+    locationValue,
+    sortValue,
+  })
 
   const updateQueryParams = useUpdateQueryParams()
 
   useEffect(() => {
-    queryClient.invalidateQueries({queryKey: ['activities-data']})
-    updateQueryParams({ name: nameValue, location: locationValue, sort: sortValue })
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    queryClient.invalidateQueries({ queryKey: ["activities-data"] })
+    updateQueryParams({
+      name: nameValue,
+      location: locationValue,
+      sort: sortValue,
+    })
   }, [nameValue, locationValue, sortValue])
 
   return (
-    <Container className="h-[calc(100vh-80px)] flex flex-col justify-center pt-6">
+    <Container className="flex h-[calc(100vh-80px)] flex-col justify-center pt-6">
       <section className="flex flex-1 overflow-hidden">
-        <div className="grid grid-cols-1 gap-4 xl:grid-cols-2 w-full">
+        <div className="grid w-full grid-cols-1 gap-4 xl:grid-cols-2">
           <div>
-            <p className="text-2xl font-bold">{`Wyniki wyszukiwania dla: ${nameValue} (${data?.length || 0})`}</p>    
-            <div className="flex gap-2 my-2">
-              <SearchInput 
-                value={nameValue} 
-                setValue={setNameValue} 
-              />
-            <div className="flex w-full items-center">
-              <SearchCombobox
-                data={locationData}
-                value={locationValue}
-                setValue={setLocationValue}
-              />
-            </div>
-            <div className="flex w-full items-center">
-              <Button
-                variant="ghost"
-                className="flex w-full justify-between rounded-lg border-2 border-secondary shadow-none hover:bg-secondary"
-              >
-                <Icons.filter className="hidden h-5 w-5 md:block" />
-                Więcej opcji
-                <div></div>
-              </Button>
-            </div>
-          </div>   
-          <div>
-            <SortSelect
-              value={sortValue}
-              setValue={setSortValue}
-            />
-          </div>     
-          <div className="overflow-y-auto max-h-[calc(100vh-300px)] pr-3 sidebar">
-            {data?.map((item, index) => (
-              <div key={index} className="py-2">
-                <Pill item={item} />
+            <p className="text-2xl font-bold">{`Wyniki wyszukiwania dla: ${nameValue} (${data?.length || 0})`}</p>
+            <div className="my-2 flex gap-2">
+              <SearchInput value={nameValue} setValue={setNameValue} />
+              <div className="flex w-full items-center">
+                <SearchCombobox
+                  data={locationData}
+                  value={locationValue}
+                  setValue={setLocationValue}
+                />
               </div>
-            ))}
+              <div className="flex w-full items-center">
+                <Button
+                  variant="ghost"
+                  className="flex w-full justify-between rounded-lg border-2 border-secondary shadow-none hover:bg-secondary"
+                >
+                  <Icons.filter className="hidden h-5 w-5 md:block" />
+                  Więcej opcji
+                  <div></div>
+                </Button>
+              </div>
+            </div>
+            <div>
+              <SortSelect value={sortValue} setValue={setSortValue} />
+            </div>
+            <div className="sidebar max-h-[calc(100vh-300px)] overflow-y-auto pr-3">
+              {data?.map((item, index) => (
+                <div key={index} className="py-2">
+                  <Pill item={item} />
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="h-full">
+            <Map />
           </div>
         </div>
-        <div className="h-full">
-          <Map />
-        </div>
-      </div>
-    </section>
-    <div className="h-16" />
-  </Container>
+      </section>
+      <div className="h-16" />
+    </Container>
   )
 }
