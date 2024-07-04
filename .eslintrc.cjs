@@ -30,6 +30,8 @@ const config = {
     "@typescript-eslint/prefer-nullish-coalescing": "off",
     "@typescript-eslint/no-unnecessary-type-assertion": "off",
     "@typescript-eslint/no-empty-interface": "off",
+    "@typescript-eslint/non-nullable-type-assertion-style": "off",
+    "@typescript-eslint/no-floating-promises": "off",
     "@typescript-eslint/no-misused-promises": [
       "error",
       {
