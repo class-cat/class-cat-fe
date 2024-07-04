@@ -18,7 +18,7 @@ export function SearchInput({ value }: Props) {
 
     useEffect(() => {
         updateQueryParams({ name: debouncedValue });
-    }, [debouncedValue]);
+    }, [debouncedValue, updateQueryParams]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(e.target.value);
