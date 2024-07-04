@@ -6,7 +6,6 @@ const config = {
   },
   plugins: ["@typescript-eslint"],
   extends: [
-    "next/babel",
     "next/core-web-vitals",
     "plugin:@typescript-eslint/recommended-type-checked",
     "plugin:@typescript-eslint/stylistic-type-checked",
@@ -28,6 +27,9 @@ const config = {
       },
     ],
     "@typescript-eslint/require-await": "off",
+    "@typescript-eslint/prefer-nullish-coalescing": "off",
+    "@typescript-eslint/no-unnecessary-type-assertion": "off",
+    "@typescript-eslint/no-empty-interface": "off",
     "@typescript-eslint/no-misused-promises": [
       "error",
       {

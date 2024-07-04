@@ -1,13 +1,13 @@
-import { useQuery } from "@tanstack/react-query";
-import { Activity } from "~/types/search.type";
+import { useQuery } from "@tanstack/react-query"
+import { type Activity } from "~/types/search.type"
 
 const createItems = (count: number) =>
-    Array.from({ length: count }, () => ({
-      name: "Sp. nr 8 im. Przyjaciół Ziemii w Gdańsku",
-      title: "Siatkówka dla klas 1-3",
-      address: "Gdańsk, Dragana 2",
-      avatar: "/stock.jpeg",
-    }))
+  Array.from({ length: count }, () => ({
+    name: "Sp. nr 8 im. Przyjaciół Ziemii w Gdańsku",
+    title: "Siatkówka dla klas 1-3",
+    address: "Gdańsk, Dragana 2",
+    avatar: "/stock.jpeg",
+  }))
 
 type Props = {
     nameValue: string | undefined
@@ -23,9 +23,9 @@ const getActivities = async ({...props}: Props): Promise<Activity[]> => {
     return createItems(20)
 };
 
-export const useGetActivities = ({...props}: Props) => {
+export const useGetActivities = ({ ...props }: Props) => {
   return useQuery({
     queryKey: ["activities-data"],
-    queryFn: () => getActivities({...props}),
-  });
-};
+    queryFn: () => getActivities({ ...props }),
+  })
+}
