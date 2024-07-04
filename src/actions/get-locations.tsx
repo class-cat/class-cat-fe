@@ -1,5 +1,5 @@
-import { useQuery } from "@tanstack/react-query";
-import { Location } from "~/types/search.type";
+import { useQuery } from "@tanstack/react-query"
+import { type Location } from "~/types/search.type"
 
 const locations: Location[] = [
   {
@@ -33,12 +33,12 @@ const locations: Location[] = [
 ]
 
 const getLocations = async (): Promise<Location[]> => {
-    return locations
-};
+  return locations
+}
 
 export const useGetLocations = () => {
   return useQuery({
     queryKey: ["locations-data"],
     queryFn: () => getLocations(),
-  });
-};
+  })
+}
