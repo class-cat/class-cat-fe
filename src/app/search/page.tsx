@@ -43,7 +43,7 @@ export default function SearchPage() {
       <section className="flex flex-1 overflow-hidden">
         <div className="grid grid-cols-1 gap-4 xl:grid-cols-2 w-full">
           <div>
-            <p className="text-2xl font-bold">{`Wyniki wyszukiwania dla: ${name} (${data?.length || 0})`}</p>    
+            <p className="text-2xl font-bold">{`Wyniki wyszukiwania dla: ${name || ""} (${data?.length || 0})`}</p>    
             <div className="flex gap-2 my-2">
               <SearchInput 
                 value={name} 
