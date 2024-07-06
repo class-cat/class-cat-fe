@@ -5,7 +5,7 @@ import { Container } from "~/components/ui/container"
 import { Input } from "~/components/ui/input"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs"
 import React from "react"
-import Map from "../components/map/map"
+
 import {
   Carousel,
   CarouselContent,
@@ -15,6 +15,7 @@ import {
 } from "~/components/ui/carousel"
 import { Card, CardContent } from "~/components/ui/card"
 import { Pill } from "~/components/pill/pill"
+import { Map } from "./_components/map"
 
 const tabsTriggers = [
   {
@@ -69,16 +70,15 @@ const MostSearchItem = ({ title, desc, avatar }: MostSearchItemProps) => {
   return (
     <Card className="aspect-square rounded-3xl bg-secondary p-4">
       <CardContent className="flex h-full flex-col items-center justify-center gap-4 sm:h-auto">
-       
-        <div className="relative w-[80px] h-[80px]">
-        <Image
-          src={avatar}
-          alt={title}
-          layout="fill"
-          objectFit="cover"
-          className="rounded-lg"
-        />
-      </div>
+        <div className="relative h-[80px] w-[80px]">
+          <Image
+            src={avatar}
+            alt={title}
+            layout="fill"
+            objectFit="cover"
+            className="rounded-lg"
+          />
+        </div>
         <div className="flex flex-col items-center text-center capitalize">
           <h5>{title}</h5>
           <p className="text-foregroundMuted">{desc}</p>
@@ -153,10 +153,10 @@ export default function HomePage() {
                     value={tab.value}
                     className={`${
                       index === 1
-                        ? 'border-x-2'
+                        ? "border-x-2"
                         : index !== tabsTriggers.length - 1
-                        ? 'border-r-2'
-                        : 'hidden border-0 sm:block'
+                          ? "border-r-2"
+                          : "hidden border-0 sm:block"
                     }`}
                   >
                     {tab.title}
@@ -191,7 +191,7 @@ export default function HomePage() {
         <div className="flex justify-center">
           <Carousel
             className="w-full max-w-xs sm:max-w-sm md:max-w-2xl lg:max-w-3xl xl:max-w-5xl"
-            opts={{ align: 'start', loop: false }}
+            opts={{ align: "start", loop: false }}
           >
             <CarouselContent className="-ml-2">
               {mostSearchedItems.map((item, index) => (
@@ -220,5 +220,5 @@ export default function HomePage() {
       </div>
       <div className="h-16" />
     </Container>
-  );
+  )
 }
