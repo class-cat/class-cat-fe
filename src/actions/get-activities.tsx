@@ -16,11 +16,12 @@ type Props = {
     distanceValue: string | null
     ageValue: string | null
     priceValue: string | null
+    categoryValue: string | null
 }
 
 const getActivities = async ({...props}: Props): Promise<Activity[]> => {
-    const {nameValue, locationValue, sortValue, distanceValue, ageValue, priceValue} = props
-    console.log(nameValue, locationValue, sortValue, distanceValue, ageValue, priceValue)
+    const {nameValue, locationValue, sortValue, distanceValue, ageValue, priceValue, categoryValue} = props
+    console.log(nameValue, locationValue, sortValue, distanceValue, ageValue, priceValue, categoryValue)
     return createItems(20)
 };
 
