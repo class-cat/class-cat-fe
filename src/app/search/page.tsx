@@ -25,6 +25,7 @@ export default function SearchPage() {
   const sort = searchParams.get("sort")
   const distance = searchParams.get("distance")
   const age = searchParams.get("age")
+  const price = searchParams.get("price")
 
   const { data: locationData} = useGetLocations()
 
@@ -34,11 +35,12 @@ export default function SearchPage() {
       sortValue: sort,
       distanceValue: distance,
       ageValue: age,
+      priceValue: price,
     })
 
   useEffect(() => {
     queryClient.invalidateQueries({ queryKey: ['activities-data'] });
-  }, [name, location, sort, distance, age]);
+  }, [name, location, sort, distance, age, price]);
 
 
   return (
@@ -64,6 +66,7 @@ export default function SearchPage() {
               <MoreOptionDialog
                 distanceValue={distance}
                 ageValue={age}
+                priceValue={price}
               />  
             </div>
           </div>   
