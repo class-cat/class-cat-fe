@@ -28,13 +28,13 @@ export function TopNavButtons() {
             </SignInButton>
           </SignedOut>
           <SignedIn>
-            <UserButton />
+            <UserButton userProfileUrl="/profile" />
           </SignedIn>
           <Button variant="outline">Dodaj zajęcia</Button>
         </div>
       )}
       {isMobile && isMenuOpen && (
-        <div className="animate-slide-in absolute right-0 top-[80px] h-[calc(100vh-80px)] w-full  border-t-2 border-primary bg-secondary p-4 shadow-md">
+        <div className="absolute right-0 top-[80px] h-[calc(100vh-80px)] w-full animate-slide-in  border-t-2 border-primary bg-secondary p-4 shadow-md">
           <div>
             <li>tu jakies itemki</li>
             <li>tu jakies itemki</li>
@@ -48,7 +48,7 @@ export function TopNavButtons() {
               </SignInButton>
             </SignedOut>
             <SignedIn>
-              <UserButton />
+              <UserButton userProfileUrl="/profile" />
             </SignedIn>
             <Button variant="outline">Dodaj zajęcia</Button>
           </div>

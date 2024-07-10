@@ -5,7 +5,6 @@ import { Input } from "~/components/ui/input";
 type SliderProps = React.ComponentProps<typeof Slider>;
 
 export function PriceSlider({ className, ...props }: SliderProps) {
-    console.log(props.value);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;

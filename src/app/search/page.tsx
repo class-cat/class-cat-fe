@@ -2,7 +2,6 @@
 
 import { useSearchParams } from "next/navigation"
 import { Container } from "~/components/ui/container"
-import Map from "../../components/map/map"
 import { useEffect } from "react"
 import { SearchInput } from "./_components/searchInput"
 import { SearchCombobox } from "./_components/searchComboBox"
@@ -13,7 +12,8 @@ import { useGetActivities } from "~/actions/get-activities"
 import { MoreOptionDialog } from "./_components/moreOptionDialog"
 import PlaceholderPill from "~/components/pill/placeholerPill"
 import { Pill } from "~/components/pill/pill"
-import PlaceholderMap from "../../components/map/placeholderMap"
+import { Map, PlaceholderMap } from "../_components/map"
+
 
 
 export default function SearchPage() {
