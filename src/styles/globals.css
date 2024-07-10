@@ -27,8 +27,10 @@
   .paddingX {
     @apply px-4 md:px-12 xl:px-24;
   }
+  .card {
+    @apply paddingX rounded-3xl bg-secondary  py-4;
+  }
 }
-
 
 @layer utilities {
   .sidebar {
@@ -37,7 +39,7 @@
 
   .sidebar::-webkit-scrollbar {
     width: 8px;
-   
+
     @apply transition-all duration-1000 ease-in-out;
   }
 
@@ -56,7 +58,6 @@
   .sidebar::-webkit-scrollbar-track {
     @apply bg-white;
   }
-
 
   .sidebarSmall {
     @apply transition-all duration-1000 ease-in-out;
@@ -78,7 +79,4 @@
   .sidebarSmall::-webkit-scrollbar-track {
     @apply bg-white;
   }
-
-
- 
 }
