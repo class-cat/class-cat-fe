@@ -16,6 +16,7 @@ import {
 import { Card, CardContent } from "~/components/ui/card"
 import { Pill } from "~/components/pill/pill"
 import { Map } from "./_components/map"
+import Link from "next/link"
 
 const tabsTriggers = [
   {
@@ -45,6 +46,7 @@ const createItems = (count: number) =>
     title: "Siatkówka dla klas 1-3",
     address: "Gdańsk, Dragana 2",
     avatar: "/stock.jpeg",
+   
   }))
 
 const tabsContent = [
@@ -59,6 +61,7 @@ const createCardItems = (count: number) =>
     title: "piłka nożna",
     desc: "34",
     avatar: "ball.svg",
+    href: "search?category=pilkanozna",
   }))
 
 type MostSearchItemProps = {
@@ -195,14 +198,15 @@ export default function HomePage() {
           >
             <CarouselContent className="-ml-2">
               {mostSearchedItems.map((item, index) => (
+                <Link key={index} href={item.href}>
                 <CarouselItem
-                  key={index}
                   className="sm:basis-1/3 md:basis-1/4 lg:basis-1/6"
                 >
                   <div className="p-1">
                     <MostSearchItem {...item} />
                   </div>
                 </CarouselItem>
+                </Link>
               ))}
             </CarouselContent>
             <CarouselPrevious className="ml-2" />

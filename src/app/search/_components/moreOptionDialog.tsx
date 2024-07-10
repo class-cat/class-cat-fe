@@ -7,6 +7,7 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/components/ui/select"
 import { PriceSlider } from "./priceSlider"
 import { useUpdateQueryParams } from "~/app/_hooks/useUpdateQueryParams"
+import { CategoryComboBox } from "./categoryComboBox"
 
 const distanceData = [
     { value: '0', label: "+0 km" },
@@ -25,26 +26,40 @@ const classRangeData = [
     { value: '4', label: "ponad podstawowa" },
 ]
 
+const categoryData = [
+    { value: 'koszykowka', label: "Koszykówka" },
+    { value: 'pilkanozna', label: "Piłka nozna" },
+    { value: 'silownia', label: "Siłownia" },
+    { value: 'gimnastyka', label: "Gimnastyka" },
+    { value: 'boks', label: "Boks" },
+    { value: 'judo', label: "Judo" },
+    { value: 'wspinaczkosportowa', label: "Wspinaczkosportowa" },
+    { value: 'kolarstwo', label: "Kolarstwo" },
+]
+
 type Props = {
+    categoryValue: string | null
     distanceValue: string | null
     ageValue: string | null
     priceValue: string | null
 }
 
-export const MoreOptionDialog = ({ distanceValue, ageValue, priceValue }: Props) => {
+export const MoreOptionDialog = ({categoryValue, distanceValue, ageValue, priceValue }: Props) => {
     const updateQueryParams = useUpdateQueryParams()
 
     const [open, setOpen] = useState(false)
+    const [category, setCategory] = useState(categoryValue)
     const [distance, setDistance] = useState(distanceValue)
     const [age, setAge] = useState(ageValue)
-    const [price, setPrice] = useState<number[] | undefined>(priceValue ? [parseInt(priceValue, 10)] : [0])
+    const [price, setPrice] = useState<number[] | undefined>(priceValue ? [parseInt(priceValue, 10)] : [200])
 
     const handleSaveOptions = () => {
-        updateQueryParams({ distance, age, price: price ? price.toString() : null });
+        updateQueryParams({ category, distance, age, price: price ? price.toString() : null });
         setOpen(false)
     };
 
     const handleResetOptions = () => {
+        setCategory(null)
         setDistance(null)
         setAge(null)
         setPrice(undefined)
@@ -53,9 +68,10 @@ export const MoreOptionDialog = ({ distanceValue, ageValue, priceValue }: Props)
     const handleOpenChange = (isOpen: boolean) => {
         setOpen(isOpen)
         if (isOpen) {
+            setCategory(categoryValue)
             setDistance(distanceValue)
             setAge(ageValue)
-            setPrice(priceValue ? [parseInt(priceValue, 10)] : [0])
+            setPrice(priceValue ? [parseInt(priceValue, 10)] : [200])
         }
     };
 
@@ -78,6 +94,10 @@ export const MoreOptionDialog = ({ distanceValue, ageValue, priceValue }: Props)
                     <DialogDescription>
                         <div className="flex flex-col gap-1">
                             <div className="text-lg">
+                                Kategoria
+                            </div>
+                            <CategoryComboBox value={category} data={categoryData} setValue={setCategory}/>
+                            <div className="text-lg mt-2">
                                 Odległość
                             </div>
                             <div>
@@ -115,7 +135,7 @@ export const MoreOptionDialog = ({ distanceValue, ageValue, priceValue }: Props)
                                 </Select>
                             </div>
                             <div className="text-lg mt-2">
-                                Kwota
+                                Kwota do
                             </div>
                             <div>
                                 <PriceSlider value={price} onValueChange={setPrice} />
