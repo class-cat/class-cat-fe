@@ -6,9 +6,14 @@ export type Activity = {
   }
   
 export type Location = {
-    value: string;
-    label: string;
-  } 
+  value: string;
+  label: string;
+} 
+
+export type Category = {
+  value: string;
+  label: string;
+} 
 
 export type QueryParams = {
   nameValue: string | null;

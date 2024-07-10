@@ -23,6 +23,7 @@ export default function SearchPage() {
   const name = searchParams.get("name")
   const location = searchParams.get("location")
   const sort = searchParams.get("sort")
+  const category = searchParams.get("category")
   const distance = searchParams.get("distance")
   const age = searchParams.get("age")
   const price = searchParams.get("price")
@@ -33,6 +34,7 @@ export default function SearchPage() {
       nameValue: name || "",
       locationValue: location,
       sortValue: sort,
+      categoryValue: category,
       distanceValue: distance,
       ageValue: age,
       priceValue: price,
@@ -40,7 +42,7 @@ export default function SearchPage() {
 
   useEffect(() => {
     queryClient.invalidateQueries({ queryKey: ['activities-data'] });
-  }, [name, location, sort, distance, age, price]);
+  }, [name, location, sort, distance, age, price, category]);
 
 
   return (
@@ -67,6 +69,7 @@ export default function SearchPage() {
                 distanceValue={distance}
                 ageValue={age}
                 priceValue={price}
+                categoryValue={category}
               />  
             </div>
           </div>   
