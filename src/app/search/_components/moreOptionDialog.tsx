@@ -1,12 +1,12 @@
-'use client'
+"use client"
 
 import { useState } from "react"
 import { Icons } from "~/components/icons"
 import { Button } from "~/components/ui/button"
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "~/components/ui/dialog"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/components/ui/select"
-import { useUpdateQueryParams } from "~/hooks/useUpdateQueryParams"
 import { PriceSlider } from "./priceSlider"
+import { useUpdateQueryParams } from "~/app/_hooks/useUpdateQueryParams"
 
 const distanceData = [
     { value: '0', label: "+0 km" },
