@@ -8,7 +8,7 @@ import { TopNav } from "./_components/topnav"
 
 import { plPL } from "@clerk/localizations"
 import { ReactQueryProvider } from "~/providers/reactquery-provider"
-
+import { Toaster } from "sonner"
 const inter = Poppins({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -46,6 +46,7 @@ export default function RootLayout({
             <footer className="padding h-[153px] bg-foreground text-white">
               ClassCat
             </footer>
+            <Toaster />
           </body>
         </html>
       </ClerkProvider>

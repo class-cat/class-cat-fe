@@ -28,7 +28,7 @@
     @apply px-4 md:px-12 xl:px-24;
   }
   .card {
-    @apply paddingX rounded-3xl bg-secondary  py-4;
+    @apply padding rounded-3xl bg-secondary;
   }
 }
 
@@ -79,4 +79,9 @@
   .sidebarSmall::-webkit-scrollbar-track {
     @apply bg-white;
   }
+}
+
+.rdp-caption_dropdowns {
+  display: flex;
+  gap: 0.5rem;
 }
