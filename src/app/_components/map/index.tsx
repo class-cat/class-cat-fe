@@ -40,7 +40,7 @@ export function Map() {
 
   return (
     <Suspense fallback={<PlaceholderMap />}>
-      <div className="mb-6 h-[120px] w-full rounded-2xl xl:h-full">
+      <div className="mb-6  w-full rounded-2xl h-full">
         <MapGL
           // style={{ width: "auto", height: 400 }}
           // className="rounded-2xl"
