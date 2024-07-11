@@ -19,6 +19,8 @@ import { Button } from "~/components/ui/button"
 import { useState } from "react"
 import type { Location } from "~/types/search.type"
 import { useUpdateQueryParams } from "~/app/_hooks/useUpdateQueryParams"
+import { useMediaQuery } from "~/app/_hooks/useMediaQuery"
+import { MOBILE_BREAKPOINT } from "~/lib/const"
 
 type Props = {
   data?: Location[]
@@ -27,6 +29,7 @@ type Props = {
 
 export function SearchCombobox({ data, value }: Props) {
   const updateQueryParams = useUpdateQueryParams()
+  const isMobile = useMediaQuery(MOBILE_BREAKPOINT)
 
   const [open, setOpen] = useState(false)
   const handleOnSelect = (currentValue: string) => {
@@ -36,19 +39,26 @@ export function SearchCombobox({ data, value }: Props) {
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
-        <Button
-          variant="default"
-          role="combobox"
-          aria-expanded={open}
-          className="flex w-full justify-between rounded-lg border-2 border-primary shadow-none"
-        >
-          <Icons.globe className="hidden h-5 w-5 md:block" />
-          {value
-            ? data?.find((item) => item.value === value)?.label
-            : "Lokalizacja"}
-          <Icons.chevronUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-        </Button>
+      <PopoverTrigger asChild className="md:w-full">
+        {
+          isMobile ?
+            <Button variant="outline" size="icon">
+              <Icons.globe className="h-5 w-5" />
+            </Button>
+          :
+          <Button
+            variant="default"
+            role="combobox"
+            aria-expanded={open}
+            className="flex w-full justify-between rounded-lg border-2 border-primary shadow-none"
+          >
+            <Icons.globe className="hidden h-5 w-5 md:block" />
+            {value
+              ? data?.find((item) => item.value === value)?.label
+              : "Lokalizacja"}
+            <Icons.chevronUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+          </Button>
+        }
       </PopoverTrigger>
       <PopoverContent className="flex h-[250px] w-full p-0">
         <Command>

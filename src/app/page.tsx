@@ -17,6 +17,7 @@ import { Card, CardContent } from "~/components/ui/card"
 import { Pill } from "~/components/pill/pill"
 import { Map } from "./_components/map"
 import Link from "next/link"
+import { MobileMap } from "./_components/map/mobileMap"
 
 const tabsTriggers = [
   {
@@ -168,6 +169,9 @@ export default function HomePage() {
                   </TabsTrigger>
                 ))}
               </TabsList>
+              <div className="xl:hidden mt-6">
+              <MobileMap />
+            </div>
               <div className="h-6" />
               {tabsContent.map((tab) => (
                 <TabsContent
@@ -182,7 +186,7 @@ export default function HomePage() {
               ))}
             </Tabs>
           </div>
-          <div>
+          <div className="hidden xl:block h-full">
             <Map />
           </div>
         </div>

@@ -13,6 +13,8 @@ import { MoreOptionDialog } from "./_components/moreOptionDialog"
 import PlaceholderPill from "~/components/pill/placeholerPill"
 import { Pill } from "~/components/pill/pill"
 import { Map, PlaceholderMap } from "../_components/map"
+import { MobileMap } from "../_components/map/mobileMap"
+
 
 
 
@@ -28,22 +30,21 @@ export default function SearchPage() {
   const age = searchParams.get("age")
   const price = searchParams.get("price")
 
-  const { data: locationData} = useGetLocations()
+  const { data: locationData } = useGetLocations()
 
   const { data, isLoading } = useGetActivities({
-      nameValue: name || "",
-      locationValue: location,
-      sortValue: sort,
-      categoryValue: category,
-      distanceValue: distance,
-      ageValue: age,
-      priceValue: price,
-    })
+    nameValue: name || "",
+    locationValue: location,
+    sortValue: sort,
+    categoryValue: category,
+    distanceValue: distance,
+    ageValue: age,
+    priceValue: price,
+  })
 
   useEffect(() => {
-    queryClient.invalidateQueries({ queryKey: ['activities-data'] });
-  }, [name, location, sort, distance, age, price, category]);
-
+    queryClient.invalidateQueries({ queryKey: ['activities-data'] })
+  }, [name, location, sort, distance, age, price, category])
 
   return (
     <Container className="h-[calc(100vh-80px)] flex flex-col justify-center pt-6">
@@ -51,61 +52,51 @@ export default function SearchPage() {
         <div className="grid grid-cols-1 gap-4 xl:grid-cols-2 w-full">
           <div>
             <div className="flex items-center space-x-2">
-              <p className="text-2xl font-bold truncate">{`Wyniki wyszukiwania dla: ${name || ""}`}</p>
-              <p className="text-2xl font-bold">{`(${data?.length || 0})`}</p>
-            </div> 
+              <p className="text-lg font-bold truncate md:text-3xl">{`Wyniki wyszukiwania dla: ${name || ""}`}</p>
+              <p className="text-lg font-bold md:text-3xl">{`(${data?.length || 0})`}</p>
+            </div>
             <div className="flex gap-2 my-2">
-              <SearchInput 
-                value={name} 
-              />
-            <div className="flex w-full items-center">
-              <SearchCombobox
-                data={locationData}
-                value={location}
-              />
+              <SearchInput value={name} />
+              <div className="flex w-[60px] md:w-full items-center">
+                <SearchCombobox data={locationData} value={location} />
+              </div>
+              <div className="flex w-[60px] md:w-full items-center">
+                <MoreOptionDialog
+                  distanceValue={distance}
+                  ageValue={age}
+                  priceValue={price}
+                  categoryValue={category}
+                />
+              </div>
             </div>
-            <div className="flex w-full">
-              <MoreOptionDialog
-                distanceValue={distance}
-                ageValue={age}
-                priceValue={price}
-                categoryValue={category}
-              />  
+            <SortSelect value={sort} />
+            <div className="xl:hidden mb-6">
+              <MobileMap />
             </div>
-          </div>   
-            <SortSelect
-              value={sort}
-            />
-            <div className="xl:hidden">
-              <Map/>
-            </div>
-           <div className="overflow-y-auto max-h-[calc(100vh-300px)] pr-3 sidebar mt-2">
+            <div className="relative overflow-y-auto  h-[calc(100vh-450px)] sm:h-[calc(100vh-315px)] pr-3 xl:pr-0 sidebar xl:mt-2">
+              <div className="overflow-y-auto mr-2">
               {isLoading ? (
-                Array.from({ length: 10 }).map((_, index) => (
-                  <div key={index} className="py-2">
-                    <PlaceholderPill />
-                  </div>
-                ))
-              ) : (
-                data?.map((item, index) => (
-                  <div key={index} className="py-2">
-                    <Pill item={item} />
-                  </div>
-                ))
-              )}
-            </div>
+              Array.from({ length: 10 }).map((_, index) => (
+                <div key={index} className="py-2">
+                  <PlaceholderPill />
+                </div>
+              ))
+            ) : (
+              data?.map((item, index) => (
+                <div key={index} className="pt-3 sm:py-2">
+                  <Pill item={item} />
+                </div>
+              ))
+            )}
+              </div>
+          </div>
+          </div>
+          <div className="hidden xl:block h-full">
+            {isLoading ? <PlaceholderMap /> : <Map />}
+          </div>
         </div>
-        <div className="h-full">
-        {isLoading ? 
-          ( 
-            <PlaceholderMap />
-          ) : 
-            <Map />
-        }
-        </div>
-      </div>
-    </section>
-    <div className="h-16" />
-  </Container>
-  )
+      </section>
+      <div className="h-16" />
+    </Container>
+  );
 }
