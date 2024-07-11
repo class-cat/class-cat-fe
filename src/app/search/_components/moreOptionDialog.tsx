@@ -8,6 +8,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~
 import { PriceSlider } from "./priceSlider"
 import { useUpdateQueryParams } from "~/app/_hooks/useUpdateQueryParams"
 import { CategoryComboBox } from "./categoryComboBox"
+import { useMediaQuery } from "~/app/_hooks/useMediaQuery"
+import { MOBILE_BREAKPOINT } from "~/lib/const"
 
 const distanceData = [
     { value: '0', label: "+0 km" },
@@ -46,6 +48,7 @@ type Props = {
 
 export const MoreOptionDialog = ({categoryValue, distanceValue, ageValue, priceValue }: Props) => {
     const updateQueryParams = useUpdateQueryParams()
+    const isMobile = useMediaQuery(MOBILE_BREAKPOINT)
 
     const [open, setOpen] = useState(false)
     const [category, setCategory] = useState(categoryValue)
@@ -77,16 +80,24 @@ export const MoreOptionDialog = ({categoryValue, distanceValue, ageValue, priceV
 
     return (
         <Dialog open={open} onOpenChange={handleOpenChange}>
-            <DialogTrigger className="flex w-full justify-center md:justify-between" asChild>
-                <Button
-                    variant="ghost"
-                    className="rounded-lg border-2 border-secondary py-5 shadow-none hover:bg-secondary"
-                    onClick={() => setOpen(true)}
-                >
-                    <Icons.filter className="hidden h-5 w-5 md:block" />
-                    Więcej opcji
-                    <div></div>
-                </Button>
+            <DialogTrigger className="md:flex md:w-full md:justify-center lg:justify-between" asChild>
+                {
+                    isMobile ?
+                        <Button variant="outline" size="icon">
+                            <Icons.filter className="h-5 w-5" />
+                        </Button>
+                    :
+                        <Button
+                            variant="ghost"
+                            className="rounded-lg border-2 border-secondary py-5 shadow-none hover:bg-secondary"
+                            onClick={() => setOpen(true)}
+                        >
+                        <Icons.filter className="hidden h-5 w-5 md:block" />
+                        Więcej opcji
+                        <div></div>
+                    </Button>
+                }
+                
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader>
