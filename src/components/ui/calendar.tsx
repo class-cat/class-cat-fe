@@ -6,14 +6,15 @@ import { DayPicker, DropdownProps } from "react-day-picker"
 
 import { cn } from "~/lib/utils"
 import { buttonVariants } from "~/components/ui/button"
+
+import { ScrollArea } from "./scroll-area"
 import {
   Select,
-  SelectTrigger,
-  SelectValue,
   SelectContent,
   SelectItem,
-} from "@radix-ui/react-select"
-import { ScrollArea } from "./scroll-area"
+  SelectTrigger,
+  SelectValue,
+} from "./select"
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker>
 
@@ -60,6 +61,7 @@ function Calendar({
           "aria-selected:bg-accent aria-selected:text-accent-foreground",
         day_hidden: "invisible",
         vhidden: "vhidden hidden",
+
         ...classNames,
       }}
       components={{
@@ -87,7 +89,7 @@ function Calendar({
                 </SelectValue>
               </SelectTrigger>
               <SelectContent position="popper">
-                <ScrollArea className="h-80 rounded-md bg-primary p-4 opacity-100">
+                <ScrollArea className="h-80 rounded-md bg-primary p-4 ">
                   {options.map((option, id: number) => (
                     <SelectItem
                       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions

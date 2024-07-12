@@ -16,6 +16,7 @@ import {
 import { Card, CardContent } from "~/components/ui/card"
 import { Pill } from "~/components/pill/pill"
 import { Map } from "./_components/map"
+import Link from "next/link"
 
 const tabsTriggers = [
   {
@@ -45,6 +46,7 @@ const createItems = (count: number) =>
     title: "Siatkówka dla klas 1-3",
     address: "Gdańsk, Dragana 2",
     avatar: "/stock.jpeg",
+   
   }))
 
 const tabsContent = [
@@ -59,6 +61,7 @@ const createCardItems = (count: number) =>
     title: "piłka nożna",
     desc: "34",
     avatar: "ball.svg",
+    href: "search?category=pilkanozna",
   }))
 
 type MostSearchItemProps = {
@@ -68,23 +71,25 @@ type MostSearchItemProps = {
 }
 const MostSearchItem = ({ title, desc, avatar }: MostSearchItemProps) => {
   return (
-    <Card className="aspect-square rounded-3xl bg-secondary p-4">
-      <CardContent className="flex h-full flex-col items-center justify-center gap-4 sm:h-auto">
-        <div className="relative h-[80px] w-[80px]">
+    <Card className="aspect-square rounded-3xl border-secondary border-2 bg-secondary p-4 shadow-none">
+      <CardContent className="flex flex-col items-center justify-center space-y-2 h-full p-0">
+        <div className="relative h-20 w-20">
           <Image
             src={avatar}
             alt={title}
             layout="fill"
-            objectFit="cover"
+            
             className="rounded-lg"
           />
         </div>
-        <div className="flex flex-col items-center text-center capitalize">
-          <h5>{title}</h5>
-          <p className="text-foregroundMuted">{desc}</p>
+        <div className="flex flex-col items-center justify-center text-center capitalize pt-2">
+          <p className="text-foregroundMuted text-md">{title}</p>
+          <p className="text-foregroundMuted text-md">{desc}</p>
         </div>
       </CardContent>
     </Card>
+
+
   )
 }
 const mostSearchedItems = createCardItems(16)
@@ -190,19 +195,21 @@ export default function HomePage() {
         <div className="h-8" />
         <div className="flex justify-center">
           <Carousel
-            className="w-full max-w-xs sm:max-w-sm md:max-w-2xl lg:max-w-3xl xl:max-w-5xl"
+            className="w-full max-w-xs sm:max-w-sm md:max-w-2xl lg:max-w-3xl xl:max-w-7xl"
             opts={{ align: "start", loop: false }}
           >
             <CarouselContent className="-ml-2">
-              {mostSearchedItems.map((item, index) => (
+              {mostSearchedItems.map((item, index) => (             
                 <CarouselItem
                   key={index}
-                  className="sm:basis-1/3 md:basis-1/4 lg:basis-1/6"
+                  className="basis-1/2 md:basis-1/3 lg:basis-1/6" 
                 >
                   <div className="p-1">
+                  <Link  href={item.href}>
                     <MostSearchItem {...item} />
-                  </div>
-                </CarouselItem>
+                    </Link>
+                  </div>    
+                </CarouselItem>      
               ))}
             </CarouselContent>
             <CarouselPrevious className="ml-2" />

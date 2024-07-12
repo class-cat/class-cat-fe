@@ -2,13 +2,13 @@
 
 import { Container } from "~/components/ui/container"
 import { Input } from "~/components/ui/input"
-import { Label } from "~/components/ui/label"
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 
 import { useForm } from "react-hook-form"
-import { toast } from "~/components/ui/use-toast"
+
 import {
   Form,
   FormControl,
@@ -28,7 +28,16 @@ import { cn } from "~/lib/utils"
 import { CalendarIcon } from "lucide-react"
 import { Calendar } from "~/components/ui/calendar"
 import { format } from "date-fns"
-type TabsTriggers = "lessons" | "reviews" | "school" | "settings"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "~/components/ui/select"
+import { Checkbox } from "~/components/ui/checkbox"
+import { toast } from "sonner"
+
 const tabsTriggers = [
   {
     id: 1,
@@ -53,25 +62,22 @@ const tabsTriggers = [
 ]
 
 const FormSchema = z.object({
-  dob: z.date(),
+  dob: z.date().optional(),
+  address: z.string().min(2).max(50).optional(),
+  sex: z.enum(["male", "female", "unknown"]).optional(),
+  email: z.boolean().optional(),
+  sms: z.boolean().optional(),
 })
 type FormSchemaType = z.infer<typeof FormSchema>
 
 const ProfileTabsContent = () => {
   const form = useForm<FormSchemaType>({
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
     resolver: zodResolver(FormSchema),
   })
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="bg-slate-950 mt-2 w-[340px] rounded-md p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    })
+    console.log(data)
+    toast("Form submitted")
   }
 
   return (
@@ -87,13 +93,9 @@ const ProfileTabsContent = () => {
           <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">test</div>
         </TabsContent>
         <TabsContent value="settings" className="card">
-          <div className="flex flex-col md:flex-row md:justify-between">
-            <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-8 md:flex-row md:justify-between">
+            <div className="flex min-w-[240px] flex-col gap-4">
               <h2 className="text-xl font-bold">Dodatkowe Informacje</h2>
-              {/* <div className="grid w-full max-w-sm items-center gap-1.5">
-                <Label htmlFor="bday">Data urodzenia</Label>
-                <Input type="date" id="bday" placeholder="Data urodzenia" />
-              </div> */}
               <FormField
                 control={form.control}
                 name="dob"
@@ -106,7 +108,7 @@ const ProfileTabsContent = () => {
                           <Button
                             variant={"outline"}
                             className={cn(
-                              "w-[240px] pl-3 text-left font-normal",
+                              "w-full border-0 pl-3 text-left font-normal",
                               !field.value && "text-muted-foreground"
                             )}
                           >
@@ -141,9 +143,89 @@ const ProfileTabsContent = () => {
                   </FormItem>
                 )}
               />
+              <FormField
+                control={form.control}
+                name="address"
+                render={({ field }) => (
+                  <FormItem className="flex flex-col">
+                    <FormLabel>Adres zamieszkania</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Adres zamieszkania"
+                        className="w-full"
+                        {...field}
+                      />
+                    </FormControl>
+
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="sex"
+                render={({ field }) => (
+                  <FormItem className="space-y-0">
+                    <FormLabel>Płeć</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger className="h-10 rounded-xl bg-white shadow-md">
+                          <SelectValue placeholder="Wybierz płeć" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="female">Kobieta</SelectItem>
+                        <SelectItem value="male">Mężczyzna</SelectItem>
+                        <SelectItem value="unknown">Nie wiem</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
             </div>
-            <div>
-              <h2 className="text-xl font-bold">Powiadomienia</h2>
+            <div className="flex min-w-[240px] flex-col justify-between">
+              <div className="flex flex-col gap-4">
+                <h2 className="text-xl font-bold">Powiadomienia</h2>
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                      <div className="space-y-1 leading-none">
+                        <FormLabel>E-mail</FormLabel>
+                      </div>
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="sms"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                      <div className="space-y-1 leading-none">
+                        <FormLabel>SMS</FormLabel>
+                      </div>
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <Button type="submit">Zapisz</Button>
             </div>
           </div>
         </TabsContent>

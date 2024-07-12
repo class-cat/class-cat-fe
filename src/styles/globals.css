@@ -80,3 +80,8 @@
     @apply bg-white;
   }
 }
+
+.rdp-caption_dropdowns {
+  display: flex;
+  gap: 0.5rem;
+}
