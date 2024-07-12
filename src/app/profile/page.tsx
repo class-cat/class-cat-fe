@@ -8,7 +8,7 @@ import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 
 import { useForm } from "react-hook-form"
-import { toast } from "~/components/ui/use-toast"
+
 import {
   Form,
   FormControl,
@@ -35,7 +35,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "~/components/ui/select"
-type TabsTriggers = "lessons" | "reviews" | "school" | "settings"
+import { Checkbox } from "~/components/ui/checkbox"
+import { toast } from "sonner"
+
 const tabsTriggers = [
   {
     id: 1,
@@ -60,27 +62,22 @@ const tabsTriggers = [
 ]
 
 const FormSchema = z.object({
-  dob: z.date(),
-  address: z.string().min(2).max(50),
-  sex: z.enum(["male", "female", "unknown"]),
+  dob: z.date().optional(),
+  address: z.string().min(2).max(50).optional(),
+  sex: z.enum(["male", "female", "unknown"]).optional(),
+  email: z.boolean().optional(),
+  sms: z.boolean().optional(),
 })
 type FormSchemaType = z.infer<typeof FormSchema>
 
 const ProfileTabsContent = () => {
   const form = useForm<FormSchemaType>({
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
     resolver: zodResolver(FormSchema),
   })
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="bg-slate-950 mt-2 w-[340px] rounded-md p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    })
+    console.log(data)
+    toast("Form submitted")
   }
 
   return (
@@ -190,8 +187,45 @@ const ProfileTabsContent = () => {
                 )}
               />
             </div>
-            <div>
-              <h2 className="text-xl font-bold">Powiadomienia</h2>
+            <div className="flex min-w-[240px] flex-col justify-between">
+              <div className="flex flex-col gap-4">
+                <h2 className="text-xl font-bold">Powiadomienia</h2>
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                      <div className="space-y-1 leading-none">
+                        <FormLabel>E-mail</FormLabel>
+                      </div>
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="sms"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                      <div className="space-y-1 leading-none">
+                        <FormLabel>SMS</FormLabel>
+                      </div>
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <Button type="submit">Zapisz</Button>
             </div>
           </div>
         </TabsContent>
