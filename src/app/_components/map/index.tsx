@@ -9,6 +9,8 @@ import { Protocol } from "pmtiles"
 import { type CircleLayerSpecification } from "mapbox-gl"
 
 import "./style.css"
+import { useFetch } from "~/app/_hooks/useFetch"
+import { ENDPOINTS } from "~/lib/const"
 const geojson = {
   type: "FeatureCollection",
   features: [
@@ -29,6 +31,14 @@ const layerStyle: CircleLayerSpecification = {
   },
 }
 export function Map() {
+  const {
+    data: map,
+    isLoading,
+    isError,
+  } = useFetch<unknown>({
+    url: `${ENDPOINTS.MAP}`,
+  })
+  console.log(map)
   useEffect(() => {
     // eslint-disable-next-line prefer-const
     let protocol = new Protocol()
@@ -40,8 +50,8 @@ export function Map() {
 
   return (
     <Suspense fallback={<PlaceholderMap />}>
-      <div className="mb-6  w-full rounded-2xl h-full">
-        <MapGL
+      <div className="mb-6  h-full w-full rounded-2xl">
+        {/* <MapGL
           // style={{ width: "auto", height: 400 }}
           // className="rounded-2xl"
           reuseMaps
@@ -72,7 +82,7 @@ export function Map() {
           <Source id="my-data" type="geojson" data={geojson}>
             <Layer {...layerStyle} />
           </Source>
-        </MapGL>
+        </MapGL> */}
       </div>
     </Suspense>
   )
