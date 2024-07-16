@@ -47,7 +47,6 @@ const createItems = (count: number) =>
     title: "Siatkówka dla klas 1-3",
     address: "Gdańsk, Dragana 2",
     avatar: "/stock.jpeg",
-   
   }))
 
 const tabsContent = [
@@ -72,25 +71,22 @@ type MostSearchItemProps = {
 }
 const MostSearchItem = ({ title, desc, avatar }: MostSearchItemProps) => {
   return (
-    <Card className="aspect-square rounded-3xl border-secondary border-2 bg-secondary p-4 shadow-none">
-      <CardContent className="flex flex-col items-center justify-center space-y-2 h-full p-0">
+    <Card className="aspect-square rounded-3xl border-2 border-secondary bg-secondary p-4 shadow-none">
+      <CardContent className="flex h-full flex-col items-center justify-center space-y-2 p-0">
         <div className="relative h-20 w-20">
           <Image
             src={avatar}
             alt={title}
             layout="fill"
-            
             className="rounded-lg"
           />
         </div>
-        <div className="flex flex-col items-center justify-center text-center capitalize pt-2">
-          <p className="text-foregroundMuted text-md">{title}</p>
-          <p className="text-foregroundMuted text-md">{desc}</p>
+        <div className="flex flex-col items-center justify-center pt-2 text-center capitalize">
+          <p className="text-md text-foregroundMuted">{title}</p>
+          <p className="text-md text-foregroundMuted">{desc}</p>
         </div>
       </CardContent>
     </Card>
-
-
   )
 }
 const mostSearchedItems = createCardItems(16)
@@ -169,9 +165,9 @@ export default function HomePage() {
                   </TabsTrigger>
                 ))}
               </TabsList>
-              <div className="xl:hidden mt-6">
-              <MobileMap />
-            </div>
+              <div className="mt-6 xl:hidden">
+                <MobileMap />
+              </div>
               <div className="h-6" />
               {tabsContent.map((tab) => (
                 <TabsContent
@@ -186,7 +182,7 @@ export default function HomePage() {
               ))}
             </Tabs>
           </div>
-          <div className="hidden xl:block h-full">
+          <div className="hidden h-full xl:block">
             <Map />
           </div>
         </div>
@@ -203,17 +199,17 @@ export default function HomePage() {
             opts={{ align: "start", loop: false }}
           >
             <CarouselContent className="-ml-2">
-              {mostSearchedItems.map((item, index) => (             
+              {mostSearchedItems.map((item, index) => (
                 <CarouselItem
                   key={index}
-                  className="basis-1/2 md:basis-1/3 lg:basis-1/6" 
+                  className="basis-1/2 md:basis-1/3 lg:basis-1/6"
                 >
                   <div className="p-1">
-                  <Link  href={item.href}>
-                    <MostSearchItem {...item} />
+                    <Link href={item.href}>
+                      <MostSearchItem {...item} />
                     </Link>
-                  </div>    
-                </CarouselItem>      
+                  </div>
+                </CarouselItem>
               ))}
             </CarouselContent>
             <CarouselPrevious className="ml-2" />
