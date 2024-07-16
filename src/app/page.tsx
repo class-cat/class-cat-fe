@@ -195,7 +195,7 @@ export default function HomePage() {
         <div className="h-8" />
         <div className="flex justify-center">
           <Carousel
-            className="w-full max-w-xs sm:max-w-sm md:max-w-2xl lg:max-w-3xl xl:max-w-6xl"
+            className="max-w-xs sm:max-w-sm md:max-w-2xl lg:max-w-3xl xl:max-w-5xl"
             opts={{ align: "start", loop: false }}
           >
             <CarouselContent className="-ml-2">
