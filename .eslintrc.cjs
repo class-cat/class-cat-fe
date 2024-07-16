@@ -7,8 +7,8 @@ const config = {
   plugins: ["@typescript-eslint"],
   extends: [
     "next/core-web-vitals",
-    "plugin:@typescript-eslint/recommended-type-checked",
-    "plugin:@typescript-eslint/stylistic-type-checked",
+    "prettier",
+    "plugin:tailwindcss/recommended",
   ],
   rules: {
     "@typescript-eslint/array-type": "off",
@@ -33,6 +33,7 @@ const config = {
     "@typescript-eslint/non-nullable-type-assertion-style": "off",
     "@typescript-eslint/no-floating-promises": "off",
     "react-hooks/exhaustive-deps": "off",
+    "restrict-template-expressions": "off",
     "@typescript-eslint/no-misused-promises": [
       "error",
       {
