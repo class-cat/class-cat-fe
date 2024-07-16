@@ -39,7 +39,7 @@ export default function RootLayout({
           <body
             className={`font-sans ${inter.variable} dark ${mochiy.variable}`}
           >
-            <div className="paddingX h-min-screen grid grid-rows-[auto,1fr] bg-white">
+            <div className="paddingX h-min-screen w-max-screen grid grid-rows-[auto,1fr] bg-white">
               <TopNav />
               <main className="bg-white">{children}</main>
             </div>
