@@ -2,7 +2,6 @@ export const httpClient = {
   baseURL: process.env.NEXT_API_URL as string,
 
   get: async <T>(url: string, params?: Record<string, string | number>) => {
-    console.log(url, params, httpClient.baseURL)
     const queryString = params
       ? `?${new URLSearchParams(params as Record<string, string>)}`
       : ""
