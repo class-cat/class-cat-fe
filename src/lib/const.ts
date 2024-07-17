@@ -1,5 +1,5 @@
 export const MOBILE_BREAKPOINT = 768
 
 export const ENDPOINTS = {
-  MAP: "map-source",
+  MAP: "ops/map-source/",
 } as const

@@ -30,15 +30,20 @@ const layerStyle: CircleLayerSpecification = {
     "circle-color": "#007cbf",
   },
 }
+type MapType = {
+  success: boolean
+  data: {
+    file: string
+  }
+}
 export function Map() {
   const {
     data: map,
     isLoading,
     isError,
-  } = useFetch<unknown>({
+  } = useFetch<MapType>({
     url: `${ENDPOINTS.MAP}`,
   })
-  console.log(map)
   useEffect(() => {
     // eslint-disable-next-line prefer-const
     let protocol = new Protocol()
@@ -51,38 +56,40 @@ export function Map() {
   return (
     <Suspense fallback={<PlaceholderMap />}>
       <div className="mb-6  h-full w-full rounded-2xl">
-        {/* <MapGL
-          // style={{ width: "auto", height: 400 }}
-          // className="rounded-2xl"
-          reuseMaps
-          initialViewState={{
-            longitude: 18.6435,
-            latitude: 54.352,
-            zoom: 12,
-          }}
-          mapStyle={{
-            version: 8,
-            glyphs:
-              "https://protomaps.github.io/basemaps-assets/fonts/{fontstack}/{range}.pbf",
-            sources: {
-              protomaps: {
-                attribution:
-                  '<a href="https://github.com/protomaps/basemaps">Protomaps</a> © <a href="https://openstreetmap.org">OpenStreetMap</a>',
-                type: "vector",
-                url: "pmtiles://https://pub-ea97de8c894d47b5af9392ef7c556635.r2.dev/media%2Fmy_area.pmtiles",
+        {isError || isLoading || map === undefined || map.success === false ? (
+          <PlaceholderMap />
+        ) : (
+          <MapGL
+            reuseMaps
+            initialViewState={{
+              longitude: 18.6435,
+              latitude: 54.352,
+              zoom: 12,
+            }}
+            mapStyle={{
+              version: 8,
+              glyphs:
+                "https://protomaps.github.io/basemaps-assets/fonts/{fontstack}/{range}.pbf",
+              sources: {
+                protomaps: {
+                  attribution:
+                    '<a href="https://github.com/protomaps/basemaps">Protomaps</a> © <a href="https://openstreetmap.org">OpenStreetMap</a>',
+                  type: "vector",
+                  url: `pmtiles://${map.data.file}`,
+                },
               },
-            },
+              // @ts-expect-error it is what is is
+              layers: layers("protomaps", "light"),
+            }}
             // @ts-expect-error it is what is is
-            layers: layers("protomaps", "light"),
-          }}
-          // @ts-expect-error it is what is is
-          mapLib={maplibregl}
-        >
-          <NavigationControl />
-          <Source id="my-data" type="geojson" data={geojson}>
-            <Layer {...layerStyle} />
-          </Source>
-        </MapGL> */}
+            mapLib={maplibregl}
+          >
+            <NavigationControl />
+            <Source id="my-data" type="geojson" data={geojson}>
+              <Layer {...layerStyle} />
+            </Source>
+          </MapGL>
+        )}
       </div>
     </Suspense>
   )
