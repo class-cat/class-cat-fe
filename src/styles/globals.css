@@ -30,6 +30,9 @@
   .card {
     @apply paddingX rounded-3xl bg-secondary  py-4;
   }
+  .cardSmall {
+    @apply w-full rounded-3xl bg-secondary  px-4 py-4;
+  }
 }
 
 @layer utilities {
