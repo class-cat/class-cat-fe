@@ -40,6 +40,7 @@ import { toast } from "sonner"
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar"
 import { useUser } from "@clerk/nextjs"
 import { Skeleton } from "~/components/ui/skeleton"
+import { LessonCard } from "./_components/lessonCard"
 
 const tabsTriggers = [
   {
@@ -64,6 +65,29 @@ const tabsTriggers = [
   },
 ]
 
+const lessons = [
+  {
+    id: 1,
+    title: "Piłka nożna dla dzieci",
+    providerName: "Sp. nr 8 im. Przyjaciół Ziemi w Gdańsku",
+    phoneNumber: "+48 111 222 333",
+    address: "Gdańsk, Dragana 2",
+    day: "monday",
+    hour: "12:00",
+    avatar: "/stock.jpeg",
+  },
+  {
+    id: 2,
+    title: "Siatkówka dla klas 1-3",
+    providerName: "Sp. nr 8 im. Przyjaciół Ziemi w Gdańsku",
+    phoneNumber: "+48 111 222 333",
+    address: "Gdańsk, Dragana 2",
+    day: "tuesday",
+    hour: "12:00",
+    avatar: "/stock.jpeg",
+  },
+] as const
+
 const FormNotificationsSchema = z.object({
   email: z.boolean().optional(),
   sms: z.boolean().optional(),
@@ -84,7 +108,11 @@ const ProfileTabsContent = () => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <TabsContent value="lessons" className="card">
-          <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">test</div>
+          <div className="flex flex-col gap-4">
+            {lessons.map((lesson) => (
+              <LessonCard key={lesson.id} lesson={lesson} />
+            ))}
+          </div>
         </TabsContent>
         <TabsContent value="reviews" className="card">
           <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">test</div>
@@ -131,7 +159,6 @@ const ProfileTabsContent = () => {
                     </FormItem>
                   )}
                 />
-                <div className="h-2" />
                 <Button type="submit">Zapisz</Button>
               </div>
             </div>
@@ -169,7 +196,7 @@ type FormSchemaType = z.infer<typeof FormSchema>
 
 export default function ProfilePage() {
   const { user, isLoaded } = useUser()
-  console.log(user?.primaryEmailAddress?.emailAddress)
+
   const form = useForm<FormSchemaType>({
     resolver: zodResolver(FormSchema),
   })
@@ -181,9 +208,9 @@ export default function ProfilePage() {
 
   return (
     <Container className="min-h-screen">
-      <div className="flex flex-col gap-8 pt-6 md:flex-row md:justify-center">
-        <section className="gap-0 sm:gap-4 md:w-2/3">
-          <Tabs defaultValue="settings" className="w-full">
+      <div className="flex flex-col gap-8 pt-6 lg:flex-row lg:justify-center">
+        <section className="gap-0 sm:gap-4 lg:w-2/3">
+          <Tabs defaultValue="lessons" className="w-full">
             <TabsList className="flex justify-between">
               {tabsTriggers.map((tab, index) => (
                 <TabsTrigger
@@ -206,9 +233,9 @@ export default function ProfilePage() {
           </Tabs>
         </section>
         {!isLoaded ? (
-          <Skeleton className="card min-h-[500px] rounded-3xl md:w-1/3" />
+          <Skeleton className="card min-h-[500px] rounded-3xl lg:w-1/3" />
         ) : (
-          <section className="cardSmall md:w-1/3">
+          <section className="cardSmall lg:w-1/3">
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
