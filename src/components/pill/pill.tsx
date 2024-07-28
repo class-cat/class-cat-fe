@@ -5,7 +5,7 @@ import { useMediaQuery } from "~/app/_hooks/useMediaQuery"
 import { Icons } from "~/components/icons"
 import { MOBILE_BREAKPOINT } from "~/lib/const"
 
-type Props = {
+interface Props {
   item: {
     name?: string
     title: string
@@ -25,8 +25,8 @@ export function Pill({ item }: Props) {
   }
 
   return (
-    <div className="relative flex items-center gap-4 rounded-2xl border-2 border-secondary p-2 mt-2 hover:shadow-md cursor-pointer">
-     <div className="relative w-[50px] h-[50px] sm:w-[80px] sm:h-[80px]">
+    <div className="relative mt-2 flex cursor-pointer items-center gap-4 rounded-2xl border-2 border-secondary p-2 hover:shadow-md">
+      <div className="relative h-[50px] w-[50px] sm:h-[80px] sm:w-[80px]">
         <Image
           src={avatar}
           alt={title}
@@ -37,21 +37,18 @@ export function Pill({ item }: Props) {
       </div>
       <div>
         <p className="font-medium">{title}</p>
-        {
-          (name && !isMobile) && (
-            <div className="flex items-center gap-1">
-              <Icons.map className="h-4 w-4" />
-              <p className="text-foregroundMuted text-xs">{name}</p>
-            </div>
-          )
-        }
+        {name && !isMobile && (
+          <div className="flex items-center gap-1">
+            <Icons.map className="h-4 w-4" />
+            <p className="text-xs text-foregroundMuted">{name}</p>
+          </div>
+        )}
         {
           <div className="flex items-center gap-1 pt-1">
             <Icons.store className="h-4 w-4" />
-            <p className="text-foregroundMuted text-xs">{address}</p>
+            <p className="text-xs text-foregroundMuted">{address}</p>
           </div>
         }
-
       </div>
       <button onClick={handleBookmark}>
         <Icons.badge
