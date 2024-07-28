@@ -30,7 +30,7 @@ const layerStyle: CircleLayerSpecification = {
     "circle-color": "#007cbf",
   },
 }
-type MapType = {
+interface MapType {
   success: boolean
   data: {
     file: string
