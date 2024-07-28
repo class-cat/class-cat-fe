@@ -53,11 +53,11 @@ const tabsTriggers = [
     title: "Opinie",
     value: "reviews",
   },
-  {
-    id: 3,
-    title: "Szkoła",
-    value: "school",
-  },
+  // {
+  //   id: 3,
+  //   title: "Szkoła",
+  //   value: "school",
+  // },
   {
     id: 4,
     title: "Ustawienia",
