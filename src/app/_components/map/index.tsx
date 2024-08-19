@@ -30,7 +30,7 @@ const layerStyle: CircleLayerSpecification = {
     "circle-color": "#007cbf",
   },
 }
-type MapType = {
+interface MapType {
   success: boolean
   data: {
     file: string
@@ -55,7 +55,7 @@ export function Map() {
 
   return (
     <Suspense fallback={<PlaceholderMap />}>
-      <div className="mb-6  h-full w-full rounded-2xl">
+      <div className="mb-6  size-full rounded-2xl">
         {isError || isLoading || map === undefined || map.success === false ? (
           <PlaceholderMap />
         ) : (
@@ -98,7 +98,7 @@ export function Map() {
 export function PlaceholderMap() {
   return (
     <div className="h-[200px] w-full animate-pulse rounded-2xl bg-secondary xl:h-full">
-      <div className="h-full w-full rounded-2xl" />
+      <div className="size-full rounded-2xl" />
     </div>
   )
 }

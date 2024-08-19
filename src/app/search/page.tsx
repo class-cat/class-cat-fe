@@ -16,8 +16,7 @@ import { MobileMap } from "../_components/map/mobileMap"
 import { ENDPOINTS } from "~/lib/const"
 import { useFetch } from "../_hooks/useFetch"
 import usePagination from "../_hooks/usePagination"
-import { ActivitiesData, Activity } from "~/types/search.type"
-
+import { type ActivitiesData, type Activity } from "~/types/search.type"
 
 export default function SearchPage() {
   const queryClient = useQueryClient()
@@ -33,11 +32,9 @@ export default function SearchPage() {
 
   const { data: locationData } = useGetLocations()
 
-  const {
-    currentPage,
-    goToNextPage,
-    updateTotalPages,
-  } = usePagination({ initialPage: 1 })
+  const { currentPage, goToNextPage, updateTotalPages } = usePagination({
+    initialPage: 1,
+  })
 
   const {
     data: activitiesData,
@@ -51,90 +48,105 @@ export default function SearchPage() {
 
   useEffect(() => {
     if (activitiesData?.results) {
-      activitiesList.current = [...activitiesList.current, ...activitiesData.results]
+      activitiesList.current = [
+        ...activitiesList.current,
+        ...activitiesData.results,
+      ]
       updateTotalPages(Math.ceil(activitiesData.count / 10))
     }
   }, [activitiesData, updateTotalPages])
 
   useEffect(() => {
     activitiesList.current = []
-    queryClient.invalidateQueries({ queryKey: ['activities-data'] })
+    queryClient.invalidateQueries({ queryKey: ["activities-data"] })
   }, [name, location, sort, distance, age, price, category, queryClient])
 
   const observer = useRef<IntersectionObserver | null>(null)
-  const lastActivityElementRef = useCallback((node: HTMLDivElement | null) => {
-    if (activitiesIsLoading) return
-    if (observer.current) observer.current.disconnect()
-    observer.current = new IntersectionObserver((entries: any) => {
-      if (entries[0].isIntersecting && activitiesData?.next) {
-        goToNextPage()
-      }
-    })
-    if (node) observer.current.observe(node)
-  }, [activitiesIsLoading, activitiesData?.next, goToNextPage])
+  const lastActivityElementRef = useCallback(
+    (node: HTMLDivElement | null) => {
+      if (activitiesIsLoading) return
+      if (observer.current) observer.current.disconnect()
+      observer.current = new IntersectionObserver((entries: any) => {
+        if (entries[0].isIntersecting && activitiesData?.next) {
+          goToNextPage()
+        }
+      })
+      if (node) observer.current.observe(node)
+    },
+    [activitiesIsLoading, activitiesData?.next, goToNextPage]
+  )
 
   return (
-    <Container className="h-[calc(100vh-80px)] flex flex-col justify-center pt-6">
+    <Container className="flex h-[calc(100vh-120px)] flex-col justify-center pt-2 sm:h-[calc(100vh-80px)] sm:pt-6">
       <section className="flex flex-1 overflow-hidden">
-        <div className="grid grid-cols-1 gap-4 xl:grid-cols-2 w-full">
+        <div className="grid w-full grid-cols-1 gap-4 xl:grid-cols-2">
           <div>
             <div className="flex items-center space-x-2">
-              <p className="text-lg font-bold truncate md:text-3xl">{`Wyniki wyszukiwania dla: ${name || ""}`}</p>
+              <p className="truncate text-lg font-bold md:text-3xl">{`Wyniki wyszukiwania dla: ${name || ""}`}</p>
               <p className="text-lg font-bold md:text-3xl">{`(${activitiesList.current.length || 0})`}</p>
             </div>
-            <div className="flex gap-2 my-2">
-              <SearchInput value={name || ''} />
-              <div className="flex w-[60px] md:w-full items-center">
-                <SearchCombobox data={locationData || []} value={location || ''} />
+            <div className="my-2 flex gap-2">
+              <SearchInput value={name || ""} />
+              <div className="flex w-[60px] items-center md:w-full">
+                <SearchCombobox
+                  data={locationData || []}
+                  value={location || ""}
+                />
               </div>
-              <div className="flex w-[60px] md:w-full items-center">
+              <div className="flex w-[60px] items-center md:w-full">
                 <MoreOptionDialog
-                  distanceValue={distance || ''}
-                  ageValue={age || ''}
-                  priceValue={price || ''}
-                  categoryValue={category || ''}
+                  distanceValue={distance || ""}
+                  ageValue={age || ""}
+                  priceValue={price || ""}
+                  categoryValue={category || ""}
                 />
               </div>
             </div>
-            <SortSelect value={sort || ''} />
-            <div className="xl:hidden mb-6">
+            <SortSelect value={sort || ""} />
+            <div className="mb-6 xl:hidden">
               <MobileMap />
             </div>
-            <div className="relative overflow-y-auto h-[calc(100vh-450px)] sm:h-[calc(100vh-315px)] pr-3 xl:pr-0 sidebar xl:mt-2">
-              <div className="overflow-y-auto mr-2">
-                {activitiesIsLoading || activitiesList.current.length === 0 ? (
-                  Array.from({ length: 10 }).map((_, index) => (
-                    <div key={index} className="py-2">
-                      <PlaceholderPill />
-                    </div>
-                  ))
-                ) : (
-                  activitiesList.current.map((item, index) => {
-                    if (activitiesList.current.length === index + 1) {
-                      return <div ref={lastActivityElementRef} key={item.slug} className="pt-3 sm:py-2">
-                        <Pill {...item} />
+            <div className="sidebar relative h-[calc(100vh-385px)] overflow-y-auto pr-3 sm:h-[calc(100vh-415px)] md:h-[calc(100vh-455px)] lg:h-[calc(100vh-315px)] xl:mt-2 xl:pr-0">
+              <div className=" mr-2">
+                {activitiesIsLoading || activitiesList.current.length === 0
+                  ? Array.from({ length: 10 }).map((_, index) => (
+                      <div key={index} className="py-2">
+                        <PlaceholderPill />
                       </div>
-                    } else {
-                      return <div key={item.slug} className="pt-3 sm:py-2">
-                        <Pill {...item} />
-                      </div>
-                    }
-                  })
-                )}
+                    ))
+                  : activitiesList.current.map((item, index) => {
+                      if (activitiesList.current.length === index + 1) {
+                        return (
+                          <div
+                            ref={lastActivityElementRef}
+                            key={item.slug}
+                            className="pt-3 sm:py-2"
+                          >
+                            <Pill {...item} />
+                          </div>
+                        )
+                      } else {
+                        return (
+                          <div key={item.slug} className="pt-3 sm:py-2">
+                            <Pill {...item} />
+                          </div>
+                        )
+                      }
+                    })}
               </div>
               {activitiesIsError && (
-                <div className="py-2 text-red-500">
+                <div className="text-red-500 py-2">
                   Error loading activities.
                 </div>
               )}
             </div>
           </div>
-          <div className="hidden xl:block h-full">
+          <div className="hidden h-full xl:block">
             {activitiesIsLoading ? <PlaceholderMap /> : <Map />}
           </div>
         </div>
       </section>
-      <div className="h-16" />
+      <div className=" sm:h-16" />
     </Container>
-  );
+  )
 }

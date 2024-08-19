@@ -15,10 +15,9 @@ import {
 import { cn } from "~/lib/utils"
 import { Button } from "~/components/ui/button"
 import { useState } from "react"
-import type { Category } from "~/types/search.type"
 
 type Props = {
-  data?: Category[]
+  data?: any[]
   value: string | null
   setValue: (value: string | null) => void
 }
@@ -37,15 +36,15 @@ export function CategoryComboBox({ data, value, setValue }: Props) {
           variant="combobox"
           role="combobox"
           aria-expanded={open}
-          className="flex justify-between flex w-[210px] items-center rounded-lg border-2 border-secondary shadow-none px-3"
+          className="flex w-[210px] items-center justify-between rounded-lg border-2 border-secondary px-3 shadow-none"
         >
           {value
             ? data?.find((item) => item.value === value)?.label
             : "Kategoria"}
-          <Icons.chevronUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+          <Icons.chevronUpDown className="ml-2 size-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="flex h-[250px] w-full p-0 border-2 border-secondary overflow-y-auto">
+      <PopoverContent className="flex h-[250px] w-full overflow-y-auto border-2 border-secondary p-0">
         <Command>
           <CommandInput placeholder="Wybierz kategorię..." />
           <CommandList>
@@ -58,7 +57,7 @@ export function CategoryComboBox({ data, value, setValue }: Props) {
                   onSelect={(currentValue) => {
                     handleOnSelect(currentValue)
                   }}
-                  className="data-[selected=true]:bg-secondary data-[selected=true]:text-foregorund"
+                  className="data-[selected=true]:text-foregorund data-[selected=true]:bg-secondary"
                 >
                   <Icons.check
                     className={cn(

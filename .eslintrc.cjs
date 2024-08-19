@@ -34,6 +34,8 @@ const config = {
     "@typescript-eslint/no-floating-promises": "off",
     "react-hooks/exhaustive-deps": "off",
     "restrict-template-expressions": "off",
+    "tailwindcss/no-custom-classnames": "off",
+    "tailwindcss/no-custom-classname": "off",
     "@typescript-eslint/no-misused-promises": [
       "error",
       {

@@ -17,7 +17,7 @@ import {
 import { cn } from "~/lib/utils"
 import { Button } from "~/components/ui/button"
 import { useState } from "react"
-import type { EntireLocation, Location } from "~/types/search.type"
+import type { EntireLocation } from "~/types/search.type"
 import { useUpdateQueryParams } from "~/app/_hooks/useUpdateQueryParams"
 import { useMediaQuery } from "~/app/_hooks/useMediaQuery"
 import { MOBILE_BREAKPOINT } from "~/lib/const"
@@ -40,25 +40,24 @@ export function SearchCombobox({ data, value }: Props) {
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild className="md:w-full">
-        {
-          isMobile ?
-            <Button variant="outline" size="icon">
-              <Icons.globe className="h-5 w-5" />
-            </Button>
-          :
+        {isMobile ? (
+          <Button variant="outline" size="icon">
+            <Icons.globe className="size-5" />
+          </Button>
+        ) : (
           <Button
             variant="default"
             role="combobox"
             aria-expanded={open}
             className="flex w-full justify-between rounded-lg border-2 border-primary shadow-none"
           >
-            <Icons.globe className="hidden h-5 w-5 md:block" />
+            <Icons.globe className="hidden size-5 md:block" />
             {value
               ? data?.find((item) => item.value === value)?.label
               : "Lokalizacja"}
-            <Icons.chevronUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+            <Icons.chevronUpDown className="ml-2 size-4 shrink-0 opacity-50" />
           </Button>
-        }
+        )}
       </PopoverTrigger>
       <PopoverContent className="flex h-[250px] w-full p-0">
         <Command>
