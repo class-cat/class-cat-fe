@@ -33,6 +33,9 @@
   .cardSmall {
     @apply w-full rounded-3xl bg-secondary  px-4 py-4;
   }
+  .pSmall {
+    @apply px-4 py-4;
+  }
 }
 
 @layer utilities {

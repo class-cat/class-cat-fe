@@ -5,7 +5,6 @@ import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from "embla-carousel-react"
 import { ArrowLeft, ArrowRight } from "lucide-react"
-
 import { cn } from "~/lib/utils"
 import { Button } from "~/components/ui/button"
 
@@ -19,6 +18,7 @@ type CarouselProps = {
   plugins?: CarouselPlugin
   orientation?: "horizontal" | "vertical"
   setApi?: (api: CarouselApi) => void
+  slidesPerGroup?: number // New prop to determine the number of slides per group
 }
 
 type CarouselContextProps = {
@@ -28,6 +28,8 @@ type CarouselContextProps = {
   scrollNext: () => void
   canScrollPrev: boolean
   canScrollNext: boolean
+  selectedIndex: number
+  scrollToIndex: (index: number) => void
 } & CarouselProps
 
 const CarouselContext = React.createContext<CarouselContextProps | null>(null)
@@ -52,6 +54,7 @@ const Carousel = React.forwardRef<
       opts,
       setApi,
       plugins,
+      slidesPerGroup = 3, // Default to 3 slides per group
       className,
       children,
       ...props
@@ -67,14 +70,13 @@ const Carousel = React.forwardRef<
     )
     const [canScrollPrev, setCanScrollPrev] = React.useState(false)
     const [canScrollNext, setCanScrollNext] = React.useState(false)
+    const [selectedIndex, setSelectedIndex] = React.useState(0)
 
     const onSelect = React.useCallback((api: CarouselApi) => {
-      if (!api) {
-        return
-      }
-
+      if (!api) return
       setCanScrollPrev(api.canScrollPrev())
       setCanScrollNext(api.canScrollNext())
+      setSelectedIndex(api.selectedScrollSnap())
     }, [])
 
     const scrollPrev = React.useCallback(() => {
@@ -84,6 +86,13 @@ const Carousel = React.forwardRef<
     const scrollNext = React.useCallback(() => {
       api?.scrollNext()
     }, [api])
+
+    const scrollToIndex = React.useCallback(
+      (index: number) => {
+        api?.scrollTo(index)
+      },
+      [api]
+    )
 
     const handleKeyDown = React.useCallback(
       (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -99,22 +108,15 @@ const Carousel = React.forwardRef<
     )
 
     React.useEffect(() => {
-      if (!api || !setApi) {
-        return
-      }
-
+      if (!api || !setApi) return
       setApi(api)
     }, [api, setApi])
 
     React.useEffect(() => {
-      if (!api) {
-        return
-      }
-
+      if (!api) return
       onSelect(api)
       api.on("reInit", onSelect)
       api.on("select", onSelect)
-
       return () => {
         api?.off("select", onSelect)
       }
@@ -132,6 +134,9 @@ const Carousel = React.forwardRef<
           scrollNext,
           canScrollPrev,
           canScrollNext,
+          selectedIndex,
+          scrollToIndex,
+          slidesPerGroup, // Pass slidesPerGroup to context
         }}
       >
         <div
@@ -206,7 +211,7 @@ const CarouselPrevious = React.forwardRef<
       variant={variant}
       size={size}
       className={cn(
-        "absolute  h-8 w-8 rounded-full",
+        "absolute h-8 w-8 rounded-full",
         orientation === "horizontal"
           ? "-left-12 top-1/2 -translate-y-1/2"
           : "-top-12 left-1/2 -translate-x-1/2 rotate-90",
@@ -216,7 +221,7 @@ const CarouselPrevious = React.forwardRef<
       onClick={scrollPrev}
       {...props}
     >
-      <ArrowLeft className="h-4 w-4" />
+      <ArrowLeft className="size-4" />
       <span className="sr-only">Previous slide</span>
     </Button>
   )
@@ -245,12 +250,46 @@ const CarouselNext = React.forwardRef<
       onClick={scrollNext}
       {...props}
     >
-      <ArrowRight className="h-4 w-4" />
+      <ArrowRight className="size-4" />
       <span className="sr-only">Next slide</span>
     </Button>
   )
 })
 CarouselNext.displayName = "CarouselNext"
+
+const CarouselDots = () => {
+  const {
+    selectedIndex,
+    scrollToIndex,
+    api,
+    slidesPerGroup = 1,
+  } = useCarousel()
+  const totalSlides = api?.scrollSnapList().length || 0
+  const numberOfDots = Math.ceil(totalSlides / slidesPerGroup) // Calculate the number of dots needed
+
+  const handleDotClick = (dotIndex: number) => {
+    const targetIndex = dotIndex * slidesPerGroup
+    scrollToIndex(targetIndex)
+  }
+
+  return (
+    <div className="mt-4 flex justify-center space-x-2">
+      {Array.from({ length: numberOfDots }).map((_, index) => (
+        <button
+          key={index}
+          onClick={() => handleDotClick(index)}
+          className={cn(
+            "h-4 w-4 rounded-full",
+            selectedIndex >= index * slidesPerGroup &&
+              selectedIndex < (index + 1) * slidesPerGroup
+              ? "bg-secondary"
+              : "hover:bg-gray-500 border-2 border-secondary"
+          )}
+        />
+      ))}
+    </div>
+  )
+}
 
 export {
   type CarouselApi,
@@ -259,4 +298,5 @@ export {
   CarouselItem,
   CarouselPrevious,
   CarouselNext,
+  CarouselDots,
 }
