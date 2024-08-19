@@ -17,13 +17,13 @@ import {
 import { cn } from "~/lib/utils"
 import { Button } from "~/components/ui/button"
 import { useState } from "react"
-import type { Location } from "~/types/search.type"
+import type { EntireLocation, Location } from "~/types/search.type"
 import { useUpdateQueryParams } from "~/app/_hooks/useUpdateQueryParams"
 import { useMediaQuery } from "~/app/_hooks/useMediaQuery"
 import { MOBILE_BREAKPOINT } from "~/lib/const"
 
 type Props = {
-  data?: Location[]
+  data?: EntireLocation[]
   value: string | null
 }
 
