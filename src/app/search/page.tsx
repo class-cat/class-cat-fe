@@ -106,7 +106,7 @@ export default function SearchPage() {
             <div className="mb-6 xl:hidden">
               <MobileMap />
             </div>
-            <div className="sidebar relative h-[calc(100vh-385px)] overflow-y-auto pr-3 sm:h-[calc(100vh-415px)] md:h-[calc(100vh-455px)] lg:h-[calc(100vh-315px)] xl:mt-2 xl:pr-0">
+            <div className="sm:sidebar relative h-[calc(100vh-385px)] overflow-y-auto sm:h-[calc(100vh-415px)] sm:pr-3 md:h-[calc(100vh-455px)] lg:h-[calc(100vh-315px)] xl:mt-2 xl:pr-0">
               <div className=" mr-2">
                 {activitiesIsLoading || activitiesList.current.length === 0
                   ? Array.from({ length: 10 }).map((_, index) => (
