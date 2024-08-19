@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query"
-import { type Location } from "~/types/search.type"
+import { type EntireLocation } from "~/types/search.type"
 
-const locations: Location[] = [
+const locations: EntireLocation[] = [
   {
     value: "bydgoszcz",
     label: "Bydgoszcz",
@@ -32,7 +32,7 @@ const locations: Location[] = [
   },
 ]
 
-const getLocations = async (): Promise<Location[]> => {
+const getLocations = async (): Promise<EntireLocation[]> => {
   return locations
 }
 

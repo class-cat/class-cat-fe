@@ -1,8 +1,6 @@
 import Image from "next/image"
-import { Icons } from "~/components/icons"
 import { Button } from "~/components/ui/button"
 import { Container } from "~/components/ui/container"
-import { Input } from "~/components/ui/input"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs"
 import React from "react"
 
@@ -18,6 +16,7 @@ import { Pill } from "~/components/pill/pill"
 import { Map } from "./_components/map"
 import Link from "next/link"
 import { MobileMap } from "./_components/map/mobileMap"
+import SearchBar from "./_components/searchbar"
 
 const tabsTriggers = [
   {
@@ -91,59 +90,14 @@ const MostSearchItem = ({ title, desc, avatar }: MostSearchItemProps) => {
 }
 const mostSearchedItems = createCardItems(16)
 
+
 export default function HomePage() {
   return (
     <Container className="h-full flex-1 justify-center pt-6">
-      <section className="paddingX flex justify-between gap-0 rounded-3xl bg-secondary py-4 sm:gap-4">
-        <div className="flex w-full flex-col justify-between gap-9 py-12 md:w-3/4">
-          <h2>
-            Wszystkie Twoje Pasje w <br />
-            jednym miejscu.
-          </h2>
-          <form
-            method="GET"
-            action="/search"
-            className="flex items-center gap-2 rounded-3xl bg-white shadow-lg"
-          >
-            <div className="flex w-full items-center px-4 sm:w-2/5">
-              <Icons.search className="hidden h-8 w-8 md:block" />
-              <Input
-                className="h-16 flex-grow rounded-l-3xl rounded-r-none px-2 py-2 focus-visible:outline-none md:text-xl"
-                placeholder="Słowo kluczowe..."
-                type="text"
-                name="name"
-              />
-            </div>
-            <div className="hidden h-[60%] w-1 bg-[#F4ECDF] sm:block" />
-            <div className="hidden w-2/5 items-center px-4 sm:flex">
-              <Icons.map className="h-8 w-8" />
-              <Input
-                className="h-16 flex-grow rounded-none px-2 py-2 focus-visible:outline-none md:text-xl"
-                placeholder="Lokalizacja"
-                type="text"
-                name="location"
-              />
-            </div>
-            <Button
-              type="submit"
-              className="h-16 flex-grow rounded-l-none rounded-r-3xl shadow-md md:text-xl"
-            >
-              Wyszukaj
-            </Button>
-          </form>
-        </div>
-        <div className="h-84">
-          <Image
-            src="./cat.svg"
-            alt="cat"
-            objectFit="contain"
-            height={200}
-            width={200}
-            className="hidden h-full w-full md:block"
-          />
-        </div>
+      <section className="sm:paddingX sm:flex sm:justify-between sm:gap-0 sm:rounded-3xl sm:bg-secondary sm:py-4 sm:gap-4">
+        <SearchBar/>
       </section>
-      <div className="h-10" />
+      <div className="h-6 sm:h-10" />
       <section>
         <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
           <div>
@@ -153,13 +107,12 @@ export default function HomePage() {
                   <TabsTrigger
                     key={tab.id}
                     value={tab.value}
-                    className={`${
-                      index === 1
-                        ? "border-x-2"
-                        : index !== tabsTriggers.length - 1
-                          ? "border-r-2"
-                          : "hidden border-0 sm:block"
-                    }`}
+                    className={`${index === 1
+                      ? "border-x-2"
+                      : index !== tabsTriggers.length - 1
+                        ? "border-r-2"
+                        : "hidden border-0 sm:block"
+                      }`}
                   >
                     {tab.title}
                   </TabsTrigger>
@@ -187,12 +140,10 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      <div className="h-16" />
+      <div className="h-6 sm:h-8" />
       <section>
-        <div className="text-center">
-          <h3>Najczęściej wyszukiwane zajęcia</h3>
-        </div>
-        <div className="h-8" />
+        <h4 className="text-center">Wyszukiwane zajęcia</h4>
+        <div className="h-6 sm:h-8" />
         <div className="flex justify-center">
           <Carousel
             className="max-w-xs sm:max-w-sm md:max-w-2xl lg:max-w-3xl xl:max-w-5xl"
@@ -217,15 +168,15 @@ export default function HomePage() {
           </Carousel>
         </div>
       </section>
-      <div className="h-16" />
-      <div className="flex w-full flex-col items-center justify-center gap-8 border-t-2 border-secondary text-center sm:flex-row">
-        <div className="h-32" />
-        <h4>Zapoznaj się z ofertą dla firm</h4>
+      <div className="h-6 sm:h-8" />
+      <div className="flex w-full flex-col items-center justify-center gap-4 border-t-2 border-secondary text-center sm:flex-row">
+        <div className="sm:h-32" />
+        <h4>Oferta dla firm</h4>
         <Button variant={"outline"} size={"lg"} className="w-full sm:w-40">
           Sprawdź szczegóły
         </Button>
       </div>
-      <div className="h-16" />
+      <div className="h-12" />
     </Container>
   )
 }
