@@ -59,7 +59,7 @@ export function SearchCombobox({ data, value }: Props) {
           </Button>
         )}
       </PopoverTrigger>
-      <PopoverContent className="flex h-[250px] w-full p-0">
+      <PopoverContent className="flex h-[250px] w-full p-0" align={isMobile ? 'end' : 'center'}>
         <Command>
           <CommandInput placeholder="Wybierz lokalizację..." />
           <CommandList>
