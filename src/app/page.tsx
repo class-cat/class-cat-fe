@@ -7,6 +7,7 @@ import React from "react"
 import {
   Carousel,
   CarouselContent,
+  CarouselDots,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
@@ -70,49 +71,54 @@ type MostSearchItemProps = {
 }
 const MostSearchItem = ({ title, desc, avatar }: MostSearchItemProps) => {
   return (
-    <Card className="aspect-square rounded-3xl border-2 border-secondary bg-secondary p-4 shadow-none">
-      <CardContent className="flex h-full flex-col items-center justify-center space-y-2 p-0">
-        <div className="relative h-20 w-20">
-          <Image
-            src={avatar}
-            alt={title}
-            layout="fill"
-            className="rounded-lg"
-          />
-        </div>
-        <div className="flex flex-col items-center justify-center pt-2 text-center capitalize">
-          <p className="text-md text-foregroundMuted">{title}</p>
-          <p className="text-md text-foregroundMuted">{desc}</p>
-        </div>
-      </CardContent>
-    </Card>
+    <>
+      <Card className="aspect-square rounded-2xl border-2 border-secondary bg-secondary p-4 shadow-none sm:rounded-3xl">
+        <CardContent className="flex h-full flex-col items-center justify-center space-y-2 p-0">
+          <div className="relative size-20">
+            <Image
+              src={avatar}
+              alt={title}
+              layout="fill"
+              className="rounded-lg"
+            />
+          </div>
+          <div className="flex flex-col items-center justify-center pt-2 text-center capitalize max-sm:hidden">
+            <p className="text-md text-foregroundMuted">{title}</p>
+            <p className="text-md text-foregroundMuted">{desc}</p>
+          </div>
+        </CardContent>
+      </Card>
+      <div className="flex flex-col items-center justify-center pt-2 text-center capitalize sm:hidden">
+        <p className="text-sm text-foregroundMuted">{title}</p>
+      </div>
+    </>
   )
 }
 const mostSearchedItems = createCardItems(16)
 
-
 export default function HomePage() {
   return (
-    <Container className="h-full flex-1 justify-center pt-6">
-      <section className="sm:paddingX sm:flex sm:justify-between sm:gap-0 sm:rounded-3xl sm:bg-secondary sm:py-4 sm:gap-4">
-        <SearchBar/>
+    <Container className="h-full flex-1 justify-center pt-2 sm:pt-6">
+      <section className="sm:paddingX sm:flex sm:justify-between sm:gap-4 sm:rounded-3xl sm:bg-secondary sm:py-4">
+        <SearchBar />
       </section>
-      <div className="h-6 sm:h-10" />
+      <div className="sm:h-10" />
       <section>
         <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
           <div>
             <Tabs defaultValue="newest" className="w-full">
-              <TabsList className="flex justify-between">
+              <TabsList className="flex justify-between max-sm:hidden">
                 {tabsTriggers.map((tab, index) => (
                   <TabsTrigger
                     key={tab.id}
                     value={tab.value}
-                    className={`${index === 1
-                      ? "border-x-2"
-                      : index !== tabsTriggers.length - 1
-                        ? "border-r-2"
-                        : "hidden border-0 sm:block"
-                      }`}
+                    className={`${
+                      index === 1
+                        ? "border-x-2"
+                        : index !== tabsTriggers.length - 1
+                          ? "border-r-2"
+                          : "hidden border-0 sm:block"
+                    }`}
                   >
                     {tab.title}
                   </TabsTrigger>
@@ -143,17 +149,17 @@ export default function HomePage() {
       <div className="h-6 sm:h-8" />
       <section>
         <h4 className="text-center">Wyszukiwane zajęcia</h4>
-        <div className="h-6 sm:h-8" />
+        <div className="h-2 sm:h-8" />
         <div className="flex justify-center">
           <Carousel
-            className="max-w-xs sm:max-w-sm md:max-w-2xl lg:max-w-3xl xl:max-w-5xl"
+            className="max-w-sm md:max-w-2xl lg:max-w-3xl xl:max-w-5xl"
             opts={{ align: "start", loop: false }}
           >
             <CarouselContent className="-ml-2">
               {mostSearchedItems.map((item, index) => (
                 <CarouselItem
                   key={index}
-                  className="basis-1/2 md:basis-1/3 lg:basis-1/6"
+                  className="basis-1/4 md:basis-1/3 lg:basis-1/6"
                 >
                   <div className="p-1">
                     <Link href={item.href}>
@@ -163,8 +169,9 @@ export default function HomePage() {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="ml-2" />
-            <CarouselNext className="mr-2" />
+            <CarouselDots />
+            <CarouselPrevious className="sx:ml-2 max-sm:hidden" />
+            <CarouselNext className="sx:mr-2 max-sm:hidden" />
           </Carousel>
         </div>
       </section>

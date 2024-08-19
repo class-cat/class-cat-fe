@@ -26,8 +26,8 @@ export function SearchInput({ value }: Props) {
 
   return (
     <div className="flex w-full items-center rounded-lg border-2 border-secondary ">
-      <div className="inline-flex w-full items-center justify-center justify-between px-4">
-        <Icons.search className="hidden h-6 w-6 md:block" />
+      <div className="inline-flex w-full items-center justify-between px-4">
+        <Icons.search className="hidden size-6 md:block" />
         <Input
           className="focus-visible:outline-none"
           placeholder="Słowo kluczowe..."

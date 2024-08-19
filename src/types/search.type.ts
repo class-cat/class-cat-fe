@@ -14,9 +14,9 @@ export type Location = {
 }
 
 export type EntireLocation = {
-  value: string;
-  label: string;
-} 
+  value: string
+  label: string
+}
 
 export type Provider = {
   slug: string
@@ -61,9 +61,8 @@ export type ActivitiesData = {
   results: Activity[]
 }
 
-
 export type QueryParams = {
-  nameValue: string | null;
-  locationValue: string | null;
-  sortValue: string | null;
+  nameValue: string | null
+  locationValue: string | null
+  sortValue: string | null
 }
