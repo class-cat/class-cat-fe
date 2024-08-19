@@ -112,7 +112,7 @@ export const MoreOptionDialog = ({
       >
         {
           <>
-            <Button variant="outline" size="icon" className="sm:hidden">
+            <Button variant="outline" size="icon" className="sm:hidden" onClick={() => setOpen(true)}>
               <Icons.filter className="size-5" />
             </Button>
 
@@ -179,8 +179,8 @@ export const MoreOptionDialog = ({
             </div>
           </DialogDescription>
         </DialogHeader>
-        <DialogFooter className="mt-2 flex items-end	">
-          <Button variant="outline" onClick={() => handleResetOptions()}>
+        <DialogFooter className="mt-2 flex w-full flex-row items-end justify-end">
+          <Button variant="outline" onClick={() => handleResetOptions()} className="mr-2">
             Wyczyść
           </Button>
           <Button onClick={() => handleSaveOptions()}>Zapisz</Button>
