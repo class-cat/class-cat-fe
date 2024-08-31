@@ -1,9 +1,11 @@
+"use client"
+
 import Image from "next/image"
 import { Button } from "~/components/ui/button"
 import { Container } from "~/components/ui/container"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs"
-import React from "react"
-
+import React, { useEffect } from "react"
+import { v4 as uuid } from 'uuid';
 import {
   Carousel,
   CarouselContent,
@@ -18,6 +20,9 @@ import { Map } from "../_components/map"
 import Link from "next/link"
 import { MobileMap } from "../_components/map/mobileMap"
 import SearchBar from "../_components/searchbar"
+import { ENDPOINTS } from "~/lib/const"
+import { useFetch } from "../_hooks/useFetch"
+import PlaceholderPill from "~/components/pill/placeholerPill"
 
 const tabsTriggers = [
   {
@@ -53,20 +58,6 @@ const tabsTriggers2 = [
     title: "Oferty dnia",
     value: "today",
   },
-]
-
-const createItems = (count: number) =>
-  Array.from({ length: count }, () => ({
-    title: "Siatkówka dla klas 1-3",
-    address: "Gdańsk, Dragana 2",
-    avatar: "/stock.jpeg",
-  }))
-
-const tabsContent = [
-  { value: "newest", items: createItems(8) },
-  { value: "today", items: createItems(4) },
-  { value: "recommended", items: createItems(4) },
-  { value: "viewed", items: createItems(4) },
 ]
 
 const createCardItems = (count: number) =>
@@ -110,6 +101,26 @@ const MostSearchItem = ({ title, desc, avatar }: MostSearchItemProps) => {
 const mostSearchedItems = createCardItems(16)
 
 export default function HomePage() {
+
+  const [searchType, setSearchType] = React.useState("newest")
+  const handleChangeTab = (value: string) => () => setSearchType(value)
+
+  const {
+    data: activitiesData,
+    isLoading: activitiesIsLoading,
+    isError: activitiesIsError,
+    refetch: activitiesRefetch,
+  } = useFetch<any>({
+    url: `${ENDPOINTS.ACTIVITIES}?type=${searchType}`,
+  })
+
+  useEffect(() => {
+    activitiesRefetch
+  }, [searchType])
+
+
+
+
   return (
     <Container className="h-full flex-1 justify-center pt-2 sm:pt-6">
       <section className="sm:paddingX sm:flex sm:justify-between sm:gap-4 sm:rounded-3xl sm:bg-secondary sm:py-4">
@@ -123,6 +134,7 @@ export default function HomePage() {
               <TabsList className="flex justify-between max-sm:hidden">
                 {tabsTriggers.map((tab, index) => (
                   <TabsTrigger
+                    onClick={handleChangeTab(tab.value)}
                     key={tab.id}
                     value={tab.value}
                     className={`${
@@ -158,17 +170,25 @@ export default function HomePage() {
                 <MobileMap />
               </div>
               <div className="h-6" />
-                {tabsContent.map((tab) => (
-                  <TabsContent
-                    key={tab.value}
-                    value={tab.value}
-                    className="grid grid-cols-1 gap-4 xl:grid-cols-1"
-                  >
-                    {tab.items.map((item, index) => (
-                      <Pill key={index} item={item} />
-                    ))}
-                  </TabsContent>
-                ))}  
+              <div className="mr-2">
+                {activitiesIsLoading ? (
+                  Array.from({ length: 10 }).map((_, index) => (
+                    <div key={index} className="py-2">
+                      <PlaceholderPill />
+                    </div>
+                  ))
+                ) : (
+                activitiesData?.data?.results.map((item: any) => {
+                  return (
+                    <div
+                      key={uuid()}
+                      className="pt-3 sm:py-2"
+                    >
+                      <Pill {...item} />
+                    </div>
+                  )
+                }) )}
+              </div>
             </Tabs>
           </div>
           <div className="hidden h-full xl:block">
