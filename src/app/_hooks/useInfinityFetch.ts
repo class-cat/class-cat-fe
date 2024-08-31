@@ -5,31 +5,30 @@ import {
   type UseInfiniteQueryOptions,
 } from "@tanstack/react-query"
 import { fetcher } from "~/lib/query-client"
+import { type CordinatesType, type ResultType } from "~/types/search.type"
 
-export type CordinatesType = {
-  lat: number | null
-  lon: number | null
-}
 type AddressType = {
   addressLine: string | null
   city: string | null
   cordinates: CordinatesType
   postalCode: string | null
 }
-export type SearchResultType = {
+export type SearchResultType = ResultType & {
   adrdress: AddressType
   locationName: string | null
   name: string
-  searchType: "activity" | "location" | "provider" | "category"
-  slug: string
   thumbnail: string | null
 }
 
-export type DataType = {
-  count: number
+export type PagesType<T> = {
+  pageParams: Array<number>
+  pages: Array<DataType<T>>
+}
+export type DataType<T> = {
+  count: number | null
   next: string | null
   previous: string | null
-  results: Array<SearchResultType>
+  data: Array<T>
   sucess: boolean
 }
 
@@ -50,7 +49,7 @@ type UseFetch<T> = {
 }
 
 type PageData<T> = {
-  data: DataType
+  data: DataType<SearchResultType>
 }
 
 export const useInfinityFetch = <T>({

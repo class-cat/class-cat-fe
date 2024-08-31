@@ -3,9 +3,9 @@
 import Image from "next/image"
 import { Button } from "~/components/ui/button"
 import { Container } from "~/components/ui/container"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs"
+import { Tabs, TabsList, TabsTrigger } from "~/components/ui/tabs"
 import React, { useEffect } from "react"
-import { v4 as uuid } from 'uuid';
+import { v4 as uuid } from "uuid"
 import {
   Carousel,
   CarouselContent,
@@ -23,6 +23,8 @@ import SearchBar from "../_components/searchbar"
 import { ENDPOINTS } from "~/lib/const"
 import { useFetch } from "../_hooks/useFetch"
 import PlaceholderPill from "~/components/pill/placeholerPill"
+import { type DataType } from "../_hooks/useInfinityFetch"
+import { type Activity } from "~/types/search.type"
 
 const tabsTriggers = [
   {
@@ -101,25 +103,20 @@ const MostSearchItem = ({ title, desc, avatar }: MostSearchItemProps) => {
 const mostSearchedItems = createCardItems(16)
 
 export default function HomePage() {
-
   const [searchType, setSearchType] = React.useState("newest")
   const handleChangeTab = (value: string) => () => setSearchType(value)
 
   const {
     data: activitiesData,
     isLoading: activitiesIsLoading,
-    isError: activitiesIsError,
     refetch: activitiesRefetch,
-  } = useFetch<any>({
+  } = useFetch<DataType<Activity>>({
     url: `${ENDPOINTS.ACTIVITIES}?type=${searchType}`,
   })
 
   useEffect(() => {
     activitiesRefetch
   }, [searchType])
-
-
-
 
   return (
     <Container className="h-full flex-1 justify-center pt-2 sm:pt-6">
@@ -171,23 +168,19 @@ export default function HomePage() {
               </div>
               <div className="h-6" />
               <div className="mr-2">
-                {activitiesIsLoading ? (
-                  Array.from({ length: 10 }).map((_, index) => (
-                    <div key={index} className="py-2">
-                      <PlaceholderPill />
-                    </div>
-                  ))
-                ) : (
-                activitiesData?.data?.results.map((item: any) => {
-                  return (
-                    <div
-                      key={uuid()}
-                      className="pt-3 sm:py-2"
-                    >
-                      <Pill {...item} />
-                    </div>
-                  )
-                }) )}
+                {activitiesIsLoading
+                  ? Array.from({ length: 10 }).map((_, index) => (
+                      <div key={index} className="py-2">
+                        <PlaceholderPill />
+                      </div>
+                    ))
+                  : activitiesData?.data?.map((item: any) => {
+                      return (
+                        <div key={uuid()} className="pt-3 sm:py-2">
+                          <Pill {...item} />
+                        </div>
+                      )
+                    })}
               </div>
             </Tabs>
           </div>
