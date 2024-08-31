@@ -69,6 +69,7 @@ export default function SearchPage() {
       pageSize: 10,
     },
   })
+  
   console.log(activitiesData?.pages)
   const { data: mapData, isLoading: mapIsLoading } = useFetch<
     DataType<MapDataType>
