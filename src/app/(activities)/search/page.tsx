@@ -107,16 +107,6 @@ export default function SearchPage() {
     if (!activitiesData?.pages) return []
     return activitiesData?.pages.reduce(
       (acc: Array<SearchResultType>, page) => {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-        console.log(page)
->>>>>>> Stashed changes
         return [...acc, ...(page?.data || [])]
       },
       []
