@@ -4,7 +4,13 @@ import { useState } from "react"
 import { useMediaQuery } from "~/app/_hooks/useMediaQuery"
 import { Icons } from "~/components/icons"
 import { MOBILE_BREAKPOINT } from "~/lib/const"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "../ui/tooltip"
+import { IconWithText } from "../ui/icon-text"
 // import { Activity } from "~/types/search.type"
 
 export function Pill(props: any) {
@@ -35,20 +41,14 @@ export function Pill(props: any) {
       <div>
         <p className="font-medium">{name || "Siatkówka dla klas 1-3"}</p>
         {name && !isMobile && (
-          <div className="flex items-center gap-1">
-            <Icons.map className="size-4" />
-            <p className="text-xs text-foregroundMuted">
-              {location?.address?.addressLine}
-            </p>
-          </div>
+          <IconWithText text={location?.address?.addressLine}>
+            <Icons.map />
+          </IconWithText>
         )}
         {
-          <div className="flex items-center gap-1 pt-1">
-            <Icons.store className="size-4" />
-            <p className="text-xs text-foregroundMuted">
-              {provider?.name}
-            </p>
-          </div>
+          <IconWithText text={provider?.name}>
+            <Icons.store />
+          </IconWithText>
         }
       </div>
       {/* <button onClick={handleBookmark}>
@@ -58,23 +58,21 @@ export function Pill(props: any) {
         />{" "}
       </button> */}
       <div className="absolute right-[10px] top-[5px] ">
-      <TooltipProvider>
-        <Tooltip>
-          <TooltipTrigger onClick={handleBookmark}>  
-           
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger onClick={handleBookmark}>
               <Icons.paw
                 className="size-8"
                 color={"#ecdec8"}
                 fill={bookmark ? "#ecdec8" : "#FFFEFB"}
                 strokeWidth={1.5}
-                
               />{" "}
-           </TooltipTrigger>
-          <TooltipContent>
-          {bookmark ? "Usuń z ulubionych" : "Dodaj do ulubionych"}
-          </TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
+            </TooltipTrigger>
+            <TooltipContent>
+              {bookmark ? "Usuń z ulubionych" : "Dodaj do ulubionych"}
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       </div>
     </div>
   )

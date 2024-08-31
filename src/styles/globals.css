@@ -18,6 +18,9 @@
   h4 {
     @apply font-sans text-3xl leading-[68px] tracking-tight text-foreground drop-shadow-lg;
   }
+  svg {
+    @apply size-4;
+  }
 }
 
 @layer components {
