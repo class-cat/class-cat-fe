@@ -193,7 +193,7 @@ export default function HomePage() {
       <section>
         <h4 className="text-center">Wyszukiwane zajęcia</h4>
         <div className="h-2 sm:h-8" />
-        <div className="flex justify-center">
+        <div className="flex justify-center max-sm:hidden">
           <Carousel
             className="max-w-sm md:max-w-2xl lg:max-w-3xl xl:max-w-5xl"
             opts={{ align: "start", loop: false }}
