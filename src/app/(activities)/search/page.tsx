@@ -16,10 +16,17 @@ import { MobileMap } from "../../_components/map/mobileMap"
 import { ENDPOINTS } from "~/lib/const"
 import {
   type DataType,
+  type PagesType,
   type SearchResultType,
   useInfinityFetch,
 } from "../../_hooks/useInfinityFetch"
 import { useQueryClient } from "@tanstack/react-query"
+import { useFetch } from "~/app/_hooks/useFetch"
+import { type ResultType, type CordinatesType } from "~/types/search.type"
+
+export type MapDataType = ResultType & {
+  cordinates: CordinatesType
+}
 
 export default function SearchPage() {
   const searchParams = useSearchParams()
@@ -55,14 +62,19 @@ export default function SearchPage() {
     isError: activitiesIsError,
     fetchNextPage: fetchNextPageActivities,
     hasNextPage: hasNextPageActivities,
-  } = useInfinityFetch<DataType>({
-    url: ENDPOINTS.SEARCH,
+  } = useInfinityFetch<PagesType<SearchResultType>>({
+    url: ENDPOINTS.SEARCH.ACTIVIES,
     params: {
       ...queryParams,
       pageSize: 10,
     },
   })
-
+  console.log(activitiesData?.pages)
+  const { data: mapData, isLoading: mapIsLoading } = useFetch<
+    DataType<MapDataType>
+  >({
+    url: ENDPOINTS.SEARCH.MAP,
+  })
   const observer = useRef<IntersectionObserver | null>(null)
 
   const lastElementRef = useCallback(
@@ -92,19 +104,21 @@ export default function SearchPage() {
   )
 
   const activitiesList = useMemo(() => {
+    if (!activitiesData?.pages) return []
     return activitiesData?.pages.reduce(
-      (acc: Array<SearchResultType>, page) => {
-        return [...acc, ...(page?.data?.results || [])]
+      (acc: Array<SearchResultType>, page: any) => {
+        console.log(page)
+        return [...acc, ...(page?.data || [])]
       },
       []
     )
   }, [activitiesData])
-
+  console.log(activitiesList)
   useEffect(() => {
     if (containerRef.current) {
       containerRef.current.scrollTo({ top: 0 })
     }
-    queryClient.invalidateQueries({ queryKey: [ENDPOINTS.SEARCH] })
+    queryClient.invalidateQueries({ queryKey: [ENDPOINTS.SEARCH.ACTIVIES] })
   }, [search, location, sort, distance, age, price, category, queryClient])
 
   return (
@@ -173,10 +187,10 @@ export default function SearchPage() {
             </div>
           </div>
           <div className="hidden h-full xl:block">
-            {activitiesIsLoading && activitiesList?.length === 0 ? (
+            {mapData === undefined || mapIsLoading ? (
               <PlaceholderMap />
             ) : (
-              <Map />
+              <Map data={mapData.data} />
             )}
           </div>
         </div>

@@ -68,3 +68,10 @@ export type QueryParams = {
   locationValue: string | null
   sortValue: string | null
 }
+
+export type SearchResultType = "activity" | "location" | "provider" | "category"
+
+export type ResultType = {
+  searchType: SearchResultType
+  slug: string
+}

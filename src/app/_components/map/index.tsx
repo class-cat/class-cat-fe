@@ -11,15 +11,7 @@ import { type CircleLayerSpecification } from "mapbox-gl"
 import "./style.css"
 import { useFetch } from "~/app/_hooks/useFetch"
 import { ENDPOINTS } from "~/lib/const"
-const geojson = {
-  type: "FeatureCollection",
-  features: [
-    {
-      type: "Feature",
-      geometry: { type: "Point", coordinates: [18.6435, 54.352] },
-    },
-  ],
-}
+import { MapDataType } from "~/app/(activities)/search/page"
 
 const layerStyle: CircleLayerSpecification = {
   source: "my-data",
@@ -30,13 +22,39 @@ const layerStyle: CircleLayerSpecification = {
     "circle-color": "#007cbf",
   },
 }
-interface MapType {
+type MapType = {
   success: boolean
   data: {
     file: string
   }
 }
-export function Map() {
+
+const geoJson = {
+  type: "FeatureCollection",
+  features: [
+    {
+      type: "Feature",
+      geometry: { type: "Point", coordinates: [18.6435, 54.352] },
+    },
+    {
+      type: "Feature",
+      geometry: { type: "Point", coordinates: [18.8435, 54.52] },
+    },
+  ],
+}
+const createGeoJSON = (data) => {
+  return {
+    type: "FeatureCollection",
+    features: data.map((item) => ({
+      type: "Feature",
+      geometry: {
+        type: "Point",
+        coordinates: [item.coordinates?.lat, item.coordinates?.lon],
+      },
+    })),
+  }
+}
+export function Map({ data }: any) {
   const {
     data: map,
     isLoading,
@@ -85,7 +103,11 @@ export function Map() {
             mapLib={maplibregl}
           >
             <NavigationControl />
-            <Source id="my-data" type="geojson" data={geojson}>
+            <Source
+              id="my-data"
+              type="geojson"
+              data={data ? createGeoJSON(data) : geoJson}
+            >
               <Layer {...layerStyle} />
             </Source>
           </MapGL>
