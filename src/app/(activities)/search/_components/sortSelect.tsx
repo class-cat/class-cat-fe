@@ -31,7 +31,7 @@ const data = [
     label: "Cena",
   },
   {
-    value: "name",
+    value: "search",
     label: "Nazwa",
   },
   {

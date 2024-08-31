@@ -33,8 +33,8 @@ export function MobileMap() {
             </div>
           </div>
         </DialogTrigger>
-        <DialogContent className="top-[1/2] h-screen w-screen px-2 py-10">
-          <div className="p-1 ">
+        <DialogContent className="top-[1/2] h-screen w-screen px-2 pt-10">
+          <div className="p-1">
             <Map />
           </div>
         </DialogContent>
