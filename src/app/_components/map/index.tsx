@@ -11,7 +11,6 @@ import { type CircleLayerSpecification } from "mapbox-gl"
 import "./style.css"
 import { useFetch } from "~/app/_hooks/useFetch"
 import { ENDPOINTS } from "~/lib/const"
-import { MapDataType } from "~/app/(activities)/search/page"
 
 const layerStyle: CircleLayerSpecification = {
   source: "my-data",
@@ -42,10 +41,10 @@ const geoJson = {
     },
   ],
 }
-const createGeoJSON = (data) => {
+const createGeoJSON = (data: any) => {
   return {
     type: "FeatureCollection",
-    features: data.map((item) => ({
+    features: data.map((item: any) => ({
       type: "Feature",
       geometry: {
         type: "Point",
