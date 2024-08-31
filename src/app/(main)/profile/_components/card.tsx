@@ -2,6 +2,9 @@ import Image from "next/image"
 import React from "react"
 import { Icons } from "~/components/icons"
 import { type LessonType } from "./lessonCard"
+import { useMediaQuery } from "~/app/_hooks/useMediaQuery"
+import { MOBILE_BREAKPOINT } from "~/lib/const"
+import { IconWithText } from "~/components/ui/icon-text"
 
 export function Card({
   lesson,
@@ -11,7 +14,6 @@ export function Card({
   children?: React.ReactNode
 }) {
   const { avatar, title, address, providerName, phoneNumber } = lesson
-
   const rightSlot = React.Children.toArray(children).find(
     (child) => React.isValidElement(child) && child.type === Card.RightSlot
   )
@@ -19,31 +21,34 @@ export function Card({
     (child) => React.isValidElement(child) && child.type === Card.Review
   )
   return (
-    <div className="pSmall rounded-2xl bg-white">
+    <div className="pSmall cursor-pointer items-center gap-4 rounded-2xl border-2 border-primary/30 bg-white hover:shadow-md">
       <div className="flex justify-between gap-4">
-        <div className="flex justify-between gap-4">
-          <Image
-            src={avatar}
-            alt="lesson avi"
-            width={144}
-            height={144}
-            className="hidden rounded-xl md:block"
-          />
-          <div className="flex flex-col gap-2">
-            <h3 className="text-xl font-bold">{title}</h3>
-            <div className="flex items-center gap-1">
+        <div className="flex items-center justify-between gap-4">
+          <div className="relative size-[50px] sm:size-[80px]">
+            {avatar ? (
+              <Image
+                src={avatar}
+                alt={title}
+                layout="fill"
+                objectFit="cover"
+                className="rounded-lg"
+              />
+            ) : (
+              <Icons.placeholder />
+            )}
+          </div>
+          <div className="flex h-full flex-col justify-stretch">
+            <p className="font-medium">{title}</p>
+            <IconWithText text={providerName}>
               <Icons.map className="size-4" />
-              <p className="text-xs text-foregroundMuted">{providerName}</p>
-            </div>
+            </IconWithText>
             <div className="flex gap-4">
-              <div className="flex flex-row items-center gap-1 pt-1">
+              <IconWithText text={address}>
                 <Icons.store className="size-4" />
-                <p className="text-xs text-foregroundMuted">{address}</p>
-              </div>
-              <div className="flex items-center gap-1 pt-1">
-                <Icons.phone className="size-4" />
-                <p className="text-xs text-foregroundMuted">{phoneNumber}</p>
-              </div>
+              </IconWithText>
+              <IconWithText text={phoneNumber}>
+                <Icons.phone />
+              </IconWithText>
             </div>
           </div>
         </div>
