@@ -4,6 +4,7 @@ import { useState } from "react"
 import { useMediaQuery } from "~/app/_hooks/useMediaQuery"
 import { Icons } from "~/components/icons"
 import { MOBILE_BREAKPOINT } from "~/lib/const"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip"
 // import { Activity } from "~/types/search.type"
 
 export function Pill(props: any) {
@@ -37,7 +38,7 @@ export function Pill(props: any) {
           <div className="flex items-center gap-1">
             <Icons.map className="size-4" />
             <p className="text-xs text-foregroundMuted">
-              {location.address.address_line || "Gdańsk, Dragana 2"}
+              {location?.address?.addressLine}
             </p>
           </div>
         )}
@@ -45,17 +46,36 @@ export function Pill(props: any) {
           <div className="flex items-center gap-1 pt-1">
             <Icons.store className="size-4" />
             <p className="text-xs text-foregroundMuted">
-              {provider?.name || "Szkoła podstawowa nr 8"}
+              {provider?.name}
             </p>
           </div>
         }
       </div>
-      <button onClick={handleBookmark}>
+      {/* <button onClick={handleBookmark}>
         <Icons.badge
           className="absolute right-[10px] top-[-15px] size-8"
           color={bookmark ? "#E74C3C" : "#FFFEFB"}
         />{" "}
-      </button>
+      </button> */}
+      <div className="absolute right-[10px] top-[5px] ">
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger onClick={handleBookmark}>  
+           
+              <Icons.paw
+                className="size-8"
+                color={"#ecdec8"}
+                fill={bookmark ? "#ecdec8" : "#FFFEFB"}
+                strokeWidth={1.5}
+                
+              />{" "}
+           </TooltipTrigger>
+          <TooltipContent>
+          {bookmark ? "Usuń z ulubionych" : "Dodaj do ulubionych"}
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+      </div>
     </div>
   )
 }

@@ -14,10 +14,10 @@ import {
 } from "~/components/ui/carousel"
 import { Card, CardContent } from "~/components/ui/card"
 import { Pill } from "~/components/pill/pill"
-import { Map } from "./_components/map"
+import { Map } from "../_components/map"
 import Link from "next/link"
-import { MobileMap } from "./_components/map/mobileMap"
-import SearchBar from "./_components/searchbar"
+import { MobileMap } from "../_components/map/mobileMap"
+import SearchBar from "../_components/searchbar"
 
 const tabsTriggers = [
   {
@@ -42,6 +42,19 @@ const tabsTriggers = [
   },
 ]
 
+const tabsTriggers2 = [
+  {
+    id: 1,
+    title: "Najnowsze oferty",
+    value: "newest",
+  },
+  {
+    id: 2,
+    title: "Oferty dnia",
+    value: "today",
+  },
+]
+
 const createItems = (count: number) =>
   Array.from({ length: count }, () => ({
     title: "Siatkówka dla klas 1-3",
@@ -51,9 +64,9 @@ const createItems = (count: number) =>
 
 const tabsContent = [
   { value: "newest", items: createItems(8) },
-  { value: "today", items: createItems(8) },
-  { value: "recommended", items: createItems(8) },
-  { value: "viewed", items: createItems(8) },
+  { value: "today", items: createItems(4) },
+  { value: "recommended", items: createItems(4) },
+  { value: "viewed", items: createItems(4) },
 ]
 
 const createCardItems = (count: number) =>
@@ -124,21 +137,38 @@ export default function HomePage() {
                   </TabsTrigger>
                 ))}
               </TabsList>
+              <TabsList className="mt-6 flex justify-between sm:hidden">
+                {tabsTriggers2.map((tab, index) => (
+                  <TabsTrigger
+                    key={tab.id}
+                    value={tab.value}
+                    className={`${
+                      index === 1
+                        ? "border-x-2"
+                        : index !== tabsTriggers.length - 1
+                          ? "border-r-2"
+                          : "hidden border-0 sm:block"
+                    }`}
+                  >
+                    {tab.title}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
               <div className="mt-6 xl:hidden">
                 <MobileMap />
               </div>
               <div className="h-6" />
-              {tabsContent.map((tab) => (
-                <TabsContent
-                  key={tab.value}
-                  value={tab.value}
-                  className="grid grid-cols-1 gap-4 xl:grid-cols-2"
-                >
-                  {tab.items.map((item, index) => (
-                    <Pill key={index} item={item} />
-                  ))}
-                </TabsContent>
-              ))}
+                {tabsContent.map((tab) => (
+                  <TabsContent
+                    key={tab.value}
+                    value={tab.value}
+                    className="grid grid-cols-1 gap-4 xl:grid-cols-1"
+                  >
+                    {tab.items.map((item, index) => (
+                      <Pill key={index} item={item} />
+                    ))}
+                  </TabsContent>
+                ))}  
             </Tabs>
           </div>
           <div className="hidden h-full xl:block">
@@ -183,7 +213,6 @@ export default function HomePage() {
           Sprawdź szczegóły
         </Button>
       </div>
-      <div className="h-12" />
     </Container>
   )
 }

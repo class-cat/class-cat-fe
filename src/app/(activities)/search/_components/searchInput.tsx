@@ -17,7 +17,7 @@ export function SearchInput({ value }: Props) {
   const debouncedValue = useDebounce(inputValue, 500)
 
   useEffect(() => {
-    updateQueryParams({ name: debouncedValue })
+    updateQueryParams({ search: debouncedValue })
   }, [debouncedValue, updateQueryParams])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

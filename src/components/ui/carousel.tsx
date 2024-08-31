@@ -54,7 +54,7 @@ const Carousel = React.forwardRef<
       opts,
       setApi,
       plugins,
-      slidesPerGroup = 3, // Default to 3 slides per group
+      slidesPerGroup = 4, // Default to 3 slides per group
       className,
       children,
       ...props

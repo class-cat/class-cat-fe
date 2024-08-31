@@ -1,10 +1,8 @@
 import "~/styles/globals.css"
 
 import { ClerkProvider } from "@clerk/nextjs"
-
 import { Mochiy_Pop_P_One } from "next/font/google"
 import { Poppins } from "next/font/google"
-import { TopNav } from "./_components/topnav"
 
 import { plPL } from "@clerk/localizations"
 import { ReactQueryProvider } from "~/providers/reactquery-provider"
@@ -39,13 +37,7 @@ export default function RootLayout({
           <body
             className={`font-sans ${inter.variable} dark ${mochiy.variable}`}
           >
-            <div className="paddingX h-min-screen w-max-screen grid grid-rows-[auto,1fr] bg-white">
-              <TopNav />
-              <main className="bg-white">{children}</main>
-            </div>
-            <footer className="padding h-[153px] bg-foreground text-white">
-              ClassCat
-            </footer>
+            {children}
           </body>
         </html>
       </ClerkProvider>

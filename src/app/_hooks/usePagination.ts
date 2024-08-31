@@ -12,11 +12,16 @@ const usePagination = ({ initialPage = 1 } = {}) => {
     setTotalPages(Math.ceil(totalItems / pageSize))
   }
 
+  const resetPagination = () => {
+    setCurrentPage(1)
+  }
+
   return {
     currentPage,
     totalPages,
     goToNextPage,
     updateTotalPages,
+    resetPagination
   }
 }
 
