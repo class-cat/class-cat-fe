@@ -1,3 +1,8 @@
+export type CordinatesType = {
+  lat: number | null
+  lon: number | null
+}
+
 export type Location = {
   id: number
   name: string
@@ -6,10 +11,7 @@ export type Location = {
     address_line: string
     city: string
     postal_code: string
-    coordinates: {
-      lat: number
-      lon: number
-    }
+    coordinates: CordinatesType
   }
 }
 
