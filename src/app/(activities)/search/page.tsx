@@ -58,7 +58,6 @@ export default function SearchPage() {
       ...queryParams,
       pageSize: 10,
     },
-    enabled: Object.keys(queryParams).length > 0,
   });
 
   const observer = useRef<IntersectionObserver | null>(null);
