@@ -53,7 +53,7 @@ export type Activity = {
   provider: Provider
   categories: Category[]
   images: Image[]
-  primary_image: Image
+  primaryImage: Image
 }
 
 export type ActivitiesData = {
