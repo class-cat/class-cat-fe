@@ -106,13 +106,13 @@ export default function SearchPage() {
   const activitiesList = useMemo(() => {
     if (!activitiesData?.pages) return []
     return activitiesData?.pages.reduce(
-      (acc: Array<SearchResultType>, page: any) => {
-        console.log(page)
+      (acc: Array<SearchResultType>, page) => {
         return [...acc, ...(page?.data || [])]
       },
       []
     )
   }, [activitiesData])
+
   console.log(activitiesList)
   useEffect(() => {
     if (containerRef.current) {

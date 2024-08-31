@@ -22,7 +22,7 @@ export type SearchResultType = ResultType & {
 
 export type PagesType<T> = {
   pageParams: Array<number>
-  pages: Array<DataType<T>>
+  pages: DataType<T>
 }
 export type DataType<T> = {
   count: number | null
@@ -48,9 +48,7 @@ type UseFetch<T> = {
   enabled?: boolean
 }
 
-type PageData<T> = {
-  data: DataType<SearchResultType>
-}
+type PageData<T> = DataType<SearchResultType>
 
 export const useInfinityFetch = <T>({
   url,
@@ -77,7 +75,7 @@ export const useInfinityFetch = <T>({
     },
     enabled,
     getNextPageParam: (lastPage, allPages) => {
-      return lastPage?.data?.next ? allPages.length + 1 : undefined
+      return lastPage?.next ? allPages.length + 1 : undefined
     },
 
     ...config,
