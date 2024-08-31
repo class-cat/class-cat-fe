@@ -4,7 +4,7 @@ import Image from "next/image"
 import { Button } from "~/components/ui/button"
 import { Container } from "~/components/ui/container"
 import { Tabs, TabsList, TabsTrigger } from "~/components/ui/tabs"
-import React, { useEffect } from "react"
+import React from "react"
 import { v4 as uuid } from "uuid"
 import {
   Carousel,
@@ -111,12 +111,17 @@ export default function HomePage() {
     isLoading: activitiesIsLoading,
     refetch: activitiesRefetch,
   } = useFetch<DataType<Activity>>({
-    url: `${ENDPOINTS.ACTIVITIES}?type=${searchType}`,
+    url: `${ENDPOINTS.ACTIVITIES}`,
+    params: {
+      type: searchType,
+      page: 1,
+      pageSize: 5,
+    },
   })
 
-  useEffect(() => {
-    activitiesRefetch
-  }, [searchType])
+  // useEffect(() => {
+  //   activitiesRefetch
+  // }, [searchType])
 
   return (
     <Container className="h-full flex-1 justify-center pt-2 sm:pt-6">
@@ -193,7 +198,7 @@ export default function HomePage() {
       <section>
         <h4 className="text-center">Wyszukiwane zajęcia</h4>
         <div className="h-2 sm:h-8" />
-        <div className="flex justify-center max-sm:hidden">
+        <div className="flex justify-center">
           <Carousel
             className="max-w-sm md:max-w-2xl lg:max-w-3xl xl:max-w-5xl"
             opts={{ align: "start", loop: false }}
