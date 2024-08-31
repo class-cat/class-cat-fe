@@ -1,5 +1,5 @@
-import { useInfiniteQuery, QueryKey, InfiniteData, UseInfiniteQueryOptions } from "@tanstack/react-query";
-import { type FetchConfig, fetcher } from "~/lib/query-client";
+import { useInfiniteQuery, type QueryKey, type InfiniteData, type UseInfiniteQueryOptions } from "@tanstack/react-query";
+import { fetcher } from "~/lib/query-client";
 
 type UseFetch<T> = {
   url: string | null;

@@ -233,6 +233,7 @@ export default function HomePage() {
           Sprawdź szczegóły
         </Button>
       </div>
+      <div className="max-sm:h-8" />
     </Container>
   )
 }
