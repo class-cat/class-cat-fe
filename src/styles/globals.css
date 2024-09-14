@@ -12,13 +12,80 @@
   h2 {
     @apply font-sans text-5xl font-black leading-[68px] tracking-tight text-foreground drop-shadow-lg;
   }
+  h3 {
+    @apply font-sans text-4xl font-black leading-[68px] tracking-tight text-foreground drop-shadow-lg;
+  }
+  h4 {
+    @apply font-sans text-3xl leading-[68px] tracking-tight text-foreground drop-shadow-lg;
+  }
+  svg {
+    @apply size-4;
+  }
 }
 
 @layer components {
   .padding {
-    @apply px-4 py-8 lg:px-24 lg:py-12;
+    @apply px-4 py-8 md:px-12 lg:px-24 lg:py-12;
   }
   .paddingX {
-    @apply px-4  lg:px-24;
+    @apply px-4 md:px-12 xl:px-24;
+  }
+  .card {
+    @apply paddingX rounded-3xl bg-secondary  py-4;
+  }
+  .cardSmall {
+    @apply w-full rounded-3xl bg-secondary  px-4 py-4;
+  }
+  .pSmall {
+    @apply px-4 py-4;
+  }
+}
+
+@layer utilities {
+  .sidebar {
+    @apply transition-all duration-1000 ease-in-out;
+  }
+
+  .sidebar::-webkit-scrollbar {
+    width: 8px;
+
+    @apply transition-all duration-1000 ease-in-out;
+  }
+
+  .sidebar:hover::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .sidebar::-webkit-scrollbar-thumb {
+    @apply rounded bg-white;
+  }
+
+  .sidebar:hover::-webkit-scrollbar-thumb {
+    @apply rounded bg-primary;
+  }
+
+  .sidebar::-webkit-scrollbar-track {
+    @apply bg-white;
+  }
+
+  .sidebarSmall {
+    @apply transition-all duration-1000 ease-in-out;
+  }
+
+  .sidebarSmall::-webkit-scrollbar {
+    width: 0;
+    @apply transition-all duration-1000 ease-in-out;
+  }
+
+  .sidebarSmall:hover::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  .sidebarSmall::-webkit-scrollbar-thumb {
+    @apply rounded bg-primary;
+  }
+
+  .sidebarSmall::-webkit-scrollbar-track {
+    @apply bg-white;
   }
 }

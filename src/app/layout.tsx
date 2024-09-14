@@ -1,11 +1,11 @@
 import "~/styles/globals.css"
 
 import { ClerkProvider } from "@clerk/nextjs"
-
 import { Mochiy_Pop_P_One } from "next/font/google"
 import { Poppins } from "next/font/google"
-import { TopNav } from "./_components/topnav"
-import { Container } from "~/components/ui/container"
+
+import { plPL } from "@clerk/localizations"
+import { ReactQueryProvider } from "~/providers/reactquery-provider"
 
 const inter = Poppins({
   subsets: ["latin"],
@@ -31,15 +31,16 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <body className={`font-sans ${inter.variable} dark ${mochiy.variable}`}>
-          <div className="paddingX grid h-screen grid-rows-[auto,1fr] bg-white">
-            <TopNav />
-            <main className="bg-white">{children}</main>
-          </div>
-        </body>
-      </html>
-    </ClerkProvider>
+    <ReactQueryProvider>
+      <ClerkProvider localization={plPL}>
+        <html lang="en">
+          <body
+            className={`font-sans ${inter.variable} dark ${mochiy.variable}`}
+          >
+            {children}
+          </body>
+        </html>
+      </ClerkProvider>
+    </ReactQueryProvider>
   )
 }
