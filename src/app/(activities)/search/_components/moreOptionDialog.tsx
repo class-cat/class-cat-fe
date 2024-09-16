@@ -22,8 +22,6 @@ import {
 import { PriceSlider } from "./priceSlider"
 import { useUpdateQueryParams } from "~/app/_hooks/useUpdateQueryParams"
 import { CategoryComboBox } from "./categoryComboBox"
-import { useMediaQuery } from "~/app/_hooks/useMediaQuery"
-import { MOBILE_BREAKPOINT } from "~/lib/const"
 
 const distanceData = [
   { value: "0", label: "+0 km" },
@@ -67,7 +65,7 @@ export const MoreOptionDialog = ({
   priceValue,
 }: Props) => {
   const updateQueryParams = useUpdateQueryParams()
-//   const isMobile = useMediaQuery(MOBILE_BREAKPOINT)
+  //   const isMobile = useMediaQuery(MOBILE_BREAKPOINT)
 
   const [open, setOpen] = useState(false)
   const [category, setCategory] = useState(categoryValue)
@@ -112,7 +110,12 @@ export const MoreOptionDialog = ({
       >
         {
           <>
-            <Button variant="outline" size="icon" className="sm:hidden" onClick={() => setOpen(true)}>
+            <Button
+              variant="outline"
+              size="icon"
+              className="sm:hidden"
+              onClick={() => setOpen(true)}
+            >
               <Icons.filter className="size-5" />
             </Button>
 
@@ -180,7 +183,11 @@ export const MoreOptionDialog = ({
           </DialogDescription>
         </DialogHeader>
         <DialogFooter className="mt-2 flex w-full flex-row items-end justify-end">
-          <Button variant="outline" onClick={() => handleResetOptions()} className="mr-2">
+          <Button
+            variant="outline"
+            onClick={() => handleResetOptions()}
+            className="mr-2"
+          >
             Wyczyść
           </Button>
           <Button onClick={() => handleSaveOptions()}>Zapisz</Button>
