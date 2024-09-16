@@ -2,8 +2,6 @@ import Image from "next/image"
 import React from "react"
 import { Icons } from "~/components/icons"
 import { type LessonType } from "./lessonCard"
-import { useMediaQuery } from "~/app/_hooks/useMediaQuery"
-import { MOBILE_BREAKPOINT } from "~/lib/const"
 import { IconWithText } from "~/components/ui/icon-text"
 
 export function Card({

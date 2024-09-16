@@ -82,6 +82,7 @@ function Calendar({
               onValueChange={(value) => {
                 handleChange(value)
               }}
+              {...props}
             >
               <SelectTrigger className="pr-1.5 focus:ring-0">
                 <SelectValue className="">
@@ -105,8 +106,12 @@ function Calendar({
             </Select>
           )
         },
-        IconLeft: ({ ...props }) => <ChevronLeft className="size-4" />,
-        IconRight: ({ ...props }) => <ChevronRight className="size-4" />,
+        IconLeft: ({ ...props }) => (
+          <ChevronLeft className="size-4" {...props} />
+        ),
+        IconRight: ({ ...props }) => (
+          <ChevronRight className="size-4" {...props} />
+        ),
       }}
       {...props}
     />

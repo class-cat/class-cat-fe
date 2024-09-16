@@ -40,8 +40,8 @@ export function SearchCombobox({ data, value }: Props) {
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild className="md:w-full">
-          <Button
-           className="h-16 w-24 grow md:text-xl bg-white shadow-none hover:bg-white text-foreground"
+        <Button
+          className="h-16 w-24 grow bg-white text-foreground shadow-none hover:bg-white md:text-xl"
           role="combobox"
           aria-expanded={open}
         >
@@ -51,7 +51,10 @@ export function SearchCombobox({ data, value }: Props) {
           <Icons.chevronUpDown className="ml-2 size-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="flex h-[250px] w-full p-0" align={isMobile ? 'end' : 'center'}>
+      <PopoverContent
+        className="flex h-[250px] w-full p-0"
+        align={isMobile ? "end" : "center"}
+      >
         <Command>
           <CommandInput placeholder="Wybierz lokalizację..." />
           <CommandList>
