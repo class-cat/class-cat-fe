@@ -48,6 +48,7 @@ type UseFetch<T> = {
   enabled?: boolean
 }
 
+// eslint-disable-next-line
 type PageData<T> = DataType<SearchResultType>
 
 export const useInfinityFetch = <T>({
