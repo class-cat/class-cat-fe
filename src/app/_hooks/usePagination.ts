@@ -21,7 +21,7 @@ const usePagination = ({ initialPage = 1 } = {}) => {
     totalPages,
     goToNextPage,
     updateTotalPages,
-    resetPagination
+    resetPagination,
   }
 }
 
