@@ -29,22 +29,22 @@ import { useQueryClient } from "@tanstack/react-query"
 const tabsTriggers = [
   {
     id: 1,
-    title: "Najnowsze oferty",
-    value: "newest",
-  },
-  {
-    id: 2,
     title: "Oferty dnia",
     value: "today",
   },
   {
-    id: 3,
+    id: 2,
     title: "Polecane",
     value: "recommended",
   },
   {
+    id: 3,
+    title: "Najnowsze oferty",
+    value: "newest",
+  },
+  {
     id: 4,
-    title: "Ostatnio oglądane",
+    title: "Polubione",
     value: "viewed",
   },
 ]
@@ -105,19 +105,6 @@ const mostSearchedItems = createCardItems(16)
 export default function HomePage() {
   const [searchType, setSearchType] = React.useState("newest")
   const handleChangeTab = (value: string) => () => setSearchType(value)
-
-  // const {
-  //   data: activitiesData,
-  //   isLoading: activitiesIsLoading,
-  //   refetch: activitiesRefetch,
-  // } = useFetch<DataType<Activity>>({
-  //   url: `${ENDPOINTS.ACTIVITIES}`,
-  //   params: {
-  //     type: searchType,
-  //     page: 1,
-  //     pageSize: 5,
-  //   },
-  // })
 
   const {
     data: activitiesData,
@@ -272,7 +259,7 @@ export default function HomePage() {
       </section>
       <div className="h-6 sm:h-8" />
       <section>
-        <h4 className="text-center">Wyszukiwane zajęcia</h4>
+        <h4 className="text-center">Polecane kategorie</h4>
         <div className="h-2 sm:h-8" />
         <div className="flex justify-center">
           <Carousel
@@ -303,9 +290,11 @@ export default function HomePage() {
       <div className="flex w-full flex-col items-center justify-center gap-4 border-t-2 border-secondary text-center sm:flex-row">
         <div className="sm:h-32" />
         <h4>Oferta dla firm</h4>
+        <Link href={'/company/sign-up'}>
         <Button variant={"outline"} size={"lg"} className="w-full sm:w-40">
           Sprawdź szczegóły
         </Button>
+        </Link>
       </div>
       <div className="max-sm:h-8" />
     </Container>

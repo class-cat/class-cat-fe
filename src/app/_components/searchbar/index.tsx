@@ -17,13 +17,13 @@ export default function SearchBar() {
     <>
       <div className="flex w-full flex-col justify-between gap-9 py-0 sm:py-12 md:w-3/4">
         <h2 className="hidden sm:block">
-          Wszystkie Twoje Pasje w <br />
+          Wszystkie Twoje pasje w <br />
           jednym miejscu.
         </h2>
         <form
           method="GET"
           action="/search"
-          className="flex  items-center gap-2 rounded-2xl border-2 border-secondary bg-white sm:rounded-3xl sm:border-0 sm:shadow-lg lg:mr-4"
+          className="flex  items-center gap-2 rounded-2xl border-2 border-secondary bg-white sm:rounded-3xl sm:border-0 sm:shadow-md lg:mr-4"
         >
           <div className="sm:w-4/8 flex w-full items-center px-4 ">
             <Icons.search className="hidden size-8 md:block" />
