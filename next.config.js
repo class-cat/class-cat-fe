@@ -10,13 +10,13 @@ const config = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'images.unsplash.com',
+        protocol: "https",
+        hostname: "images.unsplash.com",
       },
       {
-        protocol: 'https',
-        hostname: 'd4278d3d3c974da0009aefca43bdb2ae.r2.cloudflarestorage.com',
-        pathname: '/class-cat/media/**',
+        protocol: "https",
+        hostname: "d4278d3d3c974da0009aefca43bdb2ae.r2.cloudflarestorage.com",
+        pathname: "/class-cat/media/**",
       },
     ],
   },

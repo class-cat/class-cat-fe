@@ -34,8 +34,8 @@ export function Pill(props: any) {
             objectFit="cover"
             className="rounded-lg"
           />
-          // <img src={primaryImage.file} alt={name} className="rounded-lg" />
         ) : (
+          // <img src={primaryImage.file} alt={name} className="rounded-lg" />
           <Icons.placeholder className="size-full" />
         )}
       </div>
@@ -52,9 +52,9 @@ export function Pill(props: any) {
           <Icons.store className="size-4 shrink-0" />
         </IconWithText>
       </div>
-      <div className="size-10"/>
+      <div className="size-10" />
       <div className="absolute right-2 top-2">
-      <TooltipProvider>
+        <TooltipProvider>
           <Tooltip>
             <TooltipTrigger onClick={handleBookmark}>
               <Icons.paw
@@ -70,9 +70,6 @@ export function Pill(props: any) {
           </Tooltip>
         </TooltipProvider>
       </div>
-     
-       
-      
     </div>
   )
 }

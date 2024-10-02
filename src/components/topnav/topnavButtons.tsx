@@ -30,7 +30,9 @@ export function TopNavButtons() {
           <SignedIn>
             <UserButton userProfileUrl="/profile" />
           </SignedIn>
-          <Button variant="outline" className="shadow-none">Dodaj zajęcia</Button>
+          <Button variant="outline" className="shadow-none">
+            Dodaj zajęcia
+          </Button>
         </div>
       )}
       {isMobile && isMenuOpen && (

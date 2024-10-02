@@ -18,13 +18,13 @@ import { cn } from "~/lib/utils"
 
 export default function SignUpPage() {
   return (
-    <div className="sm:justify-center max-w-md w-full">
+    <div className="w-full max-w-md sm:justify-center">
       <SignUp.Root>
         <Clerk.Loading>
           {(isGlobalLoading) => (
             <>
               <SignUp.Step name="start">
-              <Card className="border-secondary bg-[#FFFFFF] shadow-none">
+                <Card className="border-secondary bg-[#FFFFFF] shadow-none">
                   <CardHeader>
                     <CardTitle className="mx-auto text-lg text-primary">
                       Zarejestruj się
@@ -41,7 +41,7 @@ export default function SignUpPage() {
                           variant="outline"
                           type="button"
                           disabled={isGlobalLoading}
-                          className="shadow-none"
+                          className="bg-[#fff] shadow-none"
                         >
                           <Clerk.Loading scope="provider:facebook">
                             {(isLoading) =>
@@ -63,7 +63,7 @@ export default function SignUpPage() {
                           variant="outline"
                           type="button"
                           disabled={isGlobalLoading}
-                          className="shadow-none"
+                          className="bg-[#fff] shadow-none"
                         >
                           <Clerk.Loading scope="provider:google">
                             {(isLoading) =>
@@ -105,7 +105,10 @@ export default function SignUpPage() {
                   <CardFooter>
                     <div className="grid w-full gap-y-4">
                       <SignUp.Action submit asChild>
-                        <Button className="w-full shadow-none" disabled={isGlobalLoading} >
+                        <Button
+                          className="w-full shadow-none"
+                          disabled={isGlobalLoading}
+                        >
                           <Clerk.Loading>
                             {(isLoading) => {
                               return isLoading ? (
@@ -117,7 +120,12 @@ export default function SignUpPage() {
                           </Clerk.Loading>
                         </Button>
                       </SignUp.Action>
-                      <Button variant="link" size="sm" className="shadow-none" asChild>
+                      <Button
+                        variant="link"
+                        size="sm"
+                        className="shadow-none"
+                        asChild
+                      >
                         <Link href="/sign-in">Masz już konto? Zaloguj się</Link>
                       </Button>
                     </div>
@@ -126,7 +134,7 @@ export default function SignUpPage() {
               </SignUp.Step>
 
               <SignUp.Step name="continue">
-              <Card className="border-secondary bg-[#FFFFFF] shadow-none">
+                <Card className="border-secondary bg-[#FFFFFF] shadow-none">
                   <CardHeader>
                     <CardTitle className="mx-auto text-lg text-primary">
                       Kontynnuj rejestrację
@@ -146,7 +154,10 @@ export default function SignUpPage() {
                   <CardFooter>
                     <div className="grid w-full gap-y-4">
                       <SignUp.Action submit asChild>
-                        <Button disabled={isGlobalLoading} className="shadow-none">
+                        <Button
+                          disabled={isGlobalLoading}
+                          className="shadow-none"
+                        >
                           <Clerk.Loading>
                             {(isLoading) => {
                               return isLoading ? (
@@ -165,7 +176,7 @@ export default function SignUpPage() {
 
               <SignUp.Step name="verifications">
                 <SignUp.Strategy name="email_code">
-                <Card className="border-secondary bg-[#FFFFFF] shadow-none">
+                  <Card className="border-secondary bg-[#FFFFFF] shadow-none">
                     <CardHeader>
                       <CardTitle className="mx-auto text-lg text-primary">
                         Zweryfikuj swój adres E-mail
@@ -214,7 +225,12 @@ export default function SignUpPage() {
                           resend
                           className="text-muted-foreground"
                           fallback={({ resendableAfter }) => (
-                            <Button variant="link" size="sm" disabled className="shadow-none">
+                            <Button
+                              variant="link"
+                              size="sm"
+                              disabled
+                              className="shadow-none"
+                            >
                               Nie otrzymałeś kodu? Wyślij ponownie (
                               <span className="tabular-nums">
                                 {resendableAfter}
@@ -223,7 +239,12 @@ export default function SignUpPage() {
                             </Button>
                           )}
                         >
-                          <Button type="button" variant="link" size="sm" className="shadow-none">
+                          <Button
+                            type="button"
+                            variant="link"
+                            size="sm"
+                            className="shadow-none"
+                          >
                             Nie otrzymałeś kodu? Wyślij ponownie
                           </Button>
                         </SignUp.Action>
@@ -232,7 +253,10 @@ export default function SignUpPage() {
                     <CardFooter>
                       <div className="grid w-full gap-y-4">
                         <SignUp.Action submit asChild>
-                          <Button className="w-full shadow-none" disabled={isGlobalLoading}>
+                          <Button
+                            className="w-full shadow-none"
+                            disabled={isGlobalLoading}
+                          >
                             <Clerk.Loading>
                               {(isLoading) => {
                                 return isLoading ? (
