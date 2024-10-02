@@ -5,7 +5,11 @@ export const metadata = {
   description: "Search for activities",
 }
 
-export default function RootLayout({children} : {children: React.ReactNode}) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
     <div className="paddingX h-min-screen w-max-screen grid grid-rows-[auto,1fr] bg-white">
       <TopNav />

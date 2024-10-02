@@ -290,10 +290,10 @@ export default function HomePage() {
       <div className="flex w-full flex-col items-center justify-center gap-4 border-t-2 border-secondary text-center sm:flex-row">
         <div className="sm:h-32" />
         <h4>Oferta dla firm</h4>
-        <Link href={'/company/sign-up'}>
-        <Button variant={"outline"} size={"lg"} className="w-full sm:w-40">
-          Sprawdź szczegóły
-        </Button>
+        <Link href={"/company/sign-up"}>
+          <Button variant={"outline"} size={"lg"} className="w-full sm:w-40">
+            Sprawdź szczegóły
+          </Button>
         </Link>
       </div>
       <div className="max-sm:h-8" />

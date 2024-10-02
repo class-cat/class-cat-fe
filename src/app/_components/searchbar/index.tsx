@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import Image from "next/image"
 import { useSearchParams } from "next/navigation"
@@ -10,9 +10,9 @@ import { Input } from "~/components/ui/input"
 import { SearchCombobox } from "../searchComboBox"
 
 export default function SearchBar() {
-  const searchParams = useSearchParams();
-  const { data: locationData } = useGetLocations();
-  const location = searchParams.get("location") as string;
+  const searchParams = useSearchParams()
+  const { data: locationData } = useGetLocations()
+  const location = searchParams.get("location") as string
   return (
     <>
       <div className="flex w-full flex-col justify-between gap-9 py-0 sm:py-12 md:w-3/4">
@@ -36,10 +36,7 @@ export default function SearchBar() {
           </div>
           <div className="hidden h-3/5 w-1 bg-secondary sm:block" />
           <div className="w-4/8 hidden sm:flex">
-            <SearchCombobox
-              data={locationData || []}
-              value={location || ""}
-            />
+            <SearchCombobox data={locationData || []} value={location || ""} />
           </div>
           <Button
             type="submit"

@@ -15,6 +15,6 @@ export default function RootLayout({
       <footer className="padding h-[153px] bg-foreground text-white">
         ClassCat
       </footer>
-    </>      
+    </>
   )
 }
