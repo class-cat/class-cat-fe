@@ -222,7 +222,7 @@ export default function HomePage() {
                 <div className="mr-2">
                   {activitiesIsLoading ? (
                     Array.from({ length: 10 }).map((_, index) => (
-                      <div key={index} className="not-first:py-2">
+                      <div key={index} className="sm:not-first:py-2 mt-2 first:mt-0">
                         <PlaceholderPill />
                       </div>
                     ))
