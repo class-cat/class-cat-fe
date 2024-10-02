@@ -3,7 +3,7 @@ import { Icons } from "../icons"
 
 export default function PlaceholderPill() {
   return (
-    <div className="relative mt-2 flex items-center gap-4 rounded-2xl border-2 border-secondary p-2">
+    <div className="relative  flex cursor-pointer items-center gap-2 rounded-2xl border-2 border-secondary p-2 hover:shadow-sm sm:gap-4">
       <div className="relative size-[80px] animate-pulse overflow-hidden rounded-lg">
         <div className="animate-pulse-slow absolute inset-0 bg-secondary opacity-50"></div>
       </div>
@@ -16,10 +16,14 @@ export default function PlaceholderPill() {
           <div className="h-3 w-1/2 animate-pulse rounded bg-secondary opacity-50"></div>
         </div>
       </div>
-      <Icons.badge
-        className="absolute right-[10px] top-[-15px] size-8"
-        color={"#FFFEFB"}
-      />{" "}
+      <div className="absolute right-2 top-2">
+              <Icons.paw
+                className="size-6 sm:size-8"
+                color={"#ecdec8"}
+                fill={"#FFFEFB"}
+                strokeWidth={1.5}
+              />
+      </div>
     </div>
   )
 }
