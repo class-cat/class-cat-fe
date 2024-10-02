@@ -69,7 +69,6 @@ export default function SearchPage() {
       pageSize: 10,
     },
   })
-  
   console.log(activitiesData?.pages)
   const { data: mapData, isLoading: mapIsLoading } = useFetch<
     DataType<MapDataType>
@@ -169,7 +168,7 @@ export default function SearchPage() {
                     return (
                       <div
                         key={uuid()}
-                        className="pt-3 sm:py-2"
+                        className="py-2"
                         ref={isLastElement ? lastElementRef : null}
                       >
                         <Pill {...item} />

@@ -24,13 +24,15 @@ export function TopNavButtons() {
         <div className="flex flex-row items-center gap-4">
           <SignedOut>
             <SignInButton>
-              <Button>Zaloguj się</Button>
+              <Button className="shadow-none">Zaloguj się</Button>
             </SignInButton>
           </SignedOut>
           <SignedIn>
             <UserButton userProfileUrl="/profile" />
           </SignedIn>
-          <Button variant="outline">Dodaj zajęcia</Button>
+          <Button variant="outline" className="shadow-none">
+            Dodaj zajęcia
+          </Button>
         </div>
       )}
       {isMobile && isMenuOpen && (
