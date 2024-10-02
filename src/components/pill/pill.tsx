@@ -24,7 +24,7 @@ export function Pill(props: any) {
   }
 
   return (
-    <div className="relative  flex cursor-pointer items-center gap-2 rounded-2xl border-2 border-secondary p-2 hover:shadow-md sm:gap-4">
+    <div className="relative  flex cursor-pointer items-center gap-2 rounded-2xl border-2 border-secondary p-2 hover:shadow-sm sm:gap-4">
       <div className="relative size-[50px] shrink-0 sm:size-[80px]">
         {primaryImage?.file ? (
           <Image

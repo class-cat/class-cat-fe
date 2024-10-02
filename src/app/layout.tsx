@@ -1,23 +1,9 @@
 import "~/styles/globals.css"
-
 import { ClerkProvider } from "@clerk/nextjs"
-import { Mochiy_Pop_P_One } from "next/font/google"
-import { Poppins } from "next/font/google"
-
 import { plPL } from "@clerk/localizations"
 import { ReactQueryProvider } from "~/providers/reactquery-provider"
+import { inter, mochiy } from "~/styles/fonts"
 
-const inter = Poppins({
-  subsets: ["latin"],
-  variable: "--font-sans",
-  weight: ["400"],
-})
-
-const mochiy = Mochiy_Pop_P_One({
-  subsets: ["latin"],
-  weight: ["400"],
-  variable: "--font-mochiy",
-})
 
 export const metadata = {
   title: "Create T3 App",

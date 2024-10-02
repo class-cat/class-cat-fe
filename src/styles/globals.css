@@ -7,16 +7,16 @@
     @apply text-foreground;
   }
   h1 {
-    @apply font-sans text-6xl font-black leading-[68px] tracking-tight text-foreground drop-shadow-lg;
+    @apply font-sans text-6xl font-black leading-[68px] tracking-tight text-foreground drop-shadow-sm;
   }
   h2 {
-    @apply font-sans text-5xl font-black leading-[68px] tracking-tight text-foreground drop-shadow-lg;
+    @apply font-sans text-5xl font-black leading-[68px] tracking-tight text-foreground drop-shadow-sm;
   }
   h3 {
-    @apply font-sans text-4xl font-black leading-[68px] tracking-tight text-foreground drop-shadow-lg;
+    @apply font-sans text-4xl font-black leading-[68px] tracking-tight text-foreground drop-shadow-sm;
   }
   h4 {
-    @apply font-sans text-3xl leading-[68px] tracking-tight text-foreground drop-shadow-lg;
+    @apply font-sans text-3xl leading-[68px] tracking-tight text-foreground drop-shadow-sm;
   }
   svg {
     @apply size-4;
@@ -87,5 +87,15 @@
 
   .sidebarSmall::-webkit-scrollbar-track {
     @apply bg-white;
+  }
+
+  .step {
+    counter-increment: step;
+  }
+
+  .step:before {
+    @apply absolute inline-flex h-9 w-9 items-center justify-center rounded-full border-4 bg-secondary text-center -indent-px;
+    @apply ml-[-50px] mt-[-4px];
+    content: counter(step);
   }
 }

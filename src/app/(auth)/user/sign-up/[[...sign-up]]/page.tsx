@@ -18,18 +18,18 @@ import { cn } from "~/lib/utils"
 
 export default function SignUpPage() {
   return (
-    <div className="sm:justify-center">
+    <div className="sm:justify-center max-w-md w-full">
       <SignUp.Root>
         <Clerk.Loading>
           {(isGlobalLoading) => (
             <>
               <SignUp.Step name="start">
-                <Card className="border-[#F5F6F7] bg-[#FFFFFF] sm:w-96">
+              <Card className="border-secondary bg-[#FFFFFF] shadow-none">
                   <CardHeader>
                     <CardTitle className="mx-auto text-lg text-primary">
                       Zarejestruj się
                     </CardTitle>
-                    <CardDescription className="mx-auto text-sm font-thin text-[#58738B]">
+                    <CardDescription className="mx-auto text-sm font-thin ">
                       Witaj! Wypełnij pola, aby rozpocząć.
                     </CardDescription>
                   </CardHeader>
@@ -41,6 +41,7 @@ export default function SignUpPage() {
                           variant="outline"
                           type="button"
                           disabled={isGlobalLoading}
+                          className="shadow-none"
                         >
                           <Clerk.Loading scope="provider:facebook">
                             {(isLoading) =>
@@ -62,6 +63,7 @@ export default function SignUpPage() {
                           variant="outline"
                           type="button"
                           disabled={isGlobalLoading}
+                          className="shadow-none"
                         >
                           <Clerk.Loading scope="provider:google">
                             {(isLoading) =>
@@ -78,24 +80,24 @@ export default function SignUpPage() {
                         </Button>
                       </Clerk.Connection>
                     </div>
-                    <p className="text-muted-foreground flex items-center gap-x-3 text-sm before:h-px before:flex-1 before:bg-[#D5DADD] after:h-px after:flex-1 after:bg-[#D5DADD]">
+                    <p className="text-muted-foreground flex items-center gap-x-3 text-sm before:h-px before:flex-1 before:bg-secondary after:h-px after:flex-1 after:bg-secondary">
                       lub
                     </p>
                     <Clerk.Field name="emailAddress" className="space-y-2">
                       <Clerk.Label asChild>
-                        <Label className="text-sm text-[#58738B]">E-mail</Label>
+                        <Label className="text-sm ">E-mail</Label>
                       </Clerk.Label>
                       <Clerk.Input type="email" required asChild>
-                        <Input className="bg-slate-100 rounded-xl border-[0.1px] border-[#D5DADD]" />
+                        <Input className="bg-slate-100 rounded-xl border-[0.1px] border-secondary" />
                       </Clerk.Input>
                       <Clerk.FieldError className="text-destructive block text-sm" />
                     </Clerk.Field>
                     <Clerk.Field name="password" className="space-y-2">
                       <Clerk.Label asChild>
-                        <Label className="text-sm text-[#58738B]">Hasło</Label>
+                        <Label className="text-sm ">Hasło</Label>
                       </Clerk.Label>
                       <Clerk.Input type="password" required asChild>
-                        <Input className="bg-slate-100 rounded-xl border-[0.1px] border-[#D5DADD]" />
+                        <Input className="bg-slate-100 rounded-xl border-[0.1px] border-secondary" />
                       </Clerk.Input>
                       <Clerk.FieldError className="text-destructive block text-sm" />
                     </Clerk.Field>
@@ -103,7 +105,7 @@ export default function SignUpPage() {
                   <CardFooter>
                     <div className="grid w-full gap-y-4">
                       <SignUp.Action submit asChild>
-                        <Button className="w-full" disabled={isGlobalLoading}>
+                        <Button className="w-full shadow-none" disabled={isGlobalLoading} >
                           <Clerk.Loading>
                             {(isLoading) => {
                               return isLoading ? (
@@ -115,7 +117,7 @@ export default function SignUpPage() {
                           </Clerk.Loading>
                         </Button>
                       </SignUp.Action>
-                      <Button variant="link" size="sm" asChild>
+                      <Button variant="link" size="sm" className="shadow-none" asChild>
                         <Link href="/sign-in">Masz już konto? Zaloguj się</Link>
                       </Button>
                     </div>
@@ -124,7 +126,7 @@ export default function SignUpPage() {
               </SignUp.Step>
 
               <SignUp.Step name="continue">
-                <Card className="border-[#F5F6F7] bg-[#FFFFFF] sm:w-96">
+              <Card className="border-secondary bg-[#FFFFFF] shadow-none">
                   <CardHeader>
                     <CardTitle className="mx-auto text-lg text-primary">
                       Kontynnuj rejestrację
@@ -144,7 +146,7 @@ export default function SignUpPage() {
                   <CardFooter>
                     <div className="grid w-full gap-y-4">
                       <SignUp.Action submit asChild>
-                        <Button disabled={isGlobalLoading}>
+                        <Button disabled={isGlobalLoading} className="shadow-none">
                           <Clerk.Loading>
                             {(isLoading) => {
                               return isLoading ? (
@@ -163,12 +165,12 @@ export default function SignUpPage() {
 
               <SignUp.Step name="verifications">
                 <SignUp.Strategy name="email_code">
-                  <Card className="border-[#F5F6F7] bg-[#FFFFFF] sm:w-96">
+                <Card className="border-secondary bg-[#FFFFFF] shadow-none">
                     <CardHeader>
                       <CardTitle className="mx-auto text-lg text-primary">
                         Zweryfikuj swój adres E-mail
                       </CardTitle>
-                      <CardDescription className="mx-auto text-sm font-thin text-[#58738B]">
+                      <CardDescription className="mx-auto text-sm font-thin ">
                         Użyj kod weryfikacyjny wysłany na adres E-mail{" "}
                       </CardDescription>
                     </CardHeader>
@@ -212,7 +214,7 @@ export default function SignUpPage() {
                           resend
                           className="text-muted-foreground"
                           fallback={({ resendableAfter }) => (
-                            <Button variant="link" size="sm" disabled>
+                            <Button variant="link" size="sm" disabled className="shadow-none">
                               Nie otrzymałeś kodu? Wyślij ponownie (
                               <span className="tabular-nums">
                                 {resendableAfter}
@@ -221,7 +223,7 @@ export default function SignUpPage() {
                             </Button>
                           )}
                         >
-                          <Button type="button" variant="link" size="sm">
+                          <Button type="button" variant="link" size="sm" className="shadow-none">
                             Nie otrzymałeś kodu? Wyślij ponownie
                           </Button>
                         </SignUp.Action>
@@ -230,7 +232,7 @@ export default function SignUpPage() {
                     <CardFooter>
                       <div className="grid w-full gap-y-4">
                         <SignUp.Action submit asChild>
-                          <Button className="w-full" disabled={isGlobalLoading}>
+                          <Button className="w-full shadow-none" disabled={isGlobalLoading}>
                             <Clerk.Loading>
                               {(isLoading) => {
                                 return isLoading ? (

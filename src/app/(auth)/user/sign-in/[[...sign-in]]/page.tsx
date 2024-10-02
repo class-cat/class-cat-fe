@@ -17,17 +17,18 @@ import { Label } from "~/components/ui/label"
 
 export default function SignInPage() {
   return (
+    <div className="sm:justify-center max-w-md w-full">
     <SignIn.Root>
       <Clerk.Loading>
         {(isGlobalLoading: boolean) => (
           <>
             <SignIn.Step name="start">
-              <Card className="border-[#F5F6F7] bg-[#FFFFFF] sm:w-96">
+            <Card className="border-secondary bg-[#FFFFFF] shadow-none">
                 <CardHeader>
                   <CardTitle className="mx-auto text-lg text-primary">
                     Zaloguj się do ClassCat
                   </CardTitle>
-                  <CardDescription className="mx-auto text-sm font-thin text-[#58738B]">
+                  <CardDescription className="mx-auto text-sm font-thin ">
                     Witaj ponownie! Zaloguj się, aby kontynuować.
                   </CardDescription>
                 </CardHeader>
@@ -39,6 +40,7 @@ export default function SignInPage() {
                         variant="outline"
                         type="button"
                         disabled={isGlobalLoading}
+                        className="shadow-none"
                       >
                         <Clerk.Loading scope="provider:facebook">
                           {(isLoading: boolean) =>
@@ -60,6 +62,7 @@ export default function SignInPage() {
                         variant="outline"
                         type="button"
                         disabled={isGlobalLoading}
+                        className="shadow-none"
                       >
                         <Clerk.Loading scope="provider:google">
                           {(isLoading: boolean) =>
@@ -81,10 +84,10 @@ export default function SignInPage() {
                   </p>
                   <Clerk.Field name="identifier" className="space-y-2">
                     <Clerk.Label asChild>
-                      <Label className="text-sm text-[#58738B]">E-mail</Label>
+                      <Label className="text-sm ">E-mail</Label>
                     </Clerk.Label>
                     <Clerk.Input type="email" required asChild>
-                      <Input className="bg-slate-100 rounded-xl border-[0.1px] border-[#D5DADD]" />
+                      <Input className="bg-slate-100 rounded-xl border-[0.1px] border-secondary" />
                     </Clerk.Input>
                     <Clerk.FieldError className="text-destructive block text-sm" />
                   </Clerk.Field>
@@ -92,7 +95,7 @@ export default function SignInPage() {
                 <CardFooter>
                   <div className="grid w-full gap-y-4">
                     <SignIn.Action submit asChild>
-                      <Button className="w-full" disabled={isGlobalLoading}>
+                      <Button className="w-full shadow-none" disabled={isGlobalLoading}>
                         <Clerk.Loading>
                           {(isLoading) => {
                             return isLoading ? (
@@ -109,9 +112,9 @@ export default function SignInPage() {
                       variant="link"
                       size="sm"
                       asChild
-                      className="rounded-xl bg-white"
+                      className="rounded-xl bg-white shadow-none"
                     >
-                      <Link href="/sign-up">
+                      <Link href="/user/sign-up">
                         Nie masz konta? Zarejestruj się
                       </Link>
                     </Button>
@@ -121,12 +124,12 @@ export default function SignInPage() {
             </SignIn.Step>
 
             <SignIn.Step name="choose-strategy">
-              <Card className="border-[#F5F6F7] bg-[#FFFFFF] sm:w-96">
+            <Card className="border-secondary bg-[#FFFFFF] shadow-none">
                 <CardHeader>
                   <CardTitle className="mx-auto text-lg text-primary">
                     Użyj innej metody logowania
                   </CardTitle>
-                  <CardDescription className="mx-auto text-sm font-thin text-[#58738B]">
+                  <CardDescription className="mx-auto text-sm font-thin ">
                     Wystąpił błąd? Możesz użyć innej metody w celu weryfikacji.
                   </CardDescription>
                 </CardHeader>
@@ -136,6 +139,7 @@ export default function SignInPage() {
                       type="button"
                       variant="link"
                       disabled={isGlobalLoading}
+                      className="shadow-none"
                     >
                       Kod E-mail
                     </Button>
@@ -145,6 +149,7 @@ export default function SignInPage() {
                       type="button"
                       variant="link"
                       disabled={isGlobalLoading}
+                      className="shadow-none"
                     >
                       Hasło
                     </Button>
@@ -153,7 +158,7 @@ export default function SignInPage() {
                 <CardFooter>
                   <div className="grid w-full gap-y-4">
                     <SignIn.Action navigate="previous" asChild>
-                      <Button className="w-full" disabled={isGlobalLoading}>
+                      <Button className="w-full shadow-none" disabled={isGlobalLoading}>
                         <Clerk.Loading>
                           {(isLoading) => {
                             return isLoading ? (
@@ -172,12 +177,12 @@ export default function SignInPage() {
 
             <SignIn.Step name="verifications">
               <SignIn.Strategy name="password">
-                <Card className="border-[#F5F6F7] bg-[#FFFFFF] sm:w-96">
+              <Card className="border-secondary bg-[#FFFFFF] shadow-none">
                   <CardHeader>
                     <CardTitle className="mx-auto text-lg text-primary">
                       Sprawdź E-mail
                     </CardTitle>
-                    <CardDescription className="mx-auto text-sm font-thin text-[#58738B]">
+                    <CardDescription className="mx-auto text-sm font-thin ">
                       Wprowadź kod weryfikacyjny wysłany na twój adres e-mail.
                     </CardDescription>
                     <p className="text-muted-foreground text-sm">
@@ -187,10 +192,10 @@ export default function SignInPage() {
                   <CardContent className="grid gap-y-4">
                     <Clerk.Field name="password" className="space-y-2">
                       <Clerk.Label asChild>
-                        <Label className="text-sm text-[#58738B]">Hasło</Label>
+                        <Label className="text-sm ">Hasło</Label>
                       </Clerk.Label>
                       <Clerk.Input type="password" asChild>
-                        <Input className="text-sm text-[#58738B]" />
+                        <Input className="text-sm " />
                       </Clerk.Input>
                       <Clerk.FieldError className="text-destructive block text-sm" />
                     </Clerk.Field>
@@ -198,7 +203,7 @@ export default function SignInPage() {
                   <CardFooter>
                     <div className="grid w-full gap-y-4">
                       <SignIn.Action submit asChild>
-                        <Button disabled={isGlobalLoading}>
+                        <Button disabled={isGlobalLoading} className="shadow-none">
                           <Clerk.Loading>
                             {(isLoading) => {
                               return isLoading ? (
@@ -211,7 +216,7 @@ export default function SignInPage() {
                         </Button>
                       </SignIn.Action>
                       <SignIn.Action navigate="choose-strategy" asChild>
-                        <Button type="button" size="sm" variant="link">
+                        <Button type="button" size="sm" variant="link" className="shadow-none">
                           Wybierz inną metodę
                         </Button>
                       </SignIn.Action>
@@ -221,8 +226,8 @@ export default function SignInPage() {
               </SignIn.Strategy>
 
               <SignIn.Strategy name="email_code">
-                <Card className="border-[#F5F6F7] bg-[#FFFFFF] sm:w-96">
-                  <CardHeader className="mx-auto text-sm font-thin text-[#58738B]">
+              <Card className="border-secondary bg-[#FFFFFF] shadow-none">
+                  <CardHeader className="mx-auto text-sm font-thin ">
                     <CardTitle className="mx-auto text-lg text-primary">
                       Sprawdź swój E-mail
                     </CardTitle>
@@ -262,7 +267,7 @@ export default function SignInPage() {
                           resend
                           className="text-muted-foreground"
                           fallback={({ resendableAfter }) => (
-                            <Button variant="link" size="sm" disabled>
+                            <Button variant="link" size="sm" className="shadow-none" disabled>
                               Nie otrzymałeś kodu? Wyślij ponownie (
                               <span className="tabular-nums">
                                 {resendableAfter}
@@ -271,7 +276,7 @@ export default function SignInPage() {
                             </Button>
                           )}
                         >
-                          <Button variant="link" size="sm">
+                          <Button variant="link" size="sm" className="shadow-none">
                             Nie otrzymałeś kodu? Wyślij ponownie
                           </Button>
                         </SignIn.Action>
@@ -281,7 +286,7 @@ export default function SignInPage() {
                   <CardFooter>
                     <div className="grid w-full gap-y-4">
                       <SignIn.Action submit asChild>
-                        <Button className="w-full" disabled={isGlobalLoading}>
+                        <Button className="w-full shadow-none" disabled={isGlobalLoading}>
                           <Clerk.Loading>
                             {(isLoading) => {
                               return isLoading ? (
@@ -294,7 +299,7 @@ export default function SignInPage() {
                         </Button>
                       </SignIn.Action>
                       <SignIn.Action navigate="choose-strategy" asChild>
-                        <Button size="sm" variant="link">
+                        <Button size="sm" variant="link" className="shadow-none">
                           Użyj innej metody
                         </Button>
                       </SignIn.Action>
@@ -307,5 +312,6 @@ export default function SignInPage() {
         )}
       </Clerk.Loading>
     </SignIn.Root>
+    </div>
   )
 }

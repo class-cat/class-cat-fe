@@ -16,6 +16,12 @@ export default {
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
         logo: ["var(--font-mochiy)", ...fontFamily.sans],
+        openSans: ["var(--font-mochiy)", ...fontFamily.sans],
+        workSans: ["var(--font-mochiy)", ...fontFamily.sans],
+      },
+      boxShadow: {
+        'inner-lg': 'inset 0 4px 6px rgba(0, 0, 0, 0.5)',
+        'inner-xl': 'inset 0 6px 10px rgba(0, 0, 0, 0.5)',
       },
       keyframes: {
         slideIn: {
