@@ -4,7 +4,7 @@ import Image from "next/image"
 import { useState } from "react"
 import { useMediaQuery } from "~/app/_hooks/useMediaQuery"
 import { Icons } from "~/components/icons"
-import { MOBILE_BREAKPOINT } from "~/lib/const"
+import { MOBILE_BREAKPOINT, ROUTES } from "~/lib/const"
 import {
   Tooltip,
   TooltipContent,
@@ -12,9 +12,10 @@ import {
   TooltipTrigger,
 } from "../ui/tooltip"
 import { IconWithText } from "../ui/icon-text"
+import Link from "next/link"
 
 export function Pill(props: any) {
-  const { name, location, provider, primaryImage } = props
+  const { slug, name, location, provider, primaryImage } = props
   const [bookmark, setBookmark] = useState(false)
 
   const isMobile = useMediaQuery(MOBILE_BREAKPOINT)
@@ -24,7 +25,12 @@ export function Pill(props: any) {
   }
 
   return (
-    <div className="relative  flex cursor-pointer items-center gap-2 rounded-2xl border-2 border-secondary p-2 hover:shadow-sm sm:gap-4">
+    <Link
+      className="relative  flex cursor-pointer items-center gap-2 rounded-2xl border-2 border-secondary p-2 hover:shadow-sm sm:gap-4"
+      href={{
+        pathname: `${ROUTES.ACTIVITY}/${slug}`,
+      }}
+    >
       <div className="relative size-[50px] shrink-0 sm:size-[80px]">
         {primaryImage?.file ? (
           <Image
@@ -70,6 +76,6 @@ export function Pill(props: any) {
           </Tooltip>
         </TooltipProvider>
       </div>
-    </div>
+    </Link>
   )
 }

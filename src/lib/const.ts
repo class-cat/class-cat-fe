@@ -8,3 +8,7 @@ export const ENDPOINTS = {
     MAP: "activities/map-search-combined/",
   },
 } as const
+
+export const ROUTES = {
+  ACTIVITY: "/activity",
+} as const
