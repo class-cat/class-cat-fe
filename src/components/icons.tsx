@@ -41,6 +41,7 @@ import {
   Megaphone,
   Barcode,
   Mail,
+  Star,
 } from "lucide-react"
 
 export type Icon = LucideIcon
@@ -86,6 +87,7 @@ export const Icons = {
   megaphone: Megaphone,
   barChart: Barcode,
   mail: Mail,
+  star: Star,
   logo: (props: LucideProps) => (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" {...props}>
       <path

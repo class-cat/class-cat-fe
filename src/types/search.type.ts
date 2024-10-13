@@ -23,7 +23,7 @@ export type EntireLocation = {
 export type Provider = {
   slug: string
   name: string
-  phone_number: string
+  phoneNumber: string
   email: string
   website_url: string
   is_verified: boolean
