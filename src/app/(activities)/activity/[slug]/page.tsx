@@ -1,6 +1,6 @@
 import { SignedIn } from "@clerk/nextjs"
 import Image from "next/image"
-import { Map, PlaceholderMap } from "~/app/_components/map"
+import { Map } from "~/app/_components/map"
 
 import { Icons } from "~/components/icons"
 import { Button } from "~/components/ui/button"
@@ -97,7 +97,6 @@ export default async function ActivityPage({
               <div className="flex justify-between">
                 <h2 className="mb-4 text-2xl font-bold">Opinie</h2>
                 <SignedIn>
-                  {/* <Button variant="default">Dodaj opinię</Button> */}
                   <AddReviewDialog />
                 </SignedIn>
               </div>
