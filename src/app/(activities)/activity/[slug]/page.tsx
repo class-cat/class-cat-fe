@@ -46,28 +46,28 @@ export default async function ActivityPage({
                 alt="Activity Image"
                 width={144}
                 height={144}
-                className="bg-gray-200 h-36 w-36 rounded-md object-cover"
+                className="bg-gray-200 size-36 rounded-md object-cover"
               />
               <div className="flex-1">
                 <h1 className="mb-2 text-2xl font-bold leading-tight">
                   {activity.name}
                 </h1>
                 <p className="flex items-start text-sm font-medium sm:text-base">
-                  <Icons.map className="mr-2 mt-1 h-4 w-4 flex-shrink-0" />
+                  <Icons.map className="mr-2 mt-1 size-4 shrink-0" />
                   <span className="break-words">{activity.provider.name}</span>
                 </p>
                 {activity.location ? (
                   <p className="flex items-start text-sm font-medium sm:text-base">
-                    <Icons.map className="mr-2 mt-1 h-4 w-4 flex-shrink-0" />
+                    <Icons.map className="mr-2 mt-1 size-4 shrink-0" />
                     <span className="break-words">
                       {" "}
-                      {activity.location.address.address_line} ", "
+                      {activity.location.address.address_line}{" "}
                       {activity.location.address.city}
                     </span>
                   </p>
                 ) : null}
                 <p className="flex items-start text-sm font-medium sm:text-base">
-                  <Icons.phone className="mr-2 mt-1 h-4 w-4 flex-shrink-0" />
+                  <Icons.phone className="mr-2 mt-1 size-4 shrink-0" />
                   <span className="break-words">
                     {activity.provider.phoneNumber}
                   </span>
@@ -116,7 +116,7 @@ export default async function ActivityPage({
                       {[...Array(5)].map((_, i) => (
                         <Icons.star
                           key={i}
-                          className="h-5 w-5 fill-primary text-primary"
+                          className="size-5 fill-primary text-primary"
                         />
                       ))}
                     </div>

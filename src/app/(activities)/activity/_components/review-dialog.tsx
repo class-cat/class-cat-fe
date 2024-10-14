@@ -61,7 +61,7 @@ export function AddReviewDialog() {
               {[1, 2, 3, 4, 5].map((star) => (
                 <Icons.star
                   key={star}
-                  className={`h-6 w-6 cursor-pointer ${
+                  className={`size-6 cursor-pointer ${
                     star <= rating
                       ? "fill-primary text-primary"
                       : "text-foregroundMuted"
