@@ -2,12 +2,14 @@
 
 import { useState } from "react"
 import { Calendar, Users, TrendingUp, Award, type LucideIcon } from "lucide-react"
-import Hero from "./_components/hero"
-import { Container } from "~/components/ui/container"
 import { motion, AnimatePresence } from "framer-motion"
+import { Container } from "~/components/ui/container"
+import Hero from "./_components/hero"
 import { FeatureCard } from "./_components/feature-card"
 import { FeatureImage } from "./_components/feature-image"
 import BusinessAccountSection from "./_components/business-account"
+import { useInView } from "~/app/_hooks/useInView"
+
 
 export type Feature = {
   icon: LucideIcon
@@ -61,52 +63,51 @@ const features: Feature[] = [
 
 export default function HomePage() {
   const [hoveredFeature, setHoveredFeature] = useState<number>(0)
+  const [ref, isInView] = useInView<HTMLElement>({ threshold: 0.1 })
 
   return (
     <Container className="h-full flex-1 justify-center pt-2 sm:pt-6">
-      <section className="sm:paddingX sm:flex sm:justify-between sm:gap-4 sm:rounded-3xl sm:bg-secondary sm:py-4">
-        <Hero />
-      </section>
+      <Hero />
 
-      <section id="features" className="w-full py-12 md:py-24 lg:py-32">
+      <motion.section
+        ref={ref}
+        initial={{ opacity: 0, y: 50 }}
+        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+        transition={{ duration: 0.5 }}
+        id="features"
+        className="w-full py-12 md:py-24 lg:py-32"
+      >
         <div className="container px-4 md:px-6">
-          <motion.h2 
-            className="mb-12 text-center text-3xl font-bold tracking-tighter sm:text-5xl"
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
+          <h2 className="mb-12 text-center text-3xl font-bold tracking-tighter sm:text-5xl">
             Zaawansowane narzędzia dla biznesu
-          </motion.h2>
+          </h2>
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 lg:gap-8">
-            <div className="grid grid-cols-1 gap-6 ">
+            <div className="grid grid-cols-1 gap-6">
               {features.map((feature, index) => (
                 <FeatureCard
                   key={feature.title}
                   feature={feature}
                   index={index}
                   onHover={() => setHoveredFeature(index)}
-                  onLeave={() => setHoveredFeature(0)}
+                  onLeave={() => setHoveredFeature(index)}
                 />
               ))}
             </div>
             <div className="col-span-2 hidden lg:block">
               <div className="sticky top-24 space-y-6">
                 <AnimatePresence mode="wait">
-                  {
-                    features[hoveredFeature] && (
-                      <FeatureImage
+                  {features[hoveredFeature] && (
+                    <FeatureImage
                       key={hoveredFeature}
                       feature={features[hoveredFeature]}
                     />
-                    )
-                  }
+                  )}
                 </AnimatePresence>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
       <BusinessAccountSection />
     </Container>
   )

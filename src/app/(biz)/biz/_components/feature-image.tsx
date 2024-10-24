@@ -1,16 +1,20 @@
 import { motion } from "framer-motion"
 import Image from "next/image"
 import { type Feature } from "../page"
+import { useInView } from "~/app/_hooks/useInView"
 
 interface FeatureImageProps {
   feature: Feature
 }
 
 export function FeatureImage({ feature }: FeatureImageProps) {
+  const [ref, isInView] = useInView<HTMLDivElement>({ threshold: 0.1 })
+
   return (
     <motion.div
+      ref={ref}
       initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
+      animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
       exit={{ opacity: 0, scale: 0.9 }}
       transition={{ duration: 0.3 }}
       className="overflow-hidden rounded-lg border border-secondary bg-[#fff] shadow-sm"
@@ -22,7 +26,7 @@ export function FeatureImage({ feature }: FeatureImageProps) {
         height={300}
         className="h-auto w-full"
       />
-      <div className="bg-[#fff]  p-4">
+      <div className="bg-[#fff] p-4">
         <h3 className="text-lg font-semibold">{feature.title}</h3>
       </div>
     </motion.div>
