@@ -1,6 +1,7 @@
 import { motion } from "framer-motion"
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card"
 import { type LucideIcon } from "lucide-react"
+import { useInView } from "~/app/_hooks/useInView"
 
 interface FeatureCardProps {
   feature: {
@@ -14,11 +15,14 @@ interface FeatureCardProps {
 }
 
 export function FeatureCard({ feature, index, onHover, onLeave }: FeatureCardProps) {
+  const [ref, isInView] = useInView<HTMLDivElement>({ threshold: 0.1 })
+
   return (
     <motion.div
+      ref={ref}
       className="flex"
       initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       onMouseEnter={onHover}
       onMouseLeave={onLeave}
