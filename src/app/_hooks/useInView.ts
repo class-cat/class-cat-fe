@@ -20,7 +20,7 @@ export function useInView<T extends Element>(
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        const isVisible = entry.isIntersecting
+        const isVisible = entry?.isIntersecting ?? false
         setIsInView(isVisible)
 
         if (isVisible && freezeOnceVisible) {
