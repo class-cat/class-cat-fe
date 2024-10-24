@@ -67,7 +67,10 @@ export default function HomePage() {
 
   return (
     <Container className="h-full flex-1 justify-center pt-2 sm:pt-6">
-      <Hero />
+      
+      <section className="hidden sm:block">
+        <Hero />
+      </section>
 
       <motion.section
         ref={ref}
