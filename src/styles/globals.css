@@ -7,28 +7,28 @@
     @apply text-foreground;
   }
   h1 {
-    @apply font-sans text-6xl font-black leading-[68px] tracking-tight text-foreground drop-shadow-sm;
+    @apply font-sans text-6xl font-black leading-[68px] tracking-tight text-foreground;
   }
   h2 {
-    @apply font-sans text-5xl font-black leading-[68px] tracking-tight text-foreground drop-shadow-sm;
+    @apply font-sans text-5xl font-black leading-[68px] tracking-tight text-foreground;
   }
   h3 {
-    @apply font-sans text-4xl font-black leading-[68px] tracking-tight text-foreground drop-shadow-sm;
+    @apply font-sans text-4xl font-black leading-[68px] tracking-tight text-foreground;
   }
   h4 {
-    @apply font-sans text-3xl leading-[68px] tracking-tight text-foreground drop-shadow-sm;
+    @apply font-sans text-3xl leading-[68px] tracking-tight text-foreground;
   }
   svg {
     @apply size-4;
   }
   h2 {
-    @apply font-sans text-5xl font-black leading-[68px] tracking-tight text-foreground drop-shadow-lg;
+    @apply font-sans text-5xl font-black leading-[68px] tracking-tight text-foreground;
   }
   h3 {
-    @apply font-sans text-4xl font-black leading-[68px] tracking-tight text-foreground drop-shadow-lg;
+    @apply font-sans text-4xl font-black leading-[68px] tracking-tight text-foreground;
   }
   h4 {
-    @apply font-sans text-3xl leading-[68px] tracking-tight text-foreground drop-shadow-lg;
+    @apply font-sans text-3xl leading-[68px] tracking-tight text-foreground;
   }
   svg {
     @apply size-4;

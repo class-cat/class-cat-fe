@@ -44,7 +44,7 @@ export default function Layout({ children }: RootLayoutProps) {
               <div className="w-full max-w-xl">
                 <div className="mb-8 text-left">
                   <h1 className="text-3xl font-semibold">
-                    Stwórz swoje konto firmy
+                    Stwóz konto swojej firmy
                     <br />i zacznij dodawać zajęcia!
                   </h1>
                 </div>
