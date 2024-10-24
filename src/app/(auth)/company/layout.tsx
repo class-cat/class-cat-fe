@@ -37,14 +37,14 @@ export default function Layout({ children }: RootLayoutProps) {
   return (
     <div className="paddingX flex min-h-screen flex-col bg-white">
       <TopNav />
-      <div className="flex flex-grow items-center justify-center px-4 py-8">
+      <div className="flex grow items-center justify-center px-4 py-8">
         <div className="container max-w-6xl">
           <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
             <div className="flex flex-col items-center lg:items-start">
               <div className="w-full max-w-xl">
                 <div className="mb-8 text-left">
                   <h1 className="text-3xl font-semibold">
-                    Stwórz swoje konto firmy
+                    Stwóz konto swojej firmy
                     <br />i zacznij dodawać zajęcia!
                   </h1>
                 </div>
