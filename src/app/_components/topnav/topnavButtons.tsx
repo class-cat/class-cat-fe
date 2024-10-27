@@ -1,11 +1,12 @@
 "use client"
 
 import { SignedOut, SignInButton, SignedIn, UserButton } from "@clerk/nextjs"
+import Link from "next/link"
 import { useState } from "react"
 import { useMediaQuery } from "~/app/_hooks/useMediaQuery"
 import { Icons } from "~/components/icons"
 import { Button } from "~/components/ui/button"
-import { MOBILE_BREAKPOINT } from "~/lib/const"
+import { MOBILE_BREAKPOINT, ROUTES } from "~/lib/const"
 
 export function TopNavButtons() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -14,27 +15,33 @@ export function TopNavButtons() {
   const handleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
   }
+
+  const UserButtons = () => {
+    return (
+      <div className="flex flex-row items-center gap-4">
+        <SignedOut>
+          <SignInButton>
+            <Button className="shadow-none">Zaloguj się</Button>
+          </SignInButton>
+        </SignedOut>
+        <SignedIn>
+          <UserButton userProfileUrl={ROUTES.ROOT.PROFILE} />
+        </SignedIn>
+        <Button variant="outline" asChild>
+          <Link href={ROUTES.COMPANY.ROOT}>Dodaj zajęcia</Link>
+        </Button>
+      </div>
+    )
+  }
+
   return (
     <>
+      <UserButtons />
       {isMobile ? (
         <Button size="icon" onClick={handleMenu}>
           <Icons.menu />
         </Button>
-      ) : (
-        <div className="flex flex-row items-center gap-4">
-          <SignedOut>
-            <SignInButton>
-              <Button className="shadow-none">Zaloguj się</Button>
-            </SignInButton>
-          </SignedOut>
-          <SignedIn>
-            <UserButton userProfileUrl="/profile" />
-          </SignedIn>
-          <Button variant="outline" className="shadow-none">
-            Dodaj zajęcia
-          </Button>
-        </div>
-      )}
+      ) : null}
       {isMobile && isMenuOpen && (
         <div className="absolute right-0 top-[80px] h-[calc(100vh-80px)] w-full animate-slide-in  border-t-2 border-primary bg-secondary p-4 shadow-md">
           <div>
@@ -42,17 +49,6 @@ export function TopNavButtons() {
             <li>tu jakies itemki</li>
             <li>tu jakies itemki</li>
             <li>tu jakies itemki</li>
-          </div>
-          <div className="flex flex-row items-center gap-4 ">
-            <SignedOut>
-              <SignInButton>
-                <Button>Zaloguj się</Button>
-              </SignInButton>
-            </SignedOut>
-            <SignedIn>
-              <UserButton userProfileUrl="/profile" />
-            </SignedIn>
-            <Button variant="outline">Dodaj zajęcia</Button>
           </div>
         </div>
       )}

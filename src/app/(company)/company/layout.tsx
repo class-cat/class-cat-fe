@@ -1,7 +1,7 @@
 import "~/styles/globals.css"
 
 import React from "react"
-import { TopNav } from "~/components/topnav/topnav"
+import { TopNav } from "~/app/_components/topnav/topnav"
 
 export default function RootLayout({
   children,

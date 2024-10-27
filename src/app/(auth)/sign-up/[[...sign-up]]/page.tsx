@@ -15,6 +15,7 @@ import {
 } from "~/components/ui/card"
 import { Input } from "~/components/ui/input"
 import { Label } from "~/components/ui/label"
+import { ROUTES } from "~/lib/const"
 import { cn } from "~/lib/utils"
 
 export default function SignUpPage() {
@@ -117,7 +118,9 @@ export default function SignUpPage() {
                         </Button>
                       </SignUp.Action>
                       <Button variant="link" size="sm" asChild>
-                        <Link href="/sign-in">Masz już konto? Zaloguj się</Link>
+                        <Link href={ROUTES.ROOT.SIGN_IN}>
+                          Masz już konto? Zaloguj się
+                        </Link>
                       </Button>
                     </div>
                   </CardFooter>
