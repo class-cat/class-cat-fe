@@ -14,6 +14,7 @@ import {
 } from "~/components/ui/card"
 import { Input } from "~/components/ui/input"
 import { Label } from "~/components/ui/label"
+import { ROUTES } from "~/lib/const"
 
 export default function SignInPage() {
   return (
@@ -117,7 +118,7 @@ export default function SignInPage() {
                         asChild
                         className="rounded-xl bg-white shadow-none"
                       >
-                        <Link href="/company/sign-up">
+                        <Link href={ROUTES.COMPANY.SIGN_UP}>
                           Nie masz konta? Zarejestruj się
                         </Link>
                       </Button>

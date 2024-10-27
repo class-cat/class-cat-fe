@@ -10,5 +10,16 @@ export const ENDPOINTS = {
 } as const
 
 export const ROUTES = {
+  ROOT: {
+    HOME: "/",
+    SIGN_UP: "/sign-up",
+    SIGN_IN: "/sign-in",
+    PROFILE: "/profile",
+  },
   ACTIVITY: "/activity",
+  COMPANY: {
+    ROOT: "/company",
+    SIGN_UP: "/company/sign-up",
+    SIGN_IN: "/company/sign-in",
+  },
 } as const
