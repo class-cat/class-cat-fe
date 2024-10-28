@@ -1,5 +1,5 @@
 import { Icons } from "~/components/icons"
-import { TopNav } from "~/components/topnav/topnav"
+import { TopNav } from "~/app/_components/topnav/topnav"
 import { Card, CardContent } from "~/components/ui/card"
 
 interface RootLayoutProps {

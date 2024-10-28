@@ -1,5 +1,5 @@
 import "~/styles/globals.css"
-import { TopNav } from "../../components/topnav/topnav"
+import { TopNav } from "../_components/topnav/topnav"
 import React from "react"
 
 export default function RootLayout({

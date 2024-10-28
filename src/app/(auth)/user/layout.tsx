@@ -1,4 +1,4 @@
-import { TopNav } from "~/components/topnav/topnav"
+import { TopNav } from "~/app/_components/topnav/topnav"
 
 interface RootLayoutProps {
   children: React.ReactNode
