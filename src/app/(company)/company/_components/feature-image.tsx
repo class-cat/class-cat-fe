@@ -1,5 +1,5 @@
 import { motion } from "framer-motion"
-import Image from "next/image"
+import Image from "next/legacy/image"
 import { type Feature } from "../page"
 import { useInView } from "~/app/_hooks/useInView"
 

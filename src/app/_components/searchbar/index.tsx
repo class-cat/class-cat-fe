@@ -1,6 +1,6 @@
 "use client"
 
-import Image from "next/image"
+import Image from "next/legacy/image"
 import { useSearchParams } from "next/navigation"
 import { useGetLocations } from "~/actions/get-locations"
 
@@ -49,7 +49,7 @@ export default function SearchBar() {
       </div>
       <div className="h-84 lg:ml-4">
         <Image
-          src="./cat.svg"
+          src="/cat.svg"
           alt="cat"
           objectFit="contain"
           height={200}

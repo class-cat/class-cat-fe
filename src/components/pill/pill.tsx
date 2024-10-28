@@ -1,6 +1,6 @@
 "use client"
 
-import Image from "next/image"
+import Image from "next/legacy/image"
 import { useState } from "react"
 import { useMediaQuery } from "~/app/_hooks/useMediaQuery"
 import { Icons } from "~/components/icons"
@@ -25,7 +25,7 @@ export function Pill(props: any) {
   }
 
   return (
-    <Link
+    (<Link
       className="relative  flex cursor-pointer items-center gap-2 rounded-2xl border-2 border-secondary p-2 hover:shadow-sm sm:gap-4"
       href={{
         pathname: `${ROUTES.ACTIVITY}/${slug}`,
@@ -42,7 +42,7 @@ export function Pill(props: any) {
           />
         ) : (
           // <img src={primaryImage.file} alt={name} className="rounded-lg" />
-          <Icons.placeholder className="size-full" />
+          (<Icons.placeholder className="size-full" />)
         )}
       </div>
       <div className="flex min-w-0 grow flex-col">
@@ -76,6 +76,6 @@ export function Pill(props: any) {
           </Tooltip>
         </TooltipProvider>
       </div>
-    </Link>
-  )
+    </Link>)
+  );
 }

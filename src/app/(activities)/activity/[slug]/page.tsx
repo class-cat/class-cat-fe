@@ -1,5 +1,5 @@
 import { SignedIn } from "@clerk/nextjs"
-import Image from "next/image"
+import Image from "next/legacy/image"
 import { Map } from "~/app/_components/map"
 
 import { Icons } from "~/components/icons"

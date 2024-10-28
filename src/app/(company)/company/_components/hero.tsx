@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image from "next/legacy/image";
 import React from "react";
 import Balancer from "react-wrap-balancer";
 import { motion } from "framer-motion";

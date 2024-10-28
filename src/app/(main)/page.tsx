@@ -1,6 +1,6 @@
 "use client"
 
-import Image from "next/image"
+import Image from "next/legacy/image"
 import { Button } from "~/components/ui/button"
 import { Container } from "~/components/ui/container"
 import { Tabs, TabsList, TabsTrigger } from "~/components/ui/tabs"
@@ -66,7 +66,7 @@ const createCardItems = (count: number) =>
   Array.from({ length: count }, () => ({
     title: "piłka nożna",
     desc: "34",
-    avatar: "ball.svg",
+    avatar: "/ball.svg",
     href: "search?category=pilkanozna",
   }))
 
