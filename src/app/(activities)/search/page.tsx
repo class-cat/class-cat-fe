@@ -179,11 +179,11 @@ export default function SearchPage() {
                   <div className="text-red-500 py-2">Brak wyników</div>
                 )}
               </div>
-              {activitiesIsError && (
+              {activitiesIsError ? (
                 <div className="text-red-500 py-2">
                   Error loading activities.
                 </div>
-              )}
+              ) : null}
             </div>
           </div>
           <div className="hidden h-full xl:block">

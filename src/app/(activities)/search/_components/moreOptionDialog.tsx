@@ -66,7 +66,6 @@ export const MoreOptionDialog = ({
   priceValue,
 }: Props) => {
   const updateQueryParams = useUpdateQueryParams()
-  //   const isMobile = useMediaQuery(MOBILE_BREAKPOINT)
 
   const [open, setOpen] = useState(false)
   const [category, setCategory] = useState(categoryValue)
@@ -110,7 +109,7 @@ export const MoreOptionDialog = ({
         asChild
       >
         {
-          <>
+          <div>
             <Button
               variant="outline"
               size="icon"
@@ -119,7 +118,6 @@ export const MoreOptionDialog = ({
             >
               <Icons.filter className="size-5" />
             </Button>
-
             <Button
               variant="ghost"
               className="w-full rounded-lg border-2 border-secondary py-5 shadow-none hover:bg-secondary max-sm:hidden"
@@ -127,9 +125,8 @@ export const MoreOptionDialog = ({
             >
               <Icons.filter className="hidden size-5 md:block" />
               Więcej opcji
-              <div></div>
             </Button>
-          </>
+          </div>
         }
       </DialogTrigger>
       <DialogContent>
