@@ -49,19 +49,6 @@ const tabsTriggers = [
   },
 ]
 
-const tabsTriggers2 = [
-  {
-    id: 1,
-    title: "Najnowsze oferty",
-    value: "newest",
-  },
-  {
-    id: 2,
-    title: "Oferty dnia",
-    value: "today",
-  },
-]
-
 const createCardItems = (count: number) =>
   Array.from({ length: count }, () => ({
     title: "piłka nożna",
@@ -168,7 +155,7 @@ export default function HomePage() {
 
   return (
     <Container className="h-full flex-1 justify-center pt-2 sm:pt-6">
-      <section className="sm:paddingX sm:flex sm:justify-between sm:gap-4 sm:rounded-3xl sm:bg-secondary sm:py-4">
+      <section className="sm:rounded-3xl sm:bg-secondary">
         <SearchBar />
       </section>
       <div className="sm:h-10" />
@@ -194,30 +181,13 @@ export default function HomePage() {
                   </TabsTrigger>
                 ))}
               </TabsList>
-              <TabsList className="mt-6 flex justify-between sm:hidden">
-                {tabsTriggers2.map((tab, index) => (
-                  <TabsTrigger
-                    key={tab.id}
-                    value={tab.value}
-                    className={`${
-                      index === 1
-                        ? "border-x-2"
-                        : index !== tabsTriggers.length - 1
-                          ? "border-r-2"
-                          : "hidden border-0 sm:block"
-                    }`}
-                  >
-                    {tab.title}
-                  </TabsTrigger>
-                ))}
-              </TabsList>
               <div className="mt-6 xl:hidden">
                 <MobileMap />
               </div>
               <div className="h-6" />
               <div
                 ref={containerRef}
-                className="sm:sidebar relative h-[calc(100vh-385px)] overflow-y-auto sm:h-[calc(100vh-415px)] sm:pr-3 md:h-[calc(100vh-455px)] lg:h-[calc(100vh-315px)] xl:pr-0"
+                className="sm:sidebar relative h-[calc(100vh-325px)] overflow-y-auto sm:h-[calc(100vh-415px)] sm:pr-3 md:h-[calc(100vh-455px)] lg:h-[calc(100vh-315px)] xl:pr-0"
               >
                 <div className="mr-2">
                   {activitiesIsLoading ? (
@@ -260,21 +230,18 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      <div className="h-6 sm:h-8" />
-      <section>
+      <div className="sm:h-8" />
+      <section className="max-sm:hidden">
         <h4 className="text-center">Polecane kategorie</h4>
-        <div className="h-2 sm:h-8" />
+        <div className="h-8" />
         <div className="flex justify-center">
           <Carousel
-            className="max-w-sm md:max-w-2xl lg:max-w-3xl xl:max-w-5xl"
+            className="max-w-2xl lg:max-w-3xl xl:max-w-5xl"
             opts={{ align: "start", loop: false }}
           >
             <CarouselContent className="-ml-2">
               {mostSearchedItems.map((item, index) => (
-                <CarouselItem
-                  key={index}
-                  className="basis-1/4 md:basis-1/3 lg:basis-1/6"
-                >
+                <CarouselItem key={index} className="basis-1/3 lg:basis-1/6">
                   <div className="p-1">
                     <Link href={item.href}>
                       <MostSearchItem {...item} />
@@ -284,13 +251,13 @@ export default function HomePage() {
               ))}
             </CarouselContent>
             <CarouselDots />
-            <CarouselPrevious className="sx:ml-2 max-sm:hidden" />
-            <CarouselNext className="sx:mr-2 max-sm:hidden" />
+            <CarouselPrevious className="ml-2" />
+            <CarouselNext className="mr-2" />
           </Carousel>
         </div>
       </section>
-      <div className="h-6 sm:h-8" />
-      <div className="flex w-full flex-col items-center justify-center gap-4 border-t-2 border-secondary text-center sm:flex-row">
+      <div className="sm:h-8" />
+      <div className="flex w-full  flex-row items-center justify-center gap-4 border-t-2 border-secondary text-center max-sm:hidden">
         <div className="sm:h-32" />
         <h4>Oferta dla firm</h4>
         <Link href={ROUTES.COMPANY.ROOT}>
@@ -299,7 +266,6 @@ export default function HomePage() {
           </Button>
         </Link>
       </div>
-      <div className="max-sm:h-8" />
     </Container>
   )
 }

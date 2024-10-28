@@ -36,7 +36,8 @@
     "**/*.tsx",
     "**/*.cjs",
     "**/*.js",
-    ".next/types/**/*.ts"
-, "src/app/search/layout.jsx"  ],
+    ".next/types/**/*.ts",
+    "src/app/search/layout.jsx"
+  ],
   "exclude": ["node_modules"]
 }
