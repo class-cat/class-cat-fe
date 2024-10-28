@@ -8,7 +8,7 @@ interface IntersectionOptions extends IntersectionObserverInit {
 
 export function useInView<T extends Element>(
   options: IntersectionOptions = {}
-): [RefObject<T>, boolean] {
+): [RefObject<T | null>, boolean] {
   const { threshold = 0, root = null, rootMargin = '0px', freezeOnceVisible = false } = options
 
   const [isInView, setIsInView] = useState<boolean>(false)

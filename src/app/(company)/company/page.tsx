@@ -1,7 +1,13 @@
-'use client'
+"use client"
 
 import { useState } from "react"
-import { Calendar, Users, TrendingUp, Award, type LucideIcon } from "lucide-react"
+import {
+  Calendar,
+  Users,
+  TrendingUp,
+  Award,
+  type LucideIcon,
+} from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Container } from "~/components/ui/container"
 import Hero from "./_components/hero"
@@ -9,7 +15,6 @@ import { FeatureCard } from "./_components/feature-card"
 import { FeatureImage } from "./_components/feature-image"
 import BusinessAccountSection from "./_components/business-account"
 import { useInView } from "~/app/_hooks/useInView"
-
 
 export type Feature = {
   icon: LucideIcon
@@ -27,7 +32,7 @@ const features: Feature[] = [
       "Inteligentne sugestie terminów spotkań",
       "Przypomnienia i powiadomienia",
     ],
-    image: "/demo.png"
+    image: "/demo.png",
   },
   {
     icon: Users,
@@ -37,7 +42,7 @@ const features: Feature[] = [
       "Śledzenie historii interakcji",
       "Segmentacja klientów",
     ],
-    image: "/demo.png"
+    image: "/demo.png",
   },
   {
     icon: TrendingUp,
@@ -47,7 +52,7 @@ const features: Feature[] = [
       "Wizualizacje danych w czasie rzeczywistym",
       "Prognozy i trendy",
     ],
-    image: "/demo.png"
+    image: "/demo.png",
   },
   {
     icon: Award,
@@ -57,8 +62,8 @@ const features: Feature[] = [
       "Personalizacja treści marketingowych",
       "Analiza skuteczności kampanii",
     ],
-    image: "/demo.png"
-  }
+    image: "/demo.png",
+  },
 ]
 
 export default function HomePage() {
@@ -67,7 +72,6 @@ export default function HomePage() {
 
   return (
     <Container className="h-full flex-1 justify-center pt-2 sm:pt-6">
-      
       <section className="hidden sm:block">
         <Hero />
       </section>

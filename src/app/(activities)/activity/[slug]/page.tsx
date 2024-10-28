@@ -27,11 +27,12 @@ async function getActivityInfo(slug: string): Promise<Activity> {
   }
 }
 
-export default async function ActivityPage({
-  params,
-}: {
-  params: { slug: string }
-}) {
+export default async function ActivityPage(
+  props: {
+    params: Promise<{ slug: string }>
+  }
+) {
+  const params = await props.params;
   const activity = await getActivityInfo(params.slug)
   console.log(activity)
 
