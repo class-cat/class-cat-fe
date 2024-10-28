@@ -1,6 +1,6 @@
-'use client'
+"use client"
 
-import { useState, useEffect, useRef, type RefObject } from 'react'
+import { useState, useEffect, useRef, type RefObject } from "react"
 
 interface IntersectionOptions extends IntersectionObserverInit {
   freezeOnceVisible?: boolean
@@ -9,7 +9,12 @@ interface IntersectionOptions extends IntersectionObserverInit {
 export function useInView<T extends Element>(
   options: IntersectionOptions = {}
 ): [RefObject<T>, boolean] {
-  const { threshold = 0, root = null, rootMargin = '0px', freezeOnceVisible = false } = options
+  const {
+    threshold = 0,
+    root = null,
+    rootMargin = "0px",
+    freezeOnceVisible = false,
+  } = options
 
   const [isInView, setIsInView] = useState<boolean>(false)
   const elementRef = useRef<T>(null)

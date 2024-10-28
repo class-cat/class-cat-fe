@@ -9,54 +9,59 @@ import { Button } from "~/components/ui/button"
 import { Input } from "~/components/ui/input"
 import { SearchCombobox } from "../searchComboBox"
 import React from "react"
+import PawsBackground from "./cat-paws"
 
 export default function SearchBar() {
   const searchParams = useSearchParams()
   const { data: locationData } = useGetLocations()
   const location = searchParams.get("location") as string
+
   return (
-    <>
-      <div className="flex w-full flex-col justify-between gap-9 py-0 sm:py-12 md:w-3/4">
-        <h2 className="hidden sm:block">
-          Wszystkie Twoje pasje w <br />
-          jednym miejscu.
-        </h2>
+    <div className="relative overflow-hidden pb-2 md:min-h-[400px]  md:px-6 md:py-10 lg:px-8">
+      <PawsBackground />
+      <div className="relative mx-auto max-w-7xl text-center md:space-y-6 md:pb-48">
+        <div className="hidden md:block">
+          <h3>Wszystkie Twoje pasje w jednym miejscu</h3>
+          <span className="text-muted mx-auto max-w-lg text-base md:text-lg">
+            Odkryj nowe możliwości oraz rozwijaj swoje zainteresowania.
+          </span>
+        </div>
         <form
           method="GET"
           action="/search"
-          className="flex  items-center gap-2 rounded-2xl border-2 border-secondary bg-white sm:rounded-3xl sm:border-0 sm:shadow-md lg:mr-4"
+          className="mx-auto flex  max-w-xl flex-row gap-4 rounded-2xl border-2 border-secondary bg-white"
         >
-          <div className="sm:w-4/8 flex w-full items-center px-4 ">
-            <Icons.search className="hidden size-8 md:block" />
+          <div className="flex w-full items-center px-4">
+            <Icons.search className="mr-2 hidden size-6 md:block" />
             <Input
-              className="h-16 grow rounded-l-2xl  rounded-r-none p-2 focus-visible:outline-none sm:rounded-l-3xl md:text-xl"
+              className="h-12 grow rounded-l-2xl rounded-r-none focus-visible:outline-none md:h-16 md:text-base"
               placeholder="Znajdź coś dla siebie..."
               type="text"
               name="search"
             />
           </div>
-          <div className="hidden h-3/5 w-1 bg-secondary sm:block" />
-          <div className="w-4/8 hidden sm:flex">
+          <div className="hidden w-full md:block md:w-auto">
             <SearchCombobox data={locationData || []} value={location || ""} />
           </div>
           <Button
             type="submit"
-            className="h-16 w-24 grow rounded-l-none rounded-r-2xl sm:rounded-r-3xl  sm:shadow-md md:text-xl "
+            className="h-12 w-auto  rounded-2xl rounded-l-none  md:h-16 md:text-lg"
           >
-            <Icons.search className="size-6" />
+            <Icons.search className="size-5 md:size-6" />
           </Button>
         </form>
       </div>
-      <div className="h-84 lg:ml-4">
+
+      {/* Cat icon */}
+      <div className="absolute -bottom-28 left-1/2 z-20 hidden w-72 -translate-x-1/2 md:block">
         <Image
-          src="./cat.svg"
-          alt="cat"
-          objectFit="contain"
-          height={200}
-          width={200}
-          className="hidden size-full md:block"
+          src="/defaultcat.png?height=200&width=200"
+          alt="Cute cat face peeking from the bottom"
+          width={300}
+          height={300}
+          className="object-cover"
         />
       </div>
-    </>
+    </div>
   )
 }

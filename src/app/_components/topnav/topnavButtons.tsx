@@ -18,7 +18,7 @@ export function TopNavButtons() {
 
   const UserButtons = () => {
     return (
-      <div className="flex flex-row items-center gap-4">
+      <div className="flex flex-row items-center gap-4 max-sm:hidden">
         <SignedOut>
           <SignInButton>
             <Button className="shadow-none">Zaloguj się</Button>
@@ -43,7 +43,7 @@ export function TopNavButtons() {
         </Button>
       ) : null}
       {isMobile && isMenuOpen && (
-        <div className="absolute right-0 top-[80px] h-[calc(100vh-80px)] w-full animate-slide-in  border-t-2 border-primary bg-secondary p-4 shadow-md">
+        <div className="absolute right-0 top-[80px] z-50 h-[calc(100vh-80px)] w-full animate-slide-in  border-t-2 border-primary bg-secondary p-4 shadow-md">
           <div>
             <li>tu jakies itemki</li>
             <li>tu jakies itemki</li>
