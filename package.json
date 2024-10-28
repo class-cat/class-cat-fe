@@ -12,7 +12,7 @@
   "dependencies": {
     "@clerk/elements": "^0.8.0",
     "@clerk/localizations": "^2.4.5",
-    "@clerk/nextjs": "^5.0.8",
+    "@clerk/nextjs": "^6.0.2",
     "@clerk/shared": "^2.3.1",
     "@clerk/types": "^4.9.0",
     "@hookform/resolvers": "^3.9.0",
