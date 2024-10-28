@@ -36,7 +36,7 @@ export default async function ActivityPage({
   console.log(activity)
 
   return (
-    <Container className="h-[calc(100vh-120px)]">
+    <Container className="container h-[calc(100vh-120px)]">
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
         <Card className="cardSmall w-full">
           <CardContent>
@@ -85,7 +85,7 @@ export default async function ActivityPage({
         <Map />
       </div>
       <div className="sm:h-16" />
-      <div className="container mx-auto px-4 py-8">
+      <div className="px-4 py-8">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           <div className="space-y-8 lg:col-span-2">
             <section>

@@ -2,9 +2,17 @@
 
 import { motion } from "framer-motion"
 import { Button } from "~/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "~/components/ui/card"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "~/components/ui/card"
 import Link from "next/link"
 import { useInView } from "~/app/_hooks/useInView"
+import { ROUTES } from "~/lib/const"
 
 export default function BusinessAccountSection() {
   const [ref, isInView] = useInView<HTMLElement>({ threshold: 0.1 })
@@ -13,7 +21,7 @@ export default function BusinessAccountSection() {
     "Wypełnij formularz rejestracyjny",
     "Zweryfikuj swoje dane biznesowe",
     "Wybierz plan odpowiedni dla Twojej firmy",
-    "Zacznij korzystać z platformy"
+    "Zacznij korzystać z platformy",
   ]
 
   return (
@@ -30,14 +38,19 @@ export default function BusinessAccountSection() {
             Stwórz konto biznesowe już dziś
           </h2>
           <p className="text-gray-500 dark:text-gray-400 max-w-4xl md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-            Odkryj pełen potencjał naszej platformy i zacznij rozwijać swój biznes z naszymi zaawansowanymi narzędziami.
+            Odkryj pełen potencjał naszej platformy i zacznij rozwijać swój
+            biznes z naszymi zaawansowanymi narzędziami.
           </p>
         </div>
         <div className="mx-auto max-w-2xl py-12">
           <Card className="border-secondary bg-[#fff] shadow-sm">
             <CardHeader>
-              <CardTitle className="text-2xl font-bold">Kroki do utworzenia konta</CardTitle>
-              <CardDescription className="text-base">Postępuj zgodnie z tymi prostymi krokami, aby rozpocząć</CardDescription>
+              <CardTitle className="text-2xl font-bold">
+                Kroki do utworzenia konta
+              </CardTitle>
+              <CardDescription className="text-base">
+                Postępuj zgodnie z tymi prostymi krokami, aby rozpocząć
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <ol className="space-y-6">
@@ -45,7 +58,9 @@ export default function BusinessAccountSection() {
                   <motion.li
                     key={index}
                     initial={{ opacity: 0, x: -50 }}
-                    animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
+                    animate={
+                      isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }
+                    }
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     className="flex items-center space-x-4"
                   >
@@ -59,7 +74,7 @@ export default function BusinessAccountSection() {
             </CardContent>
             <CardFooter>
               <Button className="w-full py-6 text-lg">
-                <Link href="/company/sign-up">
+                <Link href={ROUTES.COMPANY.SIGN_UP}>
                   Rozpocznij rejestrację
                 </Link>
               </Button>

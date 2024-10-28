@@ -20,7 +20,7 @@ import { Map } from "../_components/map"
 import Link from "next/link"
 import { MobileMap } from "../_components/map/mobileMap"
 import SearchBar from "../_components/searchbar"
-import { ENDPOINTS } from "~/lib/const"
+import { ENDPOINTS, ROUTES } from "~/lib/const"
 import PlaceholderPill from "~/components/pill/placeholerPill"
 import { type PagesType, useInfinityFetch } from "../_hooks/useInfinityFetch"
 import { type Activity } from "~/types/search.type"
@@ -293,7 +293,7 @@ export default function HomePage() {
       <div className="flex w-full flex-col items-center justify-center gap-4 border-t-2 border-secondary text-center sm:flex-row">
         <div className="sm:h-32" />
         <h4>Oferta dla firm</h4>
-        <Link href={"/biz"}>
+        <Link href={ROUTES.COMPANY.ROOT}>
           <Button variant={"outline"} size={"lg"} className="w-full sm:w-40">
             Sprawdź szczegóły
           </Button>

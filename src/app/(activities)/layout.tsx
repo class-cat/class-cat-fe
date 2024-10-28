@@ -1,4 +1,4 @@
-import { TopNav } from "../../components/topnav/topnav"
+import { TopNav } from "../_components/topnav/topnav"
 
 export const metadata = {
   title: "Search",
