@@ -11,14 +11,14 @@ import {
   CarouselPrevious,
 } from "~/components/ui/carousel"
 
-type MostSearchItemProps = {
+type Props = {
   title: string
   desc: string
   avatar: string
   href: string
 }
 
-const MostSearchItem = ({ title, desc, avatar, href }: MostSearchItemProps) => {
+const MostSearchItem = ({ title, desc, avatar, href }: Props) => {
   return (
     <Link href={href}>
       <Card className="aspect-square rounded-2xl border-2 border-secondary bg-secondary p-4 shadow-none md:rounded-3xl">

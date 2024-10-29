@@ -1,23 +1,23 @@
-import React from 'react'
+import React from "react"
 import { v4 as uuid } from "uuid"
 import { Pill } from "~/components/pill/pill"
 import PlaceholderPill from "~/components/pill/placeholerPill"
 
-type ActivityListProps = {
-  containerRef: React.RefObject<HTMLDivElement>
+type Props = {
+  containerRef: any
   activitiesList: any[]
   activitiesIsLoading: boolean
   activitiesIsError: boolean
   lastElementRef: (node: HTMLDivElement) => void
 }
 
-const ActivityList: React.FC<ActivityListProps> = ({
+const ActivityList = ({
   containerRef,
   activitiesList,
   activitiesIsLoading,
   activitiesIsError,
-  lastElementRef
-}) => {
+  lastElementRef,
+}: Props) => {
   return (
     <div
       ref={containerRef}
@@ -26,10 +26,7 @@ const ActivityList: React.FC<ActivityListProps> = ({
       <div className="mr-2">
         {activitiesIsLoading ? (
           Array.from({ length: 10 }).map((_, index) => (
-            <div
-              key={index}
-              className="md:not-first:py-2 mt-2 first:mt-0"
-            >
+            <div key={index} className="md:not-first:py-2 mt-2 first:mt-0">
               <PlaceholderPill />
             </div>
           ))
@@ -51,9 +48,7 @@ const ActivityList: React.FC<ActivityListProps> = ({
         )}
       </div>
       {activitiesIsError && (
-        <div className="text-red-500 py-2">
-          Error loading activities.
-        </div>
+        <div className="text-red-500 py-2">Error loading activities.</div>
       )}
     </div>
   )

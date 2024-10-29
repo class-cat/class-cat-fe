@@ -1,32 +1,22 @@
-'use client'
+"use client"
 
-<<<<<<< HEAD
-import Image from "next/legacy/image"
-import { Button } from "~/components/ui/button"
-=======
-import React, { useCallback, useEffect, useMemo, useRef } from "react"
 import { useQueryClient } from "@tanstack/react-query"
->>>>>>> a435ee7 (feat: update structure of files for homepage)
-import { Container } from "~/components/ui/container"
-import { Tabs, TabsList, TabsTrigger } from "~/components/ui/tabs"
+import { Container } from "lucide-react"
+import React, { useRef, useMemo, useEffect } from "react"
+import { Card, CardContent } from "~/components/ui/card"
 import { ENDPOINTS } from "~/lib/const"
-import { type PagesType, useInfinityFetch } from "../_hooks/useInfinityFetch"
-import { type Activity } from "~/types/search.type"
-import SearchBar from "./_components/searchbar"
+import { Activity } from "~/types/search.type"
 import { MobileMap } from "../_components/map/mobileMap"
-import { Map } from "../_components/map"
+import SearchBar from "../_components/searchbar"
+import { useInfinityFetch, PagesType } from "../_hooks/useInfinityFetch"
 import ActivityList from "./_components/activityList"
-import RecommendedCategories from "./_components/recommendedCategories"
 import CompanyOffer from "./_components/companyOffer"
+import RecommendedCategories from "./_components/recommendedCategories"
+import Image from "next/image"
+import { useInfiniteScroll } from "../_hooks/useInfiniteScroll"
+import { CategoryTabs } from "./_components/categoryTabs"
+import { Map } from "../_components/map"
 
-const tabsTriggers = [
-  { id: 1, title: "Oferty dnia", value: "today" },
-  { id: 2, title: "Polecane", value: "recommended" },
-  { id: 3, title: "Najnowsze oferty", value: "newest" },
-  { id: 4, title: "Polubione", value: "viewed" },
-]
-
-<<<<<<< HEAD
 const createCardItems = (count: number) =>
   Array.from({ length: count }, () => ({
     title: "piłka nożna",
@@ -50,6 +40,8 @@ const MostSearchItem = ({ title, desc, avatar }: MostSearchItemProps) => {
               src={avatar}
               alt={title}
               layout="fill"
+              width={128}
+              height={128}
               className="rounded-lg"
             />
           </div>
@@ -67,11 +59,11 @@ const MostSearchItem = ({ title, desc, avatar }: MostSearchItemProps) => {
 }
 const mostSearchedItems = createCardItems(16)
 
-=======
->>>>>>> a435ee7 (feat: update structure of files for homepage)
 export default function HomePage() {
   const [searchType, setSearchType] = React.useState("newest")
   const handleChangeTab = (value: string) => () => setSearchType(value)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const queryClient = useQueryClient()
 
   const {
     data: activitiesData,
@@ -88,35 +80,19 @@ export default function HomePage() {
     },
   })
 
-  const observer = useRef<IntersectionObserver | null>(null)
-  const containerRef = useRef<HTMLDivElement>(null)
-  const queryClient = useQueryClient()
-
-  const lastElementRef = useCallback(
-    (node: HTMLDivElement) => {
-      if (activitiesIsLoading || activitiesIsFetching) return
-      if (observer.current) observer.current.disconnect()
-
-      observer.current = new IntersectionObserver(
-        (entries) => {
-          if (entries[0]?.isIntersecting && hasNextPageActivities) {
-            fetchNextPageActivities()
-          }
-        },
-        { threshold: 1.0 }
-      )
-
-      if (node) observer.current.observe(node)
-    },
-    [fetchNextPageActivities, hasNextPageActivities, activitiesIsLoading, activitiesIsFetching]
-  )
-
   const activitiesList = useMemo(() => {
     if (!activitiesData?.pages) return []
     return activitiesData?.pages.reduce((acc: Array<any>, page) => {
       return [...acc, ...(page?.data || [])]
     }, [])
   }, [activitiesData])
+
+  const { lastElementRef } = useInfiniteScroll(
+    activitiesIsLoading,
+    activitiesIsFetching,
+    hasNextPageActivities,
+    fetchNextPageActivities
+  )
 
   useEffect(() => {
     if (containerRef.current) {
@@ -134,25 +110,7 @@ export default function HomePage() {
       <section>
         <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
           <div>
-            <Tabs defaultValue="newest" className="w-full">
-              <TabsList className="flex justify-between max-md:hidden">
-                {tabsTriggers.map((tab, index) => (
-                  <TabsTrigger
-                    onClick={handleChangeTab(tab.value)}
-                    key={tab.id}
-                    value={tab.value}
-                    className={`${
-                      index === 1
-                        ? "border-x-2"
-                        : index !== tabsTriggers.length - 1
-                          ? "border-r-2"
-                          : "hidden border-0 md:block"
-                    }`}
-                  >
-                    {tab.title}
-                  </TabsTrigger>
-                ))}
-              </TabsList>
+            <CategoryTabs onTabChange={handleChangeTab}>
               <div className="mt-6 xl:hidden">
                 <MobileMap />
               </div>
@@ -164,7 +122,7 @@ export default function HomePage() {
                 activitiesIsError={activitiesIsError}
                 lastElementRef={lastElementRef}
               />
-            </Tabs>
+            </CategoryTabs>
           </div>
           <div className="hidden h-full xl:block">
             <Map />
