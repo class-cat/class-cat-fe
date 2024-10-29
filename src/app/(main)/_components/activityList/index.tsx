@@ -19,8 +19,8 @@ const ActivityList = ({
   lastElementRef
 }: Props) => {
   return (
-    <div
-      ref={containerRef as RefObject<HTMLDivElement>}
+    (<div
+      ref={containerRef as RefObject<HTMLDivElement | null>}
       className="md:sidebar relative h-[calc(100vh-325px)] overflow-y-auto md:h-[calc(100vh-455px)] md:pr-3 lg:h-[calc(100vh-315px)] xl:pr-0"
     >
       <div className="mr-2">
@@ -55,8 +55,8 @@ const ActivityList = ({
           Error loading activities.
         </div>
       )}
-    </div>
-  )
+    </div>)
+  );
 }
 
 export default ActivityList

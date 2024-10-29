@@ -110,7 +110,7 @@ export const MoreOptionDialog = ({
         asChild
       >
         {
-          <>
+          <div>
             <Button
               variant="outline"
               size="icon"
@@ -129,7 +129,7 @@ export const MoreOptionDialog = ({
               Więcej opcji
               <div></div>
             </Button>
-          </>
+          </div>
         }
       </DialogTrigger>
       <DialogContent>

@@ -1,6 +1,6 @@
-'use client'
+"use client"
 
-import React, { useEffect, useMemo, useRef } from "react"
+import React, { Suspense, useEffect, useMemo, useRef } from "react"
 import { useQueryClient } from "@tanstack/react-query"
 import { Container } from "~/components/ui/container"
 import { ENDPOINTS } from "~/lib/const"
@@ -60,7 +60,9 @@ export default function HomePage() {
   return (
     <Container className="h-full flex-1 justify-center pt-2 md:pt-6">
       <section className="md:rounded-3xl md:bg-secondary">
-        <SearchBar />
+        <Suspense fallback={<div>Loading...</div>}>
+          <SearchBar />
+        </Suspense>
       </section>
       <div className="md:h-10" />
       <section>
