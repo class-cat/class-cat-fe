@@ -27,10 +27,9 @@ type Props = {
   value: string | null
 }
 
-export function SearchCombobox({ data, value }: Props) {
+export const SearchCombobox = ({ data, value }: Props) => {
   const updateQueryParams = useUpdateQueryParams()
   const isMobile = useMediaQuery(MOBILE_BREAKPOINT)
-
   const [open, setOpen] = useState(false)
   const handleOnSelect = (currentValue: string) => {
     updateQueryParams({ location: currentValue })
@@ -41,7 +40,7 @@ export function SearchCombobox({ data, value }: Props) {
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild className="md:w-full">
         <Button
-          className="h-16 w-24 grow bg-white text-foreground shadow-none hover:bg-white md:text-xl"
+          className="h-16 w-24 grow bg-white text-foreground shadow-none hover:bg-white md:text-base"
           role="combobox"
           aria-expanded={open}
         >

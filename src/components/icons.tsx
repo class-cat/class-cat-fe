@@ -42,6 +42,7 @@ import {
   Barcode,
   Mail,
   Star,
+  HomeIcon,
 } from "lucide-react"
 
 export type Icon = LucideIcon
@@ -55,6 +56,7 @@ export const Icons = {
   chevronDown: ChevronDown,
   chevronUpDown: ChevronsUpDown,
   filter: Filter,
+  home: HomeIcon,
   trash: Trash,
   post: FileText,
   page: File,
