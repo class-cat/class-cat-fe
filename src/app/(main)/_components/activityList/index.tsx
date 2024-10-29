@@ -3,7 +3,7 @@ import { v4 as uuid } from "uuid"
 import { Pill } from "~/components/pill/pill"
 import PlaceholderPill from "~/components/pill/placeholerPill"
 
-type ActivityListProps = {
+type Props = {
   containerRef: React.RefObject<HTMLDivElement>
   activitiesList: any[]
   activitiesIsLoading: boolean
@@ -11,13 +11,13 @@ type ActivityListProps = {
   lastElementRef: (node: HTMLDivElement) => void
 }
 
-const ActivityList: React.FC<ActivityListProps> = ({
+const ActivityList = ({
   containerRef,
   activitiesList,
   activitiesIsLoading,
   activitiesIsError,
   lastElementRef
-}) => {
+}: Props) => {
   return (
     <div
       ref={containerRef}
