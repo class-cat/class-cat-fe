@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { type RefObject, useState } from "react"
 import {
   Calendar,
   Users,
@@ -79,7 +79,7 @@ export default function HomePage() {
         <Hero />
       </section>
       <motion.section
-        ref={ref}
+        ref={ref as RefObject<HTMLDivElement>}
         initial={{ opacity: 0, y: 50 }}
         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
         transition={{ duration: 0.5 }}

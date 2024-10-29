@@ -18,7 +18,7 @@ import { SearchBar } from "./_components/searchbar"
 export default function HomePage() {
   const [searchType, setSearchType] = React.useState("newest")
   const handleChangeTab = (value: string) => () => setSearchType(value)
-  const containerRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement | null>(null)
   const queryClient = useQueryClient()
 
   const {

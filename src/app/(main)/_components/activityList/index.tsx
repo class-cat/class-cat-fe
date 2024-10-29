@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { type RefObject } from 'react'
 import { v4 as uuid } from "uuid"
 import { Pill } from "~/components/pill/pill"
 import PlaceholderPill from "~/components/pill/placeholerPill"
 
 type Props = {
-  containerRef: React.RefObject<HTMLDivElement>
+  containerRef: React.RefObject<HTMLDivElement| null>
   activitiesList: any[]
   activitiesIsLoading: boolean
   activitiesIsError: boolean
@@ -20,7 +20,7 @@ const ActivityList = ({
 }: Props) => {
   return (
     <div
-      ref={containerRef}
+      ref={containerRef as RefObject<HTMLDivElement>}
       className="md:sidebar relative h-[calc(100vh-325px)] overflow-y-auto md:h-[calc(100vh-455px)] md:pr-3 lg:h-[calc(100vh-315px)] xl:pr-0"
     >
       <div className="mr-2">
