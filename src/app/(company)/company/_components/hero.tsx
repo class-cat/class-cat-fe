@@ -4,7 +4,8 @@ import Image from "next/image"
 import React from "react"
 import { motion } from "framer-motion"
 import { useInView } from "~/app/_hooks/useInView"
-import PawsBackground from "~/app/(main)/_components/searchbar/catPaws"
+import { PawsBackground } from "~/app/(main)/_components/searchbar/catPaws"
+
 
 export default function Hero() {
   const [ref, isInView] = useInView<HTMLDivElement>({
