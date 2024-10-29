@@ -74,13 +74,9 @@ export default function HomePage() {
   })
 
   return (
-<<<<<<< HEAD
+
     <Container className="h-full flex-1 justify-center pt-2 sm:pt-6">
       <section className="hidden sm:block">
-=======
-    <Container className="h-full flex-1 justify-center pt-2 md:pt-6">
-      <section className="hidden md:block">
->>>>>>> 0907833 (feat: update hero section)
         <Hero />
       </section>
       <motion.section

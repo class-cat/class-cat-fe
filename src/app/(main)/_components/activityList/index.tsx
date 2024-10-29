@@ -1,3 +1,4 @@
+
 import React from "react"
 import { v4 as uuid } from "uuid"
 import { Pill } from "~/components/pill/pill"
@@ -16,7 +17,7 @@ const ActivityList = ({
   activitiesList,
   activitiesIsLoading,
   activitiesIsError,
-  lastElementRef,
+  lastElementRef
 }: Props) => {
   return (
     <div
@@ -53,5 +54,4 @@ const ActivityList = ({
     </div>
   )
 }
-
 export default ActivityList
