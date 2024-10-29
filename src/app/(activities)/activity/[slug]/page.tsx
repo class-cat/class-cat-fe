@@ -27,12 +27,10 @@ async function getActivityInfo(slug: string): Promise<Activity> {
   }
 }
 
-export default async function ActivityPage({
-  params,
-}: {
-  params: { slug: string }
-}) {
-  const activity = await getActivityInfo(params.slug)
+type Params = Promise<{ slug: string }>
+export default async function ActivityPage({ params }: { params: Params }) {
+  const { slug } = await params
+  const activity = await getActivityInfo(slug)
   console.log(activity)
 
   return (

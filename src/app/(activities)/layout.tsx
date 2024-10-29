@@ -1,3 +1,4 @@
+import { Suspense } from "react"
 import { TopNav } from "../_components/topnav/topnav"
 
 export const metadata = {
@@ -13,7 +14,9 @@ export default function RootLayout({
   return (
     <div className="paddingX h-min-screen w-max-screen grid grid-rows-[auto,1fr] bg-white">
       <TopNav />
-      <div className="bg-white">{children}</div>
+      <Suspense>
+        <div className="bg-white">{children}</div>
+      </Suspense>
     </div>
   )
 }
