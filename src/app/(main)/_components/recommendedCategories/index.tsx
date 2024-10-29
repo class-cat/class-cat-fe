@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Card, CardContent } from "~/components/ui/card"
@@ -23,12 +23,13 @@ const MostSearchItem = ({ title, desc, avatar, href }: Props) => {
     <Link href={href}>
       <Card className="aspect-square rounded-2xl border-2 border-secondary bg-secondary p-4 shadow-none md:rounded-3xl">
         <CardContent className="flex h-full flex-col items-center justify-center space-y-2 p-0">
-          <div className="relative size-20">
+          <div className="relative size-20 object-fill">
             <Image
               src={avatar}
               alt={title}
-              layout="fill"
               className="rounded-lg"
+              width={80}
+              height={80}
             />
           </div>
           <div className="flex flex-col items-center justify-center pt-2 text-center capitalize max-md:hidden">

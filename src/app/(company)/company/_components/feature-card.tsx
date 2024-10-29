@@ -27,8 +27,8 @@ export function FeatureCard({
   })
 
   return (
-    <motion.div
-      ref={ref as RefObject<HTMLDivElement>}
+    (<motion.div
+      ref={ref as RefObject<HTMLDivElement | null>}
       className="flex"
       initial={{ opacity: 0, y: 50 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
@@ -53,6 +53,6 @@ export function FeatureCard({
           </div>
         </CardContent>
       </Card>
-    </motion.div>
-  )
+    </motion.div>)
+  );
 }

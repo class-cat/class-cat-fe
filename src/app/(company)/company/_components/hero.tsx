@@ -14,8 +14,8 @@ export default function Hero() {
   })
 
   return (
-    <motion.div
-      ref={ref as RefObject<HTMLDivElement>}
+    (<motion.div
+      ref={ref as RefObject<HTMLDivElement | null>}
       initial={{ opacity: 0, y: 50 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
       transition={{ duration: 0.5 }}
@@ -40,6 +40,6 @@ export default function Hero() {
           className="h-auto w-full object-cover"
         />
       </div>
-    </motion.div>
-  )
+    </motion.div>)
+  );
 }
