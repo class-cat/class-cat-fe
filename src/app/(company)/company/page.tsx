@@ -68,26 +68,33 @@ const features: Feature[] = [
 
 export default function HomePage() {
   const [hoveredFeature, setHoveredFeature] = useState<number>(0)
-  const [ref, isInView] = useInView<HTMLElement>({ threshold: 0.1 })
+  const [ref, isInView] = useInView<HTMLDivElement>({
+    threshold: 0.1,
+    freezeOnceVisible: true,
+  })
 
   return (
+<<<<<<< HEAD
     <Container className="h-full flex-1 justify-center pt-2 sm:pt-6">
       <section className="hidden sm:block">
+=======
+    <Container className="h-full flex-1 justify-center pt-2 md:pt-6">
+      <section className="hidden md:block">
+>>>>>>> 0907833 (feat: update hero section)
         <Hero />
       </section>
-
       <motion.section
         ref={ref}
         initial={{ opacity: 0, y: 50 }}
         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
         transition={{ duration: 0.5 }}
         id="features"
-        className="w-full py-12 md:py-24 lg:py-32"
+        className="md:py-18 w-full py-12"
       >
         <div className="container px-4 md:px-6">
-          <h2 className="mb-12 text-center text-3xl font-bold tracking-tighter sm:text-5xl">
+          <h3 className="mb-10 text-center tracking-tighter">
             Zaawansowane narzędzia dla biznesu
-          </h2>
+          </h3>
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 lg:gap-8">
             <div className="grid grid-cols-1 gap-6">
               {features.map((feature, index) => (

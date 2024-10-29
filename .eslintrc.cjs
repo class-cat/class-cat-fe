@@ -6,6 +6,7 @@ const config = {
   },
   plugins: ["@typescript-eslint"],
   extends: [
+    "next",
     "next/core-web-vitals",
     "prettier",
     "plugin:tailwindcss/recommended",
