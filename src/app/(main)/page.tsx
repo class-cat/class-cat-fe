@@ -19,12 +19,12 @@ import { Pill } from "~/components/pill/pill"
 import { Map } from "../_components/map"
 import Link from "next/link"
 import { MobileMap } from "../_components/map/mobileMap"
-import SearchBar from "../_components/searchbar"
 import { ENDPOINTS, ROUTES } from "~/lib/const"
 import PlaceholderPill from "~/components/pill/placeholerPill"
 import { type PagesType, useInfinityFetch } from "../_hooks/useInfinityFetch"
 import { type Activity } from "~/types/search.type"
 import { useQueryClient } from "@tanstack/react-query"
+import { SearchBar } from "./_components/searchbar"
 
 const tabsTriggers = [
   {

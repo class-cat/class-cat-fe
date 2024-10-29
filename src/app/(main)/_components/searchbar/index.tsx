@@ -8,7 +8,7 @@ import { Button } from "~/components/ui/button"
 import { Input } from "~/components/ui/input"
 import { SearchCombobox } from "./searchComboBox"
 import React from "react"
-import { PawsBackground } from "./catPaws"
+import PawsBackground from "./catPaws"
 
 export const SearchBar = () => {
   const searchParams = useSearchParams()
@@ -39,7 +39,7 @@ export const SearchBar = () => {
               name="search"
             />
           </div>
-          <div className="md:my-auto md:flex md:h-12 md:w-[6px] md:bg-secondary "/>
+          <div className="md:my-auto md:flex md:h-12 md:w-[6px] md:bg-secondary " />
           <div className="hidden w-full md:block md:w-auto">
             <SearchCombobox data={locationData || []} value={location || ""} />
           </div>
@@ -50,7 +50,7 @@ export const SearchBar = () => {
             <Icons.search className="size-5 md:size-6" />
           </Button>
         </form>
-        </div>
+      </div>
       <div className="absolute -bottom-28 left-1/2 z-20 hidden w-72 -translate-x-1/2 md:block">
         <Image
           src="/defaultcat.png?height=200&width=200"
