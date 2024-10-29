@@ -13,6 +13,7 @@ import {
 import Link from "next/link"
 import { useInView } from "~/app/_hooks/useInView"
 import { ROUTES } from "~/lib/const"
+import { type RefObject } from "react"
 
 export default function BusinessAccountSection() {
   const [ref, isInView] = useInView<HTMLDivElement>({
@@ -29,7 +30,7 @@ export default function BusinessAccountSection() {
 
   return (
     <motion.section
-      ref={ref}
+      ref={ref as RefObject<HTMLDivElement>}
       initial={{ opacity: 0, y: 50 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
       transition={{ duration: 0.5 }}

@@ -2,6 +2,7 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 import { type Feature } from "../page"
 import { useInView } from "~/app/_hooks/useInView"
+import { type RefObject } from "react"
 
 interface FeatureImageProps {
   feature: Feature
@@ -15,7 +16,7 @@ export function FeatureImage({ feature }: FeatureImageProps) {
 
   return (
     <motion.div
-      ref={ref}
+      ref={ref as RefObject<HTMLDivElement>}
       initial={{ opacity: 0, scale: 0.9 }}
       animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
       exit={{ opacity: 0, scale: 0.9 }}

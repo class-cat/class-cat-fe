@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import React from "react"
+import React, { type RefObject } from "react"
 import { motion } from "framer-motion"
 import { useInView } from "~/app/_hooks/useInView"
 import { PawsBackground } from "~/app/(main)/_components/searchbar/catPaws"
@@ -15,7 +15,7 @@ export default function Hero() {
 
   return (
     <motion.div
-      ref={ref}
+      ref={ref as RefObject<HTMLDivElement>}
       initial={{ opacity: 0, y: 50 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
       transition={{ duration: 0.5 }}

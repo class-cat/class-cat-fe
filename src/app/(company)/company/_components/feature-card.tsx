@@ -2,6 +2,7 @@ import { motion } from "framer-motion"
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card"
 import { type LucideIcon } from "lucide-react"
 import { useInView } from "~/app/_hooks/useInView"
+import { type RefObject } from "react"
 
 interface FeatureCardProps {
   feature: {
@@ -27,7 +28,7 @@ export function FeatureCard({
 
   return (
     <motion.div
-      ref={ref}
+      ref={ref as RefObject<HTMLDivElement>}
       className="flex"
       initial={{ opacity: 0, y: 50 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
