@@ -8,7 +8,10 @@ interface FeatureImageProps {
 }
 
 export function FeatureImage({ feature }: FeatureImageProps) {
-  const [ref, isInView] = useInView<HTMLDivElement>({ threshold: 0.1 })
+  const [ref, isInView] = useInView<HTMLDivElement>({
+    threshold: 0.1,
+    freezeOnceVisible: true,
+  })
 
   return (
     <motion.div
@@ -21,7 +24,7 @@ export function FeatureImage({ feature }: FeatureImageProps) {
     >
       <Image
         src={feature.image}
-        alt={feature.title || 'image'}
+        alt={feature.title || "image"}
         width={400}
         height={300}
         className="h-auto w-full"

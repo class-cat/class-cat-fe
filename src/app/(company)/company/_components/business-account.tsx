@@ -15,7 +15,10 @@ import { useInView } from "~/app/_hooks/useInView"
 import { ROUTES } from "~/lib/const"
 
 export default function BusinessAccountSection() {
-  const [ref, isInView] = useInView<HTMLElement>({ threshold: 0.1 })
+  const [ref, isInView] = useInView<HTMLDivElement>({
+    threshold: 0.1,
+    freezeOnceVisible: true,
+  })
 
   const steps = [
     "Wypełnij formularz rejestracyjny",
@@ -30,19 +33,17 @@ export default function BusinessAccountSection() {
       initial={{ opacity: 0, y: 50 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
       transition={{ duration: 0.5 }}
-      className="to-gray-100 w-full bg-gradient-to-b from-white py-12 md:py-4"
+      className="to-gray-100 w-full bg-gradient-to-b from-white  md:py-4"
     >
       <div className="container px-4 md:px-6">
         <div className="flex flex-col items-center space-y-4 text-center">
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-            Stwórz konto biznesowe już dziś
-          </h2>
-          <p className="text-gray-500 dark:text-gray-400 max-w-4xl md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+          <h3 className="tracking-tighter">Stwórz konto biznesowe już dziś</h3>
+          <span className="text-muted mx-auto max-w-4xl text-base md:text-lg">
             Odkryj pełen potencjał naszej platformy i zacznij rozwijać swój
             biznes z naszymi zaawansowanymi narzędziami.
-          </p>
+          </span>
         </div>
-        <div className="mx-auto max-w-2xl py-12">
+        <div className="mx-auto max-w-xl py-12">
           <Card className="border-secondary bg-[#fff] shadow-sm">
             <CardHeader>
               <CardTitle className="text-2xl font-bold">

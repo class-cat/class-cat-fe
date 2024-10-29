@@ -1,13 +1,17 @@
-"use client";
+"use client"
 
-import Image from "next/image";
-import React from "react";
-import Balancer from "react-wrap-balancer";
-import { motion } from "framer-motion";
-import { useInView } from "~/app/_hooks/useInView";
+import Image from "next/image"
+import React from "react"
+import { motion } from "framer-motion"
+import { useInView } from "~/app/_hooks/useInView"
+import { PawsBackground } from "~/app/(main)/_components/searchbar/catPaws"
+
 
 export default function Hero() {
-  const [ref, isInView] = useInView<HTMLDivElement>({ threshold: 0.1 })
+  const [ref, isInView] = useInView<HTMLDivElement>({
+    threshold: 0.1,
+    freezeOnceVisible: true,
+  })
 
   return (
     <motion.div
@@ -15,28 +19,27 @@ export default function Hero() {
       initial={{ opacity: 0, y: 50 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
       transition={{ duration: 0.5 }}
-      className="sm:paddingX flex w-full flex-col items-center justify-between py-12 sm:gap-4 sm:rounded-3xl sm:bg-secondary sm:py-4 md:flex-row"
+      className="relative overflow-hidden pb-2 sm:rounded-3xl sm:bg-secondary md:min-h-[420px]  md:px-6 md:py-10 lg:px-8"
     >
-      <div className="flex w-full flex-col items-start justify-center gap-6 text-start md:w-3/5">
-        <h2>
-          Zarządzaj z łatwością zajęciami swojej firmy
-        </h2>
-        <p className="text-muted-foreground md:text-xl">
-          <Balancer>
+      <PawsBackground />
+      <div className="relative text-center md:space-y-6 md:pt-64">
+        <div className="hidden md:block">
+          <h3>Zarządzaj z łatwością zajęciami swojej firmy</h3>
+          <span className="text-base md:text-lg">
             Usprawnij planowanie, zwiększ zapisy i rozwijaj swoją firmę dzięki
             naszej kompleksowej platformie.
-          </Balancer>
-        </p>
+          </span>
+        </div>
       </div>
-      <div className="relative aspect-square w-full max-w-[300px] md:w-2/5">
+      <div className="absolute left-1/2 top-6 z-20 w-auto -translate-x-1/2 md:block">
         <Image
           src="/business.png"
-          alt="Business illustration"
-          fill
-          className="object-contain"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          alt="Cute cat face peeking from the bottom"
+          width={220}
+          height={220}
+          className="h-auto w-full object-cover"
         />
       </div>
     </motion.div>
-  );
+  )
 }

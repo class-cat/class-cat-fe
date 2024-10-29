@@ -14,8 +14,16 @@ interface FeatureCardProps {
   onLeave: () => void
 }
 
-export function FeatureCard({ feature, index, onHover, onLeave }: FeatureCardProps) {
-  const [ref, isInView] = useInView<HTMLDivElement>({ threshold: 0.1 })
+export function FeatureCard({
+  feature,
+  index,
+  onHover,
+  onLeave,
+}: FeatureCardProps) {
+  const [ref, isInView] = useInView<HTMLDivElement>({
+    threshold: 0.1,
+    freezeOnceVisible: true,
+  })
 
   return (
     <motion.div
@@ -30,12 +38,16 @@ export function FeatureCard({ feature, index, onHover, onLeave }: FeatureCardPro
       <Card className="flex w-full flex-col border-secondary bg-[#fff] shadow-sm transition-shadow duration-300 hover:shadow-md">
         <CardHeader className="flex flex-row items-center gap-4">
           <feature.icon className="size-10 shrink-0 text-primary" />
-          <CardTitle className="text-lg text-primary">{feature.title}</CardTitle>
+          <CardTitle className="text-lg text-primary">
+            {feature.title}
+          </CardTitle>
         </CardHeader>
         <CardContent className="grow">
           <div className="space-y-2">
             {feature.description.map((item, i) => (
-              <p key={i} className="text-gray-600 text-sm">{item}</p>
+              <p key={i} className="text-gray-600 text-sm">
+                {item}
+              </p>
             ))}
           </div>
         </CardContent>

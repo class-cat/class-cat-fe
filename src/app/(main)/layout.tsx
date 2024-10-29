@@ -13,7 +13,7 @@ export default function RootLayout({
         <TopNav />
         <main className="bg-white">{children}</main>
       </div>
-      <footer className="padding h-[153px] bg-foreground text-white">
+      <footer className="padding h-[153px] bg-foreground text-white max-md:hidden">
         ClassCat
       </footer>
     </>
