@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useRef, useLayoutEffect, useMemo } from "react";
+import React, { useState, useRef, useLayoutEffect, useMemo } from "react";
 import { Icons } from "~/components/icons";
 
-const PawsBackground = () => {
+export const PawsBackground = () => {
   const containerRef = useRef<HTMLElement | null>(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
@@ -82,5 +82,3 @@ const PawsBackground = () => {
     </div>
   );
 };
-
-export default PawsBackground;

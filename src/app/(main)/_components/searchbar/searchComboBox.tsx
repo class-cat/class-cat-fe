@@ -27,10 +27,9 @@ type Props = {
   value: string | null
 }
 
-export function SearchCombobox({ data, value }: Props) {
+export const SearchCombobox = ({ data, value }: Props) => {
   const updateQueryParams = useUpdateQueryParams()
   const isMobile = useMediaQuery(MOBILE_BREAKPOINT)
-
   const [open, setOpen] = useState(false)
   const handleOnSelect = (currentValue: string) => {
     updateQueryParams({ location: currentValue })

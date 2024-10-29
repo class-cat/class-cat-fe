@@ -8,9 +8,9 @@ import { Button } from "~/components/ui/button"
 import { Input } from "~/components/ui/input"
 import { SearchCombobox } from "./searchComboBox"
 import React from "react"
-import PawsBackground from "./catPaws"
+import { PawsBackground } from "./catPaws"
 
-export default function SearchBar() {
+export const SearchBar = () => {
   const searchParams = useSearchParams()
   const { data: locationData } = useGetLocations()
   const location = searchParams.get("location") as string
@@ -51,8 +51,6 @@ export default function SearchBar() {
           </Button>
         </form>
         </div>
-
-      {/* Cat icon */}
       <div className="absolute -bottom-28 left-1/2 z-20 hidden w-72 -translate-x-1/2 md:block">
         <Image
           src="/defaultcat.png?height=200&width=200"
@@ -61,7 +59,6 @@ export default function SearchBar() {
           height={300}
           className="object-cover"
         />
-    
       </div>
     </div>
   )
