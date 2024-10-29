@@ -25,13 +25,18 @@ export function Pill(props: any) {
   }
 
   return (
-    (<Link
+    <Link
       className="relative  flex cursor-pointer items-center gap-2 rounded-2xl border-2 border-secondary p-2 hover:shadow-sm sm:gap-4"
       href={{
         pathname: `${ROUTES.ACTIVITY}/${slug}`,
       }}
     >
-      <div className="relative size-[50px] shrink-0 sm:size-[80px]">
+      <Link
+        href={{
+          pathname: `${ROUTES.ACTIVITY}/${slug}`,
+        }}
+        className="relative size-[50px] shrink-0 cursor-pointer sm:size-[80px]"
+      >
         {primaryImage?.file ? (
           <Image
             src={primaryImage.file}
@@ -42,10 +47,15 @@ export function Pill(props: any) {
           />
         ) : (
           // <img src={primaryImage.file} alt={name} className="rounded-lg" />
-          (<Icons.placeholder className="size-full" />)
+          <Icons.placeholder className="size-full" />
         )}
-      </div>
-      <div className="flex min-w-0 grow flex-col">
+      </Link>
+      <Link
+        href={{
+          pathname: `${ROUTES.ACTIVITY}/${slug}`,
+        }}
+        className="flex min-w-0 grow cursor-pointer flex-col"
+      >
         <p className="truncate text-sm  font-medium sm:text-base">
           {name || "Siatkówka dla klas 1-3"}
         </p>
@@ -57,7 +67,7 @@ export function Pill(props: any) {
         <IconWithText text={provider?.name}>
           <Icons.store className="size-4 shrink-0" />
         </IconWithText>
-      </div>
+      </Link>
       <div className="size-10" />
       <div className="absolute right-2 top-2">
         <TooltipProvider>
@@ -76,6 +86,6 @@ export function Pill(props: any) {
           </Tooltip>
         </TooltipProvider>
       </div>
-    </Link>)
-  );
+    </Link>
+  )
 }

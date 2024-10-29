@@ -7,8 +7,9 @@ import { useGetLocations } from "~/actions/get-locations"
 import { Icons } from "~/components/icons"
 import { Button } from "~/components/ui/button"
 import { Input } from "~/components/ui/input"
-import { SearchCombobox } from "../searchComboBox"
+
 import React from "react"
+import { SearchCombobox } from "./searchComboBox"
 
 export default function SearchBar() {
   const searchParams = useSearchParams()
