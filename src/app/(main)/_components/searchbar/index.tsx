@@ -3,13 +3,12 @@
 import Image from "next/image"
 import { useSearchParams } from "next/navigation"
 import { useGetLocations } from "~/actions/get-locations"
-
 import { Icons } from "~/components/icons"
 import { Button } from "~/components/ui/button"
 import { Input } from "~/components/ui/input"
-import { SearchCombobox } from "../searchComboBox"
+import { SearchCombobox } from "./searchComboBox"
 import React from "react"
-import PawsBackground from "./cat-paws"
+import PawsBackground from "./catPaws"
 
 export default function SearchBar() {
   const searchParams = useSearchParams()
@@ -29,7 +28,7 @@ export default function SearchBar() {
         <form
           method="GET"
           action="/search"
-          className="mx-auto flex  max-w-xl flex-row gap-4 rounded-2xl border-2 border-secondary bg-white"
+          className="mx-auto flex  max-w-2xl flex-row gap-4 rounded-2xl border-2 border-secondary bg-white"
         >
           <div className="flex w-full items-center px-4">
             <Icons.search className="mr-2 hidden size-6 md:block" />
@@ -40,6 +39,7 @@ export default function SearchBar() {
               name="search"
             />
           </div>
+          <div className="md:my-auto md:flex md:h-12 md:w-[6px] md:bg-secondary "/>
           <div className="hidden w-full md:block md:w-auto">
             <SearchCombobox data={locationData || []} value={location || ""} />
           </div>
@@ -50,7 +50,7 @@ export default function SearchBar() {
             <Icons.search className="size-5 md:size-6" />
           </Button>
         </form>
-      </div>
+        </div>
 
       {/* Cat icon */}
       <div className="absolute -bottom-28 left-1/2 z-20 hidden w-72 -translate-x-1/2 md:block">
@@ -61,6 +61,7 @@ export default function SearchBar() {
           height={300}
           className="object-cover"
         />
+    
       </div>
     </div>
   )

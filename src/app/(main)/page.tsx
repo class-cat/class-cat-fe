@@ -1,93 +1,25 @@
-"use client"
+'use client'
 
-import Image from "next/image"
-import { Button } from "~/components/ui/button"
+import React, { useCallback, useEffect, useMemo, useRef } from "react"
+import { useQueryClient } from "@tanstack/react-query"
 import { Container } from "~/components/ui/container"
 import { Tabs, TabsList, TabsTrigger } from "~/components/ui/tabs"
-import React, { useCallback, useEffect, useMemo, useRef } from "react"
-import { v4 as uuid } from "uuid"
-import {
-  Carousel,
-  CarouselContent,
-  CarouselDots,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "~/components/ui/carousel"
-import { Card, CardContent } from "~/components/ui/card"
-import { Pill } from "~/components/pill/pill"
-import { Map } from "../_components/map"
-import Link from "next/link"
-import { MobileMap } from "../_components/map/mobileMap"
-import SearchBar from "../_components/searchbar"
-import { ENDPOINTS, ROUTES } from "~/lib/const"
-import PlaceholderPill from "~/components/pill/placeholerPill"
+import { ENDPOINTS } from "~/lib/const"
 import { type PagesType, useInfinityFetch } from "../_hooks/useInfinityFetch"
 import { type Activity } from "~/types/search.type"
-import { useQueryClient } from "@tanstack/react-query"
+import SearchBar from "./_components/searchbar"
+import { MobileMap } from "../_components/map/mobileMap"
+import { Map } from "../_components/map"
+import ActivityList from "./_components/activityList"
+import RecommendedCategories from "./_components/recommendedCategories"
+import CompanyOffer from "./_components/companyOffer"
 
 const tabsTriggers = [
-  {
-    id: 1,
-    title: "Oferty dnia",
-    value: "today",
-  },
-  {
-    id: 2,
-    title: "Polecane",
-    value: "recommended",
-  },
-  {
-    id: 3,
-    title: "Najnowsze oferty",
-    value: "newest",
-  },
-  {
-    id: 4,
-    title: "Polubione",
-    value: "viewed",
-  },
+  { id: 1, title: "Oferty dnia", value: "today" },
+  { id: 2, title: "Polecane", value: "recommended" },
+  { id: 3, title: "Najnowsze oferty", value: "newest" },
+  { id: 4, title: "Polubione", value: "viewed" },
 ]
-
-const createCardItems = (count: number) =>
-  Array.from({ length: count }, () => ({
-    title: "piłka nożna",
-    desc: "34",
-    avatar: "ball.svg",
-    href: "search?category=pilkanozna",
-  }))
-
-type MostSearchItemProps = {
-  title: string
-  desc: string
-  avatar: string
-}
-const MostSearchItem = ({ title, desc, avatar }: MostSearchItemProps) => {
-  return (
-    <>
-      <Card className="aspect-square rounded-2xl border-2 border-secondary bg-secondary p-4 shadow-none sm:rounded-3xl">
-        <CardContent className="flex h-full flex-col items-center justify-center space-y-2 p-0">
-          <div className="relative size-20">
-            <Image
-              src={avatar}
-              alt={title}
-              layout="fill"
-              className="rounded-lg"
-            />
-          </div>
-          <div className="flex flex-col items-center justify-center pt-2 text-center capitalize max-sm:hidden">
-            <p className="text-md text-foregroundMuted">{title}</p>
-            <p className="text-md text-foregroundMuted">{desc}</p>
-          </div>
-        </CardContent>
-      </Card>
-      <div className="flex flex-col items-center justify-center pt-2 text-center capitalize sm:hidden">
-        <p className="text-sm text-foregroundMuted">{title}</p>
-      </div>
-    </>
-  )
-}
-const mostSearchedItems = createCardItems(16)
 
 export default function HomePage() {
   const [searchType, setSearchType] = React.useState("newest")
@@ -109,6 +41,8 @@ export default function HomePage() {
   })
 
   const observer = useRef<IntersectionObserver | null>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const queryClient = useQueryClient()
 
   const lastElementRef = useCallback(
     (node: HTMLDivElement) => {
@@ -121,19 +55,12 @@ export default function HomePage() {
             fetchNextPageActivities()
           }
         },
-        {
-          threshold: 1.0,
-        }
+        { threshold: 1.0 }
       )
 
       if (node) observer.current.observe(node)
     },
-    [
-      fetchNextPageActivities,
-      hasNextPageActivities,
-      activitiesIsLoading,
-      activitiesIsFetching,
-    ]
+    [fetchNextPageActivities, hasNextPageActivities, activitiesIsLoading, activitiesIsFetching]
   )
 
   const activitiesList = useMemo(() => {
@@ -143,9 +70,6 @@ export default function HomePage() {
     }, [])
   }, [activitiesData])
 
-  const queryClient = useQueryClient()
-  const containerRef = useRef<HTMLDivElement>(null)
-
   useEffect(() => {
     if (containerRef.current) {
       containerRef.current.scrollTo({ top: 0 })
@@ -154,16 +78,16 @@ export default function HomePage() {
   }, [searchType, queryClient])
 
   return (
-    <Container className="h-full flex-1 justify-center pt-2 sm:pt-6">
-      <section className="sm:rounded-3xl sm:bg-secondary">
+    <Container className="h-full flex-1 justify-center pt-2 md:pt-6">
+      <section className="md:rounded-3xl md:bg-secondary">
         <SearchBar />
       </section>
-      <div className="sm:h-10" />
+      <div className="md:h-10" />
       <section>
         <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
           <div>
             <Tabs defaultValue="newest" className="w-full">
-              <TabsList className="flex justify-between max-sm:hidden">
+              <TabsList className="flex justify-between max-md:hidden">
                 {tabsTriggers.map((tab, index) => (
                   <TabsTrigger
                     onClick={handleChangeTab(tab.value)}
@@ -174,7 +98,7 @@ export default function HomePage() {
                         ? "border-x-2"
                         : index !== tabsTriggers.length - 1
                           ? "border-r-2"
-                          : "hidden border-0 sm:block"
+                          : "hidden border-0 md:block"
                     }`}
                   >
                     {tab.title}
@@ -185,44 +109,13 @@ export default function HomePage() {
                 <MobileMap />
               </div>
               <div className="h-6" />
-              <div
-                ref={containerRef}
-                className="sm:sidebar relative h-[calc(100vh-325px)] overflow-y-auto sm:h-[calc(100vh-415px)] sm:pr-3 md:h-[calc(100vh-455px)] lg:h-[calc(100vh-315px)] xl:pr-0"
-              >
-                <div className="mr-2">
-                  {activitiesIsLoading ? (
-                    Array.from({ length: 10 }).map((_, index) => (
-                      <div
-                        key={index}
-                        className="sm:not-first:py-2 mt-2 first:mt-0"
-                      >
-                        <PlaceholderPill />
-                      </div>
-                    ))
-                  ) : activitiesList?.length !== 0 ? (
-                    activitiesList?.map((item, index) => {
-                      const isLastElement = index === activitiesList.length - 1
-                      return (
-                        <div
-                          key={uuid()}
-                          className="sm:not-first:py-2 mt-2 first:mt-0"
-                          ref={isLastElement ? lastElementRef : null}
-                        >
-                          <Pill {...item} />
-                        </div>
-                      )
-                    })
-                  ) : (
-                    <div className="text-red-500 py-2">Brak wyników</div>
-                  )}
-                </div>
-              </div>
-
-              {activitiesIsError && (
-                <div className="text-red-500 py-2">
-                  Error loading activities.
-                </div>
-              )}
+              <ActivityList
+                containerRef={containerRef}
+                activitiesList={activitiesList}
+                activitiesIsLoading={activitiesIsLoading}
+                activitiesIsError={activitiesIsError}
+                lastElementRef={lastElementRef}
+              />
             </Tabs>
           </div>
           <div className="hidden h-full xl:block">
@@ -230,42 +123,10 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      <div className="sm:h-8" />
-      <section className="max-sm:hidden">
-        <h4 className="text-center">Polecane kategorie</h4>
-        <div className="h-8" />
-        <div className="flex justify-center">
-          <Carousel
-            className="max-w-2xl lg:max-w-3xl xl:max-w-5xl"
-            opts={{ align: "start", loop: false }}
-          >
-            <CarouselContent className="-ml-2">
-              {mostSearchedItems.map((item, index) => (
-                <CarouselItem key={index} className="basis-1/3 lg:basis-1/6">
-                  <div className="p-1">
-                    <Link href={item.href}>
-                      <MostSearchItem {...item} />
-                    </Link>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselDots />
-            <CarouselPrevious className="ml-2" />
-            <CarouselNext className="mr-2" />
-          </Carousel>
-        </div>
-      </section>
-      <div className="sm:h-8" />
-      <div className="flex w-full  flex-row items-center justify-center gap-4 border-t-2 border-secondary text-center max-sm:hidden">
-        <div className="sm:h-32" />
-        <h4>Oferta dla firm</h4>
-        <Link href={ROUTES.COMPANY.ROOT}>
-          <Button variant={"outline"} size={"lg"} className="w-full sm:w-40">
-            Sprawdź szczegóły
-          </Button>
-        </Link>
-      </div>
+      <div className="md:h-8" />
+      <RecommendedCategories />
+      <div className="md:h-8" />
+      <CompanyOffer />
     </Container>
   )
 }
