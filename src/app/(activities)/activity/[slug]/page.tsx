@@ -10,6 +10,8 @@ import { ENDPOINTS } from "~/lib/const"
 import { httpClient } from "~/lib/http-client"
 import { type Activity } from "~/types/search.type"
 import { AddReviewDialog } from "../_components/review-dialog"
+import { MobileMap } from "~/app/_components/map/mobileMap"
+import RatingSummary from "../_components/rating-summary"
 
 type ApiResponse<T> = {
   success: boolean
@@ -37,7 +39,7 @@ export default async function ActivityPage({ params }: { params: Params }) {
     <Container className="container h-[calc(100vh-120px)]">
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
         <Card className="cardSmall w-full">
-          <CardContent>
+          <CardContent className="px-0">
             <div className="flex space-x-4">
               <Image
                 src={activity.primaryImage.file}
@@ -73,17 +75,21 @@ export default async function ActivityPage({ params }: { params: Params }) {
               </div>
             </div>
           </CardContent>
-          <CardFooter className="flex items-center justify-between p-6 pt-0">
-            <span className="text-2xl font-bold">45 zł/h</span>
+          <CardFooter className="flex items-center justify-end p-0">
             <Button variant="outline" size={"lg"}>
               Wyświetl informacje
             </Button>
           </CardFooter>
         </Card>
-        <Map />
+        <div className="md:hidden">
+          <MobileMap />
+        </div>
+        <div className="hidden md:block">
+          <Map />
+        </div>
       </div>
-      <div className="sm:h-16" />
-      <div className="px-4 py-8">
+      <div className="sm:h-8" />
+      <div className="py-2">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           <div className="space-y-8 lg:col-span-2">
             <section>
@@ -92,13 +98,13 @@ export default async function ActivityPage({ params }: { params: Params }) {
             </section>
 
             <section>
+              <RatingSummary/>
               <div className="flex justify-between">
-                <h2 className="mb-4 text-2xl font-bold">Opinie</h2>
                 <SignedIn>
                   <AddReviewDialog />
                 </SignedIn>
               </div>
-              <Card>
+              <Card className="border-2 border-secondary">
                 <CardContent className="p-4">
                   <div className="flex items-start justify-between">
                     <div>
@@ -124,19 +130,19 @@ export default async function ActivityPage({ params }: { params: Params }) {
             </section>
           </div>
 
-          <div className="cardSmall space-y-8 bg-secondary">
+          <div className="cardSmall space-y-8">
             <section>
               <h2 className="mb-4 text-2xl font-bold">Inne zajęcia w szkole</h2>
-              <Card className="mb-4">
+              <Card className="mb-4 cursor-pointer bg-white radius-xs border-none hover:shadow-md">
                 <CardContent className="p-4">
-                  <h3 className="cursor-pointer text-lg font-semibold">
+                  <h3 className="text-lg font-semibold">
                     Koszykówka dla dzieci 1-3
                   </h3>
                   <div className="mt-2 flex space-x-2">
-                    <span className="bg-gray-200 rounded px-2 py-1 text-sm">
+                    <span className=" border-secondary border-2 rounded-lg px-2 py-1 text-sm">
                       poniedziałek
                     </span>
-                    <span className="bg-gray-200 rounded px-2 py-1 text-sm">
+                    <span className=" border-secondary border-2 rounded-lg px-2 py-1 text-sm">
                       środa
                     </span>
                   </div>
@@ -151,7 +157,7 @@ export default async function ActivityPage({ params }: { params: Params }) {
               <h2 className="mb-4 text-2xl font-bold">
                 Sprawdź podobne zajęcia
               </h2>
-              <Card className="mb-4 cursor-pointer">
+              <Card className="mb-4 bg-white border-none cursor-pointer  hover:shadow-md">
                 <CardContent className="p-4">
                   <h3 className="text-lg font-semibold">
                     Siatkówka dla dzieci 3-6
@@ -162,7 +168,7 @@ export default async function ActivityPage({ params }: { params: Params }) {
               {[...Array(4)].map((_, i) => (
                 <div
                   key={i}
-                  className="mb-4 h-16 cursor-pointer rounded bg-white"
+                  className="mb-4 h-16 rounded-xl bg-white radius-xs border-none cursor-pointer  hover:shadow-md"
                 ></div>
               ))}
               <Button variant="outline" className="w-full">
