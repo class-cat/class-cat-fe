@@ -1,6 +1,6 @@
 "use client"
 
-import React, { Suspense, useEffect, useMemo, useRef } from "react"
+import React, { Suspense, useEffect, useMemo, useRef, useState } from "react"
 import { useQueryClient } from "@tanstack/react-query"
 import { Container } from "~/components/ui/container"
 import { ENDPOINTS } from "~/lib/const"
@@ -14,6 +14,7 @@ import CompanyOffer from "./_components/companyOffer"
 import { CategoryTabs } from "./_components/categoryTabs"
 import { useInfiniteScroll } from "../_hooks/useInfiniteScroll"
 import { SearchBar } from "./_components/searchbar"
+import { useAuth, useUser } from "@clerk/nextjs"
 
 export default function HomePage() {
   const [searchType, setSearchType] = React.useState("newest")
@@ -29,7 +30,7 @@ export default function HomePage() {
     fetchNextPage: fetchNextPageActivities,
     hasNextPage: hasNextPageActivities,
   } = useInfinityFetch<PagesType<Activity>>({
-    url: ENDPOINTS.ACTIVITIES,
+    url: ENDPOINTS.ACTIVITIES.ROOT,
     params: {
       type: searchType,
       pageSize: 10,
@@ -54,7 +55,7 @@ export default function HomePage() {
     if (containerRef.current) {
       containerRef.current.scrollTo({ top: 0 })
     }
-    queryClient.invalidateQueries({ queryKey: [ENDPOINTS.ACTIVITIES] })
+    queryClient.invalidateQueries({ queryKey: [ENDPOINTS.ACTIVITIES.ROOT] })
   }, [searchType, queryClient])
 
   return (

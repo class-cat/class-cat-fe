@@ -9,9 +9,10 @@ import { Container } from "~/components/ui/container"
 import { ENDPOINTS } from "~/lib/const"
 import { httpClient } from "~/lib/http-client"
 import { type Activity } from "~/types/search.type"
-import { AddReviewDialog } from "../_components/review-dialog"
+import { AddReviewDialog } from "./_components/review-dialog"
 import { MobileMap } from "~/app/_components/map/mobileMap"
-import RatingSummary from "../_components/rating-summary"
+import RatingSummary from "./_components/rating-summary"
+import Reviews from "./_components/reviews"
 
 type ApiResponse<T> = {
   success: boolean
@@ -20,7 +21,7 @@ type ApiResponse<T> = {
 async function getActivityInfo(slug: string): Promise<Activity> {
   try {
     const response = await httpClient.get<ApiResponse<Activity>>(
-      `${ENDPOINTS.ACTIVITIES}${slug}`
+      `${ENDPOINTS.ACTIVITIES.ROOT}${slug}`
     )
     return response.data
   } catch (error) {
@@ -41,13 +42,23 @@ export default async function ActivityPage({ params }: { params: Params }) {
         <Card className="cardSmall w-full">
           <CardContent className="px-0">
             <div className="flex space-x-4">
-              <Image
-                src={activity.primaryImage.file}
-                alt="Activity Image"
-                width={144}
-                height={144}
-                className="bg-gray-200 size-36 rounded-md object-cover"
-              />
+              {activity.primaryImage?.file ? (
+                <Image
+                  src={activity.primaryImage.file}
+                  alt="Activity Image"
+                  width={144}
+                  height={144}
+                  className="bg-gray-200 size-36 rounded-md object-cover"
+                />
+              ) : (
+                <Image
+                  src={"/business.png"}
+                  alt="Activity Image"
+                  width={144}
+                  height={144}
+                  className="bg-gray-200 size-36 rounded-md object-cover"
+                />
+              )}
               <div className="flex-1">
                 <h1 className="mb-2 text-2xl font-bold leading-tight">
                   {activity.name}
@@ -98,51 +109,32 @@ export default async function ActivityPage({ params }: { params: Params }) {
             </section>
 
             <section>
-              <RatingSummary/>
-              <div className="flex justify-between">
-                <SignedIn>
-                  <AddReviewDialog />
-                </SignedIn>
+              <RatingSummary />
+              <div className="flex flex-col gap-4">
+                <div className="flex justify-between">
+                  <h2 className="mb-4 text-2xl font-bold">Opinie</h2>
+                  <SignedIn>
+                    <AddReviewDialog acticitySlug={slug} />
+                  </SignedIn>
+                </div>
+                <Reviews slug={slug} />
               </div>
-              <Card className="border-2 border-secondary">
-                <CardContent className="p-4">
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <p className="font-semibold">
-                        Jan Kowalski - 20 Mar, 2024
-                      </p>
-                      <p className="text-gray-600 text-sm">
-                        Syn mówi, że najlepsze zajęcia na jakich był, gorąco
-                        polecamy!
-                      </p>
-                    </div>
-                    <div className="flex">
-                      {[...Array(5)].map((_, i) => (
-                        <Icons.star
-                          key={i}
-                          className="size-5 fill-primary text-primary"
-                        />
-                      ))}
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
             </section>
           </div>
 
           <div className="cardSmall space-y-8">
             <section>
               <h2 className="mb-4 text-2xl font-bold">Inne zajęcia w szkole</h2>
-              <Card className="mb-4 cursor-pointer bg-white radius-xs border-none hover:shadow-md">
+              <Card className="radius-xs mb-4 cursor-pointer border-none bg-white hover:shadow-md">
                 <CardContent className="p-4">
                   <h3 className="text-lg font-semibold">
                     Koszykówka dla dzieci 1-3
                   </h3>
                   <div className="mt-2 flex space-x-2">
-                    <span className=" border-secondary border-2 rounded-lg px-2 py-1 text-sm">
+                    <span className=" rounded-lg border-2 border-secondary px-2 py-1 text-sm">
                       poniedziałek
                     </span>
-                    <span className=" border-secondary border-2 rounded-lg px-2 py-1 text-sm">
+                    <span className=" rounded-lg border-2 border-secondary px-2 py-1 text-sm">
                       środa
                     </span>
                   </div>
@@ -157,7 +149,7 @@ export default async function ActivityPage({ params }: { params: Params }) {
               <h2 className="mb-4 text-2xl font-bold">
                 Sprawdź podobne zajęcia
               </h2>
-              <Card className="mb-4 bg-white border-none cursor-pointer  hover:shadow-md">
+              <Card className="mb-4 cursor-pointer border-none bg-white  hover:shadow-md">
                 <CardContent className="p-4">
                   <h3 className="text-lg font-semibold">
                     Siatkówka dla dzieci 3-6
@@ -168,7 +160,7 @@ export default async function ActivityPage({ params }: { params: Params }) {
               {[...Array(4)].map((_, i) => (
                 <div
                   key={i}
-                  className="mb-4 h-16 rounded-xl bg-white radius-xs border-none cursor-pointer  hover:shadow-md"
+                  className="radius-xs mb-4 h-16 cursor-pointer rounded-xl border-none bg-white  hover:shadow-md"
                 ></div>
               ))}
               <Button variant="outline" className="w-full">
