@@ -1,6 +1,14 @@
 export const httpClient = {
   baseURL: process.env.NEXT_API_URL as string,
 
+  setAuthToken: (token: string) => {
+    if (token) {
+      headers["Authorization"] = `Bearer ${token}`
+    } else {
+      delete headers["Authorization"]
+    }
+  },
+
   get: async <T>(url: string, params?: Record<string, string | number>) => {
     const queryString = params
       ? `?${new URLSearchParams(params as Record<string, string>)}`

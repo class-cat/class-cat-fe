@@ -12,21 +12,70 @@ import {
 import { Textarea } from "~/components/ui/textarea"
 import { Button } from "~/components/ui/button"
 import { Icons } from "~/components/icons"
+import { usePost } from "~/app/_hooks/usePost"
+import { ENDPOINTS } from "~/lib/const"
+import { z } from "zod"
+import { toast } from "sonner"
+import { type Author } from "~/types/user.type"
+interface ReviewDialogProps {
+  acticitySlug: string
+}
 
-export function AddReviewDialog() {
+interface AddReviewFormDataResponse {
+  slug: string
+  rating: number
+  comment: string
+  author: Author
+}
+
+const AddReviewSchema = z.object({
+  rating: z
+    .number()
+    .min(1, "Rating must be at least 1")
+    .max(5, "Rating must be at most 5"),
+  comment: z
+    .string()
+    .min(1, "Comment cannot be empty")
+    .max(500, "Comment cannot exceed 500 characters"),
+})
+
+type AddReviewFormData = z.infer<typeof AddReviewSchema>
+export function AddReviewDialog({ acticitySlug }: ReviewDialogProps) {
   const [isOpen, setIsOpen] = useState(false)
-  const [review, setReview] = useState("")
+  const [comment, setComment] = useState("")
   const [rating, setRating] = useState(0)
 
+  const { mutate, isSuccess, isPending } = usePost<
+    AddReviewFormData,
+    AddReviewFormDataResponse
+  >({
+    url: ENDPOINTS.ACTIVITIES.REVIEW(acticitySlug),
+  })
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Here you would typically send the review to your backend
-    console.log("Submitted review:", { review, rating })
+
+    const validation = AddReviewSchema.safeParse({ rating, comment })
+
+    if (!validation.success) {
+      console.error("Validation errors:", validation.error.format())
+      toast.error("Coś poszło nie tak")
+      return
+    }
+
+    const parsedData = validation.data
+    mutate(parsedData, {
+      onError: (error) => {
+        toast.error("Coś poszło nie tak")
+        console.error(error.message)
+      },
+    })
+    console.log("Submitted comment:", { comment, rating })
     setIsOpen(false)
-    setReview("")
+    setComment("")
     setRating(0)
   }
 
+  console.log(isSuccess, isPending)
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
@@ -39,15 +88,15 @@ export function AddReviewDialog() {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label
-              htmlFor="review"
+              htmlFor="comment"
               className="text-gray-700 block text-sm font-medium"
             >
               Twoja opinia
             </label>
             <Textarea
-              id="review"
-              value={review}
-              onChange={(e) => setReview(e.target.value)}
+              id="comment"
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
               className="mt-1"
               rows={4}
               required

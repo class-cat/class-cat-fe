@@ -1,11 +1,17 @@
 export const MOBILE_BREAKPOINT = 768
 
+export const activity = "activities/activity"
 export const ENDPOINTS = {
   MAP: "ops/map-source/",
-  ACTIVITIES: "activities/activity/",
   SEARCH: {
     ACTIVIES: "activities/search-combined/",
     MAP: "activities/map-search-combined/",
+  },
+  ACTIVITIES: {
+    ROOT: `${activity}/`,
+    REVIEW: (activitySlug: string) => `${activity}/${activitySlug}/review/`,
+    REVIEW_SINGLE: (activitySlug: string, reviewId: string) =>
+      `${activity}/${activitySlug}/review/${reviewId}`,
   },
 } as const
 

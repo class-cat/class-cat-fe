@@ -118,7 +118,7 @@ export default function SignUpPage() {
                         </Button>
                       </SignUp.Action>
                       <Button variant="link" size="sm" asChild>
-                        <Link href={ROUTES.ROOT.SIGN_IN}>
+                        <Link prefetch={true} href={ROUTES.ROOT.SIGN_IN}>
                           Masz już konto? Zaloguj się
                         </Link>
                       </Button>

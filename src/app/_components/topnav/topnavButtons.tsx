@@ -28,7 +28,9 @@ export function TopNavButtons() {
           <UserButton userProfileUrl={ROUTES.ROOT.PROFILE} />
         </SignedIn>
         <Button variant="outline" asChild>
-          <Link href={ROUTES.COMPANY.ROOT}>Dodaj zajęcia</Link>
+          <Link prefetch={true} href={ROUTES.COMPANY.ROOT}>
+            Dodaj zajęcia
+          </Link>
         </Button>
       </div>
     )
@@ -36,12 +38,14 @@ export function TopNavButtons() {
 
   return (
     <>
-      <UserButtons />
-      {isMobile ? (
-        <Button size="icon" onClick={handleMenu}>
-          <Icons.menu />
-        </Button>
-      ) : null}
+      <div className="flex gap-8">
+        <UserButtons />
+        {isMobile ? (
+          <Button size="icon" onClick={handleMenu}>
+            <Icons.menu />
+          </Button>
+        ) : null}
+      </div>
       {isMobile && isMenuOpen && (
         <div className="absolute right-0 top-[80px] z-50 h-[calc(100vh-80px)] w-full animate-slide-in  border-t-2 border-primary bg-secondary p-4 shadow-md">
           <div>

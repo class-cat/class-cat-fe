@@ -25,14 +25,14 @@ export function Pill(props: any) {
   }
 
   return (
-    <div
-      className="relative  flex  items-center gap-2 rounded-2xl border-2 border-secondary p-2 hover:shadow-sm sm:gap-4"
-    >
+    <div className="relative  flex  items-center gap-2 rounded-2xl border-2 border-secondary p-2 hover:shadow-sm sm:gap-4">
       <Link
+        prefetch={true}
         href={{
           pathname: `${ROUTES.ACTIVITY}/${slug}`,
         }}
-        className="relative size-[50px] shrink-0 cursor-pointer sm:size-[80px]">
+        className="relative size-[50px] shrink-0 cursor-pointer sm:size-[80px]"
+      >
         {primaryImage?.file ? (
           <Image
             src={primaryImage.file}
@@ -46,10 +46,12 @@ export function Pill(props: any) {
         )}
       </Link>
       <Link
+        prefetch={true}
         href={{
           pathname: `${ROUTES.ACTIVITY}/${slug}`,
-        }} 
-        className="flex min-w-0 grow cursor-pointer flex-col">
+        }}
+        className="flex min-w-0 grow cursor-pointer flex-col"
+      >
         <p className="truncate text-sm  font-medium sm:text-base">
           {name || "Siatkówka dla klas 1-3"}
         </p>
