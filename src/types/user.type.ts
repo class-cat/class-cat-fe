@@ -13,3 +13,10 @@ export interface Author {
   lastName: string
   avatar: Avatar
 }
+
+export interface Review {
+  slug: string
+  rating: number
+  comment: string
+  author: Author
+}

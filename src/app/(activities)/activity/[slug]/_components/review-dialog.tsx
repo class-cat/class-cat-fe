@@ -16,16 +16,11 @@ import { usePost } from "~/app/_hooks/usePost"
 import { ENDPOINTS } from "~/lib/const"
 import { z } from "zod"
 import { toast } from "sonner"
-import { type Author } from "~/types/user.type"
+import { type Review } from "~/types/user.type"
+// import { useToken } from "~/app/_hooks/useToken"
+
 interface ReviewDialogProps {
   acticitySlug: string
-}
-
-interface AddReviewFormDataResponse {
-  slug: string
-  rating: number
-  comment: string
-  author: Author
 }
 
 const AddReviewSchema = z.object({
@@ -45,10 +40,7 @@ export function AddReviewDialog({ acticitySlug }: ReviewDialogProps) {
   const [comment, setComment] = useState("")
   const [rating, setRating] = useState(0)
 
-  const { mutate, isSuccess, isPending } = usePost<
-    AddReviewFormData,
-    AddReviewFormDataResponse
-  >({
+  const { mutate, isSuccess, isPending } = usePost<AddReviewFormData, Review>({
     url: ENDPOINTS.ACTIVITIES.REVIEW(acticitySlug),
   })
   const handleSubmit = (e: React.FormEvent) => {
@@ -61,7 +53,6 @@ export function AddReviewDialog({ acticitySlug }: ReviewDialogProps) {
       toast.error("Coś poszło nie tak")
       return
     }
-
     const parsedData = validation.data
     mutate(parsedData, {
       onError: (error) => {

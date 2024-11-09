@@ -34,7 +34,6 @@ type Params = Promise<{ slug: string }>
 export default async function ActivityPage({ params }: { params: Params }) {
   const { slug } = await params
   const activity = await getActivityInfo(slug)
-  console.log(activity)
 
   return (
     <Container className="container h-[calc(100vh-120px)]">
