@@ -17,6 +17,8 @@ import { ENDPOINTS } from "~/lib/const"
 import { z } from "zod"
 import { toast } from "sonner"
 import { type Review } from "~/types/user.type"
+import { useRouter } from "next/navigation"
+
 // import { useToken } from "~/app/_hooks/useToken"
 
 interface ReviewDialogProps {
@@ -39,8 +41,8 @@ export function AddReviewDialog({ acticitySlug }: ReviewDialogProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [comment, setComment] = useState("")
   const [rating, setRating] = useState(0)
-
-  const { mutate, isSuccess, isPending } = usePost<AddReviewFormData, Review>({
+  const router = useRouter()
+  const { mutate, isPending } = usePost<AddReviewFormData, Review>({
     url: ENDPOINTS.ACTIVITIES.REVIEW(acticitySlug),
   })
   const handleSubmit = (e: React.FormEvent) => {
@@ -55,22 +57,31 @@ export function AddReviewDialog({ acticitySlug }: ReviewDialogProps) {
     }
     const parsedData = validation.data
     mutate(parsedData, {
+      onSuccess: () => {
+        toast.success("Opinia została dodana")
+        router.refresh()
+      },
       onError: (error) => {
         toast.error("Coś poszło nie tak")
         console.error(error.message)
       },
     })
-    console.log("Submitted comment:", { comment, rating })
+
     setIsOpen(false)
     setComment("")
     setRating(0)
   }
 
-  console.log(isSuccess, isPending)
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button variant="default">Dodaj opinię</Button>
+        <Button variant="default" disabled={isPending}>
+          {isPending ? (
+            <Icons.spinner className="size-4 animate-spin" />
+          ) : (
+            <>Dodaj opinię</>
+          )}
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>

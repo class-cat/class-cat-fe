@@ -3,6 +3,8 @@ import { Card, CardContent } from "~/components/ui/card"
 import { ENDPOINTS } from "~/lib/const"
 import { httpClient } from "~/lib/http-client"
 import { type Review } from "~/types/user.type"
+import { format } from "date-fns"
+import { pl } from "date-fns/locale"
 
 type ApiResponse<T> = {
   success: boolean
@@ -28,18 +30,24 @@ async function getReviews(slug: string): Promise<Array<Review>> {
 export default async function Reviews({ slug }: ReviewsProps) {
   const reviews = await getReviews(slug)
 
+  const sortedReviews = reviews.sort(
+    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+  )
   return (
     <>
       {reviews ? (
         <>
-          {reviews.map((review) => {
+          {sortedReviews.map((review) => {
             return (
               <Card className="border-2 border-secondary" key={review.slug}>
                 <CardContent className="p-4">
                   <div className="flex items-start justify-between">
                     <div>
                       <p className="font-semibold">
-                        {review.author.firstName} {review.author.lastName}
+                        {review.author.firstName} {review.author.lastName} -{" "}
+                        {format(new Date(review.createdAt), "dd MMM, yyyy", {
+                          locale: pl,
+                        })}
                       </p>
                       <p className="text-gray-600 text-sm">{review.comment}</p>
                     </div>

@@ -17,6 +17,7 @@ export interface Author {
 export interface Review {
   slug: string
   rating: number
+  createdAt: string
   comment: string
   author: Author
 }
