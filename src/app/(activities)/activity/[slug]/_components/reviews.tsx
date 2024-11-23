@@ -5,6 +5,7 @@ import { httpClient } from "~/lib/http-client"
 import { type Review } from "~/types/user.type"
 import { format } from "date-fns"
 import { pl } from "date-fns/locale"
+import RatingSummary from "./rating-summary"
 
 type ApiResponse<T> = {
   success: boolean
@@ -33,13 +34,20 @@ export default async function Reviews({ slug }: ReviewsProps) {
   const sortedReviews = reviews.sort(
     (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
   )
+
+  const ratings = reviews.map((review) => review.rating)
+
   return (
     <>
-      {reviews ? (
-        <>
+      <RatingSummary ratings={ratings} />
+      {reviews && reviews.length > 0 ? (
+        <div className="max-h-[550px] space-y-4 overflow-y-auto">
           {sortedReviews.map((review) => {
             return (
-              <Card className="border-2 border-secondary" key={review.slug}>
+              <Card
+                className="border-2 border-secondary transition-transform duration-300 ease-in-out"
+                key={review.slug}
+              >
                 <CardContent className="p-4">
                   <div className="flex items-start justify-between">
                     <div>
@@ -64,7 +72,7 @@ export default async function Reviews({ slug }: ReviewsProps) {
               </Card>
             )
           })}
-        </>
+        </div>
       ) : (
         <p className="font-semibold">
           Te zajęcia nie mają jeszcze recenzji. Bądź pierwszy!
