@@ -5,6 +5,7 @@ import {
   type UseInfiniteQueryOptions,
 } from "@tanstack/react-query"
 import { fetcher } from "~/lib/query-client"
+import { type DataType } from "~/types/data.type"
 import { type CordinatesType, type ResultType } from "~/types/search.type"
 
 type AddressType = {
@@ -23,13 +24,6 @@ export type SearchResultType = ResultType & {
 export type PagesType<T> = {
   pageParams: Array<number>
   pages: DataType<T>
-}
-export type DataType<T> = {
-  count: number | null
-  next: string | null
-  previous: string | null
-  data: Array<T>
-  sucess: boolean
 }
 
 type UseFetch<T> = {

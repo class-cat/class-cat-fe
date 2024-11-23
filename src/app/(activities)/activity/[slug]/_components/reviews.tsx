@@ -1,11 +1,8 @@
-import { Icons } from "~/components/icons"
-import { Card, CardContent } from "~/components/ui/card"
 import { ENDPOINTS } from "~/lib/const"
 import { httpClient } from "~/lib/http-client"
 import { type Review } from "~/types/user.type"
-import { format } from "date-fns"
-import { pl } from "date-fns/locale"
 import RatingSummary from "./rating-summary"
+import { ReviewCard } from "~/components/review-card"
 
 type ApiResponse<T> = {
   success: boolean
@@ -43,34 +40,7 @@ export default async function Reviews({ slug }: ReviewsProps) {
       {reviews && reviews.length > 0 ? (
         <div className="max-h-[550px] space-y-4 overflow-y-auto">
           {sortedReviews.map((review) => {
-            return (
-              <Card
-                className="border-2 border-secondary transition-transform duration-300 ease-in-out"
-                key={review.slug}
-              >
-                <CardContent className="p-4">
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <p className="font-semibold">
-                        {review.author.firstName} {review.author.lastName} -{" "}
-                        {format(new Date(review.createdAt), "dd MMM, yyyy", {
-                          locale: pl,
-                        })}
-                      </p>
-                      <p className="text-gray-600 text-sm">{review.comment}</p>
-                    </div>
-                    <div className="flex">
-                      {[...Array(review.rating)].map((_, i) => (
-                        <Icons.star
-                          key={i}
-                          className="size-5 fill-primary text-primary"
-                        />
-                      ))}
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            )
+            return <ReviewCard key={review.slug} review={review} />
           })}
         </div>
       ) : (
