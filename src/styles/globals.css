@@ -5,6 +5,8 @@
 @layer base {
   html {
     @apply text-foreground;
+    scroll-behavior: smooth;
+    min-width: 0;
   }
   h1 {
     @apply font-sans text-6xl font-black leading-[68px] tracking-tight text-foreground;
@@ -46,7 +48,7 @@
     @apply paddingX rounded-3xl bg-secondary  py-4;
   }
   .cardSmall {
-    @apply w-full shadow-none rounded-2xl border-2 border-secondary bg-secondary  px-4 py-4;
+    @apply w-full rounded-2xl border-2 border-secondary bg-secondary px-4  py-4 shadow-none;
   }
   .pSmall {
     @apply px-4 py-4;

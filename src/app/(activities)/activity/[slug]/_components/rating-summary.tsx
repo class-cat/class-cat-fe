@@ -1,29 +1,29 @@
-import { Progress } from "~/components/ui/progress";
-import { Icons } from "~/components/icons";
+import { Progress } from "~/components/ui/progress"
+import { Icons } from "~/components/icons"
 
-export default function RatingSummary() {
-  const ratings = [12, 10, 6, 3, 1];
-  const totalOpinions = ratings.reduce((sum, count) => sum + count, 0);
+type RatingSummaryProps = {
+  ratings: Array<number>
+}
+
+export default function RatingSummary({ ratings }: RatingSummaryProps) {
+  const totalOpinions = ratings.length
 
   const averageRating =
-    ratings.reduce((sum, count, index) => sum + count * (5 - index), 0) /
-    totalOpinions;
+    ratings.reduce((total, num) => total + num, 0) / totalOpinions
 
   return (
     <div className="bg-background w-full pb-12">
       <div className="grid grid-cols-1 gap-6 md:grid-cols-4">
         <div className="flex flex-col items-center justify-center gap-2 md:col-span-1">
-          <span className="text-5xl font-bold">
-            {averageRating.toFixed(1)}
-          </span>
+          <span className="text-5xl font-bold">{averageRating.toFixed(1)}</span>
           <div className="flex gap-0.5">
             {[...Array(5)].map((_, i) => (
               <Icons.star
-              key={i}
+                key={i}
                 className={`size-5 text-primary ${
-                i < Math.round(averageRating) ? "fill-primary" : ""
-              }`}
-            />
+                  i < Math.round(averageRating) ? "fill-primary" : ""
+                }`}
+              />
             ))}
           </div>
           <span className="text-muted-foreground text-sm">
@@ -46,5 +46,5 @@ export default function RatingSummary() {
         </div>
       </div>
     </div>
-  );
+  )
 }

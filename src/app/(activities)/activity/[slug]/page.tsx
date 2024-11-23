@@ -106,9 +106,7 @@ export default async function ActivityPage({ params }: { params: Params }) {
               <h2 className="mb-4 text-2xl font-bold">Opis zajęć</h2>
               <p>{activity.description}</p>
             </section>
-
             <section>
-              <RatingSummary />
               <div className="flex flex-col gap-4">
                 <div className="flex justify-between">
                   <h2 className="mb-4 text-2xl font-bold">Opinie</h2>
