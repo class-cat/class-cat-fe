@@ -118,7 +118,7 @@ export default function SignInPage() {
                         asChild
                         className="rounded-xl bg-white shadow-none"
                       >
-                        <Link href={ROUTES.COMPANY.SIGN_UP}>
+                        <Link prefetch={true} href={ROUTES.COMPANY.SIGN_UP}>
                           Nie masz konta? Zarejestruj się
                         </Link>
                       </Button>

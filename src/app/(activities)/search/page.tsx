@@ -15,7 +15,6 @@ import { Map, PlaceholderMap } from "../../_components/map"
 import { MobileMap } from "../../_components/map/mobileMap"
 import { ENDPOINTS } from "~/lib/const"
 import {
-  type DataType,
   type PagesType,
   type SearchResultType,
   useInfinityFetch,
@@ -23,6 +22,7 @@ import {
 import { useQueryClient } from "@tanstack/react-query"
 import { useFetch } from "~/app/_hooks/useFetch"
 import { type ResultType, type CordinatesType } from "~/types/search.type"
+import { type DataType } from "~/types/data.type"
 
 export type MapDataType = ResultType & {
   cordinates: CordinatesType
@@ -69,7 +69,7 @@ export default function SearchPage() {
       pageSize: 10,
     },
   })
-  console.log(activitiesData?.pages)
+
   const { data: mapData, isLoading: mapIsLoading } = useFetch<
     DataType<MapDataType>
   >({

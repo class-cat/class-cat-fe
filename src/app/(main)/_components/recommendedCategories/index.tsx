@@ -20,7 +20,7 @@ type Props = {
 
 const MostSearchItem = ({ title, desc, avatar, href }: Props) => {
   return (
-    <Link href={href}>
+    <Link prefetch={true} href={href}>
       <Card className="aspect-square rounded-2xl border-2 border-secondary bg-secondary p-4 shadow-none md:rounded-3xl">
         <CardContent className="flex h-full flex-col items-center justify-center space-y-2 p-0">
           <div className="relative size-20 object-fill">

@@ -127,7 +127,9 @@ export default function SignUpPage() {
                         className="shadow-none"
                         asChild
                       >
-                        <Link href="/sign-in">Masz już konto? Zaloguj się</Link>
+                        <Link prefetch={true} href="/sign-in">
+                          Masz już konto? Zaloguj się
+                        </Link>
                       </Button>
                     </div>
                   </CardFooter>

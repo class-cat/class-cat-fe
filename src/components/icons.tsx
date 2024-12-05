@@ -135,7 +135,7 @@ export const Icons = {
   google: (props: LucideProps) => (
     <svg
       {...props}
-      enable-background="new 0 0 48 48"
+      enableBackground="new 0 0 48 48"
       height="48"
       viewBox="0 0 48 48"
       width="48"

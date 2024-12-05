@@ -29,7 +29,7 @@ export default function BusinessAccountSection() {
   ]
 
   return (
-    (<motion.section
+    <motion.section
       ref={ref as RefObject<HTMLDivElement | null>}
       initial={{ opacity: 0, y: 50 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
@@ -76,7 +76,7 @@ export default function BusinessAccountSection() {
             </CardContent>
             <CardFooter>
               <Button className="w-full py-6 text-lg">
-                <Link href={ROUTES.COMPANY.SIGN_UP}>
+                <Link prefetch={true} href={ROUTES.COMPANY.SIGN_UP}>
                   Rozpocznij rejestrację
                 </Link>
               </Button>
@@ -84,6 +84,6 @@ export default function BusinessAccountSection() {
           </Card>
         </div>
       </div>
-    </motion.section>)
-  );
+    </motion.section>
+  )
 }

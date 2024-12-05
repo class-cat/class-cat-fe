@@ -40,7 +40,8 @@ import { toast } from "sonner"
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar"
 import { useUser } from "@clerk/nextjs"
 import { Skeleton } from "~/components/ui/skeleton"
-import { LessonCard } from "./_components/lessonCard"
+import { LessonCard } from "./_components/lesson-card"
+import { UserReviewContent } from "./_components/review-content"
 
 const tabsTriggers = [
   {
@@ -106,7 +107,10 @@ const ProfileTabsContent = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="max-h-dvh space-y-8 overflow-y-auto"
+      >
         <TabsContent value="lessons" className="card">
           <div className="flex flex-col gap-4">
             {lessons.map((lesson) => (
@@ -114,8 +118,8 @@ const ProfileTabsContent = () => {
             ))}
           </div>
         </TabsContent>
-        <TabsContent value="reviews" className="card">
-          <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">test</div>
+        <TabsContent value="reviews" className="">
+          <UserReviewContent />
         </TabsContent>
         <TabsContent value="school" className="card">
           <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">test</div>

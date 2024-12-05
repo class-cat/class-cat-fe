@@ -3,6 +3,8 @@ import { ClerkProvider } from "@clerk/nextjs"
 import { plPL } from "@clerk/localizations"
 import { ReactQueryProvider } from "~/providers/reactquery-provider"
 import { inter, mochiy } from "~/styles/fonts"
+import TokenProvider from "~/providers/token-provider"
+import { Toaster } from "sonner"
 
 export const metadata = {
   title: "Create T3 App",
@@ -17,12 +19,13 @@ export default function RootLayout({
 }) {
   return (
     <ReactQueryProvider>
-      <ClerkProvider localization={plPL}>
+      <ClerkProvider localization={plPL} dynamic>
         <html lang="en">
           <body
             className={`font-sans ${inter.variable} dark ${mochiy.variable}`}
           >
-            {children}
+            <TokenProvider>{children}</TokenProvider>
+            <Toaster position="top-right" richColors />
           </body>
         </html>
       </ClerkProvider>
