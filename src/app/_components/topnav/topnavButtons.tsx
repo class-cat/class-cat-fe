@@ -20,9 +20,9 @@ export function TopNavButtons() {
     return (
       <div className="flex flex-row items-center gap-4 max-sm:hidden">
         <SignedOut>
-          <SignInButton>
-            <Button className="shadow-none">Zaloguj się</Button>
-          </SignInButton>
+            <Button className="shadow-none" asChild>
+            <Link href={ROUTES.ROOT.SIGN_IN}>Zaloguj się</Link>
+            </Button>
         </SignedOut>
         <SignedIn>
           <UserButton userProfileUrl={ROUTES.ROOT.PROFILE} />

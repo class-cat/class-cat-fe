@@ -15,6 +15,7 @@ import {
 } from "~/components/ui/card"
 import { Input } from "~/components/ui/input"
 import { Label } from "~/components/ui/label"
+import { ROUTES } from "~/lib/const"
 import { cn } from "~/lib/utils"
 
 export default function SignUpPage() {
@@ -127,7 +128,7 @@ export default function SignUpPage() {
                         className="shadow-none"
                         asChild
                       >
-                        <Link prefetch={true} href="/sign-in">
+                        <Link prefetch={true} href={ROUTES.ROOT.SIGN_IN}>
                           Masz już konto? Zaloguj się
                         </Link>
                       </Button>
