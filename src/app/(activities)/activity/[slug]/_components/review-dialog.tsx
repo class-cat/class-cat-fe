@@ -19,8 +19,6 @@ import { toast } from "sonner"
 import { type Review } from "~/types/user.type"
 import { useRouter } from "next/navigation"
 
-// import { useToken } from "~/app/_hooks/useToken"
-
 interface ReviewDialogProps {
   acticitySlug: string
 }

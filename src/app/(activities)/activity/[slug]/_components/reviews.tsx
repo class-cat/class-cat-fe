@@ -38,7 +38,7 @@ export default async function Reviews({ slug }: ReviewsProps) {
     <>
       <RatingSummary ratings={ratings} />
       {reviews && reviews.length > 0 ? (
-        <div className="max-h-[550px] space-y-4 overflow-y-auto">
+        <div className="md:sidebar h-[550px] space-y-4 overflow-y-auto md:pr-3">
           {sortedReviews.map((review) => {
             return <ReviewCard key={review.slug} review={review} />
           })}
