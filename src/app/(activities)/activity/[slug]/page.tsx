@@ -1,183 +1,81 @@
+import { Suspense } from "react"
 import { SignedIn } from "@clerk/nextjs"
 import Image from "next/image"
-import { Map } from "~/app/_components/map"
-
-import { Icons } from "~/components/icons"
+import { notFound } from "next/navigation"
 import { Button } from "~/components/ui/button"
-import { Card, CardContent, CardFooter } from "~/components/ui/card"
+import { Card, CardContent } from "~/components/ui/card"
 import { Container } from "~/components/ui/container"
-import { ENDPOINTS } from "~/lib/const"
-import { httpClient } from "~/lib/http-client"
-import { type Activity } from "~/types/search.type"
 import { AddReviewDialog } from "../_components/review-dialog"
-import { MobileMap } from "~/app/_components/map/mobileMap"
 import RatingSummary from "../_components/rating-summary"
+import { getActivityInfo } from "~/app/api/activities"
+import ActivityMap from "../_components/activity-map"
+import OtherActivities from "../_components/other-activities"
+import SimilarActivities from "../_components/similar-activities"
+import { ReviewCard } from "../_components/review-card"
+import { ActivityDetails } from "../_components/activity-details"
+import { type Activity } from "~/types/search.type"
 
-type ApiResponse<T> = {
-  success: boolean
-  data: T
-}
-async function getActivityInfo(slug: string): Promise<Activity> {
+export default async function ActivityPage({ params }: { params: { slug: string } }) {
+  let activity: Activity;
   try {
-    const response = await httpClient.get<ApiResponse<Activity>>(
-      `${ENDPOINTS.ACTIVITIES}${slug}`
-    )
-    return response.data
+    activity = await getActivityInfo(params.slug)
   } catch (error) {
-    console.error("Failed to fetch activity info:", error)
-    throw error
+    notFound()
   }
-}
-
-type Params = Promise<{ slug: string }>
-export default async function ActivityPage({ params }: { params: Params }) {
-  const { slug } = await params
-  const activity = await getActivityInfo(slug)
-  console.log(activity)
 
   return (
-    <Container className="container h-[calc(100vh-120px)]">
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-        <Card className="cardSmall w-full">
-          <CardContent className="px-0">
-            <div className="flex space-x-4">
+    <Container className="container min-h-[calc(100vh-120px)] space-y-8">
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+        <Card className="cardSmall w-full md:col-span-2">
+          <CardContent className="p-0 ">
+            <div className="flex flex-col  space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
               <Image
                 src={activity.primaryImage.file}
-                alt="Activity Image"
-                width={144}
-                height={144}
-                className="bg-gray-200 size-36 rounded-md object-cover"
+                alt={activity.name}
+                width={480}
+                height={480}
+                className="bg-gray-200 size-36 rounded-md object-cover sm:size-48"
               />
-              <div className="flex-1">
-                <h1 className="mb-2 text-2xl font-bold leading-tight">
-                  {activity.name}
-                </h1>
-                <p className="flex items-start text-sm font-medium sm:text-base">
-                  <Icons.map className="mr-2 mt-1 size-4 shrink-0" />
-                  <span className="break-words">{activity.provider.name}</span>
-                </p>
-                {activity.location ? (
-                  <p className="flex items-start text-sm font-medium sm:text-base">
-                    <Icons.map className="mr-2 mt-1 size-4 shrink-0" />
-                    <span className="break-words">
-                      {" "}
-                      {activity.location.address.address_line}{" "}
-                      {activity.location.address.city}
-                    </span>
-                  </p>
-                ) : null}
-                <p className="flex items-start text-sm font-medium sm:text-base">
-                  <Icons.phone className="mr-2 mt-1 size-4 shrink-0" />
-                  <span className="break-words">
-                    {activity.provider.phoneNumber}
-                  </span>
-                </p>
+              <div className="flex flex-1 flex-col justify-between space-y-2">
+                <div className="space-y-2">
+                  <h1 className="text-2xl font-bold leading-tight">{activity.name}</h1>
+                  <ActivityDetails activity={activity} />
+                </div>
+                <div className="mt-auto flex justify-end">
+                  <Button variant="outline" className="rounded-lg shadow-none" size="sm">
+                    Wyświetl informacje
+                  </Button>
+                </div>
               </div>
             </div>
           </CardContent>
-          <CardFooter className="flex items-center justify-end p-0">
-            <Button variant="outline" size={"lg"}>
-              Wyświetl informacje
-            </Button>
-          </CardFooter>
         </Card>
-        <div className="md:hidden">
-          <MobileMap />
-        </div>
-        <div className="hidden md:block">
-          <Map />
-        </div>
+        <Suspense fallback={<div className="bg-gray-200 h-[300px] animate-pulse" />}>
+          <ActivityMap />
+        </Suspense>
       </div>
-      <div className="sm:h-8" />
-      <div className="py-2">
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
-          <div className="space-y-8 lg:col-span-2">
-            <section>
-              <h2 className="mb-4 text-2xl font-bold">Opis zajęć</h2>
-              <p>{activity.description}</p>
-            </section>
-
-            <section>
-              <RatingSummary/>
-              <div className="flex justify-between">
-                <SignedIn>
-                  <AddReviewDialog />
-                </SignedIn>
-              </div>
-              <Card className="border-2 border-secondary">
-                <CardContent className="p-4">
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <p className="font-semibold">
-                        Jan Kowalski - 20 Mar, 2024
-                      </p>
-                      <p className="text-gray-600 text-sm">
-                        Syn mówi, że najlepsze zajęcia na jakich był, gorąco
-                        polecamy!
-                      </p>
-                    </div>
-                    <div className="flex">
-                      {[...Array(5)].map((_, i) => (
-                        <Icons.star
-                          key={i}
-                          className="size-5 fill-primary text-primary"
-                        />
-                      ))}
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </section>
-          </div>
-
-          <div className="cardSmall space-y-8">
-            <section>
-              <h2 className="mb-4 text-2xl font-bold">Inne zajęcia w szkole</h2>
-              <Card className="mb-4 cursor-pointer bg-white radius-xs border-none hover:shadow-md">
-                <CardContent className="p-4">
-                  <h3 className="text-lg font-semibold">
-                    Koszykówka dla dzieci 1-3
-                  </h3>
-                  <div className="mt-2 flex space-x-2">
-                    <span className=" border-secondary border-2 rounded-lg px-2 py-1 text-sm">
-                      poniedziałek
-                    </span>
-                    <span className=" border-secondary border-2 rounded-lg px-2 py-1 text-sm">
-                      środa
-                    </span>
-                  </div>
-                </CardContent>
-              </Card>
-              <Button variant="outline" className="w-full">
-                Pokaż więcej
-              </Button>
-            </section>
-
-            <section>
-              <h2 className="mb-4 text-2xl font-bold">
-                Sprawdź podobne zajęcia
-              </h2>
-              <Card className="mb-4 bg-white border-none cursor-pointer  hover:shadow-md">
-                <CardContent className="p-4">
-                  <h3 className="text-lg font-semibold">
-                    Siatkówka dla dzieci 3-6
-                  </h3>
-                  <p className="text-gray-600 text-sm">Szkoła Podstawowa 2</p>
-                </CardContent>
-              </Card>
-              {[...Array(4)].map((_, i) => (
-                <div
-                  key={i}
-                  className="mb-4 h-16 rounded-xl bg-white radius-xs border-none cursor-pointer  hover:shadow-md"
-                ></div>
-              ))}
-              <Button variant="outline" className="w-full">
-                Pokaż więcej
-              </Button>
-            </section>
-          </div>
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+        <div className="space-y-8 lg:col-span-2">
+          <section>
+            <h2 className="mb-4 text-2xl font-bold">Opis zajęć</h2>
+            <p>{activity.description}</p>
+          </section>
+          <section>
+            <RatingSummary />
+            <SignedIn>
+              <AddReviewDialog />
+            </SignedIn>
+            <ReviewCard />
+          </section>
+        </div>
+        <div className="cardSmall mb-8 space-y-8">
+          <OtherActivities slug={activity.provider?.slug} />
+          <SimilarActivities slug={activity?.slug} />
         </div>
       </div>
     </Container>
   )
 }
+
+
+
