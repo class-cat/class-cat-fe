@@ -14,11 +14,26 @@ import SimilarActivities from "../_components/similar-activities"
 import { ReviewCard } from "../_components/review-card"
 import { ActivityDetails } from "../_components/activity-details"
 import { type Activity } from "~/types/search.type"
+import { type Metadata } from "next"
 
-export default async function ActivityPage({ params }: { params: { slug: string } }) {
+type ActivityPageProps = {
+  params: Promise<{ slug: string }>
+}
+
+export async function generateMetadata({ params }: ActivityPageProps): Promise<Metadata> {
+  const resolvedParams = await params
+  return {
+    title: `Activity: ${resolvedParams.slug}`,
+  }
+}
+
+export default async function ActivityPage({ params }: ActivityPageProps) {
+
+  const resolvedParams = await params
+
   let activity: Activity;
   try {
-    activity = await getActivityInfo(params.slug)
+    activity = await getActivityInfo(resolvedParams.slug)
   } catch (error) {
     notFound()
   }
