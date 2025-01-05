@@ -6,6 +6,7 @@ import {
   useQueryClient,
 } from "@tanstack/react-query"
 import { httpClient } from "./http-client"
+import { useAuth } from "@clerk/nextjs"
 
 export type FetchConfig<T> = Omit<
   UseQueryOptions<T, Error, T, QueryKeyT>,
@@ -32,6 +33,7 @@ export const useGenericMutation = <T, S>(
   invalidateQuery?: InvalidateQueryFilters
 ) => {
   const queryClient = useQueryClient()
+
   const queryKey = [url!, params] as const
   return useMutation<Response, Error, T | S>({
     mutationFn: async (data: T | S) => {
