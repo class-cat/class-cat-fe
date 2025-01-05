@@ -27,10 +27,8 @@ export function TopNavButtons() {
         <SignedIn>
           <UserButton userProfileUrl={ROUTES.ROOT.PROFILE} />
         </SignedIn>
-        <Button variant="outline" asChild>
-          <Link prefetch={true} href={ROUTES.COMPANY.ROOT}>
-            Dodaj zajęcia
-          </Link>
+        <Button variant="outline" className="shadow-none" asChild>
+          <Link href={ROUTES.COMPANY.ROOT}>Dodaj zajęcia</Link>
         </Button>
       </div>
     )
