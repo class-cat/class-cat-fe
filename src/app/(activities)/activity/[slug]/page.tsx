@@ -41,7 +41,7 @@ export default async function ActivityPage({ params }: ActivityPageProps) {
   return (
     <Container className="container mb-8 min-h-[calc(100vh-120px)] space-y-8">
       <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-        <Card className="cardSmall w-full md:col-span-2 p-0">
+        <Card className="cardSmall w-full p-0 md:col-span-2">
           <CardContent className="p-0">
             <div className="flex flex-col  space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
               <Image
@@ -49,7 +49,7 @@ export default async function ActivityPage({ params }: ActivityPageProps) {
                 alt={activity.name}
                 width={480}
                 height={480}
-                className="bg-gray-200 size-36 rounded-md object-cover sm:size-48 rounded-r-none"
+                className="bg-gray-200 size-36 rounded-md rounded-r-none object-cover sm:size-48"
               />
               <div className="flex flex-1 flex-col justify-between space-y-2 p-4 pl-0">
                 <div className="space-y-2">

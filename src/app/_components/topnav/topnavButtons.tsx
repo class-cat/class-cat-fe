@@ -8,6 +8,15 @@ import { Icons } from "~/components/icons"
 import { Button } from "~/components/ui/button"
 import { MOBILE_BREAKPOINT, ROUTES } from "~/lib/const"
 
+export const userButtonAppearance = {
+  elements: {
+    avatarBox: "w-10 h-10",
+    userButtonAvatarBox: "w-10 h-10",
+    userButtonTrigger: "focus:shadow-none focus:outline-none",
+  },
+}
+
+
 export function TopNavButtons() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const isMobile = useMediaQuery(MOBILE_BREAKPOINT)
@@ -25,7 +34,10 @@ export function TopNavButtons() {
             </Button>
         </SignedOut>
         <SignedIn>
-          <UserButton userProfileUrl={ROUTES.ROOT.PROFILE} />
+          <UserButton 
+            userProfileUrl={ROUTES.ROOT.PROFILE} 
+            appearance={userButtonAppearance}
+          />
         </SignedIn>
         <Button variant="outline" className="shadow-none" asChild>
           <Link href={ROUTES.COMPANY.ROOT}>Dodaj zajęcia</Link>
