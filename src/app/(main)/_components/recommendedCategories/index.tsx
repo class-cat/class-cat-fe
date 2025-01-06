@@ -22,14 +22,14 @@ const MostSearchItem = ({ title, desc, avatar, href }: Props) => {
   return (
     <Link prefetch={true} href={href}>
       <Card className="aspect-square rounded-2xl border-2 border-secondary bg-secondary p-4 shadow-none md:rounded-3xl">
-        <CardContent className="flex h-full flex-col items-center justify-center space-y-2 p-0">
-          <div className="relative size-20 object-fill">
+        <CardContent className="flex h-full flex-col items-center justify-center  p-2">
+          <div className="relative size-16 object-fill">
             <Image
               src={avatar}
               alt={title}
               className="rounded-lg"
-              width={80}
-              height={80}
+              width={200}
+              height={200}
             />
           </div>
           <div className="flex flex-col items-center justify-center pt-2 text-center capitalize max-md:hidden">
@@ -45,15 +45,56 @@ const MostSearchItem = ({ title, desc, avatar, href }: Props) => {
   )
 }
 
-const createCardItems = (count: number) =>
-  Array.from({ length: count }, () => ({
+const mostSearchedItems = [
+  {
     title: "piłka nożna",
     desc: "34",
-    avatar: "ball.svg",
+    avatar: "football.svg",
     href: "search?category=pilkanozna",
-  }))
-
-const mostSearchedItems = createCardItems(16)
+  },
+  {
+    title: "łucznictwo",
+    desc: "4",
+    avatar: "archery.svg",
+    href: "search?category=lucznictwo",
+  },
+  {
+    title: "badminton",
+    desc: "14",
+    avatar: "badminton.svg",
+    href: "search?category=badminton",
+  },
+  {
+    title: "tenis",
+    desc: "32",
+    avatar: "tennis.svg",
+    href: "search?category=tenis",
+  },
+  {
+    title: "koszykówka",
+    desc: "61",
+    avatar: "basketball.svg",
+    href: "search?category=koszykowka",
+  },
+  {
+    title: "boks",
+    desc: "12",
+    avatar: "boxing.svg",
+    href: "search?category=boks",
+  },
+  {
+    title: "golf",
+    desc: "9",
+    avatar: "golf.svg",
+    href: "search?category=golf",
+  },
+  {
+    title: "piłka ręczna",
+    desc: "4",
+    avatar: "handball.svg",
+    href: "search?category=pilkareczna",
+  },
+]
 
 const RecommendedCategories: React.FC = () => {
   return (
