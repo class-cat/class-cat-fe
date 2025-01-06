@@ -41,19 +41,19 @@ export default async function ActivityPage({ params }: ActivityPageProps) {
   return (
     <Container className="container mb-8 min-h-[calc(100vh-120px)] space-y-8">
       <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-        <Card className="cardSmall w-full md:col-span-2">
-          <CardContent className="p-0 ">
+        <Card className="cardSmall w-full md:col-span-2 p-0">
+          <CardContent className="p-0">
             <div className="flex flex-col  space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
               <Image
                 src={activity.primaryImage.file}
                 alt={activity.name}
                 width={480}
                 height={480}
-                className="bg-gray-200 size-36 rounded-md object-cover sm:size-48"
+                className="bg-gray-200 size-36 rounded-md object-cover sm:size-48 rounded-r-none"
               />
-              <div className="flex flex-1 flex-col justify-between space-y-2">
+              <div className="flex flex-1 flex-col justify-between space-y-2 p-4 pl-0">
                 <div className="space-y-2">
-                  <h1 className="text-2xl font-bold leading-tight">{activity.name}</h1>
+                  <h4 className="text-2xl">{activity.name}</h4>
                   <ActivityDetails activity={activity} />
                 </div>
                 <div className="mt-auto flex justify-end">
@@ -72,7 +72,7 @@ export default async function ActivityPage({ params }: ActivityPageProps) {
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
         <div className="space-y-8 lg:col-span-2">
           <section>
-            <h2 className="mb-4 text-2xl font-bold">Opis zajęć</h2>
+            <h4 className="mb-4 text-2xl ">Opis zajęć</h4>
             <p>{activity.description}</p>
           </section>
           <section>

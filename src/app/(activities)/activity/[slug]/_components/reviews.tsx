@@ -44,7 +44,7 @@ export default async function Reviews({ slug }: ReviewsProps) {
           })}
         </div>
       ) : (
-        <p className="font-semibold">
+        <p>
           Te zajęcia nie mają jeszcze recenzji. Bądź pierwszy!
         </p>
       )}

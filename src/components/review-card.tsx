@@ -14,7 +14,7 @@ const ReviewCard = ({ review }: ReviewCardProps) => {
       <CardContent className="p-4">
         <div className="flex items-start justify-between">
           <div>
-            <p className="font-semibold">
+            <p>
               {review.author.firstName} {review.author.lastName} -{" "}
               {format(new Date(review.createdAt), "dd MMM, yyyy", {
                 locale: pl,
