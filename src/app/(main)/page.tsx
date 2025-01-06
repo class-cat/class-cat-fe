@@ -1,6 +1,6 @@
 "use client"
 
-import React, { Suspense, useEffect, useMemo, useRef, useState } from "react"
+import React, { Suspense, useEffect, useMemo, useRef } from "react"
 import { useQueryClient } from "@tanstack/react-query"
 import { Container } from "~/components/ui/container"
 import { ENDPOINTS } from "~/lib/const"
@@ -14,7 +14,6 @@ import CompanyOffer from "./_components/companyOffer"
 import { CategoryTabs } from "./_components/categoryTabs"
 import { useInfiniteScroll } from "../_hooks/useInfiniteScroll"
 import { SearchBar } from "./_components/searchbar"
-import { useAuth, useUser } from "@clerk/nextjs"
 
 export default function HomePage() {
   const [searchType, setSearchType] = React.useState("newest")

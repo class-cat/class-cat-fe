@@ -8,10 +8,10 @@ export default function SimilarActivities({ slug }: { slug: string }) {
 
   return (
     <section>
-      <h2 className="mb-4 text-2xl font-bold">Sprawdź podobne zajęcia</h2>
+      <h4 className="mb-4 text-2xl">Sprawdź podobne zajęcia</h4>
       <Card className="mb-4 cursor-pointer border-none bg-white hover:shadow-md">
         <CardContent className="p-4">
-          <h3 className="text-lg font-semibold">Siatkówka dla dzieci 3-6</h3>
+          <h4 className="text-lg">Siatkówka dla dzieci 3-6</h4>
           <p className="text-gray-600 text-sm">Szkoła Podstawowa 2</p>
         </CardContent>
       </Card>
