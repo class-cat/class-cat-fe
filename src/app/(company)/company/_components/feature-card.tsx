@@ -11,15 +11,15 @@ interface FeatureCardProps {
     description: string[]
   }
   index: number
-  onHover: () => void
-  onLeave: () => void
+  isActive: boolean
+  onClick: () => void
 }
 
 export function FeatureCard({
   feature,
   index,
-  onHover,
-  onLeave,
+  isActive,
+  onClick,
 }: FeatureCardProps) {
   const [ref, isInView] = useInView<HTMLDivElement>({
     threshold: 0.1,
@@ -27,16 +27,19 @@ export function FeatureCard({
   })
 
   return (
-    (<motion.div
+    <motion.div
       ref={ref as RefObject<HTMLDivElement | null>}
       className="flex"
       initial={{ opacity: 0, y: 50 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      onMouseEnter={onHover}
-      onMouseLeave={onLeave}
+      onClick={onClick} // Changes active state
     >
-      <Card className="flex w-full flex-col border-secondary bg-[#fff] shadow-sm transition-shadow duration-300 hover:shadow-md">
+      <Card
+        className={`flex w-full flex-col bg-[#fff] shadow-sm transition-shadow duration-300 hover:shadow-md ${
+          isActive ? 'border-primary border-2' : 'border-secondary border'
+        }`}
+      >
         <CardHeader className="flex flex-row items-center gap-4">
           <feature.icon className="size-10 shrink-0 text-primary" />
           <CardTitle className="text-lg text-primary">
@@ -53,6 +56,6 @@ export function FeatureCard({
           </div>
         </CardContent>
       </Card>
-    </motion.div>)
-  );
+    </motion.div>
+  )
 }
