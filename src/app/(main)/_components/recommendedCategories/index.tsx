@@ -87,13 +87,7 @@ const mostSearchedItems = [
     desc: "9",
     avatar: "golf.svg",
     href: "search?category=golf",
-  },
-  {
-    title: "piłka ręczna",
-    desc: "4",
-    avatar: "handball.svg",
-    href: "search?category=pilkareczna",
-  },
+  }
 ]
 
 const RecommendedCategories: React.FC = () => {

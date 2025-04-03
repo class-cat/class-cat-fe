@@ -1,6 +1,7 @@
 import "~/styles/globals.css"
 import { TopNav } from "../_components/topnav/topnav"
 import React from "react"
+import { Footer } from "./_components/footer"
 
 export default function RootLayout({
   children,
@@ -13,9 +14,7 @@ export default function RootLayout({
         <TopNav />
         <main className="bg-white">{children}</main>
       </div>
-      <footer className="padding h-[153px] bg-foreground text-white max-md:hidden">
-        ClassCat
-      </footer>
+      <Footer/>
     </>
   )
 }

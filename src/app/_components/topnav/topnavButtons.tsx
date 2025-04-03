@@ -1,6 +1,6 @@
 "use client"
 
-import { SignedOut, SignInButton, SignedIn, UserButton } from "@clerk/nextjs"
+import { SignedOut, SignedIn, UserButton } from "@clerk/nextjs"
 import Link from "next/link"
 import { useState } from "react"
 import { useMediaQuery } from "~/app/_hooks/useMediaQuery"
