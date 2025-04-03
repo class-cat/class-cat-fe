@@ -5,27 +5,78 @@
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
-.maplibregl-popup-anchor-top {
-  display: none;
+/* Base styles for the popup */
+.custom-popup .maplibregl-popup-content {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  padding: 0;
+  min-width: 180px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Style the popup tip (arrow) */
+.custom-popup .maplibregl-popup-tip {
+  border-top-color: #ffffff;
+}
+
+.maplibregl-popup-close-button {
+  visibility: hidden;
 }
 
 .maplibregl-popup-tip {
-  display: none;
+  visibility: hidden;
 }
 
-.maplibregl-popup-content {
-  background: #fff;
-  border-radius: 3px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  padding: 15px 10px;
-  pointer-events: auto;
-  position: relative;
-  cursor: pointer;
+/* Close button styling */
+.custom-popup {
+  color: #6b7280;
+  font-size: 16px;
+  padding: 4px;
+  transition: color 0.2s ease;
 }
 
-.maplibregl-popup-content:hover {
-  background: #fcfcfc;
+.custom-popup {
+  color: #374151;
 }
-.maplibregl-canvas {
-  border-radius: 1rem;
+
+/* Content styling */
+.custom-popup .maplibregl-popup-content > div {
+  padding: 12px 16px;
+}
+
+/* Title styling */
+.custom-popup h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 4px;
+  line-height: 1.2;
+}
+
+/* Paragraph/ID styling */
+.custom-popup p {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Image styling */
+.custom-popup img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Animation */
+.custom-popup {
+  animation: popupFadeIn 0.2s ease-out;
+}
+
+
+/* Optional: Hover effect for the entire popup */
+.custom-popup .maplibregl-popup-content:hover {
+  box-shadow: 0 7px 14px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.2s ease;
 }
