@@ -75,7 +75,7 @@ export default function BusinessAccountSection() {
               </ol>
             </CardContent>
             <CardFooter>
-              <Button className="w-full py-6 text-lg">
+              <Button className="mt-6 w-full py-6 text-lg">
                 <Link prefetch={true} href={ROUTES.COMPANY.SIGN_UP}>
                   Rozpocznij rejestrację
                 </Link>

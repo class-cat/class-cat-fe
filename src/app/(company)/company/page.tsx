@@ -67,11 +67,15 @@ const features: Feature[] = [
 ]
 
 export default function HomePage() {
-  const [hoveredFeature, setHoveredFeature] = useState<number>(0)
+  const [activeFeature, setActiveFeature] = useState<number>(0) // Default to "Inteligentny kalendarz"
   const [ref, isInView] = useInView<HTMLDivElement>({
     threshold: 0.1,
     freezeOnceVisible: true,
   })
+
+  const handleCardClick = (index: number) => {
+    setActiveFeature(index) // Update active card and image on click
+  }
 
   return (
     <Container className="h-full flex-1 justify-center pt-2 md:pt-6">
@@ -86,10 +90,7 @@ export default function HomePage() {
         id="features"
         className="md:py-18 w-full py-12"
       >
-        <div className="container px-4 md:px-6">
-          <h3 className="mb-10 text-center tracking-tighter">
-            Zaawansowane narzędzia dla biznesu
-          </h3>
+        <div className="container">
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 lg:gap-8">
             <div className="grid grid-cols-1 gap-6">
               {features.map((feature, index) => (
@@ -97,20 +98,18 @@ export default function HomePage() {
                   key={feature.title}
                   feature={feature}
                   index={index}
-                  onHover={() => setHoveredFeature(index)}
-                  onLeave={() => setHoveredFeature(index)}
+                  isActive={index === activeFeature} // Pass active state
+                  onClick={() => handleCardClick(index)} // Handle click
                 />
               ))}
             </div>
             <div className="col-span-2 hidden lg:block">
               <div className="sticky top-24 space-y-6">
                 <AnimatePresence mode="wait">
-                  {features[hoveredFeature] && (
-                    <FeatureImage
-                      key={hoveredFeature}
-                      feature={features[hoveredFeature]}
-                    />
-                  )}
+                  <FeatureImage
+                    key={activeFeature} // Use activeFeature as key
+                    feature={features[activeFeature] as Feature} // Display image of active feature
+                  />
                 </AnimatePresence>
               </div>
             </div>
