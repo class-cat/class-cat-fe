@@ -31,7 +31,7 @@ export function LessonCard({ lesson }: { lesson: LessonType }) {
   const { day, hour } = lesson
 
   return (
-    <Card lesson={lesson}>
+    <Card lesson={lesson} >
       <Card.RightSlot className="flex flex-col gap-1 text-right">
         <span className="text-2xl font-bold">{hour}</span>
         <span className="text-xl font-semibold">{dayTranslations[day]}</span>
