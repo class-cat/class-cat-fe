@@ -14,10 +14,20 @@ export interface Author {
   avatar: Avatar
 }
 
+export interface Activity {
+  addedAt: string
+  slug: string
+  location: Location
+  name: string
+  primaryImage: any
+  provider: any
+}
+
 export interface Review {
   slug: string
   rating: number
   createdAt: string
   comment: string
   author: Author
+  activity: Activity
 }

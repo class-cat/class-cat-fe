@@ -54,11 +54,6 @@ const tabsTriggers = [
     title: "Opinie",
     value: "reviews",
   },
-  // {
-  //   id: 3,
-  //   title: "Szkoła",
-  //   value: "school",
-  // },
   {
     id: 4,
     title: "Ustawienia",
@@ -75,7 +70,7 @@ const lessons = [
     address: "Gdańsk, Dragana 2",
     day: "monday",
     hour: "12:00",
-    avatar: "/stock.jpeg",
+    avatar: "/tennis.svg",
   },
   {
     id: 2,
@@ -85,7 +80,7 @@ const lessons = [
     address: "Gdańsk, Dragana 2",
     day: "tuesday",
     hour: "12:00",
-    avatar: "/stock.jpeg",
+    avatar: "/handball.svg",
   },
 ] as const
 
@@ -111,24 +106,21 @@ const ProfileTabsContent = () => {
         onSubmit={form.handleSubmit(onSubmit)}
         className="max-h-dvh space-y-8 overflow-y-auto"
       >
-        <TabsContent value="lessons" className="card">
+        <TabsContent value="lessons">
           <div className="flex flex-col gap-4">
             {lessons.map((lesson) => (
               <LessonCard key={lesson.id} lesson={lesson} />
             ))}
           </div>
         </TabsContent>
-        <TabsContent value="reviews" className="">
+        <TabsContent value="reviews">
           <UserReviewContent />
         </TabsContent>
-        <TabsContent value="school" className="card">
-          <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">test</div>
-        </TabsContent>
-        <TabsContent value="settings" className="card">
+        <TabsContent value="settings">
           <div className="flex flex-col gap-8">
             <div className="flex min-w-[240px] flex-col justify-between">
               <div className="flex flex-col gap-4">
-                <h2 className="text-xl font-bold">Powiadomienia</h2>
+                <h2 className="text-xl font-[500]">Powiadomienia</h2>
                 <FormField
                   control={form.control}
                   name="email"
@@ -167,16 +159,16 @@ const ProfileTabsContent = () => {
               </div>
             </div>
             <div className="flex flex-col gap-4">
-              <h2 className="text-xl font-bold">Polityka Prywatności</h2>
-              <Button className="w-full bg-white" variant={"link"}>
+              <h2 className="text-xl font-[500]">Polityka Prywatności</h2>
+              <Button className="w-full " variant={"outline"}>
                 Umowy o poufności
               </Button>
-              <Button className="w-full bg-white" variant={"link"}>
+              <Button className="w-full " variant={"outline"}>
                 Prawa wnioski/RODO
               </Button>
             </div>
             <div className="flex flex-col gap-4">
-              <h2 className="text-xl font-bold">Konto</h2>
+              <h2 className="text-xl font-[500]">Konto</h2>
               <Button className="bg-outline" variant={"combobox"} disabled>
                 Usuń konto
               </Button>
