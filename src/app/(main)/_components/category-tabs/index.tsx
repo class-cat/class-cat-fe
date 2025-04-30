@@ -1,14 +1,8 @@
 import React from 'react'
 import { Tabs, TabsList, TabsTrigger } from "~/components/ui/tabs"
+import { tabsTriggers } from './category-tabs-constatns'
 
-const tabsTriggers = [
-  { id: 1, title: "Oferty dnia", value: "today" },
-  { id: 2, title: "Polecane", value: "recommended" },
-  { id: 3, title: "Najnowsze oferty", value: "newest" },
-  { id: 4, title: "Polubione", value: "viewed" },
-]
-
-type Props = {
+interface Props {
   onTabChange: (value: string) => () => void
   children: React.ReactNode
 }

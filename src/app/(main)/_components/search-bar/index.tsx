@@ -6,9 +6,9 @@ import { useGetLocations } from "~/actions/get-locations"
 import { Icons } from "~/components/icons"
 import { Button } from "~/components/ui/button"
 import { Input } from "~/components/ui/input"
-import { SearchCombobox } from "./searchComboBox"
+import { SearchBarCombobox } from "./search-bar-combobox"
 import React from "react"
-import { PawsBackground } from "./catPaws"
+import { PawsBackground } from "./paws-background"
 
 export const SearchBar = () => {
   const searchParams = useSearchParams()
@@ -41,7 +41,7 @@ export const SearchBar = () => {
           </div>
           <div className="md:my-auto md:flex md:h-12 md:w-[6px] md:bg-secondary "/>
           <div className="hidden w-full md:block md:w-auto">
-            <SearchCombobox data={locationData || []} value={location || ""} />
+            <SearchBarCombobox data={locationData || []} value={location || ""} />
           </div>
           <Button
             type="submit"

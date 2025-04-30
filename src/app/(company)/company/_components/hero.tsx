@@ -4,7 +4,7 @@ import Image from "next/image"
 import React, { type RefObject } from "react"
 import { motion } from "framer-motion"
 import { useInView } from "~/app/_hooks/useInView"
-import { PawsBackground } from "~/app/(main)/_components/searchbar/catPaws"
+import { PawsBackground } from "~/app/(main)/_components/search-bar/paws-background"
 
 
 export default function Hero() {

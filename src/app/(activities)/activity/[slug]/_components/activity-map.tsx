@@ -1,8 +1,8 @@
 'use client'
 
 
-import { Map } from "~/app/_components/map"
-import { MobileMap } from "~/app/_components/map/mobileMap"
+import { Map } from "~/components/map"
+import { MobileMap } from "~/components/map/map-mobile"
 import { useMediaQuery } from "~/app/_hooks/useMediaQuery"
 import { MOBILE_BREAKPOINT } from "~/lib/const"
 

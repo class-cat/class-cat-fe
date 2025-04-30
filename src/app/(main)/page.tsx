@@ -6,20 +6,22 @@ import { Container } from "~/components/ui/container"
 import { ENDPOINTS } from "~/lib/const"
 import { type PagesType, useInfinityFetch } from "../_hooks/useInfinityFetch"
 import { type Activity } from "~/types/search.type"
-import { MobileMap } from "../_components/map/mobileMap"
-import { Map } from "../_components/map"
-import ActivityList from "./_components/activityList"
-import RecommendedCategories from "./_components/recommendedCategories"
-import CompanyOffer from "./_components/companyOffer"
-import { CategoryTabs } from "./_components/categoryTabs"
+import { Map } from "../../components/map"
+import {ActivityList} from "./_components/activity-list"
+import {RecommendedCategories} from "./_components/recommended-categories"
+import {CompanyOffer} from "./_components/company-offer"
+import { CategoryTabs } from "./_components/category-tabs"
 import { useInfiniteScroll } from "../_hooks/useInfiniteScroll"
-import { SearchBar } from "./_components/searchbar"
+import { SearchBar } from "./_components/search-bar"
+import { MapMobile } from "~/components/map/map-mobile"
 
 export default function HomePage() {
   const [searchType, setSearchType] = React.useState("newest")
-  const handleChangeTab = (value: string) => () => setSearchType(value)
+  
   const containerRef = useRef<HTMLDivElement | null>(null)
   const queryClient = useQueryClient()
+
+  const handleChangeTab = (value: string) => () => setSearchType(value)
 
   const {
     data: activitiesData,
@@ -70,7 +72,7 @@ export default function HomePage() {
           <div>
             <CategoryTabs onTabChange={handleChangeTab}>
               <div className="mt-6 xl:hidden">
-                <MobileMap />
+                <MapMobile />
               </div>
               <div className="h-6" />
               <ActivityList

@@ -22,15 +22,17 @@ import { useUpdateQueryParams } from "~/app/_hooks/useUpdateQueryParams"
 import { useMediaQuery } from "~/app/_hooks/useMediaQuery"
 import { MOBILE_BREAKPOINT } from "~/lib/const"
 
-type Props = {
+interface Props {
   data?: EntireLocation[]
   value: string | null
 }
 
-export const SearchCombobox = ({ data, value }: Props) => {
-  const updateQueryParams = useUpdateQueryParams()
-  const isMobile = useMediaQuery(MOBILE_BREAKPOINT)
+export const SearchBarCombobox = ({ data, value }: Props) => {
   const [open, setOpen] = useState(false)
+  const isMobile = useMediaQuery(MOBILE_BREAKPOINT)
+
+  const updateQueryParams = useUpdateQueryParams()
+  
   const handleOnSelect = (currentValue: string) => {
     updateQueryParams({ location: currentValue })
     setOpen(false)
