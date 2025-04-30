@@ -4,7 +4,7 @@ import { type LucideIcon } from "lucide-react"
 import { useInView } from "~/app/_hooks/useInView"
 import { type RefObject } from "react"
 
-interface FeatureCardProps {
+interface Props {
   feature: {
     icon: LucideIcon
     title: string
@@ -15,12 +15,12 @@ interface FeatureCardProps {
   onClick: () => void
 }
 
-export function FeatureCard({
+export const FeatureCard = ({
   feature,
   index,
   isActive,
   onClick,
-}: FeatureCardProps) {
+}: Props) => {
   const [ref, isInView] = useInView<HTMLDivElement>({
     threshold: 0.1,
     freezeOnceVisible: true,
@@ -33,11 +33,11 @@ export function FeatureCard({
       initial={{ opacity: 0, y: 50 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      onClick={onClick} // Changes active state
+      onClick={onClick}
     >
       <Card
         className={`flex w-full flex-col bg-[#fff] shadow-sm transition-shadow duration-300 hover:shadow-md ${
-          isActive ? 'border-primary border-2' : 'border-secondary border'
+          isActive ? 'border-2 border-primary' : 'border border-secondary'
         }`}
       >
         <CardHeader className="flex flex-row items-center gap-4">

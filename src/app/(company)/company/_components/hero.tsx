@@ -7,7 +7,7 @@ import { useInView } from "~/app/_hooks/useInView"
 import { PawsBackground } from "~/app/(main)/_components/search-bar/paws-background"
 
 
-export default function Hero() {
+export const Hero = () => {
   const [ref, isInView] = useInView<HTMLDivElement>({
     threshold: 0.1,
     freezeOnceVisible: true,

@@ -14,19 +14,13 @@ import Link from "next/link"
 import { useInView } from "~/app/_hooks/useInView"
 import { ROUTES } from "~/lib/const"
 import { type RefObject } from "react"
+import { steps } from "./constants"
 
-export default function BusinessAccountSection() {
+export const BusinessAccount = () => {
   const [ref, isInView] = useInView<HTMLDivElement>({
     threshold: 0.1,
     freezeOnceVisible: true,
   })
-
-  const steps = [
-    "Wypełnij formularz rejestracyjny",
-    "Zweryfikuj swoje dane biznesowe",
-    "Wybierz plan odpowiedni dla Twojej firmy",
-    "Zacznij korzystać z platformy",
-  ]
 
   return (
     <motion.section

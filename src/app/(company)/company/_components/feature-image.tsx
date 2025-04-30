@@ -1,14 +1,14 @@
 import { motion } from "framer-motion"
 import Image from "next/image"
-import { type Feature } from "../page"
 import { useInView } from "~/app/_hooks/useInView"
 import { type RefObject } from "react"
+import { type Feature } from "~/types/company.type"
 
-interface FeatureImageProps {
+interface Props {
   feature: Feature
 }
 
-export function FeatureImage({ feature }: FeatureImageProps) {
+export const FeatureImage = ({ feature }: Props) => {
   const [ref, isInView] = useInView<HTMLDivElement>({
     threshold: 0.1,
     freezeOnceVisible: true,
