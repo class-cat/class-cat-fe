@@ -27,4 +27,3 @@ export default function SimilarActivities({ slug }: { slug: string }) {
     </section>
   )
 }
-

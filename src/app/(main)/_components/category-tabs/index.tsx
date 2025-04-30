@@ -1,6 +1,6 @@
-import React from 'react'
+import React from "react"
 import { Tabs, TabsList, TabsTrigger } from "~/components/ui/tabs"
-import { tabsTriggers } from './category-tabs-constatns'
+import { tabsTriggers } from "./category-tabs-constatns"
 
 interface Props {
   onTabChange: (value: string) => () => void

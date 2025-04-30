@@ -32,7 +32,7 @@ export const SearchBarCombobox = ({ data, value }: Props) => {
   const isMobile = useMediaQuery(MOBILE_BREAKPOINT)
 
   const updateQueryParams = useUpdateQueryParams()
-  
+
   const handleOnSelect = (currentValue: string) => {
     updateQueryParams({ location: currentValue })
     setOpen(false)

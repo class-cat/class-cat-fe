@@ -15,12 +15,7 @@ interface Props {
   onClick: () => void
 }
 
-export const FeatureCard = ({
-  feature,
-  index,
-  isActive,
-  onClick,
-}: Props) => {
+export const FeatureCard = ({ feature, index, isActive, onClick }: Props) => {
   const [ref, isInView] = useInView<HTMLDivElement>({
     threshold: 0.1,
     freezeOnceVisible: true,
@@ -37,7 +32,7 @@ export const FeatureCard = ({
     >
       <Card
         className={`flex w-full flex-col bg-[#fff] shadow-sm transition-shadow duration-300 hover:shadow-md ${
-          isActive ? 'border-2 border-primary' : 'border border-secondary'
+          isActive ? "border-2 border-primary" : "border border-secondary"
         }`}
       >
         <CardHeader className="flex flex-row items-center gap-4">

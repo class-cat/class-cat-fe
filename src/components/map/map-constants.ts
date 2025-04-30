@@ -11,8 +11,8 @@ export const layerStyle: CircleLayerSpecification = {
     "circle-radius": 10,
     "circle-color": "#007cbf",
     "circle-stroke-width": 2,
-    "circle-stroke-color": "#fff"
-  }
+    "circle-stroke-color": "#fff",
+  },
 }
 
 export const geoJson = {
@@ -21,12 +21,12 @@ export const geoJson = {
     {
       type: "Feature",
       geometry: { type: "Point", coordinates: [18.6435, 54.352] },
-      properties: { id: 1, title: "Point 1", image: DEFAULT_IMAGE }
+      properties: { id: 1, title: "Point 1", image: DEFAULT_IMAGE },
     },
     {
       type: "Feature",
       geometry: { type: "Point", coordinates: [18.8435, 54.52] },
-      properties: { id: 2, title: "Point 2", image: DEFAULT_IMAGE }
+      properties: { id: 2, title: "Point 2", image: DEFAULT_IMAGE },
     },
   ],
 }
@@ -44,4 +44,4 @@ export const MAP_STYLE = {
     },
   },
   layers: layers("protomaps", "light"),
-};
+}

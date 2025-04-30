@@ -1,6 +1,6 @@
 export type Map = {
-    success: boolean
-    data: {
-      file: string
-    }
+  success: boolean
+  data: {
+    file: string
   }
+}

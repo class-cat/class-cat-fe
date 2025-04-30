@@ -7,7 +7,6 @@ import { Button } from "~/components/ui/button"
 import { MOBILE_BREAKPOINT } from "~/lib/const"
 import { TopNavUserButtons } from "./top-nav-user-buttons"
 
-
 export const TopNavButtons = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const isMobile = useMediaQuery(MOBILE_BREAKPOINT)
@@ -28,8 +27,7 @@ export const TopNavButtons = () => {
       </div>
       {isMobile && isMenuOpen && (
         <div className="absolute right-0 top-[80px] z-50 h-[calc(100vh-80px)] w-full animate-slide-in  border-t-2 border-primary bg-secondary p-4 shadow-md">
-          <div>
-          </div>
+          <div></div>
         </div>
       )}
     </>

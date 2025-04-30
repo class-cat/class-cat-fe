@@ -15,7 +15,7 @@ export const RecommendedCategories = () => {
   return (
     <section className="max-md:hidden">
       <h4 className="text-center">Polecane kategorie</h4>
-      <div className="h-3"/>
+      <div className="h-3" />
       <div className="flex justify-center">
         <Carousel
           className="max-w-2xl lg:max-w-3xl xl:max-w-5xl"

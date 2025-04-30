@@ -1,5 +1,5 @@
-import { Award, Calendar, TrendingUp, Users } from "lucide-react";
-import { type Feature } from "~/types/company.type";
+import { Award, Calendar, TrendingUp, Users } from "lucide-react"
+import { type Feature } from "~/types/company.type"
 
 export const features: Feature[] = [
   {
@@ -45,8 +45,8 @@ export const features: Feature[] = [
 ]
 
 export const steps = [
-    "Wypełnij formularz rejestracyjny",
-    "Zweryfikuj swoje dane biznesowe",
-    "Wybierz plan odpowiedni dla Twojej firmy",
-    "Zacznij korzystać z platformy",
-  ]
+  "Wypełnij formularz rejestracyjny",
+  "Zweryfikuj swoje dane biznesowe",
+  "Wybierz plan odpowiedni dla Twojej firmy",
+  "Zacznij korzystać z platformy",
+]

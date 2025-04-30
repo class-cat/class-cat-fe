@@ -3,14 +3,13 @@
 import { type RefObject, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Container } from "~/components/ui/container"
-import {Hero} from "./_components/hero"
+import { Hero } from "./_components/hero"
 import { FeatureCard } from "./_components/feature-card"
 import { FeatureImage } from "./_components/feature-image"
-import {BusinessAccount} from "./_components/business-account"
+import { BusinessAccount } from "./_components/business-account"
 import { useInView } from "~/app/_hooks/useInView"
 import { features } from "./_components/constants"
 import { type Feature } from "~/types/company.type"
-
 
 export default function HomePage() {
   const [activeFeature, setActiveFeature] = useState<number>(0)
