@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { docsLinks } from "./footer-constants"
+import { docsLinks } from "./constants"
 
 export const FooterDocs = () => {
   return (

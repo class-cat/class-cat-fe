@@ -1,7 +1,7 @@
 import React, { type RefObject } from "react"
 import { v4 as uuid } from "uuid"
 import { Pill } from "~/components/pill/pill"
-import PlaceholderPill from "~/components/pill/placeholerPill"
+import { PillSkeleton } from "~/components/pill/pill-skeleton"
 
 interface Props {
   containerRef: React.RefObject<HTMLDivElement | null>
@@ -27,7 +27,7 @@ export const ActivityList = ({
         {activitiesIsLoading ? (
           Array.from({ length: 10 }).map((_, index) => (
             <div key={index} className="md:not-first:py-2 mt-2 first:mt-0">
-              <PlaceholderPill />
+              <PillSkeleton />
             </div>
           ))
         ) : activitiesList?.length !== 0 ? (

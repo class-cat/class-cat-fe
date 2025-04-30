@@ -1,10 +1,12 @@
+"use client"
+
 import { cn } from "~/lib/utils"
 import { Slider } from "~/components/ui/slider"
 import { Input } from "~/components/ui/input"
 
 type SliderProps = React.ComponentProps<typeof Slider>
 
-export function PriceSlider({ className, ...props }: SliderProps) {
+export const PriceSlider = ({ className, ...props }: SliderProps) => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
     const parsedValue = parseInt(value, 10)

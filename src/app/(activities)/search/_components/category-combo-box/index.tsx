@@ -1,3 +1,5 @@
+"use client"
+
 import { Icons } from "~/components/icons"
 import {
   Command,
@@ -16,13 +18,13 @@ import { cn } from "~/lib/utils"
 import { Button } from "~/components/ui/button"
 import { useState } from "react"
 
-type Props = {
+interface Props {
   data?: any[]
   value: string | null
   setValue: (value: string | null) => void
 }
 
-export function CategoryComboBox({ data, value, setValue }: Props) {
+export const CategoryComboBox = ({ data, value, setValue }: Props) => {
   const [open, setOpen] = useState(false)
   const handleOnSelect = (currentValue: string) => {
     setOpen(false)

@@ -8,7 +8,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "~/components/ui/carousel"
-import { mostSearchedItems } from "./most-search-item-constants"
+import { mostSearchedItems } from "./constants"
 import { MostSearchItem } from "./most-search-item"
 
 export const RecommendedCategories = () => {

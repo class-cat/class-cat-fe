@@ -8,27 +8,25 @@ import { Container } from "~/components/ui/container"
 import { type Activity } from "~/types/search.type"
 import { type Metadata } from "next"
 import { ActivityDetails } from "./_components/activity-details"
-import ActivityMap from "./_components/activity-map"
-import OtherActivities from "./_components/other-activities"
-import SimilarActivities from "./_components/similar-activities"
+import { ActivityMap } from "./_components/activity-map"
+import { OtherActivities } from "./_components/other-activities"
+import { SimilarActivities } from "./_components/simmilar-activities"
 import { AddReviewDialog } from "./_components/review-dialog"
 import Reviews from "./_components/reviews"
 import { getActivityInfo } from "~/actions/get-activity-info"
 
-type ActivityPageProps = {
+interface Props {
   params: Promise<{ slug: string }>
 }
 
-export async function generateMetadata({
-  params,
-}: ActivityPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const resolvedParams = await params
   return {
     title: `Activity: ${resolvedParams.slug}`,
   }
 }
 
-export default async function ActivityPage({ params }: ActivityPageProps) {
+export default async function ActivityPage({ params }: Props) {
   const resolvedParams = await params
 
   let activity: Activity

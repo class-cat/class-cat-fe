@@ -1,11 +1,11 @@
 import { Icons } from "~/components/icons"
 import { type Activity } from "~/types/search.type"
 
-type Props = {
+interface Props {
   activity: Activity
 }
 
-export function ActivityDetails({ activity }: Props) {
+export const ActivityDetails = ({ activity }: Props) => {
   return (
     <div className="space-y-1">
       <p className="flex items-start text-sm font-medium sm:text-base">

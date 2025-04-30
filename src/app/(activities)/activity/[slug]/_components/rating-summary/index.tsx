@@ -1,11 +1,11 @@
 import { Progress } from "~/components/ui/progress"
 import { Icons } from "~/components/icons"
 
-type RatingSummaryProps = {
+interface Props {
   ratings: Array<number>
 }
 
-export default function RatingSummary({ ratings }: RatingSummaryProps) {
+export const RatingSummary = ({ ratings }: Props) => {
   const totalOpinions = ratings.length
 
   const averageRating =

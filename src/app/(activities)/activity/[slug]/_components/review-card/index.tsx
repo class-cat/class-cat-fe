@@ -1,7 +1,7 @@
 import { Icons } from "~/components/icons"
 import { Card, CardContent } from "~/components/ui/card"
 
-export function ReviewCard() {
+export const ReviewCard = () => {
   return (
     <Card className="border-2 border-secondary">
       <CardContent className="p-4">

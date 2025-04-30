@@ -11,15 +11,15 @@ import {
   FormItem,
   FormLabel,
 } from "~/components/ui/form"
-import { LessonCard } from "./lesson-card"
-import { UserReviewContent } from "./review-content"
+import { LessonCard } from "../lesson-card"
+import { UserReviewContent } from "../review-content"
 import { Checkbox } from "~/components/ui/checkbox"
 import { lessons } from "./constants"
 import { Button } from "~/components/ui/button"
 import {
   FormNotificationsSchema,
   type FormNotificationsSchemaType,
-} from "./schema/formNotificationsSchema.zod"
+} from "../_schema/form-notifications-schema.zod"
 
 export const ProfileTabsContent = () => {
   const form = useForm<FormNotificationsSchemaType>({

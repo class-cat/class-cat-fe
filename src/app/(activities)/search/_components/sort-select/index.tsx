@@ -16,38 +16,16 @@ import { cn } from "~/lib/utils"
 import { Button } from "~/components/ui/button"
 import { useState } from "react"
 import { useUpdateQueryParams } from "~/app/_hooks/useUpdateQueryParams"
+import { data } from "./constants"
 
-const data = [
-  {
-    value: "distance",
-    label: "Odległość",
-  },
-  {
-    value: "rating",
-    label: "Ocena",
-  },
-  {
-    value: "price",
-    label: "Cena",
-  },
-  {
-    value: "search",
-    label: "Nazwa",
-  },
-  {
-    value: "date",
-    label: "Data",
-  },
-]
-
-type Props = {
+interface Props {
   value: string | null
 }
 
 export function SortSelect({ value }: Props) {
-  const updateQueryParams = useUpdateQueryParams()
-
   const [open, setOpen] = useState(false)
+
+  const updateQueryParams = useUpdateQueryParams()
 
   const handleOnSelect = (currentValue: string) => {
     updateQueryParams({ sort: currentValue })

@@ -1,9 +1,11 @@
 import { Card, CardContent } from "~/components/ui/card"
 import { Button } from "~/components/ui/button"
 
-export default function SimilarActivities({ slug }: { slug: string }) {
-  // Fetch similar activities here
+interface Props {
+  slug: string
+}
 
+export const SimilarActivities = ({ slug }: Props) => {
   console.log(slug)
 
   return (

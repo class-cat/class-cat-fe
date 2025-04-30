@@ -1,7 +1,7 @@
 import React from "react"
 import { Icons } from "../icons"
 
-export default function PlaceholderPill() {
+export const PillSkeleton = () => {
   return (
     <div className="relative  flex cursor-pointer items-center gap-2 rounded-2xl border-2 border-secondary p-2 hover:shadow-sm sm:gap-4">
       <div className="relative size-[50px] animate-pulse overflow-hidden rounded-lg sm:size-[80px]">

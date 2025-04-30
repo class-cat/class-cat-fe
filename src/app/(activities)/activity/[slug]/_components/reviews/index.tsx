@@ -1,7 +1,7 @@
 import { ENDPOINTS } from "~/lib/const"
 import { httpClient } from "~/lib/http-client"
 import { type Review } from "~/types/user.type"
-import RatingSummary from "./rating-summary"
+import { RatingSummary } from "../rating-summary"
 import { ReviewCard } from "~/components/review-card"
 
 type ApiResponse<T> = {
