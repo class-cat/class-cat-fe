@@ -4,13 +4,13 @@ import { Icons } from "~/components/icons"
 import { type LessonType } from "./lesson-card"
 import { IconWithText } from "~/components/ui/icon-text"
 
-export function Card({
+export const Card = ({
   lesson,
   children,
 }: {
   lesson: LessonType
   children?: React.ReactNode
-}) {
+}) => {
   const { avatar, title, address, providerName, phoneNumber } = lesson
   const rightSlot = React.Children.toArray(children).find(
     (child) => React.isValidElement(child) && child.type === Card.RightSlot
