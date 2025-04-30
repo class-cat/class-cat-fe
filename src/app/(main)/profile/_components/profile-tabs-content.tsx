@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 
-import { TabsContent} from "~/components/ui/tabs"
+import { TabsContent } from "~/components/ui/tabs"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 import { type z } from "zod"
@@ -16,9 +16,10 @@ import { UserReviewContent } from "./review-content"
 import { Checkbox } from "~/components/ui/checkbox"
 import { lessons } from "./constants"
 import { Button } from "~/components/ui/button"
-import { FormNotificationsSchema, type FormNotificationsSchemaType } from "./schema/formNotificationsSchema.zod"
-
-
+import {
+  FormNotificationsSchema,
+  type FormNotificationsSchemaType,
+} from "./schema/formNotificationsSchema.zod"
 
 export const ProfileTabsContent = () => {
   const form = useForm<FormNotificationsSchemaType>({

@@ -39,9 +39,12 @@ export const SearchBar = () => {
               name="search"
             />
           </div>
-          <div className="md:my-auto md:flex md:h-12 md:w-[6px] md:bg-secondary "/>
+          <div className="md:my-auto md:flex md:h-12 md:w-[6px] md:bg-secondary " />
           <div className="hidden w-full md:block md:w-auto">
-            <SearchBarCombobox data={locationData || []} value={location || ""} />
+            <SearchBarCombobox
+              data={locationData || []}
+              value={location || ""}
+            />
           </div>
           <Button
             type="submit"
@@ -50,7 +53,7 @@ export const SearchBar = () => {
             <Icons.search className="size-5 md:size-6" />
           </Button>
         </form>
-        </div>
+      </div>
       <div className="absolute -bottom-28 left-1/2 z-20 hidden w-72 -translate-x-1/2 md:block">
         <Image
           src="/defaultcat.png?height=200&width=200"

@@ -7,9 +7,9 @@ import { ENDPOINTS } from "~/lib/const"
 import { type PagesType, useInfinityFetch } from "../_hooks/useInfinityFetch"
 import { type Activity } from "~/types/search.type"
 import { Map } from "../../components/map"
-import {ActivityList} from "./_components/activity-list"
-import {RecommendedCategories} from "./_components/recommended-categories"
-import {CompanyOffer} from "./_components/company-offer"
+import { ActivityList } from "./_components/activity-list"
+import { RecommendedCategories } from "./_components/recommended-categories"
+import { CompanyOffer } from "./_components/company-offer"
 import { CategoryTabs } from "./_components/category-tabs"
 import { useInfiniteScroll } from "../_hooks/useInfiniteScroll"
 import { SearchBar } from "./_components/search-bar"
@@ -17,7 +17,7 @@ import { MapMobile } from "~/components/map/map-mobile"
 
 export default function HomePage() {
   const [searchType, setSearchType] = React.useState("newest")
-  
+
   const containerRef = useRef<HTMLDivElement | null>(null)
   const queryClient = useQueryClient()
 

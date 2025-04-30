@@ -13,8 +13,12 @@ export default function OtherActivities({ slug }: { slug: string }) {
         <CardContent className="p-4">
           <h4 className="text-lg">Koszykówka dla dzieci 1-3</h4>
           <div className="mt-2 flex space-x-2">
-            <span className="rounded-lg border-2 border-secondary px-2 py-1 text-sm">poniedziałek</span>
-            <span className="rounded-lg border-2 border-secondary px-2 py-1 text-sm">środa</span>
+            <span className="rounded-lg border-2 border-secondary px-2 py-1 text-sm">
+              poniedziałek
+            </span>
+            <span className="rounded-lg border-2 border-secondary px-2 py-1 text-sm">
+              środa
+            </span>
           </div>
         </CardContent>
       </Card>
@@ -24,4 +28,3 @@ export default function OtherActivities({ slug }: { slug: string }) {
     </section>
   )
 }
-

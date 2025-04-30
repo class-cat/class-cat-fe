@@ -14,7 +14,7 @@ export default function RootLayout({
         <TopNav />
         <main className="bg-white">{children}</main>
       </div>
-      <Footer/>
+      <Footer />
     </>
   )
 }

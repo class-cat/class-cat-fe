@@ -4,7 +4,6 @@ import { tabsTriggers } from "./_components/constants"
 import { ProfileTabsContent } from "./_components/profile-tabs-content"
 import { ProfileForm } from "./_components/profile-form"
 
-
 export default function ProfilePage() {
   return (
     <Container className="min-h-screen">
@@ -32,7 +31,7 @@ export default function ProfilePage() {
             <ProfileTabsContent />
           </Tabs>
         </section>
-        <ProfileForm/>
+        <ProfileForm />
       </div>
       <div className="h-16" />
     </Container>

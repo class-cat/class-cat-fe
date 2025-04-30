@@ -6,7 +6,6 @@ import { motion } from "framer-motion"
 import { useInView } from "~/app/_hooks/useInView"
 import { PawsBackground } from "~/app/(main)/_components/search-bar/paws-background"
 
-
 export const Hero = () => {
   const [ref, isInView] = useInView<HTMLDivElement>({
     threshold: 0.1,
@@ -14,7 +13,7 @@ export const Hero = () => {
   })
 
   return (
-    (<motion.div
+    <motion.div
       ref={ref as RefObject<HTMLDivElement | null>}
       initial={{ opacity: 0, y: 50 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
@@ -40,6 +39,6 @@ export const Hero = () => {
           className="h-auto w-full object-cover"
         />
       </div>
-    </motion.div>)
-  );
+    </motion.div>
+  )
 }

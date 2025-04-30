@@ -1,5 +1,4 @@
-'use client'
-
+"use client"
 
 import { Map } from "~/components/map"
 import { MobileMap } from "~/components/map/map-mobile"
@@ -11,4 +10,3 @@ export default function ActivityMap() {
 
   return isMobile ? <MobileMap /> : <Map />
 }
-

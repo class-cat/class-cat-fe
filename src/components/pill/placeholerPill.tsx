@@ -17,12 +17,12 @@ export default function PlaceholderPill() {
         </div>
       </div>
       <div className="absolute right-2 top-2">
-              <Icons.paw
-                className="size-6 sm:size-8"
-                color={"#ecdec8"}
-                fill={"#FFFEFB"}
-                strokeWidth={1.5}
-              />
+        <Icons.paw
+          className="size-6 sm:size-8"
+          color={"#ecdec8"}
+          fill={"#FFFEFB"}
+          strokeWidth={1.5}
+        />
       </div>
     </div>
   )

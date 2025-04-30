@@ -19,8 +19,9 @@ type ActivityPageProps = {
   params: Promise<{ slug: string }>
 }
 
-
-export async function generateMetadata({ params }: ActivityPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: ActivityPageProps): Promise<Metadata> {
   const resolvedParams = await params
   return {
     title: `Activity: ${resolvedParams.slug}`,
@@ -28,10 +29,9 @@ export async function generateMetadata({ params }: ActivityPageProps): Promise<M
 }
 
 export default async function ActivityPage({ params }: ActivityPageProps) {
-
   const resolvedParams = await params
 
-  let activity: Activity;
+  let activity: Activity
   try {
     activity = await getActivityInfo(resolvedParams.slug)
   } catch (error) {
@@ -57,7 +57,11 @@ export default async function ActivityPage({ params }: ActivityPageProps) {
                   <ActivityDetails activity={activity} />
                 </div>
                 <div className="mt-auto flex justify-end">
-                  <Button variant="outline" className="rounded-lg shadow-none" size="sm">
+                  <Button
+                    variant="outline"
+                    className="rounded-lg shadow-none"
+                    size="sm"
+                  >
                     Wyświetl informacje
                   </Button>
                 </div>
@@ -65,7 +69,9 @@ export default async function ActivityPage({ params }: ActivityPageProps) {
             </div>
           </CardContent>
         </Card>
-        <Suspense fallback={<div className="bg-gray-200 h-[300px] animate-pulse" />}>
+        <Suspense
+          fallback={<div className="bg-gray-200 h-[300px] animate-pulse" />}
+        >
           <ActivityMap />
         </Suspense>
       </div>
@@ -80,7 +86,6 @@ export default async function ActivityPage({ params }: ActivityPageProps) {
             <SignedIn>
               <AddReviewDialog acticitySlug={activity?.slug} />
             </SignedIn>
-            
           </section>
         </div>
         <div className="cardSmall space-y-8">
@@ -91,6 +96,3 @@ export default async function ActivityPage({ params }: ActivityPageProps) {
     </Container>
   )
 }
-
-
-

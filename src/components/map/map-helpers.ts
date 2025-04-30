@@ -12,8 +12,8 @@ export const createGeoJSON = (data: any) => {
       properties: {
         id: index,
         title: item.title || `Point ${index + 1}`,
-        image: item.image || DEFAULT_IMAGE
-      }
+        image: item.image || DEFAULT_IMAGE,
+      },
     })),
   }
 }

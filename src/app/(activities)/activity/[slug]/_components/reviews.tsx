@@ -44,9 +44,7 @@ export default async function Reviews({ slug }: ReviewsProps) {
           })}
         </div>
       ) : (
-        <p>
-          Te zajęcia nie mają jeszcze recenzji. Bądź pierwszy!
-        </p>
+        <p>Te zajęcia nie mają jeszcze recenzji. Bądź pierwszy!</p>
       )}
     </>
   )

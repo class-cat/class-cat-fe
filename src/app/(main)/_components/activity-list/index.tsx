@@ -1,10 +1,10 @@
-import React, { type RefObject } from 'react'
+import React, { type RefObject } from "react"
 import { v4 as uuid } from "uuid"
 import { Pill } from "~/components/pill/pill"
 import PlaceholderPill from "~/components/pill/placeholerPill"
 
 interface Props {
-  containerRef: React.RefObject<HTMLDivElement| null>
+  containerRef: React.RefObject<HTMLDivElement | null>
   activitiesList: any[]
   activitiesIsLoading: boolean
   activitiesIsError: boolean
@@ -16,20 +16,17 @@ export const ActivityList = ({
   activitiesList,
   activitiesIsLoading,
   activitiesIsError,
-  lastElementRef
+  lastElementRef,
 }: Props) => {
   return (
-    (<div
+    <div
       ref={containerRef as RefObject<HTMLDivElement | null>}
       className="md:sidebar relative h-[calc(100vh-325px)] overflow-y-auto md:h-[calc(100vh-455px)] md:pr-3 lg:h-[calc(100vh-315px)] xl:pr-0"
     >
       <div className="mr-2">
         {activitiesIsLoading ? (
           Array.from({ length: 10 }).map((_, index) => (
-            <div
-              key={index}
-              className="md:not-first:py-2 mt-2 first:mt-0"
-            >
+            <div key={index} className="md:not-first:py-2 mt-2 first:mt-0">
               <PlaceholderPill />
             </div>
           ))
@@ -55,6 +52,6 @@ export const ActivityList = ({
           Błąd podczas ładowania aktywności
         </div>
       )}
-    </div>)
-  );
+    </div>
+  )
 }

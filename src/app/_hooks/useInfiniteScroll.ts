@@ -1,16 +1,27 @@
-import { type FetchNextPageOptions, type InfiniteData, type InfiniteQueryObserverResult } from '@tanstack/react-query'
-import { useCallback, useRef } from 'react'
-import { type PageData } from './useInfinityFetch'
-import { type SearchResultType } from '~/types/search.type'
+import {
+  type FetchNextPageOptions,
+  type InfiniteData,
+  type InfiniteQueryObserverResult,
+} from "@tanstack/react-query"
+import { useCallback, useRef } from "react"
+import { type PageData } from "./useInfinityFetch"
+import { type SearchResultType } from "~/types/search.type"
 
 export const useInfiniteScroll = (
   isLoading: boolean,
   isFetching: boolean,
   hasNextPage: boolean,
-  fetchNextPage: (options?: FetchNextPageOptions) => Promise<InfiniteQueryObserverResult<InfiniteData<PageData<SearchResultType>, unknown>, Error>>
+  fetchNextPage: (
+    options?: FetchNextPageOptions
+  ) => Promise<
+    InfiniteQueryObserverResult<
+      InfiniteData<PageData<SearchResultType>, unknown>,
+      Error
+    >
+  >
 ) => {
   const observer = useRef<IntersectionObserver | null>(null)
-  
+
   const lastElementRef = useCallback(
     (node: HTMLDivElement) => {
       if (isLoading || isFetching) return

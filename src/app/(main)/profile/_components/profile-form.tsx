@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Calendar } from "~/components/ui/calendar"
@@ -16,8 +16,18 @@ import {
 import { Button } from "~/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar"
 import { Input } from "~/components/ui/input"
-import { Popover, PopoverContent, PopoverTrigger } from "~/components/ui/popover"
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@radix-ui/react-select"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "~/components/ui/popover"
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@radix-ui/react-select"
 import { CalendarIcon } from "lucide-react"
 import { format } from "date-fns"
 import { cn } from "~/lib/utils"
@@ -25,29 +35,25 @@ import { type FormSchemaType, FormSchema } from "./schema/formSchema.zod"
 import { useUser } from "@clerk/nextjs"
 import { Skeleton } from "~/components/ui/skeleton"
 
-
 export const ProfileForm = () => {
-const { user, isLoaded } = useUser()
-      const form = useForm<FormSchemaType>({
-        resolver: zodResolver(FormSchema),
-      })
-    
-      function onSubmit(data: z.infer<typeof FormSchema>) {
-        console.log(data)
-        toast("Form submitted")
-      }
+  const { user, isLoaded } = useUser()
+  const form = useForm<FormSchemaType>({
+    resolver: zodResolver(FormSchema),
+  })
 
-    return (
-        <>
-        {!isLoaded ? (
-          <Skeleton className="card min-h-[500px] rounded-3xl lg:w-1/3" />
-        ) : (
-            <section className="cardSmall lg:w-1/3">
-            <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(onSubmit)}
-              className="space-y-8"
-            >
+  function onSubmit(data: z.infer<typeof FormSchema>) {
+    console.log(data)
+    toast("Form submitted")
+  }
+
+  return (
+    <>
+      {!isLoaded ? (
+        <Skeleton className="card min-h-[500px] rounded-3xl lg:w-1/3" />
+      ) : (
+        <section className="cardSmall lg:w-1/3">
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
               <div className="flex min-w-[240px] flex-col gap-4">
                 <Avatar className="mx-auto size-48">
                   <AvatarImage src={user?.imageUrl} />
@@ -147,8 +153,7 @@ const { user, isLoaded } = useUser()
                             selected={field.value}
                             onSelect={field.onChange}
                             disabled={(date) =>
-                              date > new Date() ||
-                              date < new Date("1900-01-01")
+                              date > new Date() || date < new Date("1900-01-01")
                             }
                             initialFocus
                             fromYear={1960}
@@ -210,10 +215,8 @@ const { user, isLoaded } = useUser()
               </Button>
             </form>
           </Form>
-          </section>
-          )
-}
-        </>
-       
-    )
+        </section>
+      )}
+    </>
+  )
 }

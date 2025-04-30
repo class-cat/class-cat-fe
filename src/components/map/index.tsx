@@ -1,12 +1,7 @@
 "use client"
 
 import { Suspense, useEffect, useState, useCallback, useMemo } from "react"
-import { 
-  Layer, 
-  Map as MapGL,
-  Source,
-  Popup
-} from "react-map-gl"
+import { Layer, Map as MapGL, Source, Popup } from "react-map-gl"
 import maplibregl from "maplibre-gl"
 import "maplibre-gl/dist/maplibre-gl.css"
 import { Protocol } from "pmtiles"
@@ -31,7 +26,7 @@ export function Map({ data }: any) {
   })
 
   const mapStyle = useMemo(() => {
-    if (!map?.data?.file) return MAP_STYLE;
+    if (!map?.data?.file) return MAP_STYLE
     return {
       ...MAP_STYLE,
       sources: {
@@ -41,37 +36,45 @@ export function Map({ data }: any) {
           url: `pmtiles://${map.data.file}`,
         },
       },
-    };
-  }, [map]);
-
-    const memoizedGeoJson = useMemo(() => {
-      return data ? createGeoJSON(data) : geoJson
-    }, [data])
-
-  const handleClick = useCallback((event: { target: { queryRenderedFeatures: (arg0: any, arg1: { layers: string[] }) => any }; point: any }) => {
-    const features = event.target.queryRenderedFeatures(event.point, {
-      layers: ["point"],
-    });
-  
-    if (features.length > 0) {
-      const feature = features[0];
-      setPopupInfo((prev: { longitude: any; latitude: any }) => {
-        if (
-          prev?.longitude === feature.geometry.coordinates[0] &&
-          prev?.latitude === feature.geometry.coordinates[1]
-        ) {
-          return prev;
-        }
-        return {
-          longitude: feature.geometry.coordinates[0],
-          latitude: feature.geometry.coordinates[1],
-          properties: feature.properties,
-        };
-      });
-    } else if (popupInfo) {
-      setPopupInfo(null);
     }
-  }, [popupInfo]);
+  }, [map])
+
+  const memoizedGeoJson = useMemo(() => {
+    return data ? createGeoJSON(data) : geoJson
+  }, [data])
+
+  const handleClick = useCallback(
+    (event: {
+      target: {
+        queryRenderedFeatures: (arg0: any, arg1: { layers: string[] }) => any
+      }
+      point: any
+    }) => {
+      const features = event.target.queryRenderedFeatures(event.point, {
+        layers: ["point"],
+      })
+
+      if (features.length > 0) {
+        const feature = features[0]
+        setPopupInfo((prev: { longitude: any; latitude: any }) => {
+          if (
+            prev?.longitude === feature.geometry.coordinates[0] &&
+            prev?.latitude === feature.geometry.coordinates[1]
+          ) {
+            return prev
+          }
+          return {
+            longitude: feature.geometry.coordinates[0],
+            latitude: feature.geometry.coordinates[1],
+            properties: feature.properties,
+          }
+        })
+      } else if (popupInfo) {
+        setPopupInfo(null)
+      }
+    },
+    [popupInfo]
+  )
 
   useEffect(() => {
     const protocol = new Protocol()
@@ -102,11 +105,7 @@ export function Map({ data }: any) {
             cursor="pointer"
             maxPitch={0}
           >
-            <Source
-              id="my-data"
-              type="geojson"
-              data={memoizedGeoJson}
-            >
+            <Source id="my-data" type="geojson" data={memoizedGeoJson}>
               <Layer {...layerStyle} />
             </Source>
             {popupInfo && (
@@ -126,7 +125,9 @@ export function Map({ data }: any) {
                     className="rounded"
                   />
                   <div className="flex flex-col justify-center">
-                    <h3 className="text-left font-bold">{popupInfo.properties.title}</h3>
+                    <h3 className="text-left font-bold">
+                      {popupInfo.properties.title}
+                    </h3>
                     <p className="text-left">ID: {popupInfo.properties.id}</p>
                   </div>
                 </div>
