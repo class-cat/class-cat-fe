@@ -1,4 +1,5 @@
 import { Card } from "./card"
+import { dayTranslations } from "./constants"
 
 export interface LessonType {
   id: number
@@ -18,16 +19,7 @@ export interface LessonType {
   hour: string
 }
 
-const dayTranslations = {
-  monday: "poniedziałek",
-  tuesday: "wtorek",
-  wednesday: "środa",
-  thursday: "czwartek",
-  friday: "piątek",
-  saturday: "sobota",
-  sunday: "niedziela",
-}
-export function LessonCard({ lesson }: { lesson: LessonType }) {
+export const LessonCard = ({ lesson }: { lesson: LessonType }) => {
   const { day, hour } = lesson
 
   return (

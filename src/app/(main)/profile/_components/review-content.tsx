@@ -5,12 +5,11 @@ import { type DataType } from "~/types/data.type"
 import { ReviewCard } from "~/components/review-card"
 import { Skeleton } from "~/components/ui/skeleton"
 
-function UserReviewContent() {
+export const UserReviewContent = () => {
   const { data: reviews, isLoading } = useFetch<DataType<Review>>({
     url: `${ENDPOINTS.USER_REVIEWS}`,
   })
 
-  console.log(reviews)
   return (
     <>
       {!isLoading ? (
@@ -29,5 +28,3 @@ function UserReviewContent() {
     </>
   )
 }
-
-export { UserReviewContent }
