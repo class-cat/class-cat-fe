@@ -31,9 +31,9 @@ import {
 import { CalendarIcon } from "lucide-react"
 import { format } from "date-fns"
 import { cn } from "~/lib/utils"
-import { type FormSchemaType, FormSchema } from "./schema/formSchema.zod"
 import { useUser } from "@clerk/nextjs"
 import { Skeleton } from "~/components/ui/skeleton"
+import { FormSchema, type FormSchemaType } from "../_schema/form-schema.zod"
 
 export const ProfileForm = () => {
   const { user, isLoaded } = useUser()

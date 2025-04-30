@@ -1,4 +1,4 @@
-import { DEFAULT_IMAGE } from "./map-constants"
+import { DEFAULT_IMAGE } from "./constants"
 
 export const createGeoJSON = (data: any) => {
   return {

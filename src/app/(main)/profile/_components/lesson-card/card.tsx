@@ -1,7 +1,7 @@
 import Image from "next/image"
 import React from "react"
 import { Icons } from "~/components/icons"
-import { type LessonType } from "./lesson-card"
+import { type LessonType } from "."
 import { IconWithText } from "~/components/ui/icon-text"
 
 export const Card = ({

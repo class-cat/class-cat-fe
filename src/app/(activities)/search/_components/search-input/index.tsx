@@ -6,11 +6,11 @@ import { Input } from "~/components/ui/input"
 import { useDebounce } from "~/app/_hooks/useDebounce"
 import { useUpdateQueryParams } from "~/app/_hooks/useUpdateQueryParams"
 
-type Props = {
+interface Props {
   value: string | null
 }
 
-export function SearchInput({ value }: Props) {
+export const SearchInput = ({ value }: Props) => {
   const updateQueryParams = useUpdateQueryParams()
 
   const [inputValue, setInputValue] = useState(value)

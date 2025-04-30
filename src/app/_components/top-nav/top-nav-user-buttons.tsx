@@ -2,7 +2,7 @@ import { SignedOut, SignedIn, UserButton } from "@clerk/nextjs"
 import { Link } from "lucide-react"
 
 import { ROUTES } from "~/lib/const"
-import { userButtonAppearance } from "./top-nav-constants"
+import { userButtonAppearance } from "./constants"
 import { Button } from "~/components/ui/button"
 
 export const TopNavUserButtons = () => {

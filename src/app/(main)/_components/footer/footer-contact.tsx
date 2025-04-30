@@ -1,4 +1,4 @@
-import { contactArray } from "./footer-constants"
+import { contactArray } from "./constants"
 
 export const FooterContact = () => {
   return (

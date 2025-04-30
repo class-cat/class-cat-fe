@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { socialLinks } from "./footer-constants"
+import { socialLinks } from "./constants"
 
 export const FooterSocials = () => {
   return (

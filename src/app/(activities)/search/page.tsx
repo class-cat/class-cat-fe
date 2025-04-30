@@ -4,15 +4,14 @@ import { v4 as uuid } from "uuid"
 import { useSearchParams } from "next/navigation"
 import { Container } from "~/components/ui/container"
 import { useCallback, useRef, useMemo, useEffect } from "react"
-import { SearchInput } from "./_components/searchInput"
-import { SearchCombobox } from "./_components/searchComboBox"
-import { SortSelect } from "./_components/sortSelect"
+import { SearchInput } from "./_components/search-input"
+import { SearchCombobox } from "./_components/search-combo-box"
+import { SortSelect } from "./_components/sort-select"
 import { useGetLocations } from "~/actions/get-locations"
-import { MoreOptionDialog } from "./_components/moreOptionDialog"
-import PlaceholderPill from "~/components/pill/placeholerPill"
+import { MoreOptionDialog } from "./_components/more-option-dialog"
+import { PillSkeleton } from "~/components/pill/pill-skeleton"
 import { Pill } from "~/components/pill/pill"
-import { Map, PlaceholderMap } from "../../../components/map"
-import { MobileMap } from "../../../components/map/map-mobile"
+import { Map } from "../../../components/map"
 import { ENDPOINTS } from "~/lib/const"
 import {
   type PagesType,
@@ -23,6 +22,8 @@ import { useQueryClient } from "@tanstack/react-query"
 import { useFetch } from "~/app/_hooks/useFetch"
 import { type ResultType, type CordinatesType } from "~/types/search.type"
 import { type DataType } from "~/types/data.type"
+import { MapMobile } from "~/components/map/map-mobile"
+import { MapSkeleton } from "~/components/map/map-skeleton"
 
 export type MapDataType = ResultType & {
   cordinates: CordinatesType
@@ -113,7 +114,6 @@ export default function SearchPage() {
     )
   }, [activitiesData])
 
-  console.log(activitiesList)
   useEffect(() => {
     if (containerRef.current) {
       containerRef.current.scrollTo({ top: 0 })
@@ -149,7 +149,7 @@ export default function SearchPage() {
             </div>
             <SortSelect value={sort || ""} />
             <div className="mb-6 xl:hidden">
-              <MobileMap />
+              <MapMobile />
             </div>
             <div
               ref={containerRef}
@@ -159,7 +159,7 @@ export default function SearchPage() {
                 {activitiesIsLoading ? (
                   Array.from({ length: 10 }).map((_, index) => (
                     <div key={index} className="py-2">
-                      <PlaceholderPill />
+                      <PillSkeleton />
                     </div>
                   ))
                 ) : activitiesList?.length !== 0 ? (
@@ -188,7 +188,7 @@ export default function SearchPage() {
           </div>
           <div className="hidden h-full xl:block">
             {mapData === undefined || mapIsLoading ? (
-              <PlaceholderMap />
+              <MapSkeleton />
             ) : (
               <Map data={mapData.data} />
             )}

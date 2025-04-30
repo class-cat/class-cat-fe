@@ -19,40 +19,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "~/components/ui/select"
-import { PriceSlider } from "./priceSlider"
+import { PriceSlider } from "../price-slider"
 import { useUpdateQueryParams } from "~/app/_hooks/useUpdateQueryParams"
-import { CategoryComboBox } from "./categoryComboBox"
+import { CategoryComboBox } from "../category-combo-box"
 import React from "react"
+import { categoryData, classRangeData, distanceData } from "./constants"
 
-const distanceData = [
-  { value: "0", label: "+0 km" },
-  { value: "5", label: "+5 km" },
-  { value: "10", label: "+10 km" },
-  { value: "15", label: "+15 km" },
-  { value: "20", label: "+20 km" },
-  { value: "30", label: "+30 km" },
-  { value: "50", label: "+50 km" },
-]
-
-const classRangeData = [
-  { value: "1", label: "1-3" },
-  { value: "2", label: "4-6" },
-  { value: "3", label: "7-8" },
-  { value: "4", label: "ponad podstawowa" },
-]
-
-const categoryData = [
-  { value: "koszykowka", label: "Koszykówka" },
-  { value: "pilkanozna", label: "Piłka nozna" },
-  { value: "silownia", label: "Siłownia" },
-  { value: "gimnastyka", label: "Gimnastyka" },
-  { value: "boks", label: "Boks" },
-  { value: "judo", label: "Judo" },
-  { value: "wspinaczkosportowa", label: "Wspinaczkosportowa" },
-  { value: "kolarstwo", label: "Kolarstwo" },
-]
-
-type Props = {
+interface Props {
   categoryValue: string | null
   distanceValue: string | null
   ageValue: string | null
@@ -66,7 +39,6 @@ export const MoreOptionDialog = ({
   priceValue,
 }: Props) => {
   const updateQueryParams = useUpdateQueryParams()
-  //   const isMobile = useMediaQuery(MOBILE_BREAKPOINT)
 
   const [open, setOpen] = useState(false)
   const [category, setCategory] = useState(categoryValue)
@@ -119,7 +91,6 @@ export const MoreOptionDialog = ({
             >
               <Icons.filter className="size-5" />
             </Button>
-
             <Button
               variant="ghost"
               className="w-full rounded-lg border-2 border-secondary py-5 shadow-none hover:bg-secondary max-sm:hidden"

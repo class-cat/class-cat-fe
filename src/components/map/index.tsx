@@ -10,7 +10,7 @@ import "./style.css"
 import { useFetch } from "~/app/_hooks/useFetch"
 import { ENDPOINTS } from "~/lib/const"
 import { type Map } from "~/types/map.type"
-import { geoJson, layerStyle, MAP_STYLE } from "./map-constants"
+import { geoJson, layerStyle, MAP_STYLE } from "./constants"
 import { createGeoJSON } from "./map-helpers"
 import { MapSkeleton } from "./map-skeleton"
 

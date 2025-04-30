@@ -14,28 +14,19 @@ import { Button } from "~/components/ui/button"
 import { Icons } from "~/components/icons"
 import { usePost } from "~/app/_hooks/usePost"
 import { ENDPOINTS } from "~/lib/const"
-import { z } from "zod"
 import { toast } from "sonner"
 import { type Review } from "~/types/user.type"
 import { useRouter } from "next/navigation"
+import {
+  type AddReviewFormData,
+  AddReviewSchema,
+} from "../_schema/add-review-schema.zod"
 
-interface ReviewDialogProps {
+interface Props {
   acticitySlug: string
 }
 
-const AddReviewSchema = z.object({
-  rating: z
-    .number()
-    .min(1, "Rating must be at least 1")
-    .max(5, "Rating must be at most 5"),
-  comment: z
-    .string()
-    .min(1, "Comment cannot be empty")
-    .max(500, "Comment cannot exceed 500 characters"),
-})
-
-type AddReviewFormData = z.infer<typeof AddReviewSchema>
-export function AddReviewDialog({ acticitySlug }: ReviewDialogProps) {
+export const AddReviewDialog = ({ acticitySlug }: Props) => {
   const [isOpen, setIsOpen] = useState(false)
   const [comment, setComment] = useState("")
   const [rating, setRating] = useState(0)

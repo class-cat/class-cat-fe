@@ -1,9 +1,11 @@
 import { Card, CardContent } from "~/components/ui/card"
 import { Button } from "~/components/ui/button"
 
-export default function OtherActivities({ slug }: { slug: string }) {
-  // Fetch other activities by provider ID here
+interface Props {
+  slug: string
+}
 
+export const OtherActivities = ({ slug }: Props) => {
   console.log(slug)
 
   return (
