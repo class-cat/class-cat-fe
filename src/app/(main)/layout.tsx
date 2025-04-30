@@ -1,5 +1,5 @@
 import "~/styles/globals.css"
-import { TopNav } from "../_components/topnav/topnav"
+import { TopNav } from "../_components/top-nav"
 import React from "react"
 import { Footer } from "./_components/footer"
 

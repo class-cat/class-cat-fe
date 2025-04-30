@@ -4,9 +4,9 @@ import { useState } from "react"
 import { Icons } from "~/components/icons"
 import { Button } from "~/components/ui/button"
 import { Dialog, DialogContent, DialogTrigger } from "~/components/ui/dialog"
-import { Map } from "./"
+import { Map } from "."
 
-export function MobileMap() {
+export const MapMobile = () => {
   const [open, setOpen] = useState(false)
 
   const openMapDialog = () => {

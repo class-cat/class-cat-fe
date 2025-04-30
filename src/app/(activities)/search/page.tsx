@@ -11,8 +11,8 @@ import { useGetLocations } from "~/actions/get-locations"
 import { MoreOptionDialog } from "./_components/moreOptionDialog"
 import PlaceholderPill from "~/components/pill/placeholerPill"
 import { Pill } from "~/components/pill/pill"
-import { Map, PlaceholderMap } from "../../_components/map"
-import { MobileMap } from "../../_components/map/mobileMap"
+import { Map, PlaceholderMap } from "../../../components/map"
+import { MobileMap } from "../../../components/map/map-mobile"
 import { ENDPOINTS } from "~/lib/const"
 import {
   type PagesType,

@@ -3,7 +3,7 @@ import { v4 as uuid } from "uuid"
 import { Pill } from "~/components/pill/pill"
 import PlaceholderPill from "~/components/pill/placeholerPill"
 
-type Props = {
+interface Props {
   containerRef: React.RefObject<HTMLDivElement| null>
   activitiesList: any[]
   activitiesIsLoading: boolean
@@ -11,7 +11,7 @@ type Props = {
   lastElementRef: (node: HTMLDivElement) => void
 }
 
-const ActivityList = ({
+export const ActivityList = ({
   containerRef,
   activitiesList,
   activitiesIsLoading,
@@ -52,11 +52,9 @@ const ActivityList = ({
       </div>
       {activitiesIsError && (
         <div className="text-red-500 py-2">
-          Error loading activities.
+          Błąd podczas ładowania aktywności
         </div>
       )}
     </div>)
   );
 }
-
-export default ActivityList

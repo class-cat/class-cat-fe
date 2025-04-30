@@ -1,9 +1,9 @@
 import { Container } from "~/components/ui/container"
-import { TopNavButtons } from "./topnavButtons"
+import { TopNavButtons } from "./top-nav-buttons"
 import { ROUTES } from "~/lib/const"
 import Image from "next/image"
 
-export function TopNav() {
+export const TopNav = () => {
   return (
     <Container>
       <nav className="flex h-[80px] w-full items-center justify-between text-xl font-semibold">
@@ -13,7 +13,7 @@ export function TopNav() {
             alt="Cute cat face peeking from the bottom"
             width={48}
             height={48}
-            className="mr-2 object-cover sm:hidden" // Added margin-left for spacing
+            className="mr-2 object-cover sm:hidden"
           />
           <span className="font-logo text-2xl text-primary">
             <a href={ROUTES.ROOT.HOME}>ClassCat</a>

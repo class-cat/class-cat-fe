@@ -3,7 +3,7 @@ import Link from "next/link"
 import { Button } from "~/components/ui/button"
 import { ROUTES } from "~/lib/const"
 
-const CompanyOffer = () => {
+export const CompanyOffer = () => {
   return (
     <div className="flex w-full flex-row items-center justify-center gap-4 border-t-2 border-secondary text-center max-md:hidden">
       <div className="md:h-32" />
@@ -16,5 +16,3 @@ const CompanyOffer = () => {
     </div>
   )
 }
-
-export default CompanyOffer

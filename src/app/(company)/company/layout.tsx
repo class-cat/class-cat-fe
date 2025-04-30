@@ -1,7 +1,7 @@
 import "~/styles/globals.css"
 
 import React from "react"
-import { TopNav } from "~/app/_components/topnav/topnav"
+import { TopNav } from "~/app/_components/top-nav"
 import { Footer } from "~/app/(main)/_components/footer"
 
 export default function RootLayout({

@@ -1,5 +1,5 @@
 import { Suspense } from "react"
-import { TopNav } from "../_components/topnav/topnav"
+import { TopNav } from "../_components/top-nav"
 
 export const metadata = {
   title: "Search",
