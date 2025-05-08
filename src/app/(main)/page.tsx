@@ -1,6 +1,6 @@
 "use client"
 
-import React, { Suspense, useEffect, useMemo, useRef } from "react"
+import React, { useEffect, useMemo, useRef, useState } from "react"
 import { useQueryClient } from "@tanstack/react-query"
 import { Container } from "~/components/ui/container"
 import { ENDPOINTS } from "~/lib/const"
@@ -16,7 +16,7 @@ import { SearchBar } from "./_components/search-bar"
 import { MapMobile } from "~/components/map/map-mobile"
 
 export default function HomePage() {
-  const [searchType, setSearchType] = React.useState("newest")
+  const [searchType, setSearchType] = useState("newest")
 
   const containerRef = useRef<HTMLDivElement | null>(null)
   const queryClient = useQueryClient()
@@ -62,9 +62,7 @@ export default function HomePage() {
   return (
     <Container className="h-full flex-1 justify-center pt-2 md:pt-6">
       <section className="md:rounded-3xl md:bg-secondary">
-        <Suspense fallback={<div>Loading...</div>}>
-          <SearchBar />
-        </Suspense>
+        <SearchBar />
       </section>
       <div className="md:h-10" />
       <section>

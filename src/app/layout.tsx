@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <ReactQueryProvider>
       <ClerkProvider localization={plPL} dynamic>
-        <html lang="en" suppressHydrationWarning>
+        <html lang="pl" suppressHydrationWarning>
           <body
             className={`font-sans ${inter.variable} dark ${mochiy.variable}`}
           >
