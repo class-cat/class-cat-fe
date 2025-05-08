@@ -3,7 +3,6 @@ import React from "react"
 import {
   Carousel,
   CarouselContent,
-  CarouselDots,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
@@ -30,7 +29,6 @@ export const RecommendedCategories = () => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselDots />
           <CarouselPrevious className="ml-2" />
           <CarouselNext className="mr-2" />
         </Carousel>

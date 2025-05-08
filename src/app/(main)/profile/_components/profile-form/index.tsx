@@ -21,19 +21,14 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "~/components/ui/popover"
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from "@radix-ui/react-select"
+
 import { CalendarIcon } from "lucide-react"
 import { format } from "date-fns"
 import { cn } from "~/lib/utils"
 import { useUser } from "@clerk/nextjs"
 import { Skeleton } from "~/components/ui/skeleton"
 import { FormSchema, type FormSchemaType } from "../_schema/form-schema.zod"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/components/ui/select"
 
 export const ProfileForm = () => {
   const { user, isLoaded } = useUser()
@@ -187,21 +182,21 @@ export const ProfileForm = () => {
                   control={form.control}
                   name="sex"
                   render={({ field }) => (
-                    <FormItem className="space-y-0">
+                    <FormItem className="z-50 flex flex-col" >
                       <FormLabel>Płeć</FormLabel>
                       <Select
                         onValueChange={field.onChange}
                         defaultValue={field.value}
                       >
                         <FormControl>
-                          <SelectTrigger className="h-10 rounded-xl bg-white shadow-md">
+                          <SelectTrigger className="h-10 rounded-md bg-white">
                             <SelectValue placeholder="Wybierz płeć" />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
                           <SelectItem value="female">Kobieta</SelectItem>
                           <SelectItem value="male">Mężczyzna</SelectItem>
-                          <SelectItem value="unknown">Nie wiem</SelectItem>
+                          <SelectItem value="unknown">Nie chce podawać</SelectItem>
                         </SelectContent>
                       </Select>
                       <FormMessage />

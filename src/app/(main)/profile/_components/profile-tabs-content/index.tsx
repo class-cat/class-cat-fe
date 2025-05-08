@@ -1,7 +1,8 @@
+'use client'
+
 import { zodResolver } from "@hookform/resolvers/zod"
 
 import { TabsContent } from "~/components/ui/tabs"
-import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 import { type z } from "zod"
 import {
@@ -20,6 +21,7 @@ import {
   FormNotificationsSchema,
   type FormNotificationsSchemaType,
 } from "../_schema/form-notifications-schema.zod"
+import { useForm } from "react-hook-form"
 
 export const ProfileTabsContent = () => {
   const form = useForm<FormNotificationsSchemaType>({
@@ -100,7 +102,7 @@ export const ProfileTabsContent = () => {
             </div>
             <div className="flex flex-col gap-4">
               <h2 className="text-xl font-[500]">Konto</h2>
-              <Button className="bg-outline" variant={"combobox"} disabled>
+              <Button variant={"outline"} disabled>
                 Usuń konto
               </Button>
             </div>

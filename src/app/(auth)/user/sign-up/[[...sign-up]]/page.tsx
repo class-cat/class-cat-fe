@@ -26,7 +26,7 @@ export default function SignUpPage() {
           {(isGlobalLoading) => (
             <>
               <SignUp.Step name="start">
-                <Card className="border-secondary bg-[#FFFFFF] shadow-none">
+                <Card className="border-2 border-secondary bg-[#FFFFFF] shadow-none">
                   <CardHeader>
                     <CardTitle className="mx-auto text-lg text-primary">
                       Zarejestruj się

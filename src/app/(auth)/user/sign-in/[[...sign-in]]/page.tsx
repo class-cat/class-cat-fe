@@ -25,7 +25,7 @@ export default function SignInPage() {
           {(isGlobalLoading: boolean) => (
             <>
               <SignIn.Step name="start">
-                <Card className="border-secondary bg-[#FFFFFF] shadow-none">
+                <Card className="border-2 border-secondary bg-[#FFFFFF] shadow-none">
                   <CardHeader>
                     <CardTitle className="mx-auto text-lg text-primary">
                       Zaloguj się do ClassCat
