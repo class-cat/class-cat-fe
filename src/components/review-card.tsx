@@ -9,13 +9,14 @@ interface ReviewCardProps {
 }
 
 const ReviewCard = ({ review }: ReviewCardProps) => {
+  console.log(review) 
   return (
     <Card className="border-2 border-secondary transition-transform duration-300 ease-in-out">
       <CardContent className="p-4">
         <div className="flex items-start justify-between">
           <div>
             <p>
-              {review.activity.name} -{" "}
+              {review.author.firstName} {review.author.lastName} -{" "}
               {format(new Date(review.createdAt), "dd MMM, yyyy", {
                 locale: pl,
               })}
@@ -23,10 +24,10 @@ const ReviewCard = ({ review }: ReviewCardProps) => {
             <p className="text-gray-600 text-sm">{review.comment}</p>
           </div>
           <div className="flex">
-            {[...Array(review.rating)].map((_, i) => (
+            {[...Array(5)].map((_, i) => (
               <Icons.star
                 key={i}
-                className="size-5 fill-primary text-primary"
+                className={`size-5 ${i < review.rating ? 'fill-primary text-primary' : 'text-primary'}`}
               />
             ))}
           </div>
