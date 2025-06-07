@@ -13,7 +13,7 @@
     0 4px 6px rgba(0, 0, 0, 0.1),
     0 1px 3px rgba(0, 0, 0, 0.08);
   padding: 0;
-  min-width: 180px;
+  min-width: 280px;
   font-family:
     "Inter",
     -apple-system,
@@ -88,4 +88,17 @@
     0 7px 14px rgba(0, 0, 0, 0.1),
     0 3px 6px rgba(0, 0, 0, 0.08);
   transition: box-shadow 0.2s ease;
+}
+
+/* Two-line truncation for provider name */
+.provider-name {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 170px;
+  white-space: normal;
+  line-height: 1.2;
+  font-size: 14px;
 }

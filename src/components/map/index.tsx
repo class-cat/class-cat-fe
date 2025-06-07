@@ -1,6 +1,6 @@
 "use client"
 
-import { Suspense, useEffect, useState, useCallback, useMemo } from "react"
+import { Suspense, useEffect, useState, useCallback, useMemo, useRef } from "react"
 import { Layer, Map as MapGL, Source, Popup, type MapMouseEvent } from "react-map-gl"
 import maplibregl from "maplibre-gl"
 import "maplibre-gl/dist/maplibre-gl.css"
@@ -26,17 +26,45 @@ type MapFeature = {
   }
 }
 
-export function Map({ data }: any) {
+export function Map() {
   const [popupInfo, setPopupInfo] = useState<any>(null)
   const [hoveredPointId, setHoveredPointId] = useState<string | null>(null)
+  const [selectedSlug, setSelectedSlug] = useState<string | null>(null)
+  const mapRef = useRef<any>(null)
+  const [imagesLoaded, setImagesLoaded] = useState(false)
 
+  // Fetch map source (tiles)
   const {
     data: map,
-    isLoading,
-    isError,
+    isLoading: isMapLoading,
+    isError: isMapError,
   } = useFetch<Map>({
     url: `${ENDPOINTS.MAP}`,
   })
+
+  // Fetch points (markers)
+  const {
+    data: pointsData,
+    isLoading: isPointsLoading,
+    isError: isPointsError,
+  } = useFetch<any>({
+    url: ENDPOINTS.SEARCH.MAP,
+    params: {
+      distance: 0.1,
+    },
+  })
+
+  // Fetch activity details by slug
+  const {
+    data: activityDetail,
+    isLoading: isActivityLoading,
+    isError: isActivityError,
+  } = useFetch<any>({
+    url: selectedSlug ? `${ENDPOINTS.ACTIVITIES.ROOT}${selectedSlug}` : null,
+    enabled: !!selectedSlug,
+  })
+
+  console.log(pointsData) 
 
   const mapStyle = useMemo(() => {
     if (!map?.data?.file) return MAP_STYLE
@@ -52,33 +80,110 @@ export function Map({ data }: any) {
     }
   }, [map])
 
+  // Filter out points with invalid coordinates before creating GeoJSON
   const memoizedGeoJson = useMemo(() => {
-    if (!data) return geoJson
-    
-    const features = data.map((item: any) => ({
-      type: 'Feature',
-      properties: {
-        id: item.id,
-        title: item.title,
-        image: item.image,
-        cluster: false
-      },
-      geometry: {
-        type: 'Point',
-        coordinates: [item.longitude, item.latitude]
-      }
-    }))
+    if (!pointsData?.data) return geoJson
+    const filtered = pointsData.data.filter((item: any) => {
+      // Accepts both {lat, lon} and {latitude, longitude}
+      const lat = item.latitude ?? item.lat ?? item.coordinates?.lat
+      const lon = item.longitude ?? item.lon ?? item.coordinates?.lon
+      return lat !== null && lat !== undefined && lon !== null && lon !== undefined
+    })
+    return createGeoJSON(filtered)
+  }, [pointsData])
 
-    return {
-      type: 'FeatureCollection',
-      features
+  console.log(memoizedGeoJson)
+
+  // Load custom marker images
+  const loadMarkerImages = useCallback(async () => {
+    if (!mapRef.current || imagesLoaded) return
+
+    const mapInstance = mapRef.current.getMap()
+    
+    try {
+      // Define your marker images
+      const markerImages = [
+        {
+          id: 'default-marker',
+          url: '/defaultcat.png',
+        },
+        {
+          id: 'activity-marker',
+          url: '/defaultcat.png',
+        },
+        {
+          id: 'hover-marker',
+          url: '/defaultcat.png',
+        }
+      ]
+
+      // Load each image
+      const imagePromises = markerImages.map(({ id, url }) => {
+        return new Promise((resolve, reject) => {
+          mapInstance.loadImage(url, (error: any, image: any) => {
+            if (error) {
+              console.warn(`Failed to load image ${id}:`, error)
+              // Fallback: create a simple colored circle as image
+              const canvas = document.createElement('canvas')
+              canvas.width = 32
+              canvas.height = 32
+              const ctx = canvas.getContext('2d')!
+              ctx.fillStyle = id === 'hover-marker' ? '#ff4d4d' : '#11b4da'
+              ctx.beginPath()
+              ctx.arc(16, 16, 14, 0, 2 * Math.PI)
+              ctx.fill()
+              ctx.strokeStyle = '#fff'
+              ctx.lineWidth = 2
+              ctx.stroke()
+              
+              const imageData = ctx.getImageData(0, 0, 32, 32)
+              mapInstance.addImage(id, imageData)
+              resolve(true)
+            } else {
+              mapInstance.addImage(id, image)
+              resolve(true)
+            }
+          })
+        })
+      })
+
+      await Promise.all(imagePromises)
+      setImagesLoaded(true)
+    } catch (error) {
+      console.error('Error loading marker images:', error)
     }
-  }, [data])
+  }, [imagesLoaded])
+
+  // Handle map load
+  const handleMapLoad = useCallback(() => {
+    loadMarkerImages()
+  }, [loadMarkerImages])
+
+  // Get interactive layers based on current state
+  const getInteractiveLayers = useCallback(() => {
+    const baseLayers = ["clusters", "cluster-count"]
+    if (imagesLoaded) {
+      return [...baseLayers, "unclustered-point-image"]
+    } else {
+      return [...baseLayers, "unclustered-point"]
+    }
+  }, [imagesLoaded])
+
+  // Get query layers based on current state
+  const getQueryLayers = useCallback(() => {
+    const baseLayers = ["clusters", "cluster-count"]
+    if (imagesLoaded) {
+      return [...baseLayers, "unclustered-point-image"]
+    } else {
+      return [...baseLayers, "unclustered-point"]
+    }
+  }, [imagesLoaded])
 
   const handleClick = useCallback(
     (event: MapMouseEvent) => {
+      const queryLayers = getQueryLayers()
       const features = event.target.queryRenderedFeatures(event.point, {
-        layers: ["clusters", "cluster-count", "unclustered-point"],
+        layers: queryLayers,
       })
 
       if (features.length > 0) {
@@ -101,18 +206,25 @@ export function Map({ data }: any) {
               })
               .catch(() => {})
           }
-        } else if (feature.layer.id === "unclustered-point") {
-          setPopupInfo({
-            longitude: feature.geometry.coordinates[0],
-            latitude: feature.geometry.coordinates[1],
-            properties: feature.properties,
-          })
+        } else if (feature.layer.id === "unclustered-point" || feature.layer.id === "unclustered-point-image") {
+          // Always close current popup before opening a new one
+          setPopupInfo(null)
+          setSelectedSlug(null)
+          setTimeout(() => {
+            setSelectedSlug(feature.properties.slug)
+            setPopupInfo({
+              longitude: feature.geometry.coordinates[0],
+              latitude: feature.geometry.coordinates[1],
+              properties: feature.properties,
+            })
+          }, 0)
         }
       } else if (popupInfo) {
         setPopupInfo(null)
+        setSelectedSlug(null)
       }
     },
-    []
+    [popupInfo, getQueryLayers]
   )
 
   const handleMouseEnter = useCallback((event: MapMouseEvent) => {
@@ -127,8 +239,10 @@ export function Map({ data }: any) {
   }, [])
 
   const handleMouseMove = useCallback((event: MapMouseEvent) => {
+    // Only query the appropriate point layer based on current state
+    const pointLayer = imagesLoaded ? "unclustered-point-image" : "unclustered-point"
     const features = event.target.queryRenderedFeatures(event.point, {
-      layers: ["unclustered-point"]
+      layers: [pointLayer]
     })
 
     if (features.length > 0) {
@@ -149,7 +263,7 @@ export function Map({ data }: any) {
       )
       setHoveredPointId(null)
     }
-  }, [hoveredPointId])
+  }, [hoveredPointId, imagesLoaded])
 
   useEffect(() => {
     const protocol = new Protocol()
@@ -162,10 +276,11 @@ export function Map({ data }: any) {
   return (
     <Suspense fallback={<MapSkeleton />}>
       <div className="mb-6 size-full overflow-hidden rounded-2xl">
-        {isError || isLoading || map === undefined || map.success === false ? (
+        {isMapError || isMapLoading || isPointsError || isPointsLoading || map === undefined || map.success === false ? (
           <MapSkeleton />
         ) : (
           <MapGL
+            ref={mapRef}
             reuseMaps
             initialViewState={{
               longitude: 18.6435,
@@ -175,13 +290,19 @@ export function Map({ data }: any) {
             }}
             mapStyle={mapStyle as any}
             mapLib={maplibregl as any}
-            onClick={handleClick}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-            onMouseMove={handleMouseMove}
-            interactiveLayerIds={["clusters", "unclustered-point"]}
+            onLoad={handleMapLoad}
+            interactiveLayerIds={
+              memoizedGeoJson.features && memoizedGeoJson.features.length > 0
+                ? getInteractiveLayers()
+                : []
+            }
+            onClick={memoizedGeoJson.features && memoizedGeoJson.features.length > 0 ? handleClick : undefined}
+            onMouseEnter={memoizedGeoJson.features && memoizedGeoJson.features.length > 0 ? handleMouseEnter : undefined}
+            onMouseLeave={memoizedGeoJson.features && memoizedGeoJson.features.length > 0 ? handleMouseLeave : undefined}
+            onMouseMove={memoizedGeoJson.features && memoizedGeoJson.features.length > 0 ? handleMouseMove : undefined}
             cursor="pointer"
             maxPitch={0}
+            maxBounds={[[13.0, 48.5], [24.2, 55.2]]}
           >
             <Source 
               id="my-data" 
@@ -193,6 +314,7 @@ export function Map({ data }: any) {
               generateId={true}
               promoteId="id"
             >
+              {/* Cluster layers remain the same */}
               <Layer
                 id="clusters"
                 type="circle"
@@ -233,53 +355,90 @@ export function Map({ data }: any) {
                   "text-color": "#ffffff"
                 }}
               />
-              <Layer
-                id="unclustered-point"
-                type="circle"
-                filter={["all", ["!", ["has", "point_count"]], ["!", ["has", "cluster"]]]}
-                paint={{
-                  "circle-color": [
-                    "case",
-                    ["boolean", ["feature-state", "hover"], false],
-                    "#ff4d4d",
-                    "#11b4da"
-                  ],
-                  "circle-radius": [
-                    "case",
-                    ["boolean", ["feature-state", "hover"], false],
-                    10,
-                    8
-                  ],
-                  "circle-stroke-width": 1,
-                  "circle-stroke-color": "#fff"
-                }}
-              />
+              
+              {/* Image markers for individual points - only render when images are loaded */}
+              {imagesLoaded && (
+                <Layer
+                  id="unclustered-point-image"
+                  type="symbol"
+                  filter={["all", ["!", ["has", "point_count"]], ["!", ["has", "cluster"]]]}
+                  layout={{
+                    "icon-image": [
+                      "case",
+                      ["boolean", ["feature-state", "hover"], false],
+                      "hover-marker",
+                      "default-marker"
+                    ],
+                    "icon-size": [
+                      "case",
+                      ["boolean", ["feature-state", "hover"], false],
+                      1.2,
+                      1.0
+                    ],
+                    "icon-allow-overlap": true,
+                    "icon-ignore-placement": true
+                  }}
+                />
+              )}
+              
+              {/* Fallback circle markers - only render when images aren't loaded */}
+              {!imagesLoaded && (
+                <Layer
+                  id="unclustered-point"
+                  type="circle"
+                  filter={["all", ["!", ["has", "point_count"]], ["!", ["has", "cluster"]]]}
+                  paint={{
+                    "circle-color": [
+                      "case",
+                      ["boolean", ["feature-state", "hover"], false],
+                      "#ff4d4d",
+                      "#11b4da"
+                    ],
+                    "circle-radius": [
+                      "case",
+                      ["boolean", ["feature-state", "hover"], false],
+                      10,
+                      8
+                    ],
+                    "circle-stroke-width": 1,
+                    "circle-stroke-color": "#fff"
+                  }}
+                />
+              )}
             </Source>
             {popupInfo && (
               <Popup
                 longitude={popupInfo.longitude}
                 latitude={popupInfo.latitude}
-                onClose={() => setPopupInfo(null)}
+                onClose={() => { setPopupInfo(null); setSelectedSlug(null); }}
                 closeOnClick={true}
                 closeButton={false}
                 className="custom-popup"
                 anchor="bottom"
-                offset={[0, -10]}
+                offset={[-30, -10]}
               >
-                <div className="flex items-center space-x-4 bg-white p-3">
-                  <Image
-                    src={popupInfo.properties.image}
-                    alt={popupInfo.properties.title}
-                    width={50}
-                    height={50}
-                    className="object-cover"
-                  />
-                  <div className="flex flex-col justify-center">
-                    <h3 className="text-gray-800 text-left font-bold">
-                      {popupInfo.properties.title}
-                    </h3>
-                    <p className="text-gray-600 text-left">ID: {popupInfo.properties.id}</p>
-                  </div>
+                <div className="flex min-h-[60px] items-center space-x-4 bg-white p-3">
+                  {!isActivityLoading && !isActivityError && activityDetail?.data && (
+                    <>
+                      <Image
+                        src={activityDetail.data.primaryImage?.file || popupInfo.properties.image}
+                        alt={activityDetail.data.name || popupInfo.properties.title}
+                        width={50}
+                        height={50}
+                        className="object-cover"
+                      />
+                      <div className="flex flex-col justify-center">
+                        <h3 className="text-gray-800 text-left">
+                          {activityDetail.data.name}
+                        </h3>
+                        <p className="text-gray-600 provider-name mt-1 text-left text-xs">
+                          <span>
+                            {activityDetail.data.provider?.name || '—'}
+                          </span>
+                        </p>
+                      </div>
+                    </>
+                  )}
                 </div>
               </Popup>
             )}
