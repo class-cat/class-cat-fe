@@ -53,7 +53,7 @@ export const useInfinityFetch = <T>({
 }: UseFetch<T>) => {
   const queryKey: QueryKey = [url as string, params]
 
-  return useInfiniteQuery<PageData<T>, Error, InfiniteData<PageData<T>>>({
+  return useInfiniteQuery({
     queryKey,
     initialPageParam: 1,
     enabled,
