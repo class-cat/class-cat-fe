@@ -6,7 +6,6 @@ import {
   useQueryClient,
 } from "@tanstack/react-query"
 import { httpClient } from "./http-client"
-import { useAuth } from "@clerk/nextjs"
 
 export type FetchConfig<T> = Omit<
   UseQueryOptions<T, Error, T, QueryKeyT>,

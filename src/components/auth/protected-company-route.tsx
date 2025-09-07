@@ -3,7 +3,7 @@
 import { useAuth } from "@clerk/nextjs"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
-import { isCompany } from "~/lib/auth"
+import { useIsCompany } from "~/lib/auth"
 
 interface ProtectedCompanyRouteProps {
   children: React.ReactNode
@@ -12,6 +12,7 @@ interface ProtectedCompanyRouteProps {
 export function ProtectedCompanyRoute({ children }: ProtectedCompanyRouteProps) {
   const { isLoaded, userId } = useAuth()
   const router = useRouter()
+  const isCompany = useIsCompany()
 
   useEffect(() => {
     if (isLoaded && !userId) {
@@ -19,12 +20,12 @@ export function ProtectedCompanyRoute({ children }: ProtectedCompanyRouteProps) 
       return
     }
 
-    if (isLoaded && userId && !isCompany()) {
+    if (isLoaded && userId && !isCompany) {
       router.push("/user/dashboard")
     }
   }, [isLoaded, userId, router])
 
-  if (!isLoaded || !userId || !isCompany()) {
+  if (!isLoaded || !userId || !isCompany) {
     return null
   }
 

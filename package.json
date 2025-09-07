@@ -8,6 +8,8 @@
     "dev": "next dev --turbopack",
     "lint": "next lint",
     "lint:fix": "npx lint --fix",
+    "lint:types": "npx tsc --noEmit",
+    "lint:all": "npm run lint && npm run lint:types",
     "start": "next start"
   },
   "dependencies": {
