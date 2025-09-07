@@ -9,10 +9,10 @@ interface Props {
   href: string
 }
 
-export const MostSearchItem = ({ title, desc, avatar, href }: Props) => {
+export const MostSearchItem = ({ title, avatar, href }: Props) => {
   return (
     <Link prefetch={true} href={href}>
-      <Card className="aspect-square rounded-2xl border-2 border-secondary bg-secondary p-4 shadow-none md:rounded-3xl">
+      <Card className="aspect-square rounded-2xl border-2 border-secondary bg-secondary p-1 shadow-none md:rounded-3xl">
         <CardContent className="flex h-full flex-col items-center justify-center  p-2">
           <div className="relative size-16 object-fill">
             <Image
@@ -25,7 +25,7 @@ export const MostSearchItem = ({ title, desc, avatar, href }: Props) => {
           </div>
           <div className="flex flex-col items-center justify-center pt-2 text-center capitalize max-md:hidden">
             <p className="text-md text-foregroundMuted">{title}</p>
-            <p className="text-md text-foregroundMuted">{desc}</p>
+            {/* <p className="text-md text-foregroundMuted">{desc}</p> */}
           </div>
         </CardContent>
       </Card>
