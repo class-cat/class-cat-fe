@@ -11,6 +11,7 @@ const config = {
     "next/core-web-vitals",
     "prettier",
     "plugin:tailwindcss/recommended",
+    "@typescript-eslint/recommended-type-checked",
   ],
   rules: {
     "@typescript-eslint/array-type": "off",

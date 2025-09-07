@@ -20,7 +20,7 @@ export const MapMobile = () => {
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
-        <div className="h-[80px] w-full rounded-2xl bg-[url('/map-button-light.png')]">
+        <div className="h-[80px] w-full rounded-lg bg-[url('/map-button-light.png')]">
           <div className="flex size-full items-center justify-center rounded-2xl">
             <Button
               variant="outline"

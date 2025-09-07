@@ -1,7 +1,7 @@
 .popup {
   background-color: #f4ecdf;
   border-radius: 12px;
-  padding: 10px;
+  padding: 5px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -13,7 +13,7 @@
     0 4px 6px rgba(0, 0, 0, 0.1),
     0 1px 3px rgba(0, 0, 0, 0.08);
   padding: 0;
-  min-width: 180px;
+  width: 280px;
   font-family:
     "Inter",
     -apple-system,
@@ -21,6 +21,14 @@
     "Segoe UI",
     Roboto,
     sans-serif;
+}
+
+/* Hide MapLibre attribution and logo */
+.maplibregl-ctrl-logo,
+.maplibregl-ctrl-attrib,
+.maplibregl-compact,
+.maplibregl-attribution-container {
+  display: none !important;
 }
 
 /* Style the popup tip (arrow) */
@@ -39,8 +47,6 @@
 /* Close button styling */
 .custom-popup {
   color: #6b7280;
-  font-size: 16px;
-  padding: 4px;
   transition: color 0.2s ease;
 }
 
@@ -50,13 +56,11 @@
 
 /* Content styling */
 .custom-popup .maplibregl-popup-content > div {
-  padding: 12px 16px;
+  padding: 5px;
 }
 
 /* Title styling */
 .custom-popup h3 {
-  font-size: 16px;
-  font-weight: 600;
   color: #1f2937;
   margin-bottom: 4px;
   line-height: 1.2;
@@ -64,7 +68,6 @@
 
 /* Paragraph/ID styling */
 .custom-popup p {
-  font-size: 14px;
   color: #6b7280;
   margin: 0;
   line-height: 1.4;
@@ -72,8 +75,15 @@
 
 /* Image styling */
 .custom-popup img {
-  max-width: 100%;
-  height: auto;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.custom-popup svg {
+  width: 100%;
+  height: 100%;
   display: block;
 }
 
@@ -88,4 +98,11 @@
     0 7px 14px rgba(0, 0, 0, 0.1),
     0 3px 6px rgba(0, 0, 0, 0.08);
   transition: box-shadow 0.2s ease;
+}
+
+/* Single-line truncation for provider name */
+.provider-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
