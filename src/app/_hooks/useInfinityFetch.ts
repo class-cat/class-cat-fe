@@ -34,7 +34,7 @@ type UseFetch<T> = {
       PageData<T>,
       Error,
       InfiniteData<PageData<T>>,
-      PageData<T>,
+      any,
       QueryKey
     >,
     "queryKey" | "queryFn" | "initialPageParam" | "getNextPageParam"
