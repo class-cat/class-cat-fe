@@ -31,9 +31,9 @@ type UseFetch<T> = {
   params?: Record<string, string | number>
   config?: Omit<
     UseInfiniteQueryOptions<
-      PageData<T>,
+      any,
       Error,
-      InfiniteData<PageData<T>>,
+      InfiniteData<any>,
       any,
       QueryKey
     >,
@@ -60,7 +60,7 @@ export const useInfinityFetch = <T>({
     queryFn: ({ pageParam = 1, signal }) => {
       if (!url) throw new Error("URL is required")
       const queryParams = { page: pageParam as string, ...params }
-      return fetcher<PageData<T>>({
+      return fetcher<any>({
         queryKey: [url, queryParams],
         signal,
         meta: {
