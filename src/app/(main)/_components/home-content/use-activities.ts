@@ -34,9 +34,9 @@ export const useActivities = () => {
 
   const { lastElementRef } = useInfiniteScroll(
     activitiesIsLoading,
-    activitiesIsFetching,
-    hasNextPageActivities,
-    fetchNextPageActivities
+    activitiesIsFetching as boolean,
+    hasNextPageActivities as boolean,
+    fetchNextPageActivities as (options?: any) => Promise<any>
   )
 
   const handleChangeTab = (value: string) => () => {

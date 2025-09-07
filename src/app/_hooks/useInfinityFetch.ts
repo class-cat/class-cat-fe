@@ -31,10 +31,10 @@ type UseFetch<T> = {
   params?: Record<string, string | number>
   config?: Omit<
     UseInfiniteQueryOptions<
-      PageData<T>,
+      DataType<T>,
       Error,
-      InfiniteData<PageData<T>>,
-      PageData<T>,
+      InfiniteData<DataType<T>>,
+      DataType<T>,
       QueryKey
     >,
     "queryKey" | "queryFn" | "initialPageParam" | "getNextPageParam"
@@ -43,7 +43,7 @@ type UseFetch<T> = {
 }
 
 // eslint-disable-next-line
-export type PageData<T> = DataType<SearchResultType>
+export type PageData<T> = DataType<T>
 
 export const useInfinityFetch = <T>({
   url,
@@ -53,14 +53,14 @@ export const useInfinityFetch = <T>({
 }: UseFetch<T>) => {
   const queryKey: QueryKey = [url as string, params]
 
-  return useInfiniteQuery<PageData<T>, Error, InfiniteData<PageData<T>>>({
+  return useInfiniteQuery<DataType<T>, Error, InfiniteData<DataType<T>>>({
     queryKey,
     initialPageParam: 1,
 
     queryFn: ({ pageParam = 1, signal }) => {
       if (!url) throw new Error("URL is required")
       const queryParams = { page: pageParam as string, ...params }
-      return fetcher<PageData<T>>({
+      return fetcher<DataType<T>>({
         queryKey: [url, queryParams],
         signal,
         meta: {
