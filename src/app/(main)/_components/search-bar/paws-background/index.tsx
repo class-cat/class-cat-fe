@@ -1,25 +1,30 @@
-import React, { useState, useMemo } from "react"
-import { useResizeObserver } from "~/app/_hooks/useResizeObserver"
-import { calculatePaws } from "./utils"
+import { generatePercentPaws } from "./utils"
 import { PawItem } from "./paw-item"
 
 export const PawsBackground = () => {
-  const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
-  const containerRef = useResizeObserver(setDimensions)
-
-  const paws = useMemo(
-    () => calculatePaws(dimensions.width, dimensions.height),
-    [dimensions.width, dimensions.height]
-  )
+  const configs = [
+    { className: "block sm:hidden", cols: 5, rows: 4 }, // xs
+    { className: "hidden sm:block lg:hidden", cols: 8, rows: 6 }, // sm-md
+    { className: "hidden lg:block", cols: 12, rows: 7 }, // lg+
+  ] as const
 
   return (
-    <div
-      ref={containerRef as any}
-      className="z-1 pointer-events-none absolute inset-0 hidden overflow-hidden md:block"
-    >
-      {paws.map((paw) => (
-        <PawItem key={paw.id} {...paw} />
-      ))}
-    </div>
+    <>
+      {configs.map((cfg, idx) => {
+        const paws = generatePercentPaws(cfg.cols, cfg.rows)
+        return (
+          <div
+            key={idx}
+            className={
+              "z-1 pointer-events-none absolute inset-0 overflow-hidden " + cfg.className
+            }
+          >
+            {paws.map((paw) => (
+              <PawItem key={paw.id} {...paw} unit="%" />
+            ))}
+          </div>
+        )
+      })}
+    </>
   )
 } 

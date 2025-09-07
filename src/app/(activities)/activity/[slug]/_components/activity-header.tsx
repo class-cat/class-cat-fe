@@ -13,7 +13,8 @@ export function ActivityHeader({ activity }: ActivityHeaderProps) {
     <Card className="cardSmall w-full overflow-hidden p-0 md:col-span-2">
       <CardContent className="p-0">
         <div className="flex flex-col sm:flex-row sm:space-x-4">
-          <div className="relative h-48 w-full sm:h-36 sm:w-36 md:h-48 md:w-48">
+          <div className="relative h-48 w-full sm:size-36 md:size-48">
+            {activity?.primaryImage?.file && (
             <Image
               src={activity?.primaryImage?.file}
               alt={activity?.name}
@@ -22,6 +23,7 @@ export function ActivityHeader({ activity }: ActivityHeaderProps) {
               sizes="(max-width: 640px) 100vw, (max-width: 768px) 144px, 192px"
               priority
             />
+            )}
           </div>
           <div className="flex flex-1 flex-col justify-between space-y-4 p-4 sm:space-y-2 sm:p-4 sm:pl-0">
             <div className="space-y-2">

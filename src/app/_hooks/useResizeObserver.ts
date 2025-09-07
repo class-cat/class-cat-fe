@@ -1,9 +1,9 @@
-import { useEffect, useRef } from "react"
+import { useLayoutEffect, useRef } from "react"
 
 export const useResizeObserver = (callback: (dimensions: { width: number; height: number }) => void) => {
   const containerRef = useRef<HTMLElement | null>(null)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const updateDimensions = () => {
       if (containerRef.current) {
         const { width, height } = containerRef.current.getBoundingClientRect()

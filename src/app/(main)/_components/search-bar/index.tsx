@@ -17,6 +17,7 @@ export const SearchBar = () => {
         <Image
           src="/defaultcat.png?height=200&width=200"
           alt="Cute cat face peeking from the bottom"
+          priority
           width={300}
           height={300}
           className="object-cover"

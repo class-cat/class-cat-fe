@@ -15,11 +15,33 @@ export type FetchConfig<T> = Omit<
 
 export type QueryKeyT = [string, Record<string, string | number>]
 
+// Simple in-memory cache for GET responses (5 minutes TTL)
+const FIVE_MINUTES_MS = 5 * 60 * 1000
+const responseCache = new Map<string, { timestamp: number; data: unknown }>()
+
+function buildCacheKey(url: string, params?: Record<string, string | number>) {
+  const search = params ? new URLSearchParams(params as Record<string, string>).toString() : ""
+  return `${url}?${search}`
+}
+
 export const fetcher = async <T>({
   queryKey,
 }: QueryFunctionContext<QueryKeyT>): Promise<T> => {
   const [url, params] = queryKey
+
+  // Try cache first
+  const cacheKey = buildCacheKey(url, params)
+  const cached = responseCache.get(cacheKey)
+  if (cached && Date.now() - cached.timestamp < FIVE_MINUTES_MS) {
+    return cached.data as T
+  }
+
+  // Network request
   const res = await httpClient.get<T>(url, params)
+
+  // Store in cache
+  responseCache.set(cacheKey, { timestamp: Date.now(), data: res })
+
   return res
 }
 

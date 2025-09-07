@@ -9,7 +9,7 @@ interface Props {
   href: string
 }
 
-export const MostSearchItem = ({ title, desc, avatar, href }: Props) => {
+export const MostSearchItem = ({ title, avatar, href }: Props) => {
   return (
     <Link prefetch={true} href={href}>
       <Card className="aspect-square rounded-2xl border-2 border-secondary bg-secondary p-1 shadow-none md:rounded-3xl">
