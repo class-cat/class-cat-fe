@@ -33,9 +33,9 @@ type UseFetch<T> = {
     UseInfiniteQueryOptions<
       PageData<T>,
       Error,
-      InfiniteData<PageData<T>>,
-      PageData<T>,
-      QueryKey
+      InfiniteData<PageData<T>, unknown>,
+      QueryKey,
+      unknown
     >,
     "queryKey" | "queryFn" | "initialPageParam" | "getNextPageParam"
   >
@@ -53,7 +53,7 @@ export const useInfinityFetch = <T>({
 }: UseFetch<T>) => {
   const queryKey: QueryKey = [url as string, params]
 
-  return useInfiniteQuery<PageData<T>, Error, InfiniteData<PageData<T>>>({
+  return useInfiniteQuery<PageData<T>, Error, InfiniteData<PageData<T>, unknown>, QueryKey, unknown>({
     queryKey,
     initialPageParam: 1,
 
@@ -63,10 +63,7 @@ export const useInfinityFetch = <T>({
       return fetcher<PageData<T>>({
         queryKey: [url, queryParams],
         signal,
-        meta: {
-          persist: false,
-        },
-      })
+      } as any)
     },
     enabled,
     getNextPageParam: (lastPage, allPages) => {
