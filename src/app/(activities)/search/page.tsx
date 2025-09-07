@@ -20,6 +20,7 @@ import {
 } from "../../_hooks/useInfinityFetch"
 import { useQueryClient } from "@tanstack/react-query"
 import { useFetch } from "~/app/_hooks/useFetch"
+import { useDebounce } from "~/app/_hooks/useDebounce"
 import { type ResultType, type CordinatesType } from "~/types/search.type"
 import { type DataType } from "~/types/data.type"
 import { MapMobile } from "~/components/map/map-mobile"
@@ -42,9 +43,11 @@ export default function SearchPage() {
   const { data: locationData } = useGetLocations()
   const containerRef = useRef<HTMLDivElement>(null)
 
+  const debouncedSearch = useDebounce(search, 500)
+
   const buildQueryParams = () => {
     const params: Record<string, string> = {}
-    if (search) params.search = search
+    if (debouncedSearch) params.search = debouncedSearch
     if (location) params.location = location
     if (sort) params.sort = sort
     if (category) params.category = category
@@ -54,7 +57,23 @@ export default function SearchPage() {
     return params
   }
 
-  const queryParams = buildQueryParams()
+  const queryParams = useMemo(() => buildQueryParams(), [
+    search,
+    location,
+    sort,
+    category,
+    distance,
+    age,
+    price,
+  ])
+
+  const activitiesParams = useMemo(
+    () => ({
+      ...queryParams,
+      pageSize: 10,
+    }),
+    [queryParams]
+  )
 
   const {
     data: activitiesData,
@@ -65,10 +84,7 @@ export default function SearchPage() {
     hasNextPage: hasNextPageActivities,
   } = useInfinityFetch<PagesType<SearchResultType>>({
     url: ENDPOINTS.SEARCH.ACTIVIES,
-    params: {
-      ...queryParams,
-      pageSize: 10,
-    },
+    params: activitiesParams
   })
 
   const { data: mapData, isLoading: mapIsLoading } = useFetch<
@@ -118,7 +134,6 @@ export default function SearchPage() {
     if (containerRef.current) {
       containerRef.current.scrollTo({ top: 0 })
     }
-    queryClient.invalidateQueries({ queryKey: [ENDPOINTS.SEARCH.ACTIVIES] })
   }, [search, location, sort, distance, age, price, category, queryClient])
 
   return (
@@ -190,7 +205,7 @@ export default function SearchPage() {
             {mapData === undefined || mapIsLoading ? (
               <MapSkeleton />
             ) : (
-              <Map data={mapData.data} />
+              <Map />
             )}
           </div>
         </div>
