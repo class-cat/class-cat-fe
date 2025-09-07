@@ -122,12 +122,7 @@ export default function SearchPage() {
 
   const activitiesList = useMemo(() => {
     if (!activitiesData?.pages) return []
-    return activitiesData?.pages.reduce(
-      (acc: Array<SearchResultType>, page) => {
-        return [...acc, ...(page?.data || [])]
-      },
-      []
-    )
+    return activitiesData.pages.flatMap((page) => page?.data || [])
   }, [activitiesData])
 
   useEffect(() => {
