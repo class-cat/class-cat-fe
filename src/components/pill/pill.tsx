@@ -21,7 +21,7 @@ export function Pill(props: any) {
   }
 
   return (
-    <div className="relative flex h-[110px] items-start gap-3 rounded-2xl border-2 border-secondary p-1.5  sm:p-2 hover:shadow-sm sm:h-[150px] sm:gap-4">
+    <div className="relative flex h-[110px] items-start gap-3 rounded-2xl border-2 border-secondary p-1.5  hover:shadow-sm sm:h-[150px] sm:gap-4 sm:p-2">
       {/* Left Image */}
       <Link
         prefetch={true}
