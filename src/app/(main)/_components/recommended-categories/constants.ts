@@ -1,8 +1,20 @@
 export const mostSearchedItems = [
   {
+    title: "Siatkówka",
+    desc: "34",
+    avatar: "/volleyball.webp",
+    href: "search?category=siatkowka",
+  },
+  {
+    title: "boks",
+    desc: "34",
+    avatar: "/boxing_cat.png",
+    href: "search?category=boks",
+  },
+  {
     title: "piłka nożna",
     desc: "34",
-    avatar: "football.svg",
+    avatar: "/football_cat.png",
     href: "search?category=pilkanozna",
   },
   {
@@ -20,13 +32,13 @@ export const mostSearchedItems = [
   {
     title: "tenis",
     desc: "32",
-    avatar: "tennis.svg",
+    avatar: "/tennis_cat.png",
     href: "search?category=tenis",
   },
   {
     title: "koszykówka",
     desc: "61",
-    avatar: "basketball.svg",
+    avatar: "/basketball_cat.png",
     href: "search?category=koszykowka",
   },
   {

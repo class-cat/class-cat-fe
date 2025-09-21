@@ -2,6 +2,7 @@ import "~/styles/globals.css"
 import { ClerkProvider } from "@clerk/nextjs"
 import { plPL } from "@clerk/localizations"
 import { ReactQueryProvider } from "~/providers/reactquery-provider"
+import { FavoritesProvider } from "~/providers/favorites-provider"
 import { inter, mochiy } from "~/styles/fonts"
 import TokenProvider from "~/providers/token-provider"
 import { Toaster } from "sonner"
@@ -24,7 +25,9 @@ export default function RootLayout({
           <body
             className={`font-sans ${inter.variable} dark ${mochiy.variable}`}
           >
-            <TokenProvider>{children}</TokenProvider>
+            <FavoritesProvider>
+              <TokenProvider>{children}</TokenProvider>
+            </FavoritesProvider>
             <Toaster position="top-right" richColors />
           </body>
         </html>

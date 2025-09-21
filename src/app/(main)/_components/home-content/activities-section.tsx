@@ -13,6 +13,7 @@ interface ActivitiesSectionProps {
   activitiesIsError: boolean
   lastElementRef: (node: HTMLDivElement) => void
   onTabChange: (value: string) => () => void
+  showOnlyFavorites?: boolean
 }
 
 export const ActivitiesSection = ({
@@ -22,6 +23,7 @@ export const ActivitiesSection = ({
   activitiesIsError,
   lastElementRef,
   onTabChange,
+  showOnlyFavorites = false,
 }: ActivitiesSectionProps) => {
   return (
     <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
@@ -37,6 +39,7 @@ export const ActivitiesSection = ({
             activitiesIsLoading={activitiesIsLoading}
             activitiesIsError={activitiesIsError}
             lastElementRef={lastElementRef}
+            showOnlyFavorites={showOnlyFavorites}
           />
         </CategoryTabs>
       </div>
@@ -45,4 +48,4 @@ export const ActivitiesSection = ({
       </div>
     </div>
   )
-} 
+}

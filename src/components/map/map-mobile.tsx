@@ -6,7 +6,17 @@ import { Button } from "~/components/ui/button"
 import { Dialog, DialogContent, DialogTrigger } from "~/components/ui/dialog"
 import { Map } from "."
 
-export const MapMobile = () => {
+export const MapMobile = ({
+  singlePoint,
+}: {
+  singlePoint?: {
+    latitude: number
+    longitude: number
+    title?: string
+    image?: string
+    slug?: string
+  }
+}) => {
   const [open, setOpen] = useState(false)
 
   const openMapDialog = () => {
@@ -36,7 +46,7 @@ export const MapMobile = () => {
       <DialogContent className="w-full p-0 sm:h-[80vh] md:max-w-[90vw]">
         <div className="relative size-full">
           <div className="size-full">
-            <Map />
+            <Map singlePoint={singlePoint} />
           </div>
         </div>
       </DialogContent>
