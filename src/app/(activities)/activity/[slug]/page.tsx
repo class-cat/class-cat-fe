@@ -31,6 +31,8 @@ export default async function ActivityPage({ params }: Props) {
     notFound()
   }
 
+  console.log(activity)
+
   return (
     <Container className="container mb-8 min-h-[calc(100vh-120px)] space-y-8">
       <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
@@ -38,7 +40,13 @@ export default async function ActivityPage({ params }: Props) {
         <Suspense
           fallback={<div className="bg-gray-200 h-[300px] animate-pulse" />}
         >
-          <ActivityMap />
+          <ActivityMap
+            latitude={activity.location?.address?.coordinates?.lat ?? null}
+            longitude={activity.location?.address?.coordinates?.lon ?? null}
+            title={activity.name}
+            image={activity.primaryImage?.file}
+            slug={activity.slug}
+          />
         </Suspense>
       </div>
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">

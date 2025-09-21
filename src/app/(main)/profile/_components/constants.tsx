@@ -10,6 +10,11 @@ export const tabsTriggers = [
     value: "reviews",
   },
   {
+    id: 3,
+    title: "Polubione",
+    value: "favorites",
+  },
+  {
     id: 4,
     title: "Ustawienia",
     value: "settings",

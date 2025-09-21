@@ -11,6 +11,7 @@ export function HomeContent() {
     activitiesIsError,
     lastElementRef,
     handleChangeTab,
+    showOnlyFavorites,
   } = useActivities()
 
   return (
@@ -22,7 +23,8 @@ export function HomeContent() {
         activitiesIsError={activitiesIsError}
         lastElementRef={lastElementRef}
         onTabChange={handleChangeTab}
+        showOnlyFavorites={showOnlyFavorites}
       />
     </section>
   )
-} 
+}

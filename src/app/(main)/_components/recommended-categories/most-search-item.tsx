@@ -13,8 +13,8 @@ export const MostSearchItem = ({ title, avatar, href }: Props) => {
   return (
     <Link prefetch={true} href={href}>
       <Card className="aspect-square rounded-2xl border-2 border-secondary bg-secondary p-1 shadow-none md:rounded-3xl">
-        <CardContent className="flex h-full flex-col items-center justify-center  p-2">
-          <div className="relative size-16 object-fill">
+        <CardContent className="flex h-full flex-col items-center justify-center p-2">
+          <div className="relative mb-[10px] size-16 object-fill">
             <Image
               src={avatar}
               alt={title}

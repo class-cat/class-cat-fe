@@ -125,7 +125,7 @@ export const ProfileForm = () => {
                             <Button
                               variant={"outline"}
                               className={cn(
-                                "w-full border-0 pl-3 text-left font-normal",
+                                "w-full border-0 pl-3 text-left font-normal shadow-none rounded-md",
                                 !field.value && "text-muted-foreground"
                               )}
                             >
