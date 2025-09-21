@@ -10,6 +10,8 @@ export const useActivities = () => {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const queryClient = useQueryClient()
 
+  const shouldFetchFromAPI = searchType !== "favorites"
+
   const {
     data: activitiesData,
     isLoading: activitiesIsLoading,
@@ -23,6 +25,7 @@ export const useActivities = () => {
       type: searchType,
       pageSize: 10,
     },
+    enabled: shouldFetchFromAPI,
   })
 
   const activitiesList = useMemo(() => {
@@ -44,16 +47,21 @@ export const useActivities = () => {
     if (containerRef.current) {
       containerRef.current.scrollTo({ top: 0 })
     }
-    queryClient.invalidateQueries({ queryKey: [ENDPOINTS.ACTIVITIES.ROOT] })
+    if (value !== "favorites") {
+      queryClient.invalidateQueries({ queryKey: [ENDPOINTS.ACTIVITIES.ROOT] })
+    }
   }
+
+  const showOnlyFavorites = searchType === "favorites"
 
   return {
     searchType,
     containerRef,
     activitiesList,
-    activitiesIsLoading,
-    activitiesIsError,
+    activitiesIsLoading: shouldFetchFromAPI ? activitiesIsLoading : false,
+    activitiesIsError: shouldFetchFromAPI ? activitiesIsError : false,
     lastElementRef,
     handleChangeTab,
+    showOnlyFavorites,
   }
-} 
+}

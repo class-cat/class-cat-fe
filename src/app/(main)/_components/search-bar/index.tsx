@@ -1,3 +1,4 @@
+/* eslint-disable tailwindcss/enforces-negative-arbitrary-values */
 "use client"
 
 import Image from "next/image"
@@ -13,9 +14,9 @@ export const SearchBar = () => {
         <SearchHeader />
         <SearchForm />
       </div>
-      <div className="absolute -bottom-28 left-1/2 z-20 hidden w-72 -translate-x-1/2 md:block">
+      <div className="absolute -bottom-[80px] left-1/2 z-20 hidden w-80 -translate-x-1/2 md:block">
         <Image
-          src="/defaultcat.png?height=200&width=200"
+          src="/home_cat.png?height=200&width=200"
           alt="Cute cat face peeking from the bottom"
           priority
           width={300}

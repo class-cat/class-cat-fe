@@ -14,6 +14,7 @@ import {
 } from "~/components/ui/form"
 import { LessonCard } from "../lesson-card"
 import { UserReviewContent } from "../review-content"
+import { FavoritesContent } from "../favorites-content"
 import { Checkbox } from "~/components/ui/checkbox"
 import { lessons } from "./constants"
 import { Button } from "~/components/ui/button"
@@ -48,6 +49,9 @@ export const ProfileTabsContent = () => {
         </TabsContent>
         <TabsContent value="reviews">
           <UserReviewContent />
+        </TabsContent>
+        <TabsContent value="favorites">
+          <FavoritesContent />
         </TabsContent>
         <TabsContent value="settings">
           <div className="flex flex-col gap-8">
@@ -93,10 +97,10 @@ export const ProfileTabsContent = () => {
             </div>
             <div className="flex flex-col gap-4">
               <h2 className="text-xl font-[500]">Polityka Prywatności</h2>
-              <Button className="w-full " variant={"outline"}>
+              <Button className="w-full shadow-none" variant={"outline"}>
                 Umowy o poufności
               </Button>
-              <Button className="w-full " variant={"outline"}>
+              <Button className="w-full shadow-none" variant={"outline"}>
                 Prawa wnioski/RODO
               </Button>
             </div>

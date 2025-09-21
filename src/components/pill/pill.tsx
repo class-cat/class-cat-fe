@@ -1,7 +1,6 @@
 "use client"
 
 import Image from "next/image"
-import { useState } from "react"
 import { Icons } from "~/components/icons"
 import { ROUTES } from "~/lib/const"
 import {
@@ -11,13 +10,41 @@ import {
   TooltipTrigger,
 } from "../ui/tooltip"
 import Link from "next/link"
+import { useFavorites, type FavoriteActivity } from "~/app/_hooks/useFavorites"
 
 export function Pill(props: any) {
   const { slug, name, location, primaryImage, description } = props
-  const [bookmark, setBookmark] = useState(false)
+  const { toggleFavorite, isFavorite, isLoaded } = useFavorites()
+  
+  const bookmark = isLoaded ? isFavorite(slug) : false
 
   const handleBookmark = () => {
-    setBookmark(!bookmark)
+    if (!isLoaded) return
+    
+    // Handle different location structures
+    let locationString = ''
+    if (typeof location === 'string') {
+      locationString = location
+    } else if (location?.address?.address_line) {
+      locationString = location.address.address_line
+    }
+
+    const activity: FavoriteActivity = {
+      slug,
+      name,
+      location: locationString,
+      primaryImage,
+      description
+    }
+    toggleFavorite(activity)
+  }
+
+  // Get location display string
+  const getLocationDisplay = () => {
+    if (typeof location === 'string') {
+      return location
+    }
+    return location?.address?.address_line || ''
   }
 
   return (
@@ -75,12 +102,12 @@ export function Pill(props: any) {
         </div>
 
         {/* Address Badge - Below provider */}
-        {location?.address?.addressLine && (
+        {getLocationDisplay() && (
           <div className="mt-1 flex items-center gap-2">
             <span
               className={`inline-flex items-center rounded-full border-0 bg-primary/50 px-2 py-1 text-xs font-medium text-white`}
             >
-              {location.address.addressLine}
+              {getLocationDisplay()}
             </span>
           </div>
         )}
@@ -90,7 +117,7 @@ export function Pill(props: any) {
       <div className="absolute right-2 top-2">
         <TooltipProvider>
           <Tooltip>
-            <TooltipTrigger onClick={handleBookmark}>
+            <TooltipTrigger onClick={handleBookmark} disabled={!isLoaded}>
               <Icons.paw
                 className="size-6 sm:size-8"
                 color={"#ecdec8"}

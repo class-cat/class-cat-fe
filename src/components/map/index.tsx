@@ -41,7 +41,17 @@ type MapFeature = {
   }
 }
 
-export function Map() {
+export function Map({
+  singlePoint,
+}: {
+  singlePoint?: {
+    latitude: number
+    longitude: number
+    title?: string
+    image?: string
+    slug?: string
+  }
+}) {
   const [popupInfo, setPopupInfo] = useState<any>(null)
   const [hoveredPointId, setHoveredPointId] = useState<string | null>(null)
   const [selectedSlug, setSelectedSlug] = useState<string | null>(null)
@@ -93,8 +103,6 @@ export function Map() {
     url: selectedSlug ? `${ENDPOINTS.ACTIVITIES.ROOT}${selectedSlug}` : null,
     enabled: !!selectedSlug,
   })
-
-  console.log(activityDetail)
 
   const mapStyle = useMemo(() => {
     if (!map?.data?.file) return MAP_STYLE
@@ -463,9 +471,9 @@ export function Map() {
             ref={mapRef}
             reuseMaps
             initialViewState={{
-              longitude: 18.6435,
-              latitude: 54.352,
-              zoom: 12,
+              longitude: singlePoint?.longitude ?? 18.6435,
+              latitude: singlePoint?.latitude ?? 54.352,
+              zoom: singlePoint ? 14 : 12,
               bearing: 0,
             }}
             mapStyle={mapStyle as any}
@@ -609,6 +617,65 @@ export function Map() {
                 />
               )}
             </Source>
+
+            {singlePoint && (
+              <Source
+                id="activity-point"
+                type="geojson"
+                data={{
+                  type: "FeatureCollection",
+                  features: [
+                    {
+                      type: "Feature",
+                      geometry: {
+                        type: "Point",
+                        coordinates: [singlePoint.longitude, singlePoint.latitude],
+                      },
+                      properties: {
+                        title: singlePoint.title ?? "",
+                        image: singlePoint.image ?? "",
+                        slug: singlePoint.slug ?? "",
+                      },
+                    },
+                  ],
+                }}
+              >
+                {imagesLoaded ? (
+                  <Layer
+                    id="activity-point-image"
+                    type="symbol"
+                    layout={{
+                      "icon-image": "activity-marker",
+                      "icon-size": 1.0,
+                      "icon-allow-overlap": true,
+                      "icon-ignore-placement": true,
+                    }}
+                  />
+                ) : (
+                  <Layer
+                    id="activity-point-circle"
+                    type="circle"
+                    paint={{
+                      "circle-color": [
+                        "case",
+                        ["boolean", ["feature-state", "hover"], false],
+                        "#ff4d4d",
+                        "#e74c3c",
+                      ],
+                      "circle-radius": [
+                        "case",
+                        ["boolean", ["feature-state", "hover"], false],
+                        10,
+                        8,
+                      ],
+                      "circle-stroke-width": 1,
+                      "circle-stroke-color": "#fff",
+                    }}
+                  />
+                )}
+              </Source>
+            )}
+
             {popupInfo && (
               <Popup
                 longitude={popupInfo.longitude}
