@@ -1,5 +1,5 @@
 "use client"
-
+        
 import { OtherActivities } from "./other-activities"
 import { SimilarActivities } from "./simmilar-activities"
 
