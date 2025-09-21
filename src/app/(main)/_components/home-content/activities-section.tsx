@@ -1,67 +1,51 @@
-import { useQueryClient } from "@tanstack/react-query"
-import { useMemo, useRef, useState } from "react"
-import { ENDPOINTS } from "~/lib/const"
-import { type Activity } from "~/types/search.type"
-import { type PagesType, useInfinityFetch } from "~/app/_hooks/useInfinityFetch"
-import { useInfiniteScroll } from "~/app/_hooks/useInfiniteScroll"
+"use client"
 
-export const useActivities = () => {
-  const [searchType, setSearchType] = useState("newest")
-  const containerRef = useRef<HTMLDivElement | null>(null)
-  const queryClient = useQueryClient()
+import { Map } from "~/components/map"
+import { MapMobile } from "~/components/map/map-mobile"
+import { CategoryTabs } from "../category-tabs"
+import { ActivityList } from "../activity-list"
+import { type RefObject } from "react"
 
-  const shouldFetchFromAPI = searchType !== "favorites"
+interface ActivitiesSectionProps {
+  containerRef: RefObject<HTMLDivElement | null>
+  activitiesList: any[]
+  activitiesIsLoading: boolean
+  activitiesIsError: boolean
+  lastElementRef: (node: HTMLDivElement) => void
+  onTabChange: (value: string) => () => void
+  showOnlyFavorites?: boolean
+}
 
-  const {
-    data: activitiesData,
-    isLoading: activitiesIsLoading,
-    isFetching: activitiesIsFetching,
-    isError: activitiesIsError,
-    fetchNextPage: fetchNextPageActivities,
-    hasNextPage: hasNextPageActivities,
-  } = useInfinityFetch<PagesType<Activity>>({
-    url: ENDPOINTS.ACTIVITIES.ROOT,
-    params: {
-      type: searchType,
-      pageSize: 10,
-    },
-    enabled: shouldFetchFromAPI,
-  })
-
-  const activitiesList = useMemo(() => {
-    if (!activitiesData?.pages) return []
-    return activitiesData?.pages.reduce((acc: Array<any>, page) => {
-      return [...acc, ...(page?.data || [])]
-    }, [])
-  }, [activitiesData])
-
-  const { lastElementRef } = useInfiniteScroll(
-    activitiesIsLoading,
-    activitiesIsFetching as boolean,
-    hasNextPageActivities as boolean,
-    fetchNextPageActivities as (options?: any) => Promise<any>
+export const ActivitiesSection = ({
+  containerRef,
+  activitiesList,
+  activitiesIsLoading,
+  activitiesIsError,
+  lastElementRef,
+  onTabChange,
+  showOnlyFavorites = false,
+}: ActivitiesSectionProps) => {
+  return (
+    <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
+      <div>
+        <CategoryTabs onTabChange={onTabChange}>
+          <div className="mt-6 xl:hidden">
+            <MapMobile />
+          </div>
+          <div className="h-6" />
+          <ActivityList
+            containerRef={containerRef}
+            activitiesList={activitiesList}
+            activitiesIsLoading={activitiesIsLoading}
+            activitiesIsError={activitiesIsError}
+            lastElementRef={lastElementRef}
+            showOnlyFavorites={showOnlyFavorites}
+          />
+        </CategoryTabs>
+      </div>
+      <div className="hidden h-full xl:block">
+        <Map />
+      </div>
+    </div>
   )
-
-  const handleChangeTab = (value: string) => () => {
-    setSearchType(value)
-    if (containerRef.current) {
-      containerRef.current.scrollTo({ top: 0 })
-    }
-    if (value !== "favorites") {
-      queryClient.invalidateQueries({ queryKey: [ENDPOINTS.ACTIVITIES.ROOT] })
-    }
-  }
-
-  const showOnlyFavorites = searchType === "favorites"
-
-  return {
-    searchType,
-    containerRef,
-    activitiesList,
-    activitiesIsLoading: shouldFetchFromAPI ? activitiesIsLoading : false,
-    activitiesIsError: shouldFetchFromAPI ? activitiesIsError : false,
-    lastElementRef,
-    handleChangeTab,
-    showOnlyFavorites,
-  }
 }
