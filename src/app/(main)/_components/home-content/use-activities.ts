@@ -11,7 +11,7 @@ export const useActivities = () => {
   const queryClient = useQueryClient()
 
   const shouldFetchFromAPI = searchType !== "favorites"
-
+  
   const {
     data: activitiesData,
     isLoading: activitiesIsLoading,
@@ -53,6 +53,9 @@ export const useActivities = () => {
   }
 
   const showOnlyFavorites = searchType === "favorites"
+
+    queryClient.invalidateQueries({ queryKey: [ENDPOINTS.ACTIVITIES.ROOT] })
+  }
 
   return {
     searchType,
