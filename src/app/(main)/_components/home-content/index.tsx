@@ -11,7 +11,7 @@ export function HomeContent() {
     activitiesIsError,
     lastElementRef,
     handleChangeTab,
-    showOnlyFavorites
+    showOnlyFavorites,
   } = useActivities()
 
   return (
