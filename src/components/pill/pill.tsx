@@ -25,8 +25,8 @@ export function Pill(props: any) {
     let locationString = ''
     if (typeof location === 'string') {
       locationString = location
-    } else if (location?.address?.address_line) {
-      locationString = location.address.address_line
+    } else if (location?.address?.addressLine) {
+      locationString = location.address.addressLine
     }
 
     const activity: FavoriteActivity = {
@@ -44,7 +44,7 @@ export function Pill(props: any) {
     if (typeof location === 'string') {
       return location
     }
-    return location?.address?.address_line || ''
+    return location?.address?.addressLine || ''
   }
 
   return (

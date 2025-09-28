@@ -31,8 +31,6 @@ export default async function ActivityPage({ params }: Props) {
     notFound()
   }
 
-  console.log(activity)
-
   return (
     <Container className="container mb-8 min-h-[calc(100vh-120px)] space-y-8">
       <div className="grid grid-cols-1 gap-8 md:grid-cols-3">

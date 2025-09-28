@@ -1,5 +1,5 @@
 import { SignedIn } from "@clerk/nextjs"
-import { AddReviewDialog } from "./review-dialog"
+import { AddReviewForm } from "./review-dialog"
 import Reviews from "./reviews"
 
 interface ReviewsSectionProps {
@@ -11,7 +11,7 @@ export function ReviewsSection({ slug }: ReviewsSectionProps) {
     <section>
       <Reviews slug={slug} />
       <SignedIn>
-        <AddReviewDialog acticitySlug={slug} />
+        <AddReviewForm acticitySlug={slug} />
       </SignedIn>
     </section>
   )

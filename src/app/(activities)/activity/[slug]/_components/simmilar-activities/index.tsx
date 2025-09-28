@@ -6,8 +6,6 @@ interface Props {
 }
 
 export const SimilarActivities = ({ slug }: Props) => {
-  console.log(slug)
-
   return (
     <section>
       <h4 className="mb-4 text-2xl">Sprawdź podobne zajęcia</h4>

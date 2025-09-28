@@ -8,9 +8,9 @@ export type Location = {
   name: string
   location_type: string
   address: {
-    address_line: string
+    addressLine: string
     city: string
-    postal_code: string
+    postalCode: string
     coordinates: CordinatesType
   }
 }
@@ -25,29 +25,29 @@ export type Provider = {
   name: string
   phoneNumber: string
   email: string
-  website_url: string
-  is_verified: boolean
+  websiteUrl: string
+  isVerified: boolean
 }
 
 export type Category = {
   slug: string
   name: string
-  number_of_activities: number
+  numberOfActivities: number
 }
 
 export type Image = {
   id: string
   file: string
-  original_file_name: string
-  file_name: string
-  file_type: string
-  upload_finished_at: string
+  originalFileName: string
+  fileName: string
+  fileType: string
+  uploadFinishedAt: string
 }
 
 export type Activity = {
   slug: string
   name: string
-  added_at: string
+  addedAt: string
   description: string
   location: Location
   provider: Provider

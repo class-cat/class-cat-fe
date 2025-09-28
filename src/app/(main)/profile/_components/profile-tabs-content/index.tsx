@@ -30,7 +30,6 @@ export const ProfileTabsContent = () => {
   })
 
   function onSubmit(data: z.infer<typeof FormNotificationsSchema>) {
-    console.log(data)
     toast("Form submitted")
   }
 

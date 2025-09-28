@@ -10,7 +10,7 @@ export const OtherActivities = ({ slug }: Props) => {
 
   return (
     <section>
-      <h4 className="mb-4 text-2xl">Inne zajęcia w szkole</h4>
+      <h4 className="mb-4 text-2xl">Inne zajęcia</h4>
       <Card className="radius-xs mb-4 cursor-pointer border-none bg-white hover:shadow-md">
         <CardContent className="p-4">
           <h4 className="text-lg">Koszykówka dla dzieci 1-3</h4>

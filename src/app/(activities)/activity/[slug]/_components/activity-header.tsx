@@ -1,7 +1,6 @@
 'use client'
 
 import Image from "next/image"
-import { Button } from "~/components/ui/button"
 import { Card, CardContent } from "~/components/ui/card"
 import { type Activity } from "~/types/search.type"
 import { ActivityDetails } from "./activity-details"
@@ -13,6 +12,9 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "~/components/ui/tooltip"
+import { BadgeCheck, Phone, Mail, Globe } from "lucide-react"
+import { toast } from "sonner"
+import { Button } from "~/components/ui/button"
 
 interface ActivityHeaderProps {
   activity: Activity
@@ -29,11 +31,24 @@ export function ActivityHeader({ activity }: ActivityHeaderProps) {
     const favoriteActivity: FavoriteActivity = {
       slug: activity.slug,
       name: activity.name,
-      location: activity.location?.address?.address_line || '',
+      location: activity.location?.address?.addressLine || '',
       primaryImage: activity.primaryImage,
       description: activity.description
     }
     toggleFavorite(favoriteActivity)
+  }
+
+  const copyToClipboard = async (text: string, type: string) => {
+    try {
+      await navigator.clipboard.writeText(text)
+      toast.success(`${type} copied`)
+    } catch (error) {
+      toast.error(`Failed to copy ${type}`)
+    }
+  }
+
+  const openWebsite = (url: string) => {
+    window.open(url, '_blank', 'noopener,noreferrer')
   }
 
   return (
@@ -74,13 +89,30 @@ export function ActivityHeader({ activity }: ActivityHeaderProps) {
               </div>
               <ActivityDetails activity={activity} />
             </div>
-            <div className="flex justify-center sm:justify-end">
+            <div className="flex justify-center gap-2 sm:justify-end">
               <Button
                 variant="outline"
-                className="w-full rounded-lg shadow-none sm:w-auto"
                 size="sm"
+                onClick={() => copyToClipboard(activity.provider.phoneNumber, 'Phone number')}
+                className="size-8 p-0 shadow-none"
               >
-                Wyświetl informacje
+                <Phone className="size-4" />
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => copyToClipboard(activity.provider.email, 'Email')}
+                className="size-8 p-0 shadow-none"
+              >
+                <Mail className="size-4" />
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => openWebsite(activity.provider.websiteUrl)}
+                className="size-8 p-0 shadow-none"
+              >
+                <Globe className="size-4" />
               </Button>
             </div>
           </div>
