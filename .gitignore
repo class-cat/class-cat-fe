@@ -16,6 +16,8 @@
 /.next/
 /out/
 next-env.d.ts
+apps/*/.next/
+apps/*/out/
 
 # production
 /build
@@ -34,9 +36,14 @@ yarn-error.log*
 # do not commit any .env files to git, except for the .env.example file. https://create.t3.gg/en/usage/env-variables#using-environment-variables
 .env
 .env*.local
+apps/*/.env
+apps/*/.env*.local
 
 # vercel
 .vercel
 
 # typescript
 *.tsbuildinfo
+
+# turborepo
+.turbo

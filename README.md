@@ -1,29 +1,115 @@
-# Create T3 App
+# Class Cat Monorepo
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+This is a Turborepo monorepo containing the Class Cat application.
 
-## What's next? How do I make an app with this?
+## Structure
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+```
+.
+├── apps/
+│   ├── main/          # Main application (user-facing)
+│   └── business/      # Business site
+├── packages/
+│   └── ui/            # Shared UI components
+└── turbo.json         # Turborepo configuration
+```
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+## Getting Started
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+### Prerequisites
 
-## Learn More
+- [Bun](https://bun.sh) installed
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+### Installation
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+```bash
+bun install
+```
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+### Environment Variables
 
-## How do I deploy this?
+Each app has its own environment variables. Copy the example files and fill in your values:
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+```bash
+# Main app
+cp apps/main/.env.example apps/main/.env
+
+# Business app
+cp apps/business/.env.example apps/business/.env
+```
+
+**Required Environment Variables:**
+- `NODE_ENV` - Environment (development, test, production)
+- `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` - Clerk publishable key
+- `CLERK_SECRET_KEY` - Clerk secret key
+- `NEXT_API_URL` - API base URL (optional)
+
+**Note:** Clerk variables are automatically handled by `@clerk/nextjs`. Make sure to set them in your `.env` files.
+
+### Development
+
+Run all apps in development mode:
+```bash
+bun run dev
+```
+
+Run a specific app:
+```bash
+bun run dev:main      # Main app only
+bun run dev:business  # Business app only
+```
+
+### Build
+
+Build all apps:
+```bash
+bun run build
+```
+
+### Linting
+
+```bash
+bun run lint
+```
+
+### Type Checking
+
+```bash
+bun run type-check
+```
+
+## Apps
+
+### Main App (`apps/main`)
+
+The main user-facing application with:
+- User authentication
+- Activity search and browsing
+- User profiles
+- Favorites
+
+### Business App (`apps/business`)
+
+The business-facing site with:
+- Company information
+- Business account sign-up
+- Feature showcase
+
+## Packages
+
+### UI (`packages/ui`)
+
+Shared UI components built with:
+- Radix UI
+- Tailwind CSS
+- React Hook Form
+- Zod
+
+## Technology Stack
+
+- **Framework**: Next.js 15
+- **Package Manager**: Bun
+- **Monorepo**: Turborepo
+- **UI**: Radix UI + Tailwind CSS
+- **Authentication**: Clerk
+- **State Management**: TanStack Query
