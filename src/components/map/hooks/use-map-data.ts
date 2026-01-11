@@ -1,9 +1,10 @@
-import { useState, useCallback, useMemo } from "react"
+import { useCallback, useMemo, useState } from "react"
 import { useFetch } from "~/app/_hooks/useFetch"
 import { ENDPOINTS } from "~/lib/const"
 import { type Map as MapType } from "~/types/map.type"
+
 import { MAP_STYLE } from "../constants"
-import type { MapPopupInfo, MapFeature } from "../types/map.types"
+import type { MapFeature, MapPopupInfo } from "../types/map.types"
 
 export const useMapData = () => {
   const [popupInfo, setPopupInfo] = useState<MapPopupInfo | null>(null)
@@ -82,4 +83,4 @@ export const useMapData = () => {
     handleClick,
     closePopup,
   }
-} 
+}

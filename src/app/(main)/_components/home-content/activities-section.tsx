@@ -1,10 +1,11 @@
 "use client"
 
+import { type RefObject } from "react"
 import { Map } from "~/components/map"
 import { MapMobile } from "~/components/map/map-mobile"
-import { CategoryTabs } from "../category-tabs"
+
 import { ActivityList } from "../activity-list"
-import { type RefObject } from "react"
+import { CategoryTabs } from "../category-tabs"
 
 interface ActivitiesSectionProps {
   containerRef: RefObject<HTMLDivElement | null>

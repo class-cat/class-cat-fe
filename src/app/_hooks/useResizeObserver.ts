@@ -1,6 +1,8 @@
 import { useLayoutEffect, useRef } from "react"
 
-export const useResizeObserver = (callback: (dimensions: { width: number; height: number }) => void) => {
+export const useResizeObserver = (
+  callback: (dimensions: { width: number; height: number }) => void
+) => {
   const containerRef = useRef<HTMLElement | null>(null)
 
   useLayoutEffect(() => {
@@ -26,4 +28,4 @@ export const useResizeObserver = (callback: (dimensions: { width: number; height
   }, [callback])
 
   return containerRef
-} 
+}

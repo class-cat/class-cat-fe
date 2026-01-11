@@ -1,8 +1,8 @@
-import React, { type RefObject, useMemo } from "react"
-import { v4 as uuid } from "uuid"
+import React, { useMemo, type RefObject } from "react"
+import { useFavorites } from "~/app/_hooks/useFavorites"
 import { Pill } from "~/components/pill/pill"
 import { PillSkeleton } from "~/components/pill/pill-skeleton"
-import { useFavorites } from "~/app/_hooks/useFavorites"
+import { v4 as uuid } from "uuid"
 
 interface Props {
   containerRef: RefObject<HTMLDivElement | null>
@@ -41,7 +41,7 @@ export const ActivityList = ({
       <div className="mr-2">
         {isLoading ? (
           Array.from({ length: 10 }).map((_, index) => (
-            <div key={index} className="md:not-first:py-2 mt-2 first:mt-0">
+            <div key={index} className="mt-2 first:mt-0 md:not-first:py-2">
               <PillSkeleton />
             </div>
           ))
@@ -51,21 +51,23 @@ export const ActivityList = ({
             return (
               <div
                 key={uuid()}
-                className="md:not-first:py-2 mt-2 first:mt-0"
-                ref={isLastElement && !showOnlyFavorites ? lastElementRef : null}
+                className="mt-2 first:mt-0 md:not-first:py-2"
+                ref={
+                  isLastElement && !showOnlyFavorites ? lastElementRef : null
+                }
               >
                 <Pill {...item} />
               </div>
             )
           })
         ) : (
-          <div className="text-red-500 py-2">
+          <div className="py-2 text-red-500">
             {showOnlyFavorites ? "Brak ulubionych aktywności" : "Brak wyników"}
           </div>
         )}
       </div>
       {activitiesIsError && !showOnlyFavorites && (
-        <div className="text-red-500 py-2">
+        <div className="py-2 text-red-500">
           Błąd podczas ładowania aktywności
         </div>
       )}

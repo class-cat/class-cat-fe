@@ -1,11 +1,10 @@
 "use client"
 
 import * as React from "react"
+import { buttonVariants } from "~/components/ui/button"
+import { cn } from "~/lib/utils"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { DayPicker, type DropdownProps } from "react-day-picker"
-
-import { cn } from "~/lib/utils"
-import { buttonVariants } from "~/components/ui/button"
 
 import { ScrollArea } from "./scroll-area"
 import {
@@ -90,13 +89,13 @@ function Calendar({
                 </SelectValue>
               </SelectTrigger>
               <SelectContent position="popper">
-                <ScrollArea className="h-80 rounded-md bg-primary p-4 ">
+                <ScrollArea className="bg-primary h-80 rounded-md p-4">
                   {options.map((option, id: number) => (
                     <SelectItem
                       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
                       key={`${option.props.value}-${id}`}
                       value={option.props.value?.toString() ?? ""}
-                      className="cursor-pointer rounded-md p-2 hover:bg-secondary"
+                      className="hover:bg-secondary cursor-pointer rounded-md p-2"
                     >
                       {option.props.children}
                     </SelectItem>

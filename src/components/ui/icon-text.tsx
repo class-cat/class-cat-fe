@@ -8,7 +8,7 @@ export function IconWithText({ text, children }: IconWithTextProps) {
   return (
     <div className="flex flex-row items-center gap-1 pt-1">
       {children}
-      <p className="ml-1 truncate text-xs text-foregroundMuted ">{text}</p>
+      <p className="text-foregroundMuted ml-1 truncate text-xs">{text}</p>
     </div>
   )
 }

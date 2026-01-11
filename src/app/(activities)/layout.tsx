@@ -1,4 +1,5 @@
 import { Suspense } from "react"
+
 import { TopNav } from "../_components/top-nav"
 
 export const metadata = {

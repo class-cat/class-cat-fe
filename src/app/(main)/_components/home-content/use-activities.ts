@@ -1,9 +1,9 @@
-import { useQueryClient } from "@tanstack/react-query"
 import { useMemo, useRef, useState } from "react"
+import { useQueryClient } from "@tanstack/react-query"
+import { useInfiniteScroll } from "~/app/_hooks/useInfiniteScroll"
+import { useInfinityFetch, type PagesType } from "~/app/_hooks/useInfinityFetch"
 import { ENDPOINTS } from "~/lib/const"
 import { type Activity } from "~/types/search.type"
-import { type PagesType, useInfinityFetch } from "~/app/_hooks/useInfinityFetch"
-import { useInfiniteScroll } from "~/app/_hooks/useInfiniteScroll"
 
 export const useActivities = () => {
   const [searchType, setSearchType] = useState("newest")

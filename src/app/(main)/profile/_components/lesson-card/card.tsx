@@ -1,8 +1,9 @@
-import Image from "next/image"
 import React from "react"
+import Image from "next/image"
 import { Icons } from "~/components/icons"
-import { type LessonType } from "."
 import { IconWithText } from "~/components/ui/icon-text"
+
+import { type LessonType } from "."
 
 export const Card = ({
   lesson,
@@ -19,7 +20,7 @@ export const Card = ({
     (child) => React.isValidElement(child) && child.type === Card.Review
   )
   return (
-    <div className="pSmall cursor-pointer items-center gap-4 rounded-2xl border-2 border-secondary bg-white hover:shadow-sm">
+    <div className="pSmall border-secondary cursor-pointer items-center gap-4 rounded-2xl border-2 bg-white hover:shadow-sm">
       <div className="flex justify-between gap-4">
         <div className="flex items-center justify-between gap-4">
           <div className="relative size-[50px] sm:size-[80px]">

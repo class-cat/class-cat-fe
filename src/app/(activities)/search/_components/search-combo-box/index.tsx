@@ -1,6 +1,10 @@
 "use client"
 
+import { useState } from "react"
+import { useMediaQuery } from "~/app/_hooks/useMediaQuery"
+import { useUpdateQueryParams } from "~/app/_hooks/useUpdateQueryParams"
 import { Icons } from "~/components/icons"
+import { Button } from "~/components/ui/button"
 import {
   Command,
   CommandEmpty,
@@ -14,13 +18,9 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "~/components/ui/popover"
-import { cn } from "~/lib/utils"
-import { Button } from "~/components/ui/button"
-import { useState } from "react"
-import type { EntireLocation } from "~/types/search.type"
-import { useUpdateQueryParams } from "~/app/_hooks/useUpdateQueryParams"
-import { useMediaQuery } from "~/app/_hooks/useMediaQuery"
 import { MOBILE_BREAKPOINT } from "~/lib/const"
+import { cn } from "~/lib/utils"
+import type { EntireLocation } from "~/types/search.type"
 
 interface Props {
   data?: EntireLocation[]
@@ -49,7 +49,7 @@ export const SearchCombobox = ({ data, value }: Props) => {
             variant="default"
             role="combobox"
             aria-expanded={open}
-            className="flex w-full justify-between rounded-lg border-2 border-primary shadow-none"
+            className="border-primary flex w-full justify-between rounded-lg border-2 shadow-none"
           >
             <Icons.globe className="hidden size-5 md:block" />
             {value

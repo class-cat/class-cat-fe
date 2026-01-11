@@ -1,30 +1,31 @@
 "use client"
 
-import { v4 as uuid } from "uuid"
+import { useCallback, useEffect, useMemo, useRef } from "react"
 import { useSearchParams } from "next/navigation"
-import { Container } from "~/components/ui/container"
-import { useCallback, useRef, useMemo, useEffect } from "react"
-import { SearchInput } from "./_components/search-input"
-import { SearchCombobox } from "./_components/search-combo-box"
-import { SortSelect } from "./_components/sort-select"
-import { useGetLocations } from "~/actions/get-locations"
-import { MoreOptionDialog } from "./_components/more-option-dialog"
-import { PillSkeleton } from "~/components/pill/pill-skeleton"
-import { Pill } from "~/components/pill/pill"
-import { Map } from "../../../components/map"
-import { ENDPOINTS } from "~/lib/const"
-import {
-  type PagesType,
-  type SearchResultType,
-  useInfinityFetch,
-} from "../../_hooks/useInfinityFetch"
 import { useQueryClient } from "@tanstack/react-query"
-import { useFetch } from "~/app/_hooks/useFetch"
+import { useGetLocations } from "~/actions/get-locations"
 import { useDebounce } from "~/app/_hooks/useDebounce"
-import { type ResultType, type CordinatesType } from "~/types/search.type"
-import { type DataType } from "~/types/data.type"
+import { useFetch } from "~/app/_hooks/useFetch"
 import { MapMobile } from "~/components/map/map-mobile"
 import { MapSkeleton } from "~/components/map/map-skeleton"
+import { Pill } from "~/components/pill/pill"
+import { PillSkeleton } from "~/components/pill/pill-skeleton"
+import { Container } from "~/components/ui/container"
+import { ENDPOINTS } from "~/lib/const"
+import { type DataType } from "~/types/data.type"
+import { type CordinatesType, type ResultType } from "~/types/search.type"
+import { v4 as uuid } from "uuid"
+
+import {
+  useInfinityFetch,
+  type PagesType,
+  type SearchResultType,
+} from "../../_hooks/useInfinityFetch"
+import { Map } from "../../../components/map"
+import { MoreOptionDialog } from "./_components/more-option-dialog"
+import { SearchCombobox } from "./_components/search-combo-box"
+import { SearchInput } from "./_components/search-input"
+import { SortSelect } from "./_components/sort-select"
 
 export type MapDataType = ResultType & {
   cordinates: CordinatesType
@@ -57,15 +58,10 @@ export default function SearchPage() {
     return params
   }
 
-  const queryParams = useMemo(() => buildQueryParams(), [
-    search,
-    location,
-    sort,
-    category,
-    distance,
-    age,
-    price,
-  ])
+  const queryParams = useMemo(
+    () => buildQueryParams(),
+    [search, location, sort, category, distance, age, price]
+  )
 
   const activitiesParams = useMemo(
     () => ({
@@ -84,7 +80,7 @@ export default function SearchPage() {
     hasNextPage: hasNextPageActivities,
   } = useInfinityFetch<PagesType<SearchResultType>>({
     url: ENDPOINTS.SEARCH.ACTIVIES,
-    params: activitiesParams
+    params: activitiesParams,
   })
 
   const { data: mapData, isLoading: mapIsLoading } = useFetch<
@@ -186,26 +182,22 @@ export default function SearchPage() {
                     )
                   })
                 ) : (
-                  <div className="text-red-500 py-2">Brak wyników</div>
+                  <div className="py-2 text-red-500">Brak wyników</div>
                 )}
               </div>
               {activitiesIsError && (
-                <div className="text-red-500 py-2">
+                <div className="py-2 text-red-500">
                   Error loading activities.
                 </div>
               )}
             </div>
           </div>
           <div className="hidden h-full xl:block">
-            {mapData === undefined || mapIsLoading ? (
-              <MapSkeleton />
-            ) : (
-              <Map />
-            )}
+            {mapData === undefined || mapIsLoading ? <MapSkeleton /> : <Map />}
           </div>
         </div>
       </section>
-      <div className=" sm:h-16" />
+      <div className="sm:h-16" />
     </Container>
   )
 }

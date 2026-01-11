@@ -5,8 +5,8 @@ export function makeQueryClient() {
     defaultOptions: {
       queries: {
         refetchOnWindowFocus: false,
-        refetchOnMount: true,        // Keep this enabled (default)
-        refetchOnReconnect: true,    // Keep this enabled (default)
+        refetchOnMount: true, // Keep this enabled (default)
+        refetchOnReconnect: true, // Keep this enabled (default)
         staleTime: 5 * 60 * 1000,
       },
     },

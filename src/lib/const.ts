@@ -21,14 +21,9 @@ export const ENDPOINTS = {
 export const ROUTES = {
   ROOT: {
     HOME: "/",
-    SIGN_UP: "/user/sign-up",
-    SIGN_IN: "/user/sign-in",
+    SIGN_UP: "/sign-up",
+    SIGN_IN: "/sign-in",
     PROFILE: "/profile",
   },
   ACTIVITY: "/activity",
-  COMPANY: {
-    ROOT: "/company",
-    SIGN_UP: "/company/sign-up",
-    SIGN_IN: "/company/sign-in",
-  },
 } as const

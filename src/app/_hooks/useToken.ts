@@ -1,5 +1,5 @@
-import { useAuth, useUser } from "@clerk/nextjs"
 import { useEffect } from "react"
+import { useAuth, useUser } from "@clerk/nextjs"
 import { httpClient } from "~/lib/http-client"
 
 export function useToken() {

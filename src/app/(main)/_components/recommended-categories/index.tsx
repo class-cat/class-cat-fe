@@ -1,5 +1,4 @@
 import React from "react"
-
 import {
   Carousel,
   CarouselContent,
@@ -7,6 +6,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "~/components/ui/carousel"
+
 import { mostSearchedItems } from "./constants"
 import { MostSearchItem } from "./most-search-item"
 

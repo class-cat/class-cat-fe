@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import { useFavorites } from "~/app/_hooks/useFavorites"
 import { Pill } from "~/components/pill/pill"
@@ -21,10 +21,10 @@ export const FavoritesContent = () => {
     return (
       <div className="flex flex-col items-center justify-center py-12 text-center">
         <div className="mb-4 text-6xl">❤️</div>
-        <h3 className="mb-2 text-lg font-semibold text-foreground">
+        <h3 className="text-foreground mb-2 text-lg font-semibold">
           Brak ulubionych zajęć
         </h3>
-        <p className="text-sm text-foregroundMuted">
+        <p className="text-foregroundMuted text-sm">
           Dodaj zajęcia do ulubionych, klikając na ikonę serca
         </p>
       </div>

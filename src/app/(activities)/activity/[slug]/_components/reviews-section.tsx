@@ -1,4 +1,5 @@
 import { SignedIn } from "@clerk/nextjs"
+
 import { AddReviewDialog } from "./review-dialog"
 import Reviews from "./reviews"
 
@@ -15,4 +16,4 @@ export function ReviewsSection({ slug }: ReviewsSectionProps) {
       </SignedIn>
     </section>
   )
-} 
+}

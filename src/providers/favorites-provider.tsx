@@ -1,6 +1,12 @@
 "use client"
 
-import React, { createContext, useContext, useState, useEffect, type ReactNode } from 'react'
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  type ReactNode,
+} from "react"
 
 export interface FavoriteActivity {
   slug: string
@@ -21,9 +27,11 @@ interface FavoritesContextType {
   isLoaded: boolean
 }
 
-const FavoritesContext = createContext<FavoritesContextType | undefined>(undefined)
+const FavoritesContext = createContext<FavoritesContextType | undefined>(
+  undefined
+)
 
-const FAVORITES_KEY = 'class-cat-favorites'
+const FAVORITES_KEY = "class-cat-favorites"
 
 export function FavoritesProvider({ children }: { children: ReactNode }) {
   const [favorites, setFavorites] = useState<FavoriteActivity[]>([])
@@ -31,14 +39,14 @@ export function FavoritesProvider({ children }: { children: ReactNode }) {
 
   // Load favorites from localStorage on mount
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       const stored = localStorage.getItem(FAVORITES_KEY)
       if (stored) {
         try {
           const parsedFavorites = JSON.parse(stored)
           setFavorites(parsedFavorites)
         } catch (error) {
-          console.error('Error parsing favorites from localStorage:', error)
+          console.error("Error parsing favorites from localStorage:", error)
           setFavorites([])
         }
       }
@@ -48,14 +56,14 @@ export function FavoritesProvider({ children }: { children: ReactNode }) {
 
   // Save favorites to localStorage whenever favorites change
   useEffect(() => {
-    if (typeof window !== 'undefined' && isLoaded) {
+    if (typeof window !== "undefined" && isLoaded) {
       localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites))
     }
   }, [favorites, isLoaded])
 
   const addToFavorites = (activity: FavoriteActivity) => {
-    setFavorites(prev => {
-      const exists = prev.some(fav => fav.slug === activity.slug)
+    setFavorites((prev) => {
+      const exists = prev.some((fav) => fav.slug === activity.slug)
       if (!exists) {
         return [...prev, activity]
       }
@@ -64,11 +72,11 @@ export function FavoritesProvider({ children }: { children: ReactNode }) {
   }
 
   const removeFromFavorites = (slug: string) => {
-    setFavorites(prev => prev.filter(fav => fav.slug !== slug))
+    setFavorites((prev) => prev.filter((fav) => fav.slug !== slug))
   }
 
   const toggleFavorite = (activity: FavoriteActivity) => {
-    const exists = favorites.some(fav => fav.slug === activity.slug)
+    const exists = favorites.some((fav) => fav.slug === activity.slug)
     if (exists) {
       removeFromFavorites(activity.slug)
     } else {
@@ -77,7 +85,7 @@ export function FavoritesProvider({ children }: { children: ReactNode }) {
   }
 
   const isFavorite = (slug: string) => {
-    return favorites.some(fav => fav.slug === slug)
+    return favorites.some((fav) => fav.slug === slug)
   }
 
   return (
@@ -99,7 +107,7 @@ export function FavoritesProvider({ children }: { children: ReactNode }) {
 export function useFavorites() {
   const context = useContext(FavoritesContext)
   if (context === undefined) {
-    throw new Error('useFavorites must be used within a FavoritesProvider')
+    throw new Error("useFavorites must be used within a FavoritesProvider")
   }
   return context
-} 
+}

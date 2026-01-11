@@ -1,5 +1,5 @@
 import { useQueryClient } from "@tanstack/react-query"
-import { type QueryKeyT, fetcher } from "~/lib/query-client"
+import { fetcher, type QueryKeyT } from "~/lib/query-client"
 
 export const usePrefetch = <T>(
   url: string | null,

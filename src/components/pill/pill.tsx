@@ -1,29 +1,30 @@
 "use client"
 
 import Image from "next/image"
+import Link from "next/link"
+import { useFavorites, type FavoriteActivity } from "~/app/_hooks/useFavorites"
 import { Icons } from "~/components/icons"
 import { ROUTES } from "~/lib/const"
+
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "../ui/tooltip"
-import Link from "next/link"
-import { useFavorites, type FavoriteActivity } from "~/app/_hooks/useFavorites"
 
 export function Pill(props: any) {
   const { slug, name, location, primaryImage, description } = props
   const { toggleFavorite, isFavorite, isLoaded } = useFavorites()
-  
+
   const bookmark = isLoaded ? isFavorite(slug) : false
 
   const handleBookmark = () => {
     if (!isLoaded) return
-    
+
     // Handle different location structures
-    let locationString = ''
-    if (typeof location === 'string') {
+    let locationString = ""
+    if (typeof location === "string") {
       locationString = location
     } else if (location?.address?.address_line) {
       locationString = location.address.address_line
@@ -34,21 +35,21 @@ export function Pill(props: any) {
       name,
       location: locationString,
       primaryImage,
-      description
+      description,
     }
     toggleFavorite(activity)
   }
 
   // Get location display string
   const getLocationDisplay = () => {
-    if (typeof location === 'string') {
+    if (typeof location === "string") {
       return location
     }
-    return location?.address?.address_line || ''
+    return location?.address?.address_line || ""
   }
 
   return (
-    <div className="relative flex h-[110px] items-start gap-3 rounded-2xl border-2 border-secondary p-1.5  hover:shadow-sm sm:h-[150px] sm:gap-4 sm:p-2">
+    <div className="border-secondary relative flex h-[110px] items-start gap-3 rounded-2xl border-2 p-1.5 hover:shadow-sm sm:h-[150px] sm:gap-4 sm:p-2">
       {/* Left Image */}
       <Link
         prefetch={true}
@@ -84,7 +85,7 @@ export function Pill(props: any) {
             }}
             className="flex h-[25px] w-[calc(100%-40px)] cursor-pointer items-center"
           >
-            <h3 className="truncate text-sm font-semibold leading-none text-foreground transition-colors hover:text-primary sm:text-base">
+            <h3 className="text-foreground hover:text-primary truncate text-sm leading-none font-semibold transition-colors sm:text-base">
               {name}
             </h3>
           </Link>
@@ -92,7 +93,7 @@ export function Pill(props: any) {
           {/* Description - Fixed height */}
           <div className="flex h-[24px] items-start sm:h-[36px] sm:w-[calc(100%-40px)]">
             {description ? (
-              <p className="line-clamp-2 text-xs leading-tight text-foregroundMuted sm:text-sm">
+              <p className="text-foregroundMuted line-clamp-2 text-xs leading-tight sm:text-sm">
                 {description}
               </p>
             ) : (
@@ -105,7 +106,7 @@ export function Pill(props: any) {
         {getLocationDisplay() && (
           <div className="mt-1 flex items-center gap-2">
             <span
-              className={`inline-flex items-center rounded-full border-0 bg-primary/50 px-2 py-1 text-xs font-medium text-white`}
+              className={`bg-primary/50 inline-flex items-center rounded-full border-0 px-2 py-1 text-xs font-medium text-white`}
             >
               {getLocationDisplay()}
             </span>
@@ -114,7 +115,7 @@ export function Pill(props: any) {
       </div>
 
       {/* Bookmark Button */}
-      <div className="absolute right-2 top-2">
+      <div className="absolute top-2 right-2">
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger onClick={handleBookmark} disabled={!isLoaded}>

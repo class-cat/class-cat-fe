@@ -1,9 +1,9 @@
-import { ENDPOINTS } from "~/lib/const"
-import { type Review } from "~/types/user.type"
 import { useFetch } from "~/app/_hooks/useFetch"
-import { type DataType } from "~/types/data.type"
 import { ReviewCard } from "~/components/review-card"
 import { Skeleton } from "~/components/ui/skeleton"
+import { ENDPOINTS } from "~/lib/const"
+import { type DataType } from "~/types/data.type"
+import { type Review } from "~/types/user.type"
 
 export const UserReviewContent = () => {
   const { data: reviews, isLoading } = useFetch<DataType<Review>>({

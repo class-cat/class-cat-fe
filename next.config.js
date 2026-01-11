@@ -7,6 +7,7 @@ await import("./src/env.js")
 /** @type {import("next").NextConfig} */
 const config = {
   env: { NEXT_API_URL: process.env.NEXT_API_URL },
+  transpilePackages: ["react-map-gl", "maplibre-gl"],
   images: {
     remotePatterns: [
       {

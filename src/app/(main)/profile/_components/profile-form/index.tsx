@@ -1,10 +1,10 @@
 "use client"
 
+import { useUser } from "@clerk/nextjs"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar"
+import { Button } from "~/components/ui/button"
 import { Calendar } from "~/components/ui/calendar"
-import { useForm } from "react-hook-form"
-import { toast } from "sonner"
-import { type z } from "zod"
 import {
   Form,
   FormControl,
@@ -13,22 +13,28 @@ import {
   FormLabel,
   FormMessage,
 } from "~/components/ui/form"
-import { Button } from "~/components/ui/button"
-import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar"
 import { Input } from "~/components/ui/input"
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "~/components/ui/popover"
-
-import { CalendarIcon } from "lucide-react"
-import { format } from "date-fns"
-import { cn } from "~/lib/utils"
-import { useUser } from "@clerk/nextjs"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "~/components/ui/select"
 import { Skeleton } from "~/components/ui/skeleton"
+import { cn } from "~/lib/utils"
+import { format } from "date-fns"
+import { CalendarIcon } from "lucide-react"
+import { useForm } from "react-hook-form"
+import { toast } from "sonner"
+import { type z } from "zod"
+
 import { FormSchema, type FormSchemaType } from "../_schema/form-schema.zod"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/components/ui/select"
 
 export const ProfileForm = () => {
   const { user, isLoaded } = useUser()
@@ -125,7 +131,7 @@ export const ProfileForm = () => {
                             <Button
                               variant={"outline"}
                               className={cn(
-                                "w-full border-0 pl-3 text-left font-normal shadow-none rounded-md",
+                                "w-full rounded-md border-0 pl-3 text-left font-normal shadow-none",
                                 !field.value && "text-muted-foreground"
                               )}
                             >
@@ -182,7 +188,7 @@ export const ProfileForm = () => {
                   control={form.control}
                   name="sex"
                   render={({ field }) => (
-                    <FormItem className="z-50 flex flex-col" >
+                    <FormItem className="z-50 flex flex-col">
                       <FormLabel>Płeć</FormLabel>
                       <Select
                         onValueChange={field.onChange}
@@ -196,7 +202,9 @@ export const ProfileForm = () => {
                         <SelectContent>
                           <SelectItem value="female">Kobieta</SelectItem>
                           <SelectItem value="male">Mężczyzna</SelectItem>
-                          <SelectItem value="unknown">Nie chce podawać</SelectItem>
+                          <SelectItem value="unknown">
+                            Nie chce podawać
+                          </SelectItem>
                         </SelectContent>
                       </Select>
                       <FormMessage />

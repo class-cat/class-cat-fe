@@ -1,11 +1,12 @@
+import { useCallback, useRef } from "react"
 import {
   type FetchNextPageOptions,
   type InfiniteData,
   type InfiniteQueryObserverResult,
 } from "@tanstack/react-query"
-import { useCallback, useRef } from "react"
-import { type PageData } from "./useInfinityFetch"
 import { type SearchResultType } from "~/types/search.type"
+
+import { type PageData } from "./useInfinityFetch"
 
 export const useInfiniteScroll = (
   isLoading: boolean,

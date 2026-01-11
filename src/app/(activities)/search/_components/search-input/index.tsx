@@ -1,10 +1,10 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { Icons } from "~/components/icons"
-import { Input } from "~/components/ui/input"
+import { useEffect, useState } from "react"
 import { useDebounce } from "~/app/_hooks/useDebounce"
 import { useUpdateQueryParams } from "~/app/_hooks/useUpdateQueryParams"
+import { Icons } from "~/components/icons"
+import { Input } from "~/components/ui/input"
 
 interface Props {
   value: string | null
@@ -25,7 +25,7 @@ export const SearchInput = ({ value }: Props) => {
   }
 
   return (
-    <div className="flex w-full items-center rounded-lg border-2 border-secondary ">
+    <div className="border-secondary flex w-full items-center rounded-lg border-2">
       <div className="inline-flex w-full items-center justify-between px-4">
         <Icons.search className="hidden size-6 md:block" />
         <Input

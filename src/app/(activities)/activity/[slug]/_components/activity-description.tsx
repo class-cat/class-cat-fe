@@ -9,4 +9,4 @@ export function ActivityDescription({ description }: ActivityDescriptionProps) {
       <p>{description}</p>
     </section>
   )
-} 
+}

@@ -6,4 +6,4 @@ export const PAWS_CONSTANTS = {
   PAW_SIZE: 16,
   PAW_COLOR: "#ecdec8",
   TRANSITION: "opacity 0.3s ease-in-out",
-} as const 
+} as const

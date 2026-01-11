@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useRef, type RefObject } from "react"
+import { useEffect, useRef, useState, type RefObject } from "react"
 
 interface IntersectionOptions extends IntersectionObserverInit {
   freezeOnceVisible?: boolean

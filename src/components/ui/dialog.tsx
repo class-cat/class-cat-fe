@@ -2,9 +2,8 @@
 
 import * as React from "react"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
-import { X } from "lucide-react"
-
 import { cn } from "~/lib/utils"
+import { X } from "lucide-react"
 
 const Dialog = DialogPrimitive.Root
 
@@ -20,7 +19,7 @@ const DialogOverlay = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Overlay
     ref={ref}
-    className={cn("fixed inset-0 z-50 bg-foreground/10", className)}
+    className={cn("bg-foreground/10 fixed inset-0 z-50", className)}
     {...props}
   />
 ))
@@ -37,7 +36,9 @@ function hasDialogTitle(children: React.ReactNode): boolean {
       return
     }
 
-    const grandChildren = (child as unknown as { props?: { children?: React.ReactNode } })?.props?.children
+    const grandChildren = (
+      child as unknown as { props?: { children?: React.ReactNode } }
+    )?.props?.children
     if (grandChildren) {
       if (hasDialogTitle(grandChildren)) {
         found = true
@@ -49,7 +50,10 @@ function hasDialogTitle(children: React.ReactNode): boolean {
 
 const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & { srTitle?: string; ariaLabel?: string }
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & {
+    srTitle?: string
+    ariaLabel?: string
+  }
 >(({ className, children, srTitle, ariaLabel, ...props }, ref) => {
   const childrenHasTitle = hasDialogTitle(children)
   const shouldRenderHiddenTitle = !childrenHasTitle && !ariaLabel
@@ -61,7 +65,7 @@ const DialogContent = React.forwardRef<
         ref={ref}
         aria-label={ariaLabel}
         className={cn(
-          "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] fixed z-50 grid gap-4 bg-white p-6 shadow-lg duration-200 max-sm:inset-0 sm:left-[50%] sm:top-[45%] sm:w-full sm:max-w-lg sm:translate-x-[-50%] sm:translate-y-[-50%] sm:rounded-lg",
+          "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] fixed z-50 grid gap-4 bg-white p-6 shadow-lg duration-200 max-sm:inset-0 sm:top-[45%] sm:left-[50%] sm:w-full sm:max-w-lg sm:translate-x-[-50%] sm:translate-y-[-50%] sm:rounded-lg",
           className
         )}
         {...props}
@@ -72,7 +76,7 @@ const DialogContent = React.forwardRef<
           <DialogTitle className="sr-only">Dialog</DialogTitle>
         ) : null}
         {children}
-        <DialogPrimitive.Close className="ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none">
+        <DialogPrimitive.Close className="ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute top-4 right-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-none disabled:pointer-events-none">
           <X className="size-4" />
           <span className="sr-only">Close</span>
         </DialogPrimitive.Close>
@@ -110,7 +114,7 @@ const DialogTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Title
     ref={ref}
-    className={cn("text-2xl leading-none ", className)}
+    className={cn("text-2xl leading-none", className)}
     {...props}
   />
 ))

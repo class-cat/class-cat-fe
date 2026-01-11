@@ -1,5 +1,5 @@
-import { generatePercentPaws } from "./utils"
 import { PawItem } from "./paw-item"
+import { generatePercentPaws } from "./utils"
 
 export const PawsBackground = () => {
   const configs = [
@@ -16,7 +16,8 @@ export const PawsBackground = () => {
           <div
             key={idx}
             className={
-              "z-1 pointer-events-none absolute inset-0 overflow-hidden " + cfg.className
+              "pointer-events-none absolute inset-0 z-1 overflow-hidden " +
+              cfg.className
             }
           >
             {paws.map((paw) => (
@@ -27,4 +28,4 @@ export const PawsBackground = () => {
       })}
     </>
   )
-} 
+}

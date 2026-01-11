@@ -5,6 +5,7 @@ import { useMediaQuery } from "~/app/_hooks/useMediaQuery"
 import { Icons } from "~/components/icons"
 import { Button } from "~/components/ui/button"
 import { MOBILE_BREAKPOINT } from "~/lib/const"
+
 import { TopNavUserButtons } from "./top-nav-user-buttons"
 
 export const TopNavButtons = () => {
@@ -26,7 +27,7 @@ export const TopNavButtons = () => {
         ) : null}
       </div>
       {isMobile && isMenuOpen && (
-        <div className="absolute right-0 top-[80px] z-50 h-[calc(100vh-80px)] w-full animate-slide-in  border-t-2 border-primary bg-secondary p-4 shadow-md">
+        <div className="animate-slide-in border-primary bg-secondary absolute top-[80px] right-0 z-50 h-[calc(100vh-80px)] w-full border-t-2 p-4 shadow-md">
           <div></div>
         </div>
       )}

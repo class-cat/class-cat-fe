@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import { type FetchConfig, type QueryKeyT, fetcher } from "~/lib/query-client"
+import { fetcher, type FetchConfig, type QueryKeyT } from "~/lib/query-client"
 
 type UseFetch<T> = {
   url: string | null

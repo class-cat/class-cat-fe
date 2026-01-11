@@ -1,6 +1,6 @@
-import { FooterSocials } from "./footer-socials"
-import { FooterNavigation } from "./footer-navigation"
 import { FooterDocs } from "./footer-docs"
+import { FooterNavigation } from "./footer-navigation"
+import { FooterSocials } from "./footer-socials"
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear()
@@ -12,8 +12,8 @@ export const Footer = () => {
           <FooterNavigation />
           <FooterDocs />
         </div>
-        <div className="border-gray-800 flex flex-col items-center justify-start border-t pt-8 md:flex-row">
-          <p className="text-gray-400 text-sm">
+        <div className="flex flex-col items-center justify-start border-t border-gray-800 pt-8 md:flex-row">
+          <p className="text-sm text-gray-400">
             © {currentYear} ClassCat. Wszelkie prawa zastrzeżone.
           </p>
         </div>

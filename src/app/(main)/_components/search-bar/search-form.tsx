@@ -1,11 +1,12 @@
 "use client"
 
+import { useSearchParams } from "next/navigation"
+import { useGetLocations } from "~/actions/get-locations"
 import { Icons } from "~/components/icons"
 import { Button } from "~/components/ui/button"
 import { Input } from "~/components/ui/input"
+
 import { SearchBarCombobox } from "./search-bar-combobox"
-import { useSearchParams } from "next/navigation"
-import { useGetLocations } from "~/actions/get-locations"
 
 export const SearchForm = () => {
   const searchParams = useSearchParams()
@@ -16,7 +17,7 @@ export const SearchForm = () => {
     <form
       method="GET"
       action="/search"
-      className="mx-auto flex max-w-2xl flex-row gap-4 rounded-2xl border-2 border-secondary bg-white"
+      className="border-secondary mx-auto flex max-w-2xl flex-row gap-4 rounded-2xl border-2 bg-white"
     >
       <div className="flex w-full items-center px-4">
         <Icons.search className="mr-2 hidden size-6 md:block" />
@@ -27,12 +28,9 @@ export const SearchForm = () => {
           name="search"
         />
       </div>
-      <div className="md:my-auto md:flex md:h-12 md:w-[6px] md:bg-secondary" />
+      <div className="md:bg-secondary md:my-auto md:flex md:h-12 md:w-[6px]" />
       <div className="hidden w-full md:block md:w-auto">
-        <SearchBarCombobox
-          data={locationData || []}
-          value={location || ""}
-        />
+        <SearchBarCombobox data={locationData || []} value={location || ""} />
       </div>
       <Button
         type="submit"
@@ -42,4 +40,4 @@ export const SearchForm = () => {
       </Button>
     </form>
   )
-} 
+}

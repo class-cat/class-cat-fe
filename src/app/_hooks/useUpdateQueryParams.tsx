@@ -1,5 +1,5 @@
-import { useRouter } from "next/navigation"
 import { useCallback } from "react"
+import { useRouter } from "next/navigation"
 
 export const useUpdateQueryParams = () => {
   const router = useRouter()

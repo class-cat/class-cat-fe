@@ -1,6 +1,10 @@
 "use client"
 
+import { useState } from "react"
+import { useMediaQuery } from "~/app/_hooks/useMediaQuery"
+import { useUpdateQueryParams } from "~/app/_hooks/useUpdateQueryParams"
 import { Icons } from "~/components/icons"
+import { Button } from "~/components/ui/button"
 import {
   Command,
   CommandEmpty,
@@ -14,13 +18,9 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "~/components/ui/popover"
-import { cn } from "~/lib/utils"
-import { Button } from "~/components/ui/button"
-import { useState } from "react"
-import type { EntireLocation } from "~/types/search.type"
-import { useUpdateQueryParams } from "~/app/_hooks/useUpdateQueryParams"
-import { useMediaQuery } from "~/app/_hooks/useMediaQuery"
 import { MOBILE_BREAKPOINT } from "~/lib/const"
+import { cn } from "~/lib/utils"
+import type { EntireLocation } from "~/types/search.type"
 
 interface Props {
   data?: EntireLocation[]
@@ -42,7 +42,7 @@ export const SearchBarCombobox = ({ data, value }: Props) => {
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild className="md:w-full">
         <Button
-          className="h-16 w-24 grow bg-white text-foreground shadow-none hover:bg-white md:text-base"
+          className="text-foreground h-16 w-24 grow bg-white shadow-none hover:bg-white md:text-base"
           role="combobox"
           aria-expanded={open}
         >

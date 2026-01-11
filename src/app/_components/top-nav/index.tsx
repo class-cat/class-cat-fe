@@ -1,7 +1,8 @@
-import { Container } from "~/components/ui/container"
-import { TopNavButtons } from "./top-nav-buttons"
-import { ROUTES } from "~/lib/const"
 import Image from "next/image"
+import { Container } from "~/components/ui/container"
+import { ROUTES } from "~/lib/const"
+
+import { TopNavButtons } from "./top-nav-buttons"
 
 export const TopNav = () => {
   return (
@@ -15,7 +16,7 @@ export const TopNav = () => {
             height={48}
             className="mr-2 object-cover sm:hidden"
           />
-          <span className="font-logo text-2xl text-primary">
+          <span className="font-logo text-primary text-2xl">
             <a href={ROUTES.ROOT.HOME}>ClassCat</a>
           </span>
         </div>

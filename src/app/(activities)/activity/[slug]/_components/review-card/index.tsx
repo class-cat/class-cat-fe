@@ -3,12 +3,12 @@ import { Card, CardContent } from "~/components/ui/card"
 
 export const ReviewCard = () => {
   return (
-    <Card className="border-2 border-secondary">
+    <Card className="border-secondary border-2">
       <CardContent className="p-4">
         <div className="flex items-start justify-between">
           <div>
             <p className="font-semibold">Jan Kowalski - 20 Mar, 2024</p>
-            <p className="text-gray-600 text-sm">
+            <p className="text-sm text-gray-600">
               Syn mówi, że najlepsze zajęcia na jakich był, gorąco polecamy!
             </p>
           </div>
@@ -16,7 +16,7 @@ export const ReviewCard = () => {
             {[...Array(5)].map((_, i) => (
               <Icons.star
                 key={i}
-                className="size-5 fill-primary text-primary"
+                className="fill-primary text-primary size-5"
               />
             ))}
           </div>

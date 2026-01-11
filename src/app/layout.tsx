@@ -1,10 +1,11 @@
 import "~/styles/globals.css"
-import { ClerkProvider } from "@clerk/nextjs"
+
 import { plPL } from "@clerk/localizations"
-import { ReactQueryProvider } from "~/providers/reactquery-provider"
+import { ClerkProvider } from "@clerk/nextjs"
 import { FavoritesProvider } from "~/providers/favorites-provider"
-import { inter, mochiy } from "~/styles/fonts"
+import { ReactQueryProvider } from "~/providers/reactquery-provider"
 import TokenProvider from "~/providers/token-provider"
+import { inter, mochiy } from "~/styles/fonts"
 import { Toaster } from "sonner"
 
 export const metadata = {

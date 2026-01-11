@@ -8,7 +8,8 @@ interface Paw {
 }
 
 export const calculatePaws = (width: number, height: number): Paw[] => {
-  const { SPACING, MIN_OPACITY, OPACITY_MULTIPLIER, DISTANCE_MULTIPLIER } = PAWS_CONSTANTS
+  const { SPACING, MIN_OPACITY, OPACITY_MULTIPLIER, DISTANCE_MULTIPLIER } =
+    PAWS_CONSTANTS
   const columns = Math.ceil(width / SPACING)
   const rows = Math.ceil(height / SPACING)
   const paws: Paw[] = []
@@ -22,7 +23,9 @@ export const calculatePaws = (width: number, height: number): Paw[] => {
       const bottomY = height
       const dx = x - centerX
       const dy = y - bottomY
-      const distance = Math.sqrt(Math.pow(dx * DISTANCE_MULTIPLIER, 2) + Math.pow(dy, 2))
+      const distance = Math.sqrt(
+        Math.pow(dx * DISTANCE_MULTIPLIER, 2) + Math.pow(dy, 2)
+      )
 
       const maxDistance = Math.sqrt(
         Math.pow(
@@ -71,7 +74,8 @@ export const generatePercentPaws = (
 
   const paws: Paw[] = []
 
-  const clamp = (v: number, min: number, max: number) => Math.max(min, Math.min(max, v))
+  const clamp = (v: number, min: number, max: number) =>
+    Math.max(min, Math.min(max, v))
 
   for (let row = 0; row < rows; row++) {
     for (let col = 0; col < columns; col++) {
@@ -83,18 +87,24 @@ export const generatePercentPaws = (
       const distance = Math.sqrt(dx * dx + dy * dy)
 
       // Normalize distance between inner and outer radius
-      const t = clamp((distance - innerRadiusPct) / Math.max(outerRadiusPct - innerRadiusPct, 1e-6), 0, 1)
+      const t = clamp(
+        (distance - innerRadiusPct) /
+          Math.max(outerRadiusPct - innerRadiusPct, 1e-6),
+        0,
+        1
+      )
 
       // Smooth falloff: 1 at innerRadius, 0 at outerRadius
       const fade = Math.pow(1 - t, exponent)
 
       // Apply multiplier, cap to maxOpacity; drop to 0 beyond outer radius
       const rawOpacity = PAWS_CONSTANTS.OPACITY_MULTIPLIER * fade
-      const opacity = t >= 1 ? 0 : clamp(Math.max(minOpacity, rawOpacity), 0, maxOpacity)
+      const opacity =
+        t >= 1 ? 0 : clamp(Math.max(minOpacity, rawOpacity), 0, maxOpacity)
 
       paws.push({ id: `${row}-${col}`, x: xPct, y: yPct, opacity })
     }
   }
 
   return paws
-} 
+}

@@ -1,5 +1,5 @@
-import { Progress } from "~/components/ui/progress"
 import { Icons } from "~/components/icons"
+import { Progress } from "~/components/ui/progress"
 
 interface Props {
   ratings: Array<number>
@@ -20,7 +20,7 @@ export const RatingSummary = ({ ratings }: Props) => {
             {[...Array(5)].map((_, i) => (
               <Icons.star
                 key={i}
-                className={`size-5 text-primary ${
+                className={`text-primary size-5 ${
                   i < Math.round(averageRating) ? "fill-primary" : ""
                 }`}
               />
@@ -36,7 +36,7 @@ export const RatingSummary = ({ ratings }: Props) => {
               <span className="w-3 text-right">{rating}</span>
               <Progress
                 value={((ratings as any)[index] / totalOpinions) * 100}
-                className="h-3 flex-1 [&>div]:bg-primary"
+                className="[&>div]:bg-primary h-3 flex-1"
               />
               <span className="text-muted-foreground w-8">
                 ({ratings[index]})

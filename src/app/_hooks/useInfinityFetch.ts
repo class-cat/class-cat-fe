@@ -1,7 +1,7 @@
 import {
   useInfiniteQuery,
-  type QueryKey,
   type InfiniteData,
+  type QueryKey,
   type UseInfiniteQueryOptions,
 } from "@tanstack/react-query"
 import { fetcher } from "~/lib/query-client"
@@ -53,7 +53,13 @@ export const useInfinityFetch = <T>({
 }: UseFetch<T>) => {
   const queryKey: QueryKey = [url as string, params]
 
-  return useInfiniteQuery<PageData<T>, Error, InfiniteData<PageData<T>, unknown>, QueryKey, unknown>({
+  return useInfiniteQuery<
+    PageData<T>,
+    Error,
+    InfiniteData<PageData<T>, unknown>,
+    QueryKey,
+    unknown
+  >({
     queryKey,
     initialPageParam: 1,
 

@@ -21,4 +21,4 @@ export const PawItem = ({ id, x, y, opacity, unit = "px" }: PawItemProps) => (
       transition: "opacity 0.3s ease-in-out",
     }}
   />
-) 
+)

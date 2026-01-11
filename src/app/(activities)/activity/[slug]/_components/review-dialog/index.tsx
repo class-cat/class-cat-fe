@@ -1,7 +1,10 @@
 "use client"
 
 import { useState } from "react"
-
+import { useRouter } from "next/navigation"
+import { usePost } from "~/app/_hooks/usePost"
+import { Icons } from "~/components/icons"
+import { Button } from "~/components/ui/button"
 import {
   Dialog,
   DialogContent,
@@ -10,16 +13,13 @@ import {
   DialogTrigger,
 } from "~/components/ui/dialog"
 import { Textarea } from "~/components/ui/textarea"
-import { Button } from "~/components/ui/button"
-import { Icons } from "~/components/icons"
-import { usePost } from "~/app/_hooks/usePost"
 import { ENDPOINTS } from "~/lib/const"
-import { toast } from "sonner"
 import { type Review } from "~/types/user.type"
-import { useRouter } from "next/navigation"
+import { toast } from "sonner"
+
 import {
-  type AddReviewFormData,
   AddReviewSchema,
+  type AddReviewFormData,
 } from "../_schema/add-review-schema.zod"
 
 interface Props {
@@ -80,7 +80,7 @@ export const AddReviewDialog = ({ acticitySlug }: Props) => {
           <div>
             <label
               htmlFor="comment"
-              className="text-gray-700 block text-sm font-medium"
+              className="block text-sm font-medium text-gray-700"
             >
               Twoja opinia
             </label>
@@ -94,7 +94,7 @@ export const AddReviewDialog = ({ acticitySlug }: Props) => {
             />
           </div>
           <div>
-            <label className="text-gray-700 block text-sm font-medium">
+            <label className="block text-sm font-medium text-gray-700">
               Ocena
             </label>
             <div className="mt-1 flex">

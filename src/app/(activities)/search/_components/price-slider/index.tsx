@@ -1,8 +1,8 @@
 "use client"
 
-import { cn } from "~/lib/utils"
-import { Slider } from "~/components/ui/slider"
 import { Input } from "~/components/ui/input"
+import { Slider } from "~/components/ui/slider"
+import { cn } from "~/lib/utils"
 
 type SliderProps = React.ComponentProps<typeof Slider>
 
@@ -18,7 +18,7 @@ export const PriceSlider = ({ className, ...props }: SliderProps) => {
   return (
     <>
       <Input
-        className="mb-3 flex w-[210px] items-center rounded-lg border-2 border-secondary focus-visible:outline-none"
+        className="border-secondary mb-3 flex w-[210px] items-center rounded-lg border-2 focus-visible:outline-none"
         placeholder="Słowo kluczowe..."
         type="text"
         value={props.value?.toString() || [0].toString()}

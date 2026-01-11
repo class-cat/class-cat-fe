@@ -44,4 +44,4 @@ export interface MapProps {
   controls?: MapControls
   onFeatureClick?: (feature: MapFeature) => void
   className?: string
-} 
+}

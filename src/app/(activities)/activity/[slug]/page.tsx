@@ -1,14 +1,15 @@
 import { Suspense } from "react"
+import { type Metadata } from "next"
 import { notFound } from "next/navigation"
+import { getActivityInfo } from "~/actions/get-activity-info"
 import { Container } from "~/components/ui/container"
 import { type Activity } from "~/types/search.type"
-import { type Metadata } from "next"
-import { ActivityMap } from "./_components/activity-map"
-import { getActivityInfo } from "~/actions/get-activity-info"
-import { ActivityHeader } from "./_components/activity-header"
+
 import { ActivityDescription } from "./_components/activity-description"
-import { ReviewsSection } from "./_components/reviews-section"
+import { ActivityHeader } from "./_components/activity-header"
+import { ActivityMap } from "./_components/activity-map"
 import { ActivitySidebar } from "./_components/activity-sidebar"
+import { ReviewsSection } from "./_components/reviews-section"
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -38,7 +39,7 @@ export default async function ActivityPage({ params }: Props) {
       <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
         <ActivityHeader activity={activity} />
         <Suspense
-          fallback={<div className="bg-gray-200 h-[300px] animate-pulse" />}
+          fallback={<div className="h-[300px] animate-pulse bg-gray-200" />}
         >
           <ActivityMap
             latitude={activity.location?.address?.coordinates?.lat ?? null}
@@ -54,9 +55,9 @@ export default async function ActivityPage({ params }: Props) {
           <ActivityDescription description={activity.description} />
           <ReviewsSection slug={activity.slug} />
         </div>
-        <ActivitySidebar 
-          providerSlug={activity.provider?.slug} 
-          activitySlug={activity.slug} 
+        <ActivitySidebar
+          providerSlug={activity.provider?.slug}
+          activitySlug={activity.slug}
         />
       </div>
     </Container>

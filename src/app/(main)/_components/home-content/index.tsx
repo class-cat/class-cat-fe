@@ -1,7 +1,7 @@
 "use client"
 
-import { useActivities } from "./use-activities"
 import { ActivitiesSection } from "./activities-section"
+import { useActivities } from "./use-activities"
 
 export function HomeContent() {
   const {

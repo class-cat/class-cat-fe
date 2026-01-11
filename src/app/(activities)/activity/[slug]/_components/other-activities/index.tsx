@@ -1,5 +1,5 @@
-import { Card, CardContent } from "~/components/ui/card"
 import { Button } from "~/components/ui/button"
+import { Card, CardContent } from "~/components/ui/card"
 
 interface Props {
   slug: string
@@ -15,10 +15,10 @@ export const OtherActivities = ({ slug }: Props) => {
         <CardContent className="p-4">
           <h4 className="text-lg">Koszykówka dla dzieci 1-3</h4>
           <div className="mt-2 flex space-x-2">
-            <span className="rounded-lg border-2 border-secondary px-2 py-1 text-sm">
+            <span className="border-secondary rounded-lg border-2 px-2 py-1 text-sm">
               poniedziałek
             </span>
-            <span className="rounded-lg border-2 border-secondary px-2 py-1 text-sm">
+            <span className="border-secondary rounded-lg border-2 px-2 py-1 text-sm">
               środa
             </span>
           </div>

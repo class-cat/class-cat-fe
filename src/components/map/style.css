@@ -6,14 +6,21 @@
 }
 
 /* Base styles for the popup */
-.custom-popup .maplibregl-popup-content {
-  background: #ffffff;
-  border-radius: 8px;
-  box-shadow:
-    0 4px 6px rgba(0, 0, 0, 0.1),
-    0 1px 3px rgba(0, 0, 0, 0.08);
+.maplibregl-popup-content {
+  pointer-events: auto !important;
+  background: #fff !important;
+  border-radius: 5px !important;
+  padding: 1px !important;
+  position: relative !important;
+  box-shadow: 0 1px 2px #0000001a !important;
+}
+
+.custom-popup .maplibregl-popup-content,
+.map-popup .maplibregl-popup-content {
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
   padding: 0;
-  width: 280px;
   font-family:
     "Inter",
     -apple-system,
@@ -32,8 +39,9 @@
 }
 
 /* Style the popup tip (arrow) */
-.custom-popup .maplibregl-popup-tip {
-  border-top-color: #ffffff;
+.custom-popup .maplibregl-popup-tip,
+.map-popup .maplibregl-popup-tip {
+  border-top-color: transparent;
 }
 
 .maplibregl-popup-close-button {
@@ -42,6 +50,16 @@
 
 .maplibregl-popup-tip {
   visibility: hidden;
+}
+
+/* Map popup specific styles */
+.map-popup .maplibregl-popup-content {
+  padding: 0;
+  background: transparent;
+}
+
+.map-popup .maplibregl-popup-tip {
+  display: none;
 }
 
 /* Close button styling */
@@ -56,7 +74,7 @@
 
 /* Content styling */
 .custom-popup .maplibregl-popup-content > div {
-  padding: 5px;
+  padding: 0px;
 }
 
 /* Title styling */
@@ -98,6 +116,7 @@
     0 7px 14px rgba(0, 0, 0, 0.1),
     0 3px 6px rgba(0, 0, 0, 0.08);
   transition: box-shadow 0.2s ease;
+  padding: 0px;
 }
 
 /* Single-line truncation for provider name */

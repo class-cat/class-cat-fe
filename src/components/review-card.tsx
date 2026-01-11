@@ -1,17 +1,18 @@
-import { pl } from "date-fns/locale"
+import { type Review } from "~/types/user.type"
 import { format } from "date-fns"
+import { pl } from "date-fns/locale"
+
 import { Icons } from "./icons"
 import { Card, CardContent } from "./ui/card"
-import { type Review } from "~/types/user.type"
 
 interface ReviewCardProps {
   review: Review
 }
 
 const ReviewCard = ({ review }: ReviewCardProps) => {
-  console.log(review) 
+  console.log(review)
   return (
-    <Card className="border-2 border-secondary transition-transform duration-300 ease-in-out">
+    <Card className="border-secondary border-2 transition-transform duration-300 ease-in-out">
       <CardContent className="p-4">
         <div className="flex items-start justify-between">
           <div>
@@ -21,13 +22,13 @@ const ReviewCard = ({ review }: ReviewCardProps) => {
                 locale: pl,
               })}
             </p>
-            <p className="text-gray-600 text-sm">{review.comment}</p>
+            <p className="text-sm text-gray-600">{review.comment}</p>
           </div>
           <div className="flex">
             {[...Array(5)].map((_, i) => (
               <Icons.star
                 key={i}
-                className={`size-5 ${i < review.rating ? 'fill-primary text-primary' : 'text-primary'}`}
+                className={`size-5 ${i < review.rating ? "fill-primary text-primary" : "text-primary"}`}
               />
             ))}
           </div>

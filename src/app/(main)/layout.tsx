@@ -1,6 +1,8 @@
 import "~/styles/globals.css"
-import { TopNav } from "../_components/top-nav"
+
 import React from "react"
+
+import { TopNav } from "../_components/top-nav"
 import { Footer } from "./_components/footer"
 
 export default function RootLayout({

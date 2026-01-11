@@ -1,6 +1,75 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  /* Colors */
+  --color-primary: #e74c3c;
+  --color-secondary: #f4ecdf;
+  --color-white: #fffefb;
+  --color-foreground: #1c1e31;
+  --color-foreground-muted: #535353;
+  --color-popover: #fffefb;
+
+  /* Font Families - using CSS variables from Next.js font loader */
+  --font-family-sans:
+    var(--font-sans), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-family-logo: var(--font-mochiy), ui-sans-serif, system-ui, sans-serif;
+  --font-family-open-sans:
+    var(--font-mochiy), ui-sans-serif, system-ui, sans-serif;
+  --font-family-work-sans:
+    var(--font-mochiy), ui-sans-serif, system-ui, sans-serif;
+
+  /* Box Shadows */
+  --shadow-inner-lg: inset 0 4px 6px rgba(0, 0, 0, 0.5);
+  --shadow-inner-xl: inset 0 6px 10px rgba(0, 0, 0, 0.5);
+
+  /* Animations */
+  --animate-slide-in: slide-in 0.3s ease-in-out;
+  --animate-caret-blink: caret-blink 1.25s ease-out infinite;
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+}
+
+@keyframes slide-in {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes caret-blink {
+  0%,
+  70%,
+  100% {
+    opacity: 1;
+  }
+  20%,
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes accordion-down {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+
+@keyframes accordion-up {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
 
 @layer base {
   html {
@@ -8,29 +77,49 @@
     scroll-behavior: smooth;
     min-width: 0;
   }
+
+  /* Global scrollbar styles */
+  * {
+    scrollbar-color: var(--color-secondary) transparent !important;
+    scrollbar-width: thin;
+  }
+
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: var(--color-secondary) !important;
+    border-radius: 4px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background-color: transparent !important;
+  }
   h1 {
-    @apply font-sans text-6xl font-black leading-[68px] tracking-tight text-foreground;
+    @apply text-foreground font-sans text-6xl leading-[68px] font-black tracking-tight;
   }
   h2 {
-    @apply font-sans text-5xl font-black leading-[68px] tracking-tight text-foreground;
+    @apply text-foreground font-sans text-5xl leading-[68px] font-black tracking-tight;
   }
   h3 {
-    @apply font-sans text-4xl font-black leading-[68px] tracking-tight text-foreground;
+    @apply text-foreground font-sans text-4xl leading-[68px] font-black tracking-tight;
   }
   h4 {
-    @apply font-sans text-3xl leading-[68px] tracking-tight text-foreground;
+    @apply text-foreground font-sans text-3xl leading-[68px] tracking-tight;
   }
   svg {
     @apply size-4;
   }
   h2 {
-    @apply font-sans text-5xl font-black leading-[68px] tracking-tight text-foreground;
+    @apply text-foreground font-sans text-5xl leading-[68px] font-black tracking-tight;
   }
   h3 {
-    @apply font-sans text-4xl font-black leading-[68px] tracking-tight text-foreground;
+    @apply text-foreground font-sans text-4xl leading-[68px] font-black tracking-tight;
   }
   h4 {
-    @apply font-sans text-3xl leading-[68px] tracking-tight text-foreground;
+    @apply text-foreground font-sans text-3xl leading-[68px] tracking-tight;
   }
   svg {
     @apply size-4;
@@ -45,10 +134,10 @@
     @apply px-4 md:px-12 xl:px-24;
   }
   .card {
-    @apply paddingX rounded-3xl bg-secondary  py-4;
+    @apply bg-secondary rounded-3xl px-4 py-4 md:px-12 xl:px-24;
   }
   .cardSmall {
-    @apply w-full rounded-2xl border-2 border-secondary bg-secondary px-4  py-4 shadow-none;
+    @apply border-secondary bg-secondary w-full rounded-2xl border-2 px-4 py-4 shadow-none;
   }
   .pSmall {
     @apply px-4 py-4;
@@ -58,6 +147,8 @@
 @layer utilities {
   .sidebar {
     @apply transition-all duration-1000 ease-in-out;
+    scrollbar-color: var(--color-secondary) transparent !important;
+    scrollbar-width: thin;
   }
 
   .sidebar::-webkit-scrollbar {
@@ -71,19 +162,23 @@
   }
 
   .sidebar::-webkit-scrollbar-thumb {
-    @apply rounded bg-white;
+    background-color: var(--color-secondary) !important;
+    border-radius: 4px;
   }
 
   .sidebar:hover::-webkit-scrollbar-thumb {
-    @apply rounded bg-primary;
+    background-color: var(--color-secondary) !important;
+    border-radius: 4px;
   }
 
   .sidebar::-webkit-scrollbar-track {
-    @apply bg-white;
+    background-color: transparent !important;
   }
 
   .sidebarSmall {
     @apply transition-all duration-1000 ease-in-out;
+    scrollbar-color: var(--color-secondary) transparent !important;
+    scrollbar-width: thin;
   }
 
   .sidebarSmall::-webkit-scrollbar {
@@ -96,10 +191,11 @@
   }
 
   .sidebarSmall::-webkit-scrollbar-thumb {
-    @apply rounded bg-primary;
+    background-color: var(--color-secondary) !important;
+    border-radius: 4px;
   }
 
   .sidebarSmall::-webkit-scrollbar-track {
-    @apply bg-white;
+    background-color: transparent !important;
   }
 }

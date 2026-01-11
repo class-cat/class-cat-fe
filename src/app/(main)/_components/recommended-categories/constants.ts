@@ -2,13 +2,13 @@ export const mostSearchedItems = [
   {
     title: "Siatkówka",
     desc: "34",
-    avatar: "/volleyball.webp",
+    avatar: "/volleyball_cat.png",
     href: "search?category=siatkowka",
   },
   {
     title: "boks",
     desc: "34",
-    avatar: "/boxing_cat.png",
+    avatar: "/box_cat.png",
     href: "search?category=boks",
   },
   {

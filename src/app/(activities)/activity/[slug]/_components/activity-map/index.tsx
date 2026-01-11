@@ -1,9 +1,9 @@
 "use client"
 
-import { Map } from "~/components/map"
 import { useMediaQuery } from "~/app/_hooks/useMediaQuery"
-import { MOBILE_BREAKPOINT } from "~/lib/const"
+import { Map } from "~/components/map"
 import { MapMobile } from "~/components/map/map-mobile"
+import { MOBILE_BREAKPOINT } from "~/lib/const"
 
 export const ActivityMap = ({
   latitude,

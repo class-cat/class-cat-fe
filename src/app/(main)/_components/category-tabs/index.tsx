@@ -1,5 +1,6 @@
 import React from "react"
 import { Tabs, TabsList, TabsTrigger } from "~/components/ui/tabs"
+
 import { tabsTriggers } from "./constatns"
 
 interface Props {
@@ -18,9 +19,9 @@ export const CategoryTabs = ({ onTabChange, children }: Props) => {
             value={tab.value}
             className={`${
               index === 1
-                ? "border-x-2"
+                ? "border-secondary border-x-2"
                 : index !== tabsTriggers.length - 1
-                  ? "border-r-2"
+                  ? "border-secondary border-r-2"
                   : "hidden border-0 md:block"
             }`}
           >

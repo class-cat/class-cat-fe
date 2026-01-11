@@ -1,6 +1,7 @@
 "use client"
 
-import { useState } from "react"
+import React, { useState } from "react"
+import { useUpdateQueryParams } from "~/app/_hooks/useUpdateQueryParams"
 import { Icons } from "~/components/icons"
 import { Button } from "~/components/ui/button"
 import {
@@ -19,10 +20,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "~/components/ui/select"
-import { PriceSlider } from "../price-slider"
-import { useUpdateQueryParams } from "~/app/_hooks/useUpdateQueryParams"
+
 import { CategoryComboBox } from "../category-combo-box"
-import React from "react"
+import { PriceSlider } from "../price-slider"
 import { categoryData, classRangeData, distanceData } from "./constants"
 
 interface Props {
@@ -93,7 +93,7 @@ export const MoreOptionDialog = ({
             </Button>
             <Button
               variant="ghost"
-              className="w-full rounded-lg border-2 border-secondary py-5 shadow-none hover:bg-secondary max-sm:hidden"
+              className="border-secondary hover:bg-secondary w-full rounded-lg border-2 py-5 shadow-none max-sm:hidden"
               onClick={() => setOpen(true)}
             >
               <Icons.filter className="hidden size-5 md:block" />

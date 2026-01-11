@@ -1,6 +1,9 @@
 "use client"
 
+import { useState } from "react"
+import { useUpdateQueryParams } from "~/app/_hooks/useUpdateQueryParams"
 import { Icons } from "~/components/icons"
+import { Button } from "~/components/ui/button"
 import {
   Command,
   CommandGroup,
@@ -13,9 +16,7 @@ import {
   PopoverTrigger,
 } from "~/components/ui/popover"
 import { cn } from "~/lib/utils"
-import { Button } from "~/components/ui/button"
-import { useState } from "react"
-import { useUpdateQueryParams } from "~/app/_hooks/useUpdateQueryParams"
+
 import { data } from "./constants"
 
 interface Props {
@@ -37,7 +38,7 @@ export function SortSelect({ value }: Props) {
       <PopoverTrigger asChild>
         <Button
           variant="ghost"
-          className="flex rounded-lg border-2 border-white shadow-none hover:bg-secondary"
+          className="hover:bg-secondary flex rounded-lg border-2 border-white shadow-none"
         >
           {value
             ? `Sortuj: ${data.find((item) => item.value === value)?.label}`

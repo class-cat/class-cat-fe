@@ -1,10 +1,11 @@
 import {
+  useMutation,
+  useQueryClient,
   type InvalidateQueryFilters,
   type QueryFunctionContext,
   type UseQueryOptions,
-  useMutation,
-  useQueryClient,
 } from "@tanstack/react-query"
+
 import { httpClient } from "./http-client"
 
 export type FetchConfig<T> = Omit<
@@ -19,7 +20,9 @@ const FIVE_MINUTES_MS = 5 * 60 * 1000
 const responseCache = new Map<string, { timestamp: number; data: unknown }>()
 
 function buildCacheKey(url: string, params?: Record<string, string | number>) {
-  const search = params ? new URLSearchParams(params as Record<string, string>).toString() : ""
+  const search = params
+    ? new URLSearchParams(params as Record<string, string>).toString()
+    : ""
   return `${url}?${search}`
 }
 

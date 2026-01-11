@@ -1,10 +1,9 @@
-import { SignedOut, SignedIn, UserButton } from "@clerk/nextjs"
-
-
-import { ROUTES } from "~/lib/const"
-import { userButtonAppearance } from "./constants"
-import { Button } from "~/components/ui/button"
 import Link from "next/link"
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs"
+import { Button } from "~/components/ui/button"
+import { ROUTES } from "~/lib/const"
+
+import { userButtonAppearance } from "./constants"
 
 export const TopNavUserButtons = () => {
   return (
@@ -20,9 +19,6 @@ export const TopNavUserButtons = () => {
           appearance={userButtonAppearance}
         />
       </SignedIn>
-      <Button variant="outline" className="shadow-none" asChild>
-        <Link href={ROUTES.COMPANY.ROOT}>Dodaj zajęcia</Link>
-      </Button>
     </div>
   )
 }

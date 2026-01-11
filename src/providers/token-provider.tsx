@@ -1,7 +1,7 @@
 "use client"
 
-import { useAuth, useUser } from "@clerk/nextjs"
 import { useEffect, useRef } from "react"
+import { useAuth, useUser } from "@clerk/nextjs"
 import { httpClient } from "~/lib/http-client"
 
 export default function TokenProvider({

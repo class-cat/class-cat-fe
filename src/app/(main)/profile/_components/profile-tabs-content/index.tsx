@@ -1,10 +1,8 @@
-'use client'
+"use client"
 
 import { zodResolver } from "@hookform/resolvers/zod"
-
-import { TabsContent } from "~/components/ui/tabs"
-import { toast } from "sonner"
-import { type z } from "zod"
+import { Button } from "~/components/ui/button"
+import { Checkbox } from "~/components/ui/checkbox"
 import {
   Form,
   FormControl,
@@ -12,17 +10,19 @@ import {
   FormItem,
   FormLabel,
 } from "~/components/ui/form"
-import { LessonCard } from "../lesson-card"
-import { UserReviewContent } from "../review-content"
-import { FavoritesContent } from "../favorites-content"
-import { Checkbox } from "~/components/ui/checkbox"
-import { lessons } from "./constants"
-import { Button } from "~/components/ui/button"
+import { TabsContent } from "~/components/ui/tabs"
+import { useForm } from "react-hook-form"
+import { toast } from "sonner"
+import { type z } from "zod"
+
 import {
   FormNotificationsSchema,
   type FormNotificationsSchemaType,
 } from "../_schema/form-notifications-schema.zod"
-import { useForm } from "react-hook-form"
+import { FavoritesContent } from "../favorites-content"
+import { LessonCard } from "../lesson-card"
+import { UserReviewContent } from "../review-content"
+import { lessons } from "./constants"
 
 export const ProfileTabsContent = () => {
   const form = useForm<FormNotificationsSchemaType>({
@@ -62,7 +62,7 @@ export const ProfileTabsContent = () => {
                   control={form.control}
                   name="email"
                   render={({ field }) => (
-                    <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                    <FormItem className="flex flex-row items-start space-y-0 space-x-3">
                       <FormControl>
                         <Checkbox
                           checked={field.value}
@@ -79,7 +79,7 @@ export const ProfileTabsContent = () => {
                   control={form.control}
                   name="sms"
                   render={({ field }) => (
-                    <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                    <FormItem className="flex flex-row items-start space-y-0 space-x-3">
                       <FormControl>
                         <Checkbox
                           checked={field.value}

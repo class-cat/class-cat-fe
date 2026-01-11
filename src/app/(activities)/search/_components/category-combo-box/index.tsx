@@ -1,6 +1,8 @@
 "use client"
 
+import { useState } from "react"
 import { Icons } from "~/components/icons"
+import { Button } from "~/components/ui/button"
 import {
   Command,
   CommandEmpty,
@@ -15,8 +17,6 @@ import {
   PopoverTrigger,
 } from "~/components/ui/popover"
 import { cn } from "~/lib/utils"
-import { Button } from "~/components/ui/button"
-import { useState } from "react"
 
 interface Props {
   data?: any[]
@@ -38,7 +38,7 @@ export const CategoryComboBox = ({ data, value, setValue }: Props) => {
           variant="combobox"
           role="combobox"
           aria-expanded={open}
-          className="flex w-[210px] items-center justify-between rounded-lg border-2 border-secondary px-3 shadow-none"
+          className="border-secondary flex w-[210px] items-center justify-between rounded-lg border-2 px-3 shadow-none"
         >
           {value
             ? data?.find((item) => item.value === value)?.label
@@ -46,7 +46,7 @@ export const CategoryComboBox = ({ data, value, setValue }: Props) => {
           <Icons.chevronUpDown className="ml-2 size-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="flex h-[250px] w-full overflow-y-auto border-2 border-secondary p-0">
+      <PopoverContent className="border-secondary flex h-[250px] w-full overflow-y-auto border-2 p-0">
         <Command>
           <CommandInput placeholder="Wybierz kategorię..." />
           <CommandList>

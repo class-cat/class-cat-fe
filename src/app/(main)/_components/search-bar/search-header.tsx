@@ -7,4 +7,4 @@ export const SearchHeader = () => {
       </span>
     </div>
   )
-} 
+}

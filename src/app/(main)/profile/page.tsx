@@ -1,8 +1,9 @@
 import { Container } from "~/components/ui/container"
 import { Tabs, TabsList, TabsTrigger } from "~/components/ui/tabs"
+
 import { tabsTriggers } from "./_components/constants"
-import { ProfileTabsContent } from "./_components/profile-tabs-content"
 import { ProfileForm } from "./_components/profile-form"
+import { ProfileTabsContent } from "./_components/profile-tabs-content"
 
 export default function ProfilePage() {
   return (

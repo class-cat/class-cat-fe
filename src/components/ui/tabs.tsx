@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import * as TabsPrimitive from "@radix-ui/react-tabs"
-
 import { cn } from "~/lib/utils"
 
 const Tabs = TabsPrimitive.Root
@@ -14,7 +13,7 @@ const TabsList = React.forwardRef<
   <TabsPrimitive.List
     ref={ref}
     className={cn(
-      "inline-flex items-center justify-center rounded-2xl border-2 border-secondary",
+      "border-secondary inline-flex items-center justify-center rounded-2xl border-2",
       className
     )}
     {...props}
@@ -29,7 +28,7 @@ const TabsTrigger = React.forwardRef<
   <TabsPrimitive.Trigger
     ref={ref}
     className={cn(
-      "ring-offset-background focus-visible:ring-ring inline-flex h-14 w-full items-center justify-center whitespace-nowrap text-pretty border-secondary border-opacity-50 px-3 py-1.5 text-base font-medium transition-all first:rounded-l-2xl first:border-0 last:rounded-r-2xl last:border-0 hover:bg-secondary/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-secondary data-[state=active]:text-foreground data-[state=active]:shadow-sm",
+      "ring-offset-background focus-visible:ring-ring border-secondary border-opacity-50 hover:bg-secondary/50 data-[state=active]:bg-secondary data-[state=active]:text-foreground inline-flex h-14 w-full items-center justify-center px-3 py-1.5 text-base font-medium text-pretty whitespace-nowrap transition-all first:rounded-l-xl first:border-0 last:rounded-r-xl last:border-0 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50",
       className
     )}
     {...props}
@@ -44,7 +43,7 @@ const TabsContent = React.forwardRef<
   <TabsPrimitive.Content
     ref={ref}
     className={cn(
-      "ring-offset-background focus-visible:ring-ring w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
+      "ring-offset-background focus-visible:ring-ring w-full focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none",
       className
     )}
     {...props}
